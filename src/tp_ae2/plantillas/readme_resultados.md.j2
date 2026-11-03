@@ -1,0 +1,334 @@
+{%- set d0 = r.hipotesis_principal.d0 -%}
+{%- set d1 = r.hipotesis_principal.d1 -%}
+{%- set e = r.estimadores -%}
+{%- set icm = r.intervalos -%}
+{%- set comp = r.prueba_complementaria -%}
+{%- set an = r.anova -%}
+{%- set m = r.regresion_multiple -%}
+{%- set ds = r.diagnosticos.regresion_simple -%}
+{%- set dm = r.diagnosticos.regresion_multiple -%}
+{%- set q0 = v.respaldo -%}
+{%- set inf = v.influencia -%}
+{%- set alfa = v.alfa -%}
+{%- set por = "por mes" if v.mensual else "por trimestre" -%}
+{%- set unidad_resp = "trimestres" if v.respaldo_frecuencia == "trimestral" else "meses" -%}
+## 3. Qué demostramos
+
+{% if v.rechaza -%}
+**Encontramos una asociación entre la variación del PBI y la del bono.** Con {{ v.principal.n }} {{ v.unidad }} de datos, la pendiente de la regresión es β1 = {{ n(d0.b1) }} (IC 95 % {{ ic(d0.ic_b1.inferior, d0.ic_b1.superior) }}; p = {{ pv(d0.p_b1) }}): se rechaza H0. Es una asociación, no una prueba de que una variable mueva a la otra.{% if v.principal.n < r.muestra.n_minimo_consigna %} Ojo: son {{ v.principal.n }} observaciones, menos de las {{ r.muestra.n_minimo_consigna }} que pide la consigna.{% endif %}
+{%- else -%}
+**No encontramos relación entre el crecimiento del PBI y la suba del bono.** Con {{ v.principal.n }} {{ v.unidad }} de datos ({{ v.principal.inicio }} a {{ v.principal.fin }}), los {{ v.unidad }} en que la economía creció más no fueron {{ v.unidad }} en que el AL30D subiera (o bajara) más de lo que daría el azar.
+{%- endif %}
+
+- **Hipótesis principal (regresión simple).** β1 = {{ n(d0.b1) }}, IC 95 % {{ ic(d0.ic_b1.inferior, d0.ic_b1.superior) }}, p = {{ pv(d0.p_b1) }}: {{ "se rechaza H0" if v.rechaza else "no se rechaza H0" }}.
+- **¿El bono se adelanta a la economía?** Con el PBI del {{ "mes" if v.mensual else "trimestre" }} siguiente, β1 = {{ n(d1.b1) }} y p = {{ pv(d1.p_b1) }}: {{ "sí hay evidencia" if d1.p_b1 < alfa else "no hay evidencia" }}.
+{%- if comp.aplicable %}
+- **La hipótesis que enviamos a los docentes.** El crecimiento medio del PBI en los {{ v.unidad }} de suba del bono menos el de los {{ v.unidad }} de baja da {{ n(comp.decision.diferencia) }} pp (IC 95 % {{ ic(comp.decision.ic.inferior, comp.decision.ic.superior) }}; p = {{ pv(comp.decision.p_valor) }}): {{ "la diferencia es significativa" if comp.decision.p_valor < alfa else "no hay diferencia significativa" }}.
+{%- endif %}
+{%- if not v.rechaza %}
+- **Qué tan chica tendría que ser la relación.** Aun en el extremo del intervalo de β1, un movimiento típico del PBI (un desvío estándar, {{ n(e.var_pbi.desvio, 2) }} pp) se asociaría con unos {{ n(v.extremo_por_desvio, 1) }} pp de variación del bono, cuando el bono se mueve típicamente {{ n(e.var_bono.desvio, 1) }} pp {{ por }}. Si la relación existe, explica una parte chica de lo que hace el bono.
+{%- endif %}
+{%- if (q0.p_b1 < alfa) != v.rechaza %}
+{%- if v.mensual and not v.rechaza %}
+- **La única excepción no alcanza.** Con datos {{ "trimestrales" if v.respaldo_frecuencia == "trimestral" else "mensuales" }} sin interpolar (n = {{ q0.n }}), β1 = {{ n(q0.b1) }} y p = {{ pv(q0.p_b1) }}: el resultado cambia{{ " y el signo es opuesto" if (q0.b1 < 0) != (d0.b1 < 0) }}.{% if v.motivos_excepcion %} No se toma como resultado porque {{ v.motivos_excepcion | join(" y ") }}.{% endif %}
+{%- else %}
+- **El resultado depende de la muestra.** Con la muestra {{ v.respaldo_frecuencia }} (n = {{ q0.n }}), β1 = {{ n(q0.b1) }} y p = {{ pv(q0.p_b1) }}: {{ "se rechaza H0" if q0.p_b1 < alfa else "no se rechaza H0" }}. La conclusión cambia con la frecuencia de los datos, así que hay que leerla con cautela.
+{%- endif %}
+{%- endif %}
+{%- if not v.rechaza %}
+- **Lectura posible, que este trabajo no contrasta.** El precio del bono parece seguir más las expectativas sobre la capacidad de pago del Estado (situación fiscal, reservas, riesgo de default) que la actividad del período.
+{%- endif %}
+
+> No rechazar H0 no prueba que la relación sea cero: significa que los datos no alcanzan para afirmarla. Por eso los intervalos de confianza importan: dicen qué tamaños de relación quedan descartados.
+
+## 4. Cómo leer los números
+
+- **p-valor.** La probabilidad de ver un resultado igual o más extremo que el observado si en realidad no hubiera relación. Si es menor a 0,05, decimos que hay evidencia ("se rechaza H0"). Si es mayor, los datos no alcanzan para afirmarla.
+- **IC 95 % (intervalo de confianza).** El rango de valores plausibles para el número verdadero, con 95 % de confianza. Si incluye el cero, no se puede descartar que no haya relación.
+- **β1 (pendiente).** Cuántos puntos porcentuales se mueve el bono, en promedio, por cada punto porcentual que se mueve el PBI.
+- **R².** Qué parte de la variación del bono explica el modelo: 0 es nada, 1 es todo.
+- **pp.** Puntos porcentuales. **n**: cantidad de observaciones.
+
+## 5. Herramientas estadísticas
+
+Cada herramienta sigue el mismo esquema: **por qué la usamos**, **cómo la aplicamos** (paso a paso, con las fórmulas y los números intermedios), **qué dio** y **qué significa**. La consigna pide estimador, intervalo de confianza, bondad de ajuste y regresión lineal simple y múltiple, más una herramienta a elección: elegimos ANOVA. Todo se trabaja con 95 % de confianza (α = 0,05).
+
+Las variables son las mismas en todas las herramientas:
+
+- **Y = Var AL30D:** variación porcentual del precio del bono en cada {{ "mes" if v.mensual else "trimestre" }}.
+- **X = Var PBI:** variación porcentual del PBI real desestacionalizado{{ " y mensualizado" if v.mensual }}.
+- **n = {{ v.principal.n }} {{ v.unidad }}**, de {{ v.principal.inicio }} a {{ v.principal.fin }}.
+
+### 5.1 Regresión lineal simple (la herramienta principal)
+
+**Por qué la usamos.** Es la forma directa de responder la pregunta del trabajo. Estima cuánto cambia, en promedio, la variación del bono cuando la variación del PBI sube un punto, y permite testear si ese número es distinto de cero. La hipótesis principal se formuló sobre esta herramienta.
+
+**Cómo la aplicamos.**
+
+*Paso 1. Modelo e hipótesis.*
+
+$$\text{Var AL30D}_t = \beta_0 + \beta_1 \cdot \text{Var PBI}_t + \varepsilon_t \qquad H_0: \beta_1 = 0 \qquad H_1: \beta_1 \neq 0$$
+
+*Paso 2. Estimación por mínimos cuadrados* (la recta que hace mínima la suma de los errores al cuadrado):
+
+$$\hat\beta_1 = \frac{S_{xy}}{S_{xx}} = \frac{\sum (x_i - \bar x)(y_i - \bar y)}{\sum (x_i - \bar x)^2} \qquad \hat\beta_0 = \bar y - \hat\beta_1 \, \bar x$$
+
+Con nuestros datos: media de X = {{ n(d0.x_media) }}, media de Y = {{ n(d0.y_media) }}, Sxy = {{ n(d0.sxy) }} y Sxx = {{ n(d0.sxx) }}. Entonces β̂1 = {{ n(d0.sxy) }} / {{ n(d0.sxx) }} = **{{ n(d0.b1) }}** y β̂0 = {{ n(d0.b0) }}.
+
+*Paso 3. Test t sobre la pendiente*, con n − 2 = {{ d0.gl }} grados de libertad:
+
+$$s^2 = \frac{SCE}{n-2} \qquad EE(\hat\beta_1) = \sqrt{\frac{s^2}{S_{xx}}} \qquad t = \frac{\hat\beta_1}{EE(\hat\beta_1)}$$
+
+SCE es la suma de los errores al cuadrado ({{ n(d0.sce, 2) }}). Queda s² = {{ n(d0.s2, 2) }}, EE(β̂1) = {{ n(d0.ee_b1) }} y **t = {{ n(d0.t_b1) }}**. El valor crítico de la t de Student con {{ d0.gl }} gl es ±{{ n(d0.valor_critico_t) }}: si |t| lo supera, se rechaza H0.
+
+*Paso 4. Intervalo de confianza y R².*
+
+$$IC_{95\%}(\beta_1) = \hat\beta_1 \pm t_{0{,}975;\,n-2} \cdot EE(\hat\beta_1) \qquad R^2 = 1 - \frac{SCE}{SCT}$$
+
+*Paso 5. Extensión temporal.* Repetimos la regresión con el PBI del {{ "mes" if v.mensual else "trimestre" }} siguiente (d = +1, declarado antes de ver los datos) para ver si el bono se anticipa a la economía. Como exploración, también con desfases de −3 a +3, juzgados con un umbral más exigente (0,01) porque son varias pruebas.
+
+**Qué dio.**
+
+| | β̂1 | IC 95 % | t | p-valor | R² |
+|---|---|---|---|---|---|
+| Principal (d = 0) | {{ n(d0.b1) }} | {{ ic(d0.ic_b1.inferior, d0.ic_b1.superior) }} | {{ n(d0.t_b1) }} | {{ pv(d0.p_b1) }} | {{ n(d0.r2) }} |
+| Extensión (d = +1) | {{ n(d1.b1) }} | {{ ic(d1.ic_b1.inferior, d1.ic_b1.superior) }} | {{ n(d1.t_b1) }} | {{ pv(d1.p_b1) }} | {{ n(d1.r2) }} |
+
+{% if v.exploratorios_signif -%}
+De los {{ v.n_exploratorios }} desfases exploratorios, pasa el umbral de 0,01 {{ "el desfase" if v.exploratorios_signif | length == 1 else "los desfases" }} {% for f in v.exploratorios_signif %}d = {{ n(f.d, 0, signo=True) }} (β̂1 = {{ n(f.b1) }}, p = {{ pv(f.p_valor) }}){{ ", " if not loop.last }}{% endfor %}.
+{%- else -%}
+Ninguno de los {{ v.n_exploratorios }} desfases exploratorios pasa el umbral de 0,01.
+{%- endif %}
+
+**Qué significa.** {% if v.rechaza %}La pendiente es distinta de cero: |t| = {{ n(d0.t_b1 | abs) }} supera el valor crítico, el intervalo no incluye al cero y el PBI explica el {{ n(d0.r2 * 100, 1) }} % de la variación del bono. **Se rechaza H0.**{% else %}La pendiente es prácticamente cero: |t| = {{ n(d0.t_b1 | abs) }} está muy por debajo de {{ n(d0.valor_critico_t, 2) }}, el intervalo incluye al cero y el PBI explica el {{ n(d0.r2 * 100, 1) }} % de la variación del bono. **No se rechaza H0.**{% endif %} Con el PBI del {{ "mes" if v.mensual else "trimestre" }} siguiente {{ "tampoco aparece relación" if d1.p_b1 >= alfa else "sí aparece relación" }}.{% if v.exploratorios_signif %} El desfase exploratorio significativo queda como pista para otro trabajo y no como resultado: con {{ v.n_exploratorios }} desfases probados alguno puede salir por azar, y el PBI mensualizado hace que meses vecinos estén muy correlacionados.{% endif %}
+
+**Dónde está el cálculo.** [`src/tp_ae2/herramientas/regresion.py`](src/tp_ae2/herramientas/regresion.py), función `regresion_simple`, escrita desde estas fórmulas y comparada contra statsmodels en los tests. Para rehacerla con calculadora, `outputs/tablas/cuadro_a_mano.csv` tiene las sumas: Σx = {{ n(d0.sumas.sum_x) }}, Σy = {{ n(d0.sumas.sum_y) }}, Σx² = {{ n(d0.sumas.sum_x2) }}, Σxy = {{ n(d0.sumas.sum_xy) }}.
+
+{%- set cpbi = m.coeficientes[1] %}
+{%- set cotro = m.coeficientes[2] %}
+{%- set notro = nombres.get(cotro.nombre, cotro.nombre) %}
+
+### 5.2 Regresión lineal múltiple
+
+**Por qué la usamos.** {% if m.modo == "ccl" %}El precio del AL30D en dólares también se mueve con el tipo de cambio. Si sumamos la variación del dólar CCL implícito como segunda variable, la regresión mide la relación con el PBI *manteniendo constante* el CCL. Si la relación con el PBI estuviera tapada por el tipo de cambio, aparecería acá.{% else %}Sumamos una segunda variable ({{ notro }}) para medir la relación con el PBI manteniéndola constante.{% endif %} La consigna también la pide.
+
+**Cómo la aplicamos.**
+
+*Paso 1. Modelo e hipótesis.*
+
+$$\text{Var AL30D}_t = \beta_0 + \beta_1 \cdot \text{Var PBI}_t + \beta_2 \cdot X_{2,t} + \varepsilon_t$$
+
+con X₂ = {{ notro }}. Se testea cada coeficiente (H0: βj = 0) y el modelo completo (H0: β1 = β2 = 0).
+
+*Paso 2. Estimación por mínimos cuadrados en forma matricial*, con X la matriz que tiene una columna de unos y las dos variables:
+
+$$\hat\beta = (X^\top X)^{-1} X^\top y$$
+
+*Paso 3. Test t de cada coeficiente* con n − k − 1 = {{ m.gl }} grados de libertad (k = {{ m.k }} variables), y **test F global**:
+
+$$F = \frac{(SCT - SCE)/k}{SCE/(n-k-1)}$$
+
+Con SCT = {{ n(m.sct, 2) }} y SCE = {{ n(m.sce, 2) }} queda F = {{ n(m.f) }}, con ({{ m.gl_f[0] }}; {{ m.gl_f[1] }}) grados de libertad.
+
+*Paso 4. R² ajustado*, que descuenta la cantidad de variables:
+
+$$R^2_{aj} = 1 - (1 - R^2)\,\frac{n-1}{n-k-1}$$
+
+*Paso 5. Multicolinealidad.* Si las dos variables explicativas estuvieran muy correlacionadas entre sí, los coeficientes serían inestables. Se mide con el VIF:
+
+$$VIF_j = \frac{1}{1 - R_j^2}$$
+
+donde R²j sale de explicar una variable con la otra. Valores mayores a 5 o 10 preocupan; acá dan {% for x in dm.vif %}{{ n(x.vif, 2) }}{{ " y " if not loop.last }}{% endfor %}.
+
+**Qué dio.**
+
+| Coeficiente | Estimación | Error estándar | t | p-valor | IC 95 % |
+|---|---|---|---|---|---|
+{% for c in m.coeficientes -%}
+| {{ "Constante" if c.nombre == "constante" else nombres.get(c.nombre, c.nombre) }} | {{ n(c.coeficiente) }} | {{ n(c.error_estandar) }} | {{ n(c.t) }} | {{ pv(c.p_valor) }} | {{ ic(c.ic.inferior, c.ic.superior) }} |
+{% endfor %}
+Modelo completo: F = {{ n(m.f) }}, p = {{ pv(m.p_f) }}, R² = {{ n(m.r2) }}, R² ajustado = {{ n(m.r2_ajustado) }}.
+
+**Qué significa.** {% if cpbi.p_valor < alfa %}Con el control, el PBI sí aparece asociado al bono (p = {{ pv(cpbi.p_valor) }}).{% else %}Ni con el control aparece relación con el PBI (p = {{ pv(cpbi.p_valor) }}).{% endif %} {% if m.p_f < alfa %}El modelo completo es significativo{% else %}El modelo completo tampoco es significativo{% endif %}: explica el {{ n(m.r2 * 100, 1) }} % de la variación del bono{% if m.r2_ajustado < 0 %}, y su R² ajustado negativo indica que sumar variables no mejora la explicación{% endif %}.
+
+**Dónde está el cálculo.** [`src/tp_ae2/herramientas/regresion.py`](src/tp_ae2/herramientas/regresion.py), función `regresion_multiple`.
+
+{% if an.aplicable -%}
+### 5.3 ANOVA de un factor (herramienta a elección)
+
+**Por qué la usamos.** La regresión busca una relación en línea recta. El ANOVA no necesita esa forma: divide los {{ v.unidad }} en tres grupos según cuánto creció el PBI y compara la variación media del bono entre los grupos. Si el bono reaccionara solo en los {{ v.unidad }} de mucho o de poco crecimiento, el ANOVA lo detectaría aunque la recta no.
+
+**Cómo la aplicamos.**
+
+*Paso 1. Grupos por terciles de la Var PBI* (un tercio de los {{ v.unidad }} en cada uno):
+
+{% for g in an.grupos -%}
+- **{{ g.grupo | capitalize }}:** Var PBI de {{ n(an.limites_terciles[g.grupo][0], 2) }} % a {{ n(an.limites_terciles[g.grupo][1], 2) }} % ({{ g.n }} {{ v.unidad }}).
+{% endfor %}
+*Paso 2. Hipótesis.* H0: la variación media del bono es igual en los tres grupos. H1: al menos un grupo difiere.
+
+*Paso 3. Descomponer la variabilidad total* en la que hay entre grupos y la que hay dentro de cada grupo:
+
+$$SC_{total} = SC_{entre} + SC_{dentro}$$
+
+Con nuestros datos: {{ n(an.sc_total, 2) }} = {{ n(an.sc_entre, 2) }} + {{ n(an.sc_dentro, 2) }}.
+
+*Paso 4. Estadístico F*, que compara la variabilidad entre grupos con la de adentro:
+
+$$F = \frac{SC_{entre}/(k-1)}{SC_{dentro}/(N-k)} = \frac{CM_{entre}}{CM_{dentro}}$$
+
+F = {{ n(an.cm_entre, 2) }} / {{ n(an.cm_dentro, 2) }} = **{{ n(an.f) }}**, con ({{ an.gl_entre }}; {{ an.gl_dentro }}) grados de libertad. El valor crítico al 95 % es {{ n(an.valor_critico) }}.
+
+*Paso 5. Tamaño del efecto y supuestos.* η² = SC entre / SC total = {{ n(an.eta2) }}. Igualdad de varianzas (Levene): p = {{ pv(an.supuestos.levene.p_valor) }}. Normalidad por grupo (Shapiro-Wilk): {% for g in an.supuestos.shapiro_por_grupo %}{{ g.grupo }} p = {{ pv(g.p_valor) }}{{ "; " if not loop.last }}{% endfor %}.
+
+**Qué dio.** Variación media del bono: {% for g in an.grupos %}{{ g.grupo }} {{ n(g.media, 2, signo=True) }} %{{ "; " if not loop.last }}{% endfor %}. F = {{ n(an.f) }}, p = {{ pv(an.p_valor) }}.
+
+**Qué significa.** {% if an.p_valor < alfa %}Las medias difieren entre grupos: se rechaza H0.{% else %}Aunque las medias se ven distintas, la diferencia entre grupos es chica comparada con lo que varía el bono dentro de cada grupo: es la esperable por azar. No se rechaza H0.{% endif %} El grupo de crecimiento del PBI explica el {{ n(an.eta2 * 100, 1) }} % de la variación del bono.
+
+**Dónde está el cálculo.** [`src/tp_ae2/herramientas/anova.py`](src/tp_ae2/herramientas/anova.py).
+
+{% endif -%}
+{% if comp.aplicable -%}
+{%- set g1, g2 = comp.grupo_1, comp.grupo_2 %}
+### 5.4 Diferencia de medias (la hipótesis enviada a los docentes)
+
+**Por qué la usamos.** Es la hipótesis original del grupo, enviada a los docentes el 22/10. Mira la relación desde el otro lado: separa los {{ v.unidad }} según lo que hizo el bono (subió o bajó) y compara cuánto creció el PBI en cada grupo.
+
+**Cómo la aplicamos.**
+
+*Paso 1. Grupos e hipótesis.* Suba del bono: {{ g1.n }} {{ v.unidad }}. Baja: {{ g2.n }} {{ v.unidad }}. H0: μ suba = μ baja. H1: son distintas.
+
+*Paso 2. Prueba F de igualdad de varianzas.* La regla de la cátedra es usar el t con varianza agrupada si no se rechaza que las varianzas sean iguales, y el t de Welch si se rechaza.
+
+$$F = \frac{S_1^2}{S_2^2}$$
+
+F = {{ n(comp.prueba_f.estadistico) }}, con ({{ comp.prueba_f.gl[0] }}; {{ comp.prueba_f.gl[1] }}) grados de libertad, p = {{ pv(comp.prueba_f.p_valor) }}: {{ "se rechaza la igualdad de varianzas, así que corresponde Welch" if comp.prueba_f.p_valor < alfa else "no se rechaza la igualdad de varianzas, así que corresponde el t con varianza agrupada" }}.
+
+*Paso 3. Test t.*
+{% if comp.test_de_decision == "varianza agrupada" %}
+$$S_p^2 = \frac{(n_1 - 1)S_1^2 + (n_2 - 1)S_2^2}{n_1 + n_2 - 2} \qquad t = \frac{\bar x_1 - \bar x_2}{S_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}$$
+
+Con S1 = {{ n(g1.desvio) }} y S2 = {{ n(g2.desvio) }}, el desvío agrupado es Sp = {{ n(comp.desvio_agrupado) }}. La diferencia de medias es {{ n(g1.media) }} − {{ n(g2.media) }} = {{ n(comp.decision.diferencia) }} pp, con error estándar {{ n(comp.decision.error_estandar) }}: **t = {{ n(comp.decision.estadistico) }}**, con {{ n(comp.decision.gl, 0) }} grados de libertad.
+{% else %}
+$$t = \frac{\bar x_1 - \bar x_2}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}$$
+
+La diferencia de medias es {{ n(comp.decision.diferencia) }} pp: **t = {{ n(comp.decision.estadistico) }}**, con {{ n(comp.decision.gl, 2) }} grados de libertad (Welch).
+{% endif %}
+*Paso 4. Intervalo de confianza y potencia.* El IC 95 % de la diferencia es diferencia ± t crítico × error estándar. Además calculamos la diferencia mínima que el test detectaría con 80 % de probabilidad (potencia), para saber qué tamaños quedan descartados si no se rechaza H0.
+
+**Qué dio.** PBI medio con el bono en suba: {{ n(g1.media, 2, signo=True) }} %; en baja: {{ n(g2.media, 2, signo=True) }} %. Diferencia = {{ n(comp.decision.diferencia) }} pp, IC 95 % {{ ic(comp.decision.ic.inferior, comp.decision.ic.superior) }}, p = {{ pv(comp.decision.p_valor) }}. Con Welch, como control, p = {{ pv(comp.t_welch.p_valor) }}. Diferencia mínima detectable: {{ n(comp.diferencia_minima_detectable.en_unidades, 2) }} pp.
+
+**Qué significa.** {% if comp.decision.p_valor < alfa %}La economía creció distinto en los {{ v.unidad }} de suba y de baja del bono: se rechaza H0.{% else %}La economía creció prácticamente lo mismo en los {{ v.unidad }} de suba y de baja del bono: no se rechaza H0. Una diferencia de {{ n(comp.diferencia_minima_detectable.en_unidades, 2) }} pp o más probablemente se habría detectado; una menor no se puede descartar.{% endif %}
+
+**Dónde está el cálculo.** [`src/tp_ae2/herramientas/diferencia_medias.py`](src/tp_ae2/herramientas/diferencia_medias.py).
+
+{% endif -%}
+### 5.5 Estimador
+
+**Por qué la usamos.** Antes de testear relaciones hay que describir cada serie: dónde está su centro, cuánto se dispersa y con qué frecuencia sube el bono. Los estimadores resumen la muestra en esos pocos números y son la base de todas las demás herramientas.
+
+**Cómo la aplicamos.** Usamos los estimadores insesgados de la media, la varianza y la proporción:
+
+$$\bar x = \frac{1}{n}\sum x_i \qquad S^2 = \frac{1}{n-1}\sum (x_i - \bar x)^2 \qquad \hat p = \frac{\text{períodos con suba del bono}}{n}$$
+
+Se divide por n − 1 y no por n para que S² no subestime la varianza. El error estándar de la media es S / √n.
+
+**Qué dio.**
+
+| | Media | Desvío (S) | Error estándar | Mínimo | Máximo |
+|---|---|---|---|---|---|
+| Var AL30D (%) | {{ n(e.var_bono.media) }} | {{ n(e.var_bono.desvio) }} | {{ n(e.var_bono.error_estandar) }} | {{ n(e.var_bono.minimo, 2) }} | {{ n(e.var_bono.maximo, 2) }} |
+| Var PBI (%) | {{ n(e.var_pbi.media) }} | {{ n(e.var_pbi.desvio) }} | {{ n(e.var_pbi.error_estandar) }} | {{ n(e.var_pbi.minimo, 2) }} | {{ n(e.var_pbi.maximo, 2) }} |
+
+Proporción de {{ v.unidad }} con suba del bono: p̂ = {{ e.proporcion_suba.exitos }} / {{ e.proporcion_suba.n }} = {{ n(e.proporcion_suba.proporcion) }}.
+
+**Qué significa.** El bono es unas {{ n(v.veces_mas_volatil, 0) }} veces más volátil que el PBI: su desvío es {{ n(e.var_bono.desvio, 2) }} pp contra {{ n(e.var_pbi.desvio, 2) }} pp. Con esa diferencia ya se intuye que la actividad sola difícilmente explique los movimientos del bono.
+
+**Dónde está el cálculo.** [`src/tp_ae2/herramientas/estimadores.py`](src/tp_ae2/herramientas/estimadores.py).
+
+### 5.6 Intervalo de confianza (95 %)
+
+**Por qué la usamos.** Una media de la muestra es un solo número y no dice cuánto puede errarle al valor verdadero. El intervalo da un rango que, con 95 % de confianza, contiene la media o la proporción verdadera.
+
+**Cómo la aplicamos.** Para las medias, con la t de Student (la varianza verdadera no se conoce); para la proporción, con la aproximación Normal:
+
+$$IC_{95\%}(\mu) = \bar x \pm t_{0{,}975;\,n-1} \cdot \frac{S}{\sqrt n} \qquad IC_{95\%}(p) = \hat p \pm z_{0{,}975} \cdot \sqrt{\frac{\hat p (1 - \hat p)}{n}}$$
+
+Con {{ icm.media_var_bono.gl }} grados de libertad, t = {{ n(icm.media_var_bono.cuantil) }}; z = {{ n(icm.proporcion_suba.cuantil, 2) }}. Por ejemplo, para el bono: {{ n(icm.media_var_bono.estimacion) }} ± {{ n(icm.media_var_bono.cuantil) }} × {{ n(icm.media_var_bono.error_estandar) }} = {{ n(icm.media_var_bono.estimacion) }} ± {{ n(icm.media_var_bono.margen) }}.
+
+**Qué dio.**
+
+| | Estimación | IC 95 % |
+|---|---|---|
+| Media de Var AL30D (%) | {{ n(icm.media_var_bono.estimacion) }} | {{ ic(icm.media_var_bono.inferior, icm.media_var_bono.superior) }} |
+| Media de Var PBI (%) | {{ n(icm.media_var_pbi.estimacion) }} | {{ ic(icm.media_var_pbi.inferior, icm.media_var_pbi.superior) }} |
+| Proporción de {{ v.unidad }} con suba | {{ n(icm.proporcion_suba.estimacion) }} | {{ ic(icm.proporcion_suba.inferior, icm.proporcion_suba.superior) }} |
+| Pendiente β1 de la regresión | {{ n(d0.b1) }} | {{ ic(d0.ic_b1.inferior, d0.ic_b1.superior) }} |
+
+**Qué significa.** {% if v.ic_bono_con_cero and v.ic_pbi_con_cero %}Los dos intervalos de medias incluyen el cero: con estos datos no se puede afirmar que el bono ni el PBI hayan crecido en promedio {{ por }}.{% elif v.ic_bono_con_cero %}El intervalo del bono incluye el cero: no se puede afirmar que haya subido en promedio.{% elif v.ic_pbi_con_cero %}El intervalo del PBI incluye el cero: no se puede afirmar que haya crecido en promedio.{% else %}Ninguno de los dos intervalos de medias incluye el cero.{% endif %}{% if v.ic_prop_con_mitad %} El de la proporción incluye 0,5: tampoco se puede afirmar que el bono haya subido más veces de las que bajó.{% endif %} {% if d0.ic_b1.inferior <= 0 <= d0.ic_b1.superior %}El de β1 incluye el cero, que es la misma conclusión que el test t.{% else %}El de β1 no incluye el cero, que es la misma conclusión que el test t.{% endif %}
+
+**Dónde está el cálculo.** [`src/tp_ae2/herramientas/intervalos.py`](src/tp_ae2/herramientas/intervalos.py).
+
+{%- set bb, bp, br = r.bondad_ajuste.var_bono, r.bondad_ajuste.var_pbi, r.bondad_ajuste.residuos_principal %}
+
+### 5.7 Bondad de ajuste (χ² y Shapiro-Wilk)
+
+**Por qué la usamos.** El test t y los intervalos suponen que los datos (o los errores de la regresión) siguen una distribución Normal. La bondad de ajuste verifica si eso se cumple, y la consigna la pide.
+
+**Cómo la aplicamos.**
+{% if bb.chi2.aplicable %}
+*Paso 1. Test χ² de bondad de ajuste.* Se divide el rango de valores en k = {{ bb.chi2.k }} clases que, si los datos fueran Normales (con la media y el desvío de la muestra), tendrían la misma probabilidad. Así se esperan n / k = {{ n(bb.chi2.tabla[0].esperada, 1) }} observaciones por clase, y se compara con las observadas:
+
+$$\chi^2 = \sum_{j=1}^{k} \frac{(O_j - E_j)^2}{E_j}$$
+
+Tiene k − 1 − 2 = {{ bb.chi2.gl }} grados de libertad: se pierden dos por estimar la media y el desvío. El valor crítico al 95 % es {{ n(bb.chi2.valor_critico) }}.
+{% endif %}
+*Paso {{ "2" if bb.chi2.aplicable else "1" }}. Test de Shapiro-Wilk.* Compara los datos ordenados con los que daría una Normal; con muestras chicas detecta desvíos que el χ² pasa por alto. Su estadístico W vale 1 si el ajuste es perfecto.
+
+**Qué dio.**
+
+| Variable | χ² | p-valor (χ²) | W de Shapiro-Wilk | p-valor (SW) |
+|---|---|---|---|---|
+{% for nombre, b in (("Var AL30D", bb), ("Var PBI", bp), ("Residuos de la regresión principal", br)) -%}
+| {{ nombre }} | {{ n(b.chi2.estadistico) if b.chi2.aplicable else "—" }} | {{ pv(b.chi2.p_valor) if b.chi2.aplicable else "—" }} | {{ n(b.shapiro.estadistico) }} | {{ pv(b.shapiro.p_valor) }} |
+{% endfor %}
+**Qué significa.** {% if bb.shapiro.p_valor < alfa or bp.shapiro.p_valor < alfa %}Las series no son exactamente Normales{% if bb.shapiro.p_valor < alfa %}: el bono tiene {{ v.unidad }} extremos, de {{ n(e.var_bono.minimo, 1) }} % a {{ n(e.var_bono.maximo, 1, signo=True) }} %{% endif %}. Con n = {{ v.principal.n }}, los tests sobre medias y coeficientes siguen siendo aproximadamente válidos por el teorema central del límite, y los errores robustos de la sección 6.1 llegan a la misma conclusión.{% else %}No se rechaza la normalidad: los supuestos de los tests t se sostienen.{% endif %}{% if bb.chi2.aplicable and (bb.chi2.p_valor < alfa) != (bb.shapiro.p_valor < alfa) %} Que el χ² y Shapiro-Wilk no coincidan para el bono es esperable: Shapiro-Wilk es más potente con este tamaño de muestra.{% endif %}
+
+**Dónde está el cálculo.** [`src/tp_ae2/herramientas/bondad_ajuste.py`](src/tp_ae2/herramientas/bondad_ajuste.py).
+
+## 6. Controles: ¿el resultado es confiable?
+
+Las herramientas de la sección 5 dan un resultado. Estos controles revisan si ese resultado se sostiene.
+
+### 6.1 Supuestos de la regresión
+
+**Por qué.** Los p-valores de la regresión solo son confiables si se cumplen sus supuestos (Gauss-Markov): errores con varianza constante, sin correlación en el tiempo y regresores que no se pisen entre sí.
+
+**Cómo.** Breusch-Pagan testea si la varianza de los errores cambia con X. Durbin-Watson y Breusch-Godfrey testean si el error de un período se parece al del anterior. El VIF mide la colinealidad (sección 5.2). Como respaldo, repetimos la regresión múltiple con errores robustos de Newey-West (HAC), que no suponen varianza constante ni ausencia de autocorrelación.
+
+**Qué dio.** Breusch-Pagan p = {{ pv(ds.breusch_pagan.p_valor) }}; Durbin-Watson = {{ n(ds.durbin_watson, 2) }} (el ideal es cerca de 2); Breusch-Godfrey p = {{ pv(ds.breusch_godfrey.p_valor) }}; VIF {% for x in dm.vif %}{{ n(x.vif, 2) }}{{ " y " if not loop.last }}{% endfor %}. Con errores HAC, el coeficiente del PBI da p = {{ pv(m.hac.coeficientes[1].p_valor) }}.
+
+**Qué significa.** {% if ds.breusch_pagan.p_valor >= alfa and ds.breusch_godfrey.p_valor >= alfa %}No aparecen heterocedasticidad ni autocorrelación{% if ds.breusch_pagan.p_valor < 0.1 %} (la homocedasticidad se cumple por poco){% endif %}{% else %}Algún supuesto no se cumple; por eso pesa el resultado con errores HAC{% endif %}. {{ "Los errores HAC llegan a la misma conclusión." if (m.hac.coeficientes[1].p_valor < alfa) == (cpbi.p_valor < alfa) else "Con errores HAC la conclusión cambia." }}
+
+### 6.2 Robustez: {{ "datos sin interpolar" if v.mensual else "la otra muestra" }} e influencia de cada período
+
+**Por qué.** {% if v.mensual %}El PBI se publica por trimestre. Para tener al menos 50 observaciones lo pasamos a mensual con un spline, una curva suave que pasa por cada dato trimestral. Hay que ver si el resultado depende de ese paso.{% else %}La muestra principal usa los trimestres reales. Hay que ver si el resultado cambia con la muestra mensual, en la que el PBI se pasa a mensual con un spline.{% endif %}
+
+**Cómo.** Repetimos todas las herramientas con la muestra {{ v.respaldo_frecuencia }} ({{ q0.n }} {{ unidad_resp }}). Además sacamos un período por vez y recalculamos la regresión (leave-one-out), y medimos la influencia de cada uno con la distancia de Cook. Esto último se agregó después de ver los resultados y se rotula como tal.
+
+**Qué dio.** Con {{ q0.n }} {{ unidad_resp }}: β̂1 = {{ n(q0.b1) }}, IC 95 % {{ ic(q0.ic_b1.inferior, q0.ic_b1.superior) }}, p = {{ pv(q0.p_b1) }}. Al sacar un período por vez, la decisión se mantiene en {{ inf.n - inf.periodos_que_cambian_decision | length }} de {{ inf.n }} casos{% if inf.periodos_que_cambian_decision %}; sin {{ inf.periodos_que_cambian_decision | join(", ") }} cambia{% endif %}.
+
+**Qué significa.** {% if (q0.p_b1 < alfa) == v.rechaza %}La conclusión no depende {{ "de la mensualización" if v.mensual else "de la frecuencia de los datos" }}.{% elif not v.mensual %}Con la muestra mensual la conclusión cambia: el resultado depende de la frecuencia de los datos.{% else %}Con los datos sin interpolar aparece {{ "una relación" if q0.p_b1 < alfa else "otra conclusión" }}, pero es una señal a mirar y no un resultado{% if v.motivos_excepcion %}: {{ v.motivos_excepcion | join(" y ") }}{% endif %}. En los {{ inf.signos.pbi_baja }} {{ unidad_resp }} en que cayó el PBI el bono subió en {{ inf.signos.pbi_baja_bono_sube }}; en los {{ inf.signos.pbi_sube }} en que creció, subió en {{ inf.signos.pbi_sube_bono_sube }}.{% endif %}
+
+### 6.3 Sensibilidades
+
+**Por qué.** Varias decisiones de método podrían haberse tomado de otra forma. Cambiamos una por vez para ver si el veredicto se mueve.
+
+**Qué dio.**
+
+| Cambio | p-valor | Decisión |
+|---|---|---|
+{% for s in v.sensibilidades -%}
+| {{ s.especificacion }} | {{ pv(s.p_valor) }} | {{ s.decision }} |
+{% endfor %}
+**Qué significa.** {% if v.sensibilidades_cambian %}{{ v.sensibilidades_cambian | length }} de {{ v.sensibilidades | length }} cambian la decisión: el resultado depende de esas elecciones.{% else %}Ninguna cambia la decisión: el resultado no depende de esas elecciones de método.{% endif %}

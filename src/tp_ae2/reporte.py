@@ -18,6 +18,7 @@ log = logging.getLogger(__name__)
 
 PLANTILLAS = Path(__file__).parent / "plantillas"
 MARCA_INICIO, MARCA_FIN = "<!-- RESULTADOS:INICIO -->", "<!-- RESULTADOS:FIN -->"
+MARCA_RESUMEN_INICIO, MARCA_RESUMEN_FIN = "<!-- RESUMEN:INICIO -->", "<!-- RESUMEN:FIN -->"
 
 # Números del borrador previo del grupo (origen no verificado): solo para la reconciliación.
 BORRADOR = [
@@ -243,10 +244,58 @@ def reconciliacion(r: dict, extras: dict) -> str:
     return "\n".join(lineas)
 
 
+def _valores_readme(r: dict) -> dict:
+    """Cantidades derivadas que el README explica en palabras (todas salen de resultados.json)."""
+    alfa = r["meta"]["alfa"]
+    principal = r["muestra"]["principal"]
+    d0 = r["hipotesis_principal"]["d0"]
+    est = r["estimadores"]
+    sx, sy = est["var_pbi"]["desvio"], est["var_bono"]["desvio"]
+    extremo_ic = max(abs(d0["ic_b1"]["inferior"]), abs(d0["ic_b1"]["superior"]))
+    ic_medias = r["intervalos"]
+    resp = r["robustez_trimestral"]
+    sens = [s for s in r["sensibilidades"] if s["id"] not in ("base", "e") and s.get("p_valor") is not None]
+    q0 = resp["bateria_respaldo"]["hipotesis_principal"]["d0"]
+    n_min = r["muestra"]["n_minimo_consigna"]
+    cambian = resp["influencia"]["periodos_que_cambian_decision"]
+    motivos = []  # por qué la muestra de respaldo no se toma como resultado
+    if q0["n"] < n_min:
+        motivos.append(f"son menos de las {n_min} observaciones que pide la consigna")
+    if cambian:
+        motivos.append(("depende de un solo período" if len(cambian) == 1 else "depende de pocos períodos")
+                       + f" (sin {', '.join(cambian)}, la decisión se invierte)")
+    return {
+        "motivos_excepcion": motivos,
+        "alfa": alfa,
+        "mensual": principal["frecuencia"] == "mensual",
+        "unidad": "meses" if principal["frecuencia"] == "mensual" else "trimestres",
+        "principal": principal,
+        "rechaza": d0["p_b1"] < alfa,
+        "veces_mas_volatil": sy / sx,
+        "extremo_por_desvio": extremo_ic * sx,
+        "ic_bono_con_cero": ic_medias["media_var_bono"]["inferior"] <= 0 <= ic_medias["media_var_bono"]["superior"],
+        "ic_pbi_con_cero": ic_medias["media_var_pbi"]["inferior"] <= 0 <= ic_medias["media_var_pbi"]["superior"],
+        "ic_prop_con_mitad": ic_medias["proporcion_suba"]["inferior"] <= .5 <= ic_medias["proporcion_suba"]["superior"],
+        "exploratorios_signif": [f for f in r["desfases"] if f["etiqueta"] == "exploratoria" and f["p_valor"] < f["umbral"]],
+        "n_exploratorios": sum(1 for f in r["desfases"] if f["etiqueta"] == "exploratoria"),
+        "respaldo": resp["bateria_respaldo"]["hipotesis_principal"]["d0"],
+        "respaldo_frecuencia": resp["muestra_comparada"],
+        "influencia": resp["influencia"],
+        "sensibilidades": sens,
+        "sensibilidades_cambian": [s for s in sens if s["decision"] != r["sensibilidades"][0]["decision"]],
+    }
+
+
+def bloque_resumen_readme(r: dict) -> str:
+    texto = _entorno().get_template("readme_resumen.md.j2").render(r=r, v=_valores_readme(r)).strip()
+    return "\n".join([MARCA_RESUMEN_INICIO, texto, MARCA_RESUMEN_FIN])
+
+
 def bloque_readme(r: dict) -> str:
     p0, p1 = r["hipotesis_principal"]["d0"], r["hipotesis_principal"]["d1"]
     comp = r["prueba_complementaria"]
     resp = r["robustez_trimestral"]["bateria_respaldo"]["hipotesis_principal"]["d0"]
+    explicacion = _entorno().get_template("readme_resultados.md.j2").render(r=r, v=_valores_readme(r)).strip()
     filas = [
         "| Contraste | Etiqueta | n | Estimación | p-valor | Decisión (α = 0,05) |",
         "|---|---|---|---|---|---|",
@@ -266,12 +315,16 @@ def bloque_readme(r: dict) -> str:
                  f"{resp['n']} | {num(resp['b1'])} | {pval(resp['p_b1'])} | {decision(resp['p_b1'], 0.05)} |")
     return "\n".join([
         MARCA_INICIO,
-        "<!-- Bloque generado por `python -m tp_ae2.run_all` desde outputs/resultados.json. No editar a mano. -->",
+        "<!-- Bloque generado por `python -m tp_ae2.run_all` desde outputs/resultados.json. No editar a mano: los "
+        "números y las interpretaciones se recalculan. -->",
         "",
-        f"> **Veredicto de la hipótesis principal.** {r['veredictos']['hipotesis_principal']}",
+        explicacion,
+        "",
+        "## 7. Todos los contrastes principales en una tabla",
         "",
         f"Muestra principal: {r['muestra']['principal']['frecuencia']}, {r['muestra']['principal']['inicio']} a "
-        f"{r['muestra']['principal']['fin']} (n = {r['muestra']['principal']['n']}).",
+        f"{r['muestra']['principal']['fin']} (n = {r['muestra']['principal']['n']}). Los p-valores de todos los tests "
+        "(diagnósticos y sensibilidades incluidos) están en el anexo de la presentación y en `outputs/tablas/p_valores.csv`.",
         "",
         *filas,
         "",
@@ -279,9 +332,9 @@ def bloque_readme(r: dict) -> str:
     ])
 
 
-def inyectar_readme(ruta: Path, bloque: str) -> None:
+def inyectar_readme(ruta: Path, bloque: str, marcas: tuple[str, str] = (MARCA_INICIO, MARCA_FIN)) -> None:
     contenido = ruta.read_text(encoding="utf-8")
-    patron = re.compile(re.escape(MARCA_INICIO) + r".*?" + re.escape(MARCA_FIN), re.S)
+    patron = re.compile(re.escape(marcas[0]) + r".*?" + re.escape(marcas[1]), re.S)
     if not patron.search(contenido):
-        raise ValueError(f"{ruta}: faltan las marcas {MARCA_INICIO} / {MARCA_FIN}")
+        raise ValueError(f"{ruta}: faltan las marcas {marcas[0]} / {marcas[1]}")
     escribir_texto(ruta, patron.sub(lambda _: bloque, contenido))

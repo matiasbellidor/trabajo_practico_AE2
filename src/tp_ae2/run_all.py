@@ -39,6 +39,8 @@ def ejecutar(cfg: Config) -> dict:
     reporte.escribir_texto(salidas / "reconciliacion_borrador_previo.md", reporte.reconciliacion(resultados, extras))
     presentacion.generar(cfg)
     if cfg.ruta("readme").exists():
+        reporte.inyectar_readme(cfg.ruta("readme"), reporte.bloque_resumen_readme(resultados),
+                                (reporte.MARCA_RESUMEN_INICIO, reporte.MARCA_RESUMEN_FIN))
         reporte.inyectar_readme(cfg.ruta("readme"), reporte.bloque_readme(resultados))
 
     log.info("Listo. %s", resultados["veredictos"]["hipotesis_principal"])

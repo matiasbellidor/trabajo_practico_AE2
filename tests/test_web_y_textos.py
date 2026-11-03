@@ -124,3 +124,22 @@ def test_integrantes_en_orden_alfabetico_por_apellido(corrida):
     integrantes = resultados["meta"]["integrantes"]
     apellidos = [nombre.split()[-1] for nombre in integrantes]
     assert apellidos == sorted(apellidos)
+
+
+def test_readme_esta_al_dia_con_los_resultados(corrida):
+    resultados, _ = corrida
+    readme = (RAIZ_REPO / "README.md").read_text(encoding="utf-8")
+    for bloque in (reporte.bloque_resumen_readme(resultados), reporte.bloque_readme(resultados)):
+        assert bloque in readme, "README desactualizado: correr python -m tp_ae2.run_all"
+        assert not CAUSAL.search(bloque) and PROHIBIDO not in bloque
+
+
+def test_readme_se_genera_con_la_muestra_trimestral_como_principal(cfg):
+    from tp_ae2 import analisis
+    from tp_ae2.config import con_cambios
+
+    resultados, _ = analisis.ejecutar(con_cambios(cfg, {"muestra_principal": "trimestral"}))
+    resumen, bloque = reporte.bloque_resumen_readme(resultados), reporte.bloque_readme(resultados)
+    assert "Con 19 trimestres de datos" in resumen
+    assert "### 5.1 Regresión lineal simple" in bloque and "## 6. Controles" in bloque and "por trimestre" in bloque
+    assert not CAUSAL.search(resumen + bloque)
