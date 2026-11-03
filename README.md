@@ -183,6 +183,6 @@ Las animaciones son cortas, una sola vez y solo de `transform` y `opacity`. Con 
 
 ## Autoría y licencia
 
-Grupo 1 (orden alfabético por apellido): Maria Acevedo, Matías Rodrigo Bellido (GitHub: [matiasbellidor](https://github.com/matiasbellidor)), Melina Escalante, Luka Orpianesi y Manuel Rodriguez.
+Grupo 1: Maria Acevedo, Matías Rodrigo Bellido, Melina Escalante, Luka Orpianesi y Manuel Rodriguez.
 
 El código se publica bajo licencia MIT (`LICENSE`). Los datos pertenecen a sus fuentes originales: Data912 y el INDEC (vía datos.gob.ar).
