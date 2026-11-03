@@ -80,6 +80,37 @@ def markdown_a_html(texto: str) -> str:
     return "\n".join(bloques)
 
 
+def trazo_portada(panel: list[dict], ancho: int = 600, alto: int = 220) -> dict:
+    """Recorrido acumulado (base 100 en el período previo al primero) del AL30D y del PBI, para la portada.
+
+    Cada serie se escala a su propio rango: la figura muestra forma, no magnitudes comparables.
+    """
+    margen = 8
+
+    def indice(variaciones: list[float]) -> list[float]:
+        valores = [100.0]
+        for v in variaciones:
+            valores.append(valores[-1] * (1 + v / 100))
+        return valores
+
+    def puntos(valores: list[float]) -> list[tuple[float, float]]:
+        bajo, alto_v = min(valores), max(valores)
+        rango = (alto_v - bajo) or 1.0
+        paso = (ancho - 2 * margen) / (len(valores) - 1)
+        return [(margen + i * paso, margen + (alto - 2 * margen) * (1 - (v - bajo) / rango))
+                for i, v in enumerate(valores)]
+
+    def camino(pts: list[tuple[float, float]]) -> str:
+        return "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts)
+
+    bono = indice([float(f["var_bono"]) for f in panel])
+    pbi = indice([float(f["var_pbi"]) for f in panel])
+    pb, pp = puntos(bono), puntos(pbi)
+    return {"ancho": ancho, "alto": alto, "bono": camino(pb), "pbi": camino(pp), "fin_bono": pb[-1],
+            "fin_pbi": pp[-1], "bono_final": bono[-1], "pbi_final": pbi[-1],
+            "inicio": str(panel[0]["periodo"]), "fin": str(panel[-1]["periodo"])}
+
+
 def _svg_accesible(svg: str, figura_id: str) -> str:
     return svg.replace("<svg ", f'<svg role="img" aria-labelledby="cap-{figura_id}" focusable="false" ', 1)
 
@@ -90,7 +121,7 @@ def renderizar(resultados: dict, figuras: list[dict], svgs: dict[str, str], pane
                                  undefined=jinja2.StrictUndefined, trim_blocks=True, lstrip_blocks=True)
     figs = {f["id"]: {**f, "svg": _svg_accesible(svgs[f["id"]], f["id"])} for f in figuras}
     return entorno.get_template("plantilla.html.j2").render(
-        r=resultados, t=textos.construir(resultados), figs=figs, panel=panel,
+        r=resultados, t=textos.construir(resultados), figs=figs, panel=panel, trazo=trazo_portada(panel),
         secciones=[{"id": i, "titulo": t} for i, t in SECCIONES],
         css=(WEB / "estilos.css").read_text(encoding="utf-8"), js=(WEB / "navegacion.js").read_text(encoding="utf-8"),
         conclusion_html=markdown_a_html(conclusion_md) if conclusion_md else None,

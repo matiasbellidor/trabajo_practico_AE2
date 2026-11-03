@@ -10,12 +10,12 @@ proyecto:
   cuatrimestre: "2C 2026"
   autor: "Matías Rodrigo Bellido"
   grupo: "Grupo 1"
-  integrantes:
+  integrantes:   # orden alfabético por apellido
+    - "Maria Acevedo"
     - "Matías Rodrigo Bellido"
+    - "Melina Escalante"
     - "Luka Orpianesi"
     - "Manuel Rodriguez"
-    - "Melina Escalante"
-    - "Maria Acevedo"
   github: "matiasbellidor"
   repositorio: "https://github.com/matiasbellidor/trabajo_practico_AE2"
   pages: "https://matiasbellidor.github.io/trabajo_practico_AE2/"

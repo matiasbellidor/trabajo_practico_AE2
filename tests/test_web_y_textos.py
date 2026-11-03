@@ -1,5 +1,6 @@
 """(8) El HTML no hace pedidos externos; textos sin lenguaje causal; README y conclusión."""
 
+import json
 import re
 
 import pytest
@@ -92,3 +93,34 @@ def test_informe_sin_conclusion_escrita(corrida):
     resultados, _ = corrida
     informe = reporte.cuerpo_informe(resultados, textos.construir(resultados))
     assert informe.rstrip().endswith("## 8. Conclusión (se redacta aparte)")
+
+
+def test_html_navegacion_y_repositorio(corrida, html_generado):
+    resultados, _ = corrida
+    repo = resultados["meta"]["repositorio"]
+    # Link al repositorio en la barra, en la portada y en el anexo, siempre en otra pestaña.
+    assert html_generado.count(f'href="{repo}" target="_blank" rel="noopener"') >= 3
+    assert 'class="repo repo--oscura"' in html_generado and "Repositorio en GitHub" in html_generado
+    # Índice, riel y progreso tienen un elemento por sección.
+    for patron in (r'<a href="#[^"]+" data-ir="\d+" data-titulo=', r'<span class="riel__etiqueta">',
+                   r'<span class="progreso__tramo">'):
+        assert len(re.findall(patron, html_generado)) == 14, patron
+    assert 'id="indice" popover' in html_generado and 'popovertarget="indice"' in html_generado
+    # El trazo de la portada sale de los datos: dos caminos con un punto por mes más la base.
+    caminos = re.findall(r'class="trazo__linea[^"]*" d="(M[^"]+)"', html_generado)
+    assert len(caminos) == 2
+    assert all(c.count(" L") == resultados["muestra"]["principal"]["n"] for c in caminos)
+    # Los rangos de fechas de las fuentes no se cortan: cada fecha va en su propio <time>. La corrida de los tests
+    # no carga el linaje, así que se mira la web publicada.
+    publicado = RAIZ_REPO / "docs" / "index.html"
+    if publicado.exists():
+        filas = re.findall(r'<td class="rango"><time datetime="\d{4}-\d{2}-\d{2}">', publicado.read_text(encoding="utf-8"))
+        assert len(filas) == len([l for l in json.loads((RAIZ_REPO / "outputs" / "linaje_datos.json")
+                                                        .read_text(encoding="utf-8")) if l["existe"]])
+
+
+def test_integrantes_en_orden_alfabetico_por_apellido(corrida):
+    resultados, _ = corrida
+    integrantes = resultados["meta"]["integrantes"]
+    apellidos = [nombre.split()[-1] for nombre in integrantes]
+    assert apellidos == sorted(apellidos)

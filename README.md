@@ -157,17 +157,32 @@ trabajo_practico_AE2/
 ├── tests/                      # pytest: herramientas contra scipy/statsmodels, datos, web, conclusión y reproducibilidad
 ├── outputs/                    # resultados, tablas, figuras y resumen
 ├── reports/cuerpo_informe.md
-└── docs/                       # sitio estático (GitHub Pages)
+├── docs/                       # sitio estático (GitHub Pages y Vercel)
+├── vercel.json                 # deploy en Vercel: preset Other, sin build, publica docs/
+└── .claude/skills/tp-web-design/  # reglas de diseño y motion de la web + script de verificación
 ```
 
 ## Presentación web
 
-`docs/index.html` es un único archivo autocontenido: funciona sin conexión, no hace pedidos externos, tiene tema claro y oscuro, se navega con ← → y Re Pág / Av Pág, y se imprime en A4 apaisado con una sección por página.
+`docs/index.html` es un único archivo autocontenido: funciona sin conexión, no hace pedidos externos, tiene tema claro y oscuro y se imprime en A4 apaisado con una sección por página.
 
-Publicada con GitHub Pages en https://matiasbellidor.github.io/trabajo_practico_AE2/ (Settings → Pages → Deploy from a branch → rama `main`, carpeta `/docs`).
+Para no perderse entre las 14 secciones:
+
+- **Barra superior:** la sección actual (`05/14 · Bondad de ajuste`). Al tocarla abre el índice. La barra tiene además el link al repositorio y un progreso dividido en un tramo por sección.
+- **Riel de puntos** (escritorio): un cursor que se desliza a la sección activa y se llena a medida que se avanza en ella.
+- **"Volver a…":** si un scroll involuntario saltea dos secciones o más, aparece un botón para volver a donde estabas.
+- **Link compartible:** la URL guarda la sección (`#robustez`), así que recargar o compartir el link abre en el mismo lugar.
+- **Teclado:** ← → y Re Pág / Av Pág cambian de sección; Esc cierra el índice.
+
+Las animaciones son cortas, una sola vez y solo de `transform` y `opacity`. Con "reducir movimiento" activado en el sistema, todo aparece quieto y completo. Las reglas de diseño y el script de verificación están en la skill del proyecto, [`.claude/skills/tp-web-design/`](.claude/skills/tp-web-design/SKILL.md).
+
+## Deploy
+
+- **GitHub Pages:** https://matiasbellidor.github.io/trabajo_practico_AE2/ (Settings → Pages → rama `main`, carpeta `/docs`).
+- **Vercel:** importar el repositorio y dejar la configuración que trae [`vercel.json`](vercel.json): preset "Other", sin instalar dependencias ni buildear, y `docs/` como carpeta publicada. `docs/index.html` se commitea ya generado, así que Vercel no necesita Python.
 
 ## Autoría y licencia
 
-Grupo 1: Matías Rodrigo Bellido (GitHub: [matiasbellidor](https://github.com/matiasbellidor)), Luka Orpianesi, Manuel Rodriguez, Melina Escalante y Maria Acevedo.
+Grupo 1 (orden alfabético por apellido): Maria Acevedo, Matías Rodrigo Bellido (GitHub: [matiasbellidor](https://github.com/matiasbellidor)), Melina Escalante, Luka Orpianesi y Manuel Rodriguez.
 
 El código se publica bajo licencia MIT (`LICENSE`). Los datos pertenecen a sus fuentes originales: Data912 y el INDEC (vía datos.gob.ar).

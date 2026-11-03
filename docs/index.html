@@ -108,39 +108,121 @@ h3 { font-size: 1.25rem; margin: 1.6rem 0 .6rem; }
 p { margin: 0 0 .9rem; max-width: 72ch; }
 a { color: var(--foco); text-underline-offset: .18em; overflow-wrap: anywhere; }
 strong { font-weight: 650; }
+code { overflow-wrap: anywhere; }
 :focus-visible { outline: 3px solid var(--foco); outline-offset: 3px; border-radius: 4px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .saltar { position: absolute; left: 1rem; top: -4rem; z-index: 50; background: var(--superficie); color: var(--tinta); padding: .6rem 1rem; border-radius: 8px; }
 .saltar:focus { top: 1rem; }
 
-/* Barra superior y progreso */
+/* Barra superior: marca, sección actual (abre el índice), acciones y progreso por sección */
 .barra {
-  position: fixed; inset: 0 0 auto 0; z-index: 30; display: flex; align-items: center; justify-content: space-between;
-  gap: 1rem; padding: .55rem clamp(1rem, 3vw, 2rem); background: color-mix(in srgb, var(--fondo) 88%, transparent);
+  position: fixed; inset: 0 0 auto 0; z-index: 30; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center; gap: 1rem; padding: .5rem clamp(1rem, 3vw, 2rem); background: color-mix(in srgb, var(--fondo) 88%, transparent);
   backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--linea); font-size: .85rem; color: var(--tinta-2);
 }
-.barra__marca { font-family: var(--serif); font-weight: 600; color: var(--tinta); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.barra__marca { font-family: var(--serif); font-weight: 600; color: var(--tinta); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-decoration: none; min-width: 0; }
 .barra__marca span { color: var(--tenue); font-family: var(--sans); font-weight: 400; }
-.barra__acciones { display: flex; gap: .5rem; align-items: center; flex-shrink: 0; }
+.barra__acciones { display: flex; gap: .5rem; align-items: center; justify-self: end; }
 .boton {
   font: inherit; color: var(--tinta); background: var(--superficie); border: 1px solid var(--linea); border-radius: 999px;
   padding: .35rem .85rem; cursor: pointer; min-height: 36px;
 }
 .boton:hover { background: var(--superficie-2); }
-.progreso { position: absolute; left: 0; bottom: -1px; height: 3px; width: 100%; transform-origin: 0 50%; transform: scaleX(0); background: var(--acento); }
-
-/* Riel de puntos */
-.riel { position: fixed; right: clamp(.5rem, 1.5vw, 1.4rem); top: 50%; transform: translateY(-50%); z-index: 20; }
-.riel ol { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
-.riel a { position: relative; display: block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--tenue); }
-.riel a::after { content: ""; position: absolute; inset: -8px; }
-.riel a[aria-current="true"] { background: var(--acento); border-color: var(--acento); }
-.riel a span {
-  position: absolute; right: 22px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: .8rem;
-  background: var(--superficie); color: var(--tinta); border: 1px solid var(--linea); padding: .15rem .5rem; border-radius: 6px;
-  opacity: 0; pointer-events: none; transition: opacity .15s;
+.boton--repo { display: inline-flex; align-items: center; gap: .45rem; text-decoration: none; }
+.boton--repo, .boton--tema { display: inline-flex; align-items: center; gap: .45rem; }
+.boton--repo .icono, .boton--tema .icono { width: 17px; height: 17px; flex: none; }
+.seccion-actual {
+  font: inherit; color: var(--tinta); background: var(--superficie); border: 1px solid var(--linea); border-radius: 999px;
+  display: inline-flex; align-items: center; gap: .6rem; padding: .3rem .7rem .3rem .85rem; min-height: 36px; cursor: pointer;
+  max-width: min(46vw, 30rem); min-width: 0;
 }
-.riel a:hover span, .riel a:focus-visible span { opacity: 1; }
+.seccion-actual:hover { border-color: var(--acento); }
+.seccion-actual__num { font-weight: 650; font-variant-numeric: tabular-nums; color: var(--acento); white-space: nowrap; display: inline-flex; }
+.seccion-actual__num > span:first-child { display: inline-block; }
+.seccion-actual__total { color: var(--tenue); font-weight: 400; }
+.seccion-actual__titulo { display: block; overflow: hidden; min-width: 0; }
+.seccion-actual__titulo > span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.seccion-actual__flecha { flex: none; color: var(--tenue); }
+.progreso { position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; display: flex; gap: 2px; }
+.progreso__tramo { flex: 1; background: color-mix(in srgb, var(--linea) 70%, transparent); overflow: hidden; }
+.progreso__tramo i { display: block; height: 100%; background: var(--acento); transform-origin: 0 50%; transform: scaleX(0); }
+
+/* Índice desplegable (popover nativo; navegacion.js da el respaldo con la clase .abierta) */
+.indice {
+  display: none; position: fixed; inset: 3.4rem auto auto 50%; margin: 0; transform: translateX(-50%);
+  width: min(calc(100vw - 2rem), 440px); max-height: min(74vh, 640px); overflow: auto; padding: .55rem;
+  background: var(--superficie); color: var(--tinta); border: 1px solid var(--linea); border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(20, 32, 54, .22); z-index: 45;
+}
+.indice:popover-open { display: block; }
+.indice.abierta { display: block; }
+.indice::backdrop { background: rgba(10, 16, 32, .28); }
+.indice__titulo { font: 600 .74rem/1.2 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--tenue); margin: .35rem .7rem .45rem; }
+.indice ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.indice a { display: flex; gap: .8rem; align-items: baseline; padding: .5rem .7rem; border-radius: 8px; color: var(--tinta); text-decoration: none; min-height: 40px; }
+.indice a:hover { background: var(--superficie-2); }
+.indice a[aria-current="true"] { background: var(--acento-suave); }
+.indice__num { font: 600 .78rem/1 var(--sans); color: var(--tenue); font-variant-numeric: tabular-nums; letter-spacing: .06em; min-width: 1.6em; }
+.indice a[aria-current="true"] .indice__num { color: var(--acento); }
+
+/* Riel de puntos: pista que se llena, puntos recorridos y cursor que se desliza y se llena con la sección */
+.riel { position: fixed; right: clamp(.6rem, 1.6vw, 1.5rem); top: 50%; transform: translateY(-50%); z-index: 20; padding: 4px 1px; }
+.riel ol { position: relative; z-index: 1; list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.riel a { position: relative; display: block; width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--tenue); background: var(--fondo); }
+.riel a::after { content: ""; position: absolute; inset: -7px; }
+.riel a:hover { border-color: var(--acento); }
+.riel a[data-estado="pasada"] { background: var(--tenue); }
+.riel a[aria-current="true"] { border-color: transparent; background: transparent; }
+.riel__pista { position: absolute; left: 50%; top: 9px; bottom: 9px; width: 2px; margin-left: -1px; background: var(--linea); border-radius: 2px; overflow: hidden; }
+.riel__relleno { position: absolute; inset: 0; background: var(--acento); opacity: .55; transform-origin: 50% 0; transform: scaleY(0); }
+.riel__cursor {
+  position: absolute; left: 50%; top: 0; z-index: 2; width: 12px; height: 26px; margin-left: -6px; border-radius: 999px;
+  border: 2px solid var(--acento); background: var(--fondo); overflow: hidden; pointer-events: none;
+  transform: translateY(var(--y, 9px)) translateY(-50%);
+}
+.riel__cursor::after { content: ""; position: absolute; inset: 0; background: var(--acento); transform-origin: 50% 0; transform: scaleY(var(--avance, 0)); }
+.riel__etiqueta {
+  position: absolute; right: 24px; top: 50%; transform: translate(6px, -50%); white-space: nowrap; font-size: .8rem;
+  background: var(--superficie); color: var(--tinta); border: 1px solid var(--linea); padding: .2rem .55rem; border-radius: 6px;
+  box-shadow: var(--sombra); opacity: 0; pointer-events: none;
+}
+.riel a:hover .riel__etiqueta, .riel a:focus-visible .riel__etiqueta, .riel.anuncia a[aria-current="true"] .riel__etiqueta { opacity: 1; transform: translate(0, -50%); }
+
+/* Aviso "Volver a…" después de un salto largo de scroll */
+.volver {
+  position: fixed; left: 50%; bottom: max(1rem, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 40;
+  display: flex; align-items: center; gap: .2rem; padding: .3rem; max-width: calc(100% - 2rem);
+  background: var(--tinta); color: var(--fondo); border-radius: 999px; box-shadow: 0 12px 32px rgba(20, 32, 54, .28);
+}
+.volver[hidden] { display: none; }
+.volver button { font: inherit; color: inherit; background: transparent; border: 0; cursor: pointer; border-radius: 999px; }
+.volver button:hover { background: color-mix(in srgb, var(--fondo) 14%, transparent); }
+.volver :focus-visible { outline-color: var(--fondo); }
+.volver .volver__ir { display: flex; align-items: center; gap: .5rem; padding: .45rem .9rem; min-height: 40px; min-width: 0; font-size: .9rem; }
+.volver__ir svg { flex: none; }
+.volver__ir span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.volver .volver__cerrar { flex: none; width: 36px; height: 36px; font-size: 1.2rem; line-height: 1; }
+
+/* Tarjeta del repositorio */
+.repo {
+  display: flex; align-items: center; gap: 1rem; padding: 1rem 1.15rem; border: 1px solid var(--linea); border-radius: 14px;
+  background: var(--superficie); color: var(--tinta); text-decoration: none; box-shadow: var(--sombra); max-width: 40rem;
+}
+.repo:hover { border-color: var(--acento); }
+.repo__logo { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--tinta); color: var(--fondo); }
+.repo__logo .icono { width: 24px; height: 24px; }
+.repo__texto { display: grid; gap: .15rem; min-width: 0; }
+.repo__texto strong { font-family: var(--serif); font-size: 1.1rem; }
+.repo__texto span { font-size: .9rem; color: var(--tinta-2); }
+.repo__texto .repo__url { font: .8rem/1.35 ui-monospace, SFMono-Regular, Consolas, monospace; color: var(--tenue); overflow-wrap: anywhere; }
+.repo__flecha { flex: none; margin-left: auto; color: var(--acento); }
+.repo--oscura { background: rgba(243, 239, 230, .06); border-color: rgba(243, 239, 230, .2); color: var(--noche-tinta); box-shadow: none; }
+.repo--oscura:hover { border-color: #f2a56f; }
+.repo--oscura .repo__texto span, .repo--oscura .repo__texto .repo__url { color: var(--noche-tenue); }
+.repo--oscura .repo__logo { background: var(--noche-tinta); color: var(--noche); }
+.repo--oscura .repo__flecha { color: #f2a56f; }
+.anexo__repo { display: grid; gap: .6rem; margin-top: 1.2rem; }
+.anexo__repo p { margin: 0; color: var(--tenue); font-size: .9rem; }
 
 /* Diapositivas */
 .diapo {
@@ -148,7 +230,8 @@ strong { font-weight: 650; }
   padding: clamp(4.5rem, 8vh, 6rem) clamp(1rem, 5vw, 4.5rem) clamp(2.5rem, 6vh, 4rem); border-bottom: 1px solid var(--linea);
 }
 .diapo__contenido { width: 100%; max-width: 1180px; margin: 0 auto; }
-.diapo__num { font: 600 .8rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--acento); margin: 0 0 .9rem; }
+.diapo__num { display: flex; align-items: center; gap: .65rem; font: 600 .8rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--acento); margin: 0 0 .9rem; }
+.diapo__num::before { content: ""; flex: none; width: 2rem; height: 2px; border-radius: 2px; background: currentColor; transform-origin: 0 50%; }
 .diapo__bajada { font-size: 1.15rem; color: var(--tinta-2); margin: .8rem 0 1.8rem; max-width: 70ch; }
 
 /* Portada */
@@ -161,12 +244,26 @@ strong { font-weight: 650; }
 .portada__grupo ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .3rem 1.4rem; color: var(--noche-tinta); }
 .portada__pista { margin-top: 2.6rem; font-size: .9rem; color: var(--noche-tenue); }
 .portada kbd { font: inherit; border: 1px solid rgba(243, 239, 230, .35); border-radius: 4px; padding: 0 .35rem; }
+.portada__rejilla { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(2rem, 4vw, 4rem); align-items: end; }
+.portada__lateral { display: grid; gap: 1rem; }
+/* Recorrido real de las dos series: el motivo visual sale de los datos del trabajo */
+.trazo { margin: 0; padding: 1rem 1.1rem .9rem; border: 1px solid rgba(243, 239, 230, .16); border-radius: 14px; background: rgba(243, 239, 230, .04); }
+.trazo svg { display: block; width: 100%; height: auto; overflow: visible; }
+.trazo__linea { fill: none; stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+.trazo__linea--bono { stroke: #5b9cf0; }
+.trazo__linea--pbi { stroke: #f08a55; }
+.trazo figcaption { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin-top: .75rem; font-size: .84rem; color: var(--noche-tinta); }
+.trazo__serie { display: inline-flex; align-items: center; gap: .45rem; font-variant-numeric: tabular-nums; }
+.trazo__serie i { width: 16px; height: 3px; border-radius: 2px; background: #5b9cf0; }
+.trazo__serie--pbi i { background: #f08a55; }
+.trazo__nota { flex-basis: 100%; font-size: .78rem; color: var(--noche-tenue); }
 
 /* Rejilla de contenido */
 .dos-col { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(1.2rem, 3vw, 2.6rem); align-items: start; }
 .tarjeta { background: var(--superficie); border: 1px solid var(--linea); border-radius: 14px; padding: 1.2rem 1.4rem; box-shadow: var(--sombra); }
 .etiqueta { display: block; font: 600 .74rem/1.2 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--tenue); margin-bottom: .45rem; }
 .porque { border-left: 3px solid var(--acento); padding-left: 1rem; color: var(--tinta-2); }
+h2 + .porque { margin-top: 1.3rem; }
 .interpretacion { margin: 0; padding-left: 1.1rem; }
 .interpretacion li { margin-bottom: .55rem; max-width: 75ch; }
 .chip { display: inline-block; font-size: .75rem; font-weight: 600; letter-spacing: .04em; padding: .1rem .55rem; border-radius: 999px; border: 1px solid var(--linea); color: var(--tinta-2); background: var(--superficie-2); white-space: nowrap; }
@@ -216,6 +313,32 @@ summary::marker { color: var(--acento); }
 .tabla td.n, .tabla th.n { text-align: right; white-space: nowrap; }
 .tabla tbody tr:last-child td { border-bottom: 0; }
 .tabla tr.resalta td { background: var(--acento-suave); }
+/* Rango de fechas: cada fecha en una pieza, inicio arriba y fin abajo */
+.tabla td.rango { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rango time { white-space: nowrap; }
+.rango__hasta { display: block; color: var(--tinta-2); }
+.rango__a { color: var(--tenue); font-size: .85em; }
+.chip--bloque { display: table; margin-top: .3rem; font-size: .68rem; }
+
+/* Barras de scroll con la identidad de la página: pista discreta, cursor óxido. Chrome, Edge y Safari usan los
+   pseudoelementos ::-webkit-scrollbar (más control: cápsula, sin flechas); Firefox, las propiedades estándar. */
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--acento) 55%, var(--linea)); border-radius: 999px;
+  border: 3px solid transparent; background-clip: padding-box; min-height: 40px;
+}
+::-webkit-scrollbar-thumb:hover { background-color: var(--acento); }
+::-webkit-scrollbar-thumb:active { background-color: var(--acento); border-width: 2px; }
+::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+::-webkit-scrollbar-corner { background: transparent; }
+.tabla-scroll::-webkit-scrollbar-track, .indice::-webkit-scrollbar-track, .figura__lienzo::-webkit-scrollbar-track {
+  background: color-mix(in srgb, var(--superficie-2) 80%, transparent); border-radius: 999px;
+}
+@supports not selector(::-webkit-scrollbar) {
+  html { scrollbar-color: color-mix(in srgb, var(--acento) 55%, var(--linea)) transparent; }
+  .tabla-scroll, .indice, .figura__lienzo, .formula { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--acento) 55%, var(--linea)) var(--superficie-2); }
+}
 
 /* Figuras */
 .figura { margin: 1.2rem 0 0; background: var(--superficie); border: 1px solid var(--linea); border-radius: 14px; padding: 1rem; }
@@ -235,14 +358,48 @@ summary::marker { color: var(--acento); }
 .conclusion li { margin-bottom: .55rem; }
 .pie { padding: 2rem clamp(1rem, 5vw, 4.5rem); color: var(--tenue); font-size: .88rem; text-align: center; }
 
-/* Entrada suave (solo con JS y sin preferencia de movimiento reducido) */
+/* Motion (solo con JS y sin preferencia de movimiento reducido). El estilo de arriba es el estado final:
+   sin JS, con movimiento reducido o al imprimir, todo se ve completo. Solo se animan transform y opacity. */
 @media (prefers-reduced-motion: no-preference) {
-  .js .revela { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
-  .js .revela.visible { opacity: 1; transform: none; }
   html { scroll-behavior: smooth; }
+  .js .revela { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .65s cubic-bezier(.2, .8, .2, 1); }
+  .js .revela.visible { opacity: 1; transform: none; }
+
+  /* Encabezado de cada sección: el título entra la primera vez; la línea del número se extiende en la sección activa */
+  .js .diapo h1, .js .diapo h2 { opacity: 0; transform: translateY(18px); transition: opacity .6s ease .05s, transform .75s cubic-bezier(.2, .8, .2, 1) .05s; }
+  .js .diapo.vista h1, .js .diapo.vista h2 { opacity: 1; transform: none; }
+  .js .diapo__num::before { transform: scaleX(.3); transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
+  .js .diapo.activa .diapo__num::before { transform: scaleX(1); }
+
+  /* Portada: las dos series se dibujan una vez, en el orden en que se leen */
+  .js .trazo__linea { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .js .portada.vista .trazo__linea { animation: trazar 1.8s cubic-bezier(.45, 0, .2, 1) .35s forwards; }
+  .js .portada.vista .trazo__linea--pbi { animation-delay: .7s; }
+  .js .trazo figcaption { opacity: 0; transition: opacity .6s ease 1.6s; }
+  .js .portada.vista .trazo figcaption { opacity: 1; }
+  @keyframes trazar { to { stroke-dashoffset: 0; } }
+
+  /* Navegación */
+  .progreso__tramo i { transition: transform .18s linear; }
+  .riel__cursor { transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
+  .riel__relleno { transition: transform .3s ease-out; }
+  .riel a { transition: background-color .25s, border-color .25s; }
+  .riel__etiqueta { transition: opacity .2s ease, transform .25s cubic-bezier(.2, .8, .2, 1); }
+  .seccion-actual { transition: border-color .2s; }
+  .repo { transition: border-color .2s, transform .25s cubic-bezier(.2, .8, .2, 1); }
+  .repo:hover { transform: translateY(-2px); }
+  .repo__flecha { transition: transform .25s cubic-bezier(.2, .8, .2, 1); }
+  .repo:hover .repo__flecha { transform: translate(2px, -2px); }
+  .volver.entra { animation: volver-entra .28s cubic-bezier(.2, .8, .2, 1); }
+  @keyframes volver-entra { from { opacity: 0; transform: translate(-50%, 14px); } }
+  .indice { opacity: 0; transform: translate(-50%, -8px); transition: opacity .18s ease, transform .22s cubic-bezier(.2, .8, .2, 1), display .22s allow-discrete, overlay .22s allow-discrete; }
+  .indice:popover-open { opacity: 1; transform: translateX(-50%); }
+  .indice.abierta { opacity: 1; transform: translateX(-50%); }
+  @starting-style { .indice:popover-open { opacity: 0; transform: translate(-50%, -8px); } }
 }
 
 @media (max-width: 1100px) {
+  .barra__marca span { display: none; }
   .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .lista-pasos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -250,6 +407,10 @@ summary::marker { color: var(--acento); }
   html { scroll-snap-type: none; }
   .dos-col, .hipotesis { grid-template-columns: minmax(0, 1fr); }
   .riel { display: none; }
+  .barra { grid-template-columns: minmax(0, 1fr) auto; }
+  .barra__marca { display: none; }
+  .seccion-actual { justify-self: start; max-width: 100%; }
+  .portada__rejilla { grid-template-columns: minmax(0, 1fr); align-items: start; }
   .diapo { min-height: 0; padding-top: 5rem; }
   .portada { min-height: 100svh; }
 }
@@ -257,7 +418,13 @@ summary::marker { color: var(--acento); }
   body { font-size: 1rem; }
   .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lista-pasos { grid-template-columns: minmax(0, 1fr); }
-  .barra__marca span { display: none; }
+  .barra { gap: .5rem; }
+  .barra__acciones { gap: .35rem; }
+  .boton--repo, .boton--tema { padding: .35rem .55rem; min-width: 36px; justify-content: center; }
+  .boton--repo .boton__texto, .boton--tema .boton__texto { display: none; }
+  .seccion-actual { gap: .45rem; padding: .3rem .55rem .3rem .7rem; }
+  .repo { padding: .85rem; gap: .8rem; }
+  .repo__logo { width: 38px; height: 38px; }
   .figura { padding: .6rem; }
   .figura__lienzo svg { min-width: 620px; }
   .pista-movil { display: block; }
@@ -283,7 +450,11 @@ html.modo-impresion .figura { padding: 2mm; margin-top: 3mm; }
 html.modo-impresion .figura__lienzo svg { max-height: 80mm; width: auto; max-width: 100%; margin: 0 auto; }
 html.modo-impresion .par-figuras { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
 html.modo-impresion .par-figuras .figura__lienzo svg { max-height: 70mm; }
-html.modo-impresion .revela { opacity: 1 !important; transform: none !important; }
+html.modo-impresion .revela, html.modo-impresion .diapo h1, html.modo-impresion .diapo h2,
+html.modo-impresion .trazo figcaption { opacity: 1 !important; transform: none !important; }
+html.modo-impresion .trazo__linea { stroke-dashoffset: 0 !important; animation: none !important; }
+html.modo-impresion .diapo__num::before { transform: none !important; }
+html.modo-impresion .volver, html.modo-impresion .indice, html.modo-impresion .riel { display: none !important; }
 html.modo-impresion .kpis, html.modo-impresion .veredicto { margin-bottom: 3mm; }
 /* La rejilla no depende del ancho de la ventana: se mide igual que se imprime. */
 html.modo-impresion .kpis { grid-template-columns: repeat(5, minmax(0, 1fr)); }
@@ -304,7 +475,7 @@ html.modo-impresion .figura__lienzo svg { min-width: 0; }
   @page { size: A4 landscape; margin: 11mm 13mm; }
   html { scroll-snap-type: none; }
   body { font-size: 10.5pt; background: #fff; }
-  .barra, .riel, .saltar, .no-imprimir { display: none !important; }
+  .barra, .riel, .saltar, .no-imprimir, .indice, .volver { display: none !important; }
   .diapo { min-height: 0; display: block; padding: 0; border: 0; break-before: page; }
   .diapo:first-of-type { break-before: auto; }
   .portada { padding-top: 30mm; }
@@ -313,38 +484,79 @@ html.modo-impresion .figura__lienzo svg { min-width: 0; }
   .tabla thead th { position: static; }
   .tabla, .figura, .tarjeta, .kpi, .veredicto { break-inside: avoid; }
   .figura__lienzo svg { max-height: 120mm; width: auto; max-width: 100%; margin: 0 auto; }
-  .js .revela { opacity: 1 !important; transform: none !important; }
+  .js .revela, .js .diapo h1, .js .diapo h2, .js .trazo figcaption { opacity: 1 !important; transform: none !important; }
+  .js .trazo__linea { stroke-dashoffset: 0 !important; animation: none !important; }
+  .js .diapo__num::before { transform: none !important; }
   summary { color: var(--tinta); }
   a { color: inherit; }
 }
 
 </style>
 </head>
-<body><a class="saltar" href="#contenido">Saltar al contenido</a>
-<header class="barra">
-  <div class="barra__marca">TP Análisis Estadístico 2 <span>· Grupo 1 · Cátedra Tito Lasanta</span></div>
+<body><a class="saltar" href="#contenido">Saltar al contenido</a><header class="barra">
+  <a class="barra__marca" href="#portada">TP Análisis Estadístico 2 <span>· Grupo 1 · Cátedra Tito Lasanta</span></a>
+  <button class="seccion-actual" type="button" popovertarget="indice" data-indice-boton aria-label="Abrir el índice. Sección 1 de 14: Portada">
+    <span class="seccion-actual__num" aria-hidden="true"><span data-seccion-num>01</span><span class="seccion-actual__total">/14</span></span>
+    <span class="seccion-actual__titulo" aria-hidden="true"><span data-seccion-titulo>Portada</span></span>
+    <svg class="seccion-actual__flecha" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
   <div class="barra__acciones">
-    <button class="boton" type="button" data-tema aria-pressed="false">Tema oscuro</button>
+    <a class="boton boton--repo" href="https://github.com/matiasbellidor/trabajo_practico_AE2" target="_blank" rel="noopener" aria-label="Código del trabajo en GitHub (se abre en otra pestaña)"><svg class="icono" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="boton__texto">Código</span></a>
+    <button class="boton boton--tema" type="button" data-tema aria-pressed="false" aria-label="Tema oscuro"><svg class="icono" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg><span class="boton__texto" data-tema-texto>Tema oscuro</span></button>
   </div>
-  <div class="progreso" aria-hidden="true"></div>
+  <div class="progreso" aria-hidden="true"><span class="progreso__tramo"><i></i></span><span class="progreso__tramo"><i></i></span><span class="progreso__tramo"><i></i></span><span class="progreso__tramo"><i></i></span><span class="progreso__tramo"><i></i></span><span class="progreso__tramo"><i></i></span><span class="progreso__tramo"><i></i></span><span class="progreso__tramo"><i></i></span><span class="progreso__tramo"><i></i></span><span class="progreso__tramo"><i></i></span><span class="progreso__tramo"><i></i></span><span class="progreso__tramo"><i></i></span><span class="progreso__tramo"><i></i></span><span class="progreso__tramo"><i></i></span></div>
 </header>
-<nav class="riel" aria-label="Secciones">
-  <ol>    <li><a href="#portada" aria-current="false"><span>1. Portada</span></a></li>    <li><a href="#hipotesis" aria-current="false"><span>2. Pregunta e hipótesis</span></a></li>    <li><a href="#datos" aria-current="false"><span>3. Datos y metodología</span></a></li>    <li><a href="#resultado" aria-current="false"><span>4. Resultado principal</span></a></li>    <li><a href="#estimador" aria-current="false"><span>5. Estimador e IC</span></a></li>    <li><a href="#bondad" aria-current="false"><span>6. Bondad de ajuste</span></a></li>    <li><a href="#regresion" aria-current="false"><span>7. Regresión simple y desfases</span></a></li>    <li><a href="#multiple" aria-current="false"><span>8. Regresión múltiple</span></a></li>    <li><a href="#anova" aria-current="false"><span>9. ANOVA</span></a></li>    <li><a href="#complementaria" aria-current="false"><span>10. Prueba complementaria</span></a></li>    <li><a href="#robustez" aria-current="false"><span>11. Robustez</span></a></li>    <li><a href="#limitaciones" aria-current="false"><span>12. Limitaciones</span></a></li>    <li><a href="#conclusion" aria-current="false"><span>13. Conclusión</span></a></li>    <li><a href="#anexo" aria-current="false"><span>14. Anexo: p-valores</span></a></li>  </ol>
+<nav class="indice" id="indice" popover aria-label="Índice de secciones">
+  <p class="indice__titulo">Índice</p>
+  <ol>    <li><a href="#portada" data-ir="0" data-titulo="Portada" aria-current="false"><span class="indice__num">01</span><span>Portada</span></a></li>    <li><a href="#hipotesis" data-ir="1" data-titulo="Pregunta e hipótesis" aria-current="false"><span class="indice__num">02</span><span>Pregunta e hipótesis</span></a></li>    <li><a href="#datos" data-ir="2" data-titulo="Datos y metodología" aria-current="false"><span class="indice__num">03</span><span>Datos y metodología</span></a></li>    <li><a href="#resultado" data-ir="3" data-titulo="Resultado principal" aria-current="false"><span class="indice__num">04</span><span>Resultado principal</span></a></li>    <li><a href="#estimador" data-ir="4" data-titulo="Estimador e IC" aria-current="false"><span class="indice__num">05</span><span>Estimador e IC</span></a></li>    <li><a href="#bondad" data-ir="5" data-titulo="Bondad de ajuste" aria-current="false"><span class="indice__num">06</span><span>Bondad de ajuste</span></a></li>    <li><a href="#regresion" data-ir="6" data-titulo="Regresión simple y desfases" aria-current="false"><span class="indice__num">07</span><span>Regresión simple y desfases</span></a></li>    <li><a href="#multiple" data-ir="7" data-titulo="Regresión múltiple" aria-current="false"><span class="indice__num">08</span><span>Regresión múltiple</span></a></li>    <li><a href="#anova" data-ir="8" data-titulo="ANOVA" aria-current="false"><span class="indice__num">09</span><span>ANOVA</span></a></li>    <li><a href="#complementaria" data-ir="9" data-titulo="Prueba complementaria" aria-current="false"><span class="indice__num">10</span><span>Prueba complementaria</span></a></li>    <li><a href="#robustez" data-ir="10" data-titulo="Robustez" aria-current="false"><span class="indice__num">11</span><span>Robustez</span></a></li>    <li><a href="#limitaciones" data-ir="11" data-titulo="Limitaciones" aria-current="false"><span class="indice__num">12</span><span>Limitaciones</span></a></li>    <li><a href="#conclusion" data-ir="12" data-titulo="Conclusión" aria-current="false"><span class="indice__num">13</span><span>Conclusión</span></a></li>    <li><a href="#anexo" data-ir="13" data-titulo="Anexo: p-valores" aria-current="false"><span class="indice__num">14</span><span>Anexo: p-valores</span></a></li>  </ol>
 </nav>
+<nav class="riel" aria-label="Secciones">
+  <span class="riel__pista" aria-hidden="true"><span class="riel__relleno"></span></span>
+  <ol>    <li><a href="#portada" data-ir="0" aria-current="false"><span class="riel__etiqueta">01 · Portada</span></a></li>    <li><a href="#hipotesis" data-ir="1" aria-current="false"><span class="riel__etiqueta">02 · Pregunta e hipótesis</span></a></li>    <li><a href="#datos" data-ir="2" aria-current="false"><span class="riel__etiqueta">03 · Datos y metodología</span></a></li>    <li><a href="#resultado" data-ir="3" aria-current="false"><span class="riel__etiqueta">04 · Resultado principal</span></a></li>    <li><a href="#estimador" data-ir="4" aria-current="false"><span class="riel__etiqueta">05 · Estimador e IC</span></a></li>    <li><a href="#bondad" data-ir="5" aria-current="false"><span class="riel__etiqueta">06 · Bondad de ajuste</span></a></li>    <li><a href="#regresion" data-ir="6" aria-current="false"><span class="riel__etiqueta">07 · Regresión simple y desfases</span></a></li>    <li><a href="#multiple" data-ir="7" aria-current="false"><span class="riel__etiqueta">08 · Regresión múltiple</span></a></li>    <li><a href="#anova" data-ir="8" aria-current="false"><span class="riel__etiqueta">09 · ANOVA</span></a></li>    <li><a href="#complementaria" data-ir="9" aria-current="false"><span class="riel__etiqueta">10 · Prueba complementaria</span></a></li>    <li><a href="#robustez" data-ir="10" aria-current="false"><span class="riel__etiqueta">11 · Robustez</span></a></li>    <li><a href="#limitaciones" data-ir="11" aria-current="false"><span class="riel__etiqueta">12 · Limitaciones</span></a></li>    <li><a href="#conclusion" data-ir="12" aria-current="false"><span class="riel__etiqueta">13 · Conclusión</span></a></li>    <li><a href="#anexo" data-ir="13" aria-current="false"><span class="riel__etiqueta">14 · Anexo: p-valores</span></a></li>  </ol>
+  <span class="riel__cursor" aria-hidden="true"></span>
+</nav>
+<div class="volver" data-volver hidden>
+  <button class="volver__ir" type="button" data-volver-ir>
+    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M6.5 4 3 7.5 6.5 11M3.5 7.5H10a3 3 0 0 1 0 6H8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Volver a <strong data-volver-destino></strong></span>
+  </button>
+  <button class="volver__cerrar" type="button" data-volver-cerrar aria-label="Descartar el aviso">×</button>
+</div>
+<p class="sr-only" aria-live="polite" data-anuncio></p>
 
 <main id="contenido">
 
 <section class="diapo portada" id="portada" aria-labelledby="t-portada">
-  <div class="diapo__contenido">
-    <p class="diapo__num">Trabajo práctico · FCE UBA</p>
-    <h1 id="t-portada">Variación del PBI real argentino y variación del bono AL30D</h1>
-    <p class="portada__materia">Análisis Estadístico 2 · Cátedra Tito Lasanta · 2C 2026</p>
-    <p class="portada__meta">Entrega: 12/11/2026</p>
-    <div class="portada__grupo">
-      <span class="etiqueta" style="color: var(--noche-tenue)">Grupo 1</span>
-      <ul><li>Matías Rodrigo Bellido</li><li>Luka Orpianesi</li><li>Manuel Rodriguez</li><li>Melina Escalante</li><li>Maria Acevedo</li></ul>
+  <div class="diapo__contenido portada__rejilla">
+    <div class="portada__texto">
+      <p class="diapo__num">Trabajo práctico · FCE UBA</p>
+      <h1 id="t-portada">Variación del PBI real argentino y variación del bono AL30D</h1>
+      <p class="portada__materia">Análisis Estadístico 2 · Cátedra Tito Lasanta · 2C 2026</p>
+      <p class="portada__meta">Entrega: 12/11/2026</p>
+      <div class="portada__grupo">
+        <span class="etiqueta" style="color: var(--noche-tenue)">Grupo 1</span>
+        <ul><li>Maria Acevedo</li><li>Matías Rodrigo Bellido</li><li>Melina Escalante</li><li>Luka Orpianesi</li><li>Manuel Rodriguez</li></ul>
+      </div>
+      <p class="portada__pista no-imprimir">Avanzá con <kbd>→</kbd> o <kbd>Av Pág</kbd>; retrocedé con <kbd>←</kbd> o <kbd>Re Pág</kbd>. El índice está arriba, en la sección actual.</p>
     </div>
-    <p class="portada__pista no-imprimir">Avanzá con <kbd>→</kbd> o <kbd>Av Pág</kbd>; retrocedé con <kbd>←</kbd> o <kbd>Re Pág</kbd>.</p>
+    <div class="portada__lateral">
+      <figure class="trazo" role="img" aria-label="Recorrido mensual del AL30D y del PBI entre 2021-10 y 2026-05, en índices con base 100. El AL30D termina en 270,7 y el PBI en 107,5.">
+        <svg viewBox="0 0 600 220" aria-hidden="true" focusable="false">
+          <path class="trazo__linea trazo__linea--pbi" d="M8.0,166.4 L18.4,151.6 L28.9,140.9 L39.3,136.1 L49.7,132.0 L60.1,121.6 L70.6,100.5 L81.0,74.1 L91.4,50.3 L101.9,35.8 L112.3,32.4 L122.7,40.6 L133.1,59.3 L143.6,80.1 L154.0,93.0 L164.4,92.3 L174.9,89.0 L185.3,98.6 L195.7,129.7 L206.1,162.9 L216.6,172.1 L227.0,140.7 L237.4,91.6 L247.9,57.2 L258.3,61.3 L268.7,93.2 L279.1,133.8 L289.6,167.0 L300.0,190.6 L310.4,205.4 L320.9,212.0 L331.3,208.7 L341.7,193.3 L352.1,165.5 L362.6,132.8 L373.0,104.5 L383.4,87.6 L393.9,80.3 L404.3,78.2 L414.7,77.7 L425.1,76.8 L435.6,74.3 L446.0,69.1 L456.4,62.2 L466.9,54.8 L477.3,48.2 L487.7,42.8 L498.1,39.1 L508.6,37.2 L519.0,35.7 L529.4,33.0 L539.9,28.2 L550.3,22.2 L560.7,16.6 L571.1,12.6 L581.6,10.0 L592.0,8.0" pathLength="1"/>
+          <path class="trazo__linea trazo__linea--bono" d="M8.0,165.1 L18.4,168.6 L28.9,184.4 L39.3,176.1 L49.7,178.7 L60.1,182.6 L70.6,181.5 L81.0,187.7 L91.4,192.1 L101.9,203.9 L112.3,200.1 L122.7,202.6 L133.1,212.0 L143.6,208.5 L154.0,198.1 L164.4,197.3 L174.9,177.9 L185.3,186.3 L195.7,193.7 L206.1,206.0 L216.6,203.1 L227.0,184.1 L237.4,181.0 L247.9,173.6 L258.3,184.7 L268.7,195.3 L279.1,170.8 L289.6,163.3 L300.0,158.9 L310.4,143.7 L320.9,123.0 L331.3,111.6 L341.7,117.0 L352.1,120.4 L362.6,123.1 L373.0,112.1 L383.4,101.8 L393.9,86.7 L404.3,67.8 L414.7,56.5 L425.1,58.4 L435.6,66.0 L446.0,66.6 L456.4,55.7 L466.9,52.6 L477.3,52.4 L487.7,54.0 L498.1,57.1 L508.6,86.6 L519.0,40.1 L529.4,36.8 L539.9,27.9 L550.3,21.1 L560.7,21.9 L571.1,19.1 L581.6,10.6 L592.0,8.0" pathLength="1"/>
+        </svg>
+        <figcaption>
+          <span class="trazo__serie trazo__serie--bono"><i></i>AL30D: 100 → 270,7</span>
+          <span class="trazo__serie trazo__serie--pbi"><i></i>PBI: 100 → 107,5</span>
+          <span class="trazo__nota">Índices base 100, 2021-10 a 2026-05. Cada línea en su propia escala: lo que se compara es la forma.</span>
+        </figcaption>
+      </figure>
+      <a class="repo repo--oscura" href="https://github.com/matiasbellidor/trabajo_practico_AE2" target="_blank" rel="noopener" aria-label="Repositorio en GitHub: código en Python, datos de origen, tablas y tests del trabajo (se abre en otra pestaña)">
+  <span class="repo__logo"><svg class="icono" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></span>
+  <span class="repo__texto"><strong>Repositorio en GitHub</strong><span>Código en Python, datos de origen, tablas y tests. Todo se regenera con un comando.</span><span class="repo__url">github.com/matiasbellidor/trabajo_practico_AE2</span></span>
+  <svg class="repo__flecha" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a>
+    </div>
   </div>
 </section>
 
@@ -394,7 +606,7 @@ html.modo-impresion .figura__lienzo svg { min-width: 0; }
         <span class="etiqueta">Fuentes</span>
         <div class="tabla-scroll"><table class="tabla">
           <thead><tr><th>Archivo</th><th>Fuente</th><th class="n">Filas</th><th>Rango</th></tr></thead>
-          <tbody>            <tr><td><code>al30d</code></td><td>Data912, /historical/bonds/AL30D (cotización en dólares MEP)</td><td class="n">1243</td><td>2021-09-23 a 2026-10-27</td></tr>            <tr><td><code>pbi</code></td><td>INDEC, sh_oferta_demanda_09_26.xls, cuadro 1 (PBI a precios de 2004, trimestral, sin desestacionalizar)</td><td class="n">90</td><td>2004-01-01 a 2026-04-01</td></tr>            <tr><td><code>al30</code></td><td>Data912, /historical/bonds/AL30 (cotización en pesos)</td><td class="n">1251</td><td>2021-09-16 a 2026-10-30</td></tr>            <tr><td><code>al30c</code></td><td>Data912, /historical/bonds/AL30C (cotización en dólares cable)</td><td class="n">1153</td><td>2021-09-29 a 2026-10-30</td></tr>            <tr><td><code>pbi_indec_desest</code></td><td>INDEC, sh_oferta_demanda_desest_09_26.xls (PIB desestacionalizado, millones de pesos de 2004)</td><td class="n">90</td><td>2004-01-01 a 2026-04-01</td></tr>            <tr><td><code>verificacion_al30d</code></td><td>Data912, /historical/bonds/AL30D</td><td class="n">1243</td><td>2021-09-23 a 2026-10-27</td></tr>            <tr><td><code>verificacion_pbi</code></td><td>INDEC vía datos.gob.ar, serie 9.2_PP2_2004_T_16</td><td class="n">90</td><td>2004-01-01 a 2026-04-01</td></tr>          </tbody>
+          <tbody>            <tr><td><code>al30d</code></td><td>Data912, /historical/bonds/AL30D (cotización en dólares MEP)</td><td class="n">1243</td><td class="rango"><time datetime="2021-09-23">2021-09-23</time><span class="rango__hasta"><span class="rango__a">a </span><time datetime="2026-10-27">2026-10-27</time></span></td></tr>            <tr><td><code>pbi</code></td><td>INDEC, sh_oferta_demanda_09_26.xls, cuadro 1 (PBI a precios de 2004, trimestral, sin desestacionalizar)</td><td class="n">90</td><td class="rango"><time datetime="2004-01-01">2004-01-01</time><span class="rango__hasta"><span class="rango__a">a </span><time datetime="2026-04-01">2026-04-01</time></span></td></tr>            <tr><td><code>al30</code></td><td>Data912, /historical/bonds/AL30 (cotización en pesos)</td><td class="n">1251</td><td class="rango"><time datetime="2021-09-16">2021-09-16</time><span class="rango__hasta"><span class="rango__a">a </span><time datetime="2026-10-30">2026-10-30</time></span></td></tr>            <tr><td><code>al30c</code></td><td>Data912, /historical/bonds/AL30C (cotización en dólares cable)</td><td class="n">1153</td><td class="rango"><time datetime="2021-09-29">2021-09-29</time><span class="rango__hasta"><span class="rango__a">a </span><time datetime="2026-10-30">2026-10-30</time></span></td></tr>            <tr><td><code>pbi_indec_desest</code></td><td>INDEC, sh_oferta_demanda_desest_09_26.xls (PIB desestacionalizado, millones de pesos de 2004)</td><td class="n">90</td><td class="rango"><time datetime="2004-01-01">2004-01-01</time><span class="rango__hasta"><span class="rango__a">a </span><time datetime="2026-04-01">2026-04-01</time></span></td></tr>            <tr><td><code>verificacion_al30d</code><span class="chip chip--bloque">verificación</span></td><td>Data912, /historical/bonds/AL30D</td><td class="n">1243</td><td class="rango"><time datetime="2021-09-23">2021-09-23</time><span class="rango__hasta"><span class="rango__a">a </span><time datetime="2026-10-27">2026-10-27</time></span></td></tr>            <tr><td><code>verificacion_pbi</code><span class="chip chip--bloque">verificación</span></td><td>INDEC vía datos.gob.ar, serie 9.2_PP2_2004_T_16</td><td class="n">90</td><td class="rango"><time datetime="2004-01-01">2004-01-01</time><span class="rango__hasta"><span class="rango__a">a </span><time datetime="2026-04-01">2026-04-01</time></span></td></tr>          </tbody>
         </table></div>
         <p style="font-size:.88rem;color:var(--tenue)">Huellas SHA-256 y modo de obtención de cada archivo en <code>outputs/linaje_datos.json</code>.</p>
       </div>
@@ -6270,25 +6482,49 @@ L 713.405625 370.135859
       <thead><tr><th>Prueba</th><th>Etiqueta</th><th class="n">Estadístico</th><th class="n">gl</th><th class="n">p</th><th class="n">Umbral</th><th>Decisión</th></tr></thead>
       <tbody><tr><td>Regresión simple, β1 con d = −3</td><td><span class="chip">exploratoria</span></td><td class="n">−2,2409</td><td class="n">54</td><td class="n">0,0292</td><td class="n">0,01</td><td>No se rechaza H0</td></tr><tr><td>Regresión simple, β1 con d = −2</td><td><span class="chip">exploratoria</span></td><td class="n">−3,1668</td><td class="n">54</td><td class="n">0,0025</td><td class="n">0,01</td><td>Se rechaza H0</td></tr><tr><td>Regresión simple, β1 con d = −1</td><td><span class="chip">exploratoria</span></td><td class="n">−1,9143</td><td class="n">54</td><td class="n">0,0609</td><td class="n">0,01</td><td>No se rechaza H0</td></tr><tr><td>Regresión simple, β1 con d = 0</td><td><span class="chip chip--principal">principal</span></td><td class="n">0,0076</td><td class="n">54</td><td class="n">0,9940</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Regresión simple, β1 con d = +1</td><td><span class="chip">extensión</span></td><td class="n">0,9286</td><td class="n">53</td><td class="n">0,3573</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Regresión simple, β1 con d = +2</td><td><span class="chip">exploratoria</span></td><td class="n">0,1610</td><td class="n">52</td><td class="n">0,8727</td><td class="n">0,01</td><td>No se rechaza H0</td></tr><tr><td>Regresión simple, β1 con d = +3</td><td><span class="chip">exploratoria</span></td><td class="n">−1,1340</td><td class="n">51</td><td class="n">0,2621</td><td class="n">0,01</td><td>No se rechaza H0</td></tr><tr><td>Regresión simple, F global (d = 0)</td><td><span class="chip">herramienta</span></td><td class="n">0,0001</td><td class="n">1; 54</td><td class="n">0,9940</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Bondad de ajuste χ² a la Normal: Var AL30D</td><td><span class="chip">herramienta</span></td><td class="n">6,8571</td><td class="n">5</td><td class="n">0,2315</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Shapiro-Wilk: Var AL30D</td><td><span class="chip">herramienta</span></td><td class="n">0,9390</td><td class="n">—</td><td class="n">0,0070</td><td class="n">0,05</td><td>Se rechaza H0</td></tr><tr><td>Bondad de ajuste χ² a la Normal: Var PBI</td><td><span class="chip">herramienta</span></td><td class="n">19,4286</td><td class="n">5</td><td class="n">0,0016</td><td class="n">0,05</td><td>Se rechaza H0</td></tr><tr><td>Shapiro-Wilk: Var PBI</td><td><span class="chip">herramienta</span></td><td class="n">0,9542</td><td class="n">—</td><td class="n">0,0327</td><td class="n">0,05</td><td>Se rechaza H0</td></tr><tr><td>Bondad de ajuste χ² a la Normal: residuos de la regresión principal</td><td><span class="chip">herramienta</span></td><td class="n">6,8571</td><td class="n">5</td><td class="n">0,2315</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Shapiro-Wilk: residuos de la regresión principal</td><td><span class="chip">herramienta</span></td><td class="n">0,9390</td><td class="n">—</td><td class="n">0,0070</td><td class="n">0,05</td><td>Se rechaza H0</td></tr><tr><td>Regresión múltiple, F global</td><td><span class="chip">herramienta</span></td><td class="n">0,9389</td><td class="n">2; 53</td><td class="n">0,3975</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Regresión múltiple, t de constante</td><td><span class="chip">herramienta</span></td><td class="n">1,9046</td><td class="n">53</td><td class="n">0,0623</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Regresión múltiple, t de Var PBI</td><td><span class="chip">herramienta</span></td><td class="n">−0,1097</td><td class="n">53</td><td class="n">0,9131</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Regresión múltiple, t de Var CCL implícito</td><td><span class="chip">herramienta</span></td><td class="n">−1,3703</td><td class="n">53</td><td class="n">0,1764</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Breusch-Pagan (regresión simple)</td><td><span class="chip">diagnóstico</span></td><td class="n">3,5757</td><td class="n">1</td><td class="n">0,0586</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Breusch-Godfrey (regresión simple)</td><td><span class="chip">diagnóstico</span></td><td class="n">0,8606</td><td class="n">3</td><td class="n">0,8349</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Shapiro-Wilk de residuos (regresión simple)</td><td><span class="chip">diagnóstico</span></td><td class="n">0,9390</td><td class="n">—</td><td class="n">0,0070</td><td class="n">0,05</td><td>Se rechaza H0</td></tr><tr><td>Breusch-Pagan (regresión múltiple)</td><td><span class="chip">diagnóstico</span></td><td class="n">3,3528</td><td class="n">2</td><td class="n">0,1870</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Breusch-Godfrey (regresión múltiple)</td><td><span class="chip">diagnóstico</span></td><td class="n">0,5713</td><td class="n">3</td><td class="n">0,9030</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Shapiro-Wilk de residuos (regresión múltiple)</td><td><span class="chip">diagnóstico</span></td><td class="n">0,9399</td><td class="n">—</td><td class="n">0,0077</td><td class="n">0,05</td><td>Se rechaza H0</td></tr><tr><td>ANOVA de un factor (terciles del PBI)</td><td><span class="chip">herramienta</span></td><td class="n">0,2581</td><td class="n">2; 53</td><td class="n">0,7735</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Levene (ANOVA)</td><td><span class="chip">diagnóstico</span></td><td class="n">3,1312</td><td class="n">2; 53</td><td class="n">0,0518</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Shapiro-Wilk grupo bajo (ANOVA)</td><td><span class="chip">diagnóstico</span></td><td class="n">0,9625</td><td class="n">—</td><td class="n">0,6217</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Shapiro-Wilk grupo medio (ANOVA)</td><td><span class="chip">diagnóstico</span></td><td class="n">0,8512</td><td class="n">—</td><td class="n">0,0088</td><td class="n">0,05</td><td>Se rechaza H0</td></tr><tr><td>Shapiro-Wilk grupo alto (ANOVA)</td><td><span class="chip">diagnóstico</span></td><td class="n">0,8957</td><td class="n">—</td><td class="n">0,0407</td><td class="n">0,05</td><td>Se rechaza H0</td></tr><tr><td>F de igualdad de varianzas (complementaria)</td><td><span class="chip">complementaria</span></td><td class="n">1,0401</td><td class="n">31; 23</td><td class="n">0,9357</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>t varianza agrupada (complementaria) — decisión</td><td><span class="chip">complementaria</span></td><td class="n">−0,0491</td><td class="n">54</td><td class="n">0,9610</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>t Welch (complementaria)</td><td><span class="chip">complementaria</span></td><td class="n">−0,0492</td><td class="n">50,21</td><td class="n">0,9609</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Hipótesis principal: β1 (d = 0) — muestra trimestral</td><td><span class="chip">robustez</span></td><td class="n">−2,7334</td><td class="n">17</td><td class="n">0,0142</td><td class="n">0,05</td><td>Se rechaza H0</td></tr><tr><td>Extensión: β1 (d = +1) — muestra trimestral</td><td><span class="chip">robustez</span></td><td class="n">−0,1022</td><td class="n">16</td><td class="n">0,9199</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>Múltiple: β de Var PBI — muestra trimestral</td><td><span class="chip">robustez</span></td><td class="n">−2,7557</td><td class="n">16</td><td class="n">0,0141</td><td class="n">0,05</td><td>Se rechaza H0</td></tr><tr><td>ANOVA por terciles del PBI — muestra trimestral</td><td><span class="chip">robustez</span></td><td class="n">4,5416</td><td class="n">2; 16</td><td class="n">0,0274</td><td class="n">0,05</td><td>Se rechaza H0</td></tr><tr><td>Complementaria: μ suba − μ baja (Var PBI) — muestra trimestral</td><td><span class="chip">robustez</span></td><td class="n">−2,1264</td><td class="n">17</td><td class="n">0,0484</td><td class="n">0,05</td><td>Se rechaza H0</td></tr><tr><td>(a) Bono sin ajuste ex-pago (serie bruta)</td><td><span class="chip">sensibilidad</span></td><td class="n">−0,1370</td><td class="n">54</td><td class="n">0,8915</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>(b) PBI sin desestacionalizar</td><td><span class="chip">sensibilidad</span></td><td class="n">−0,6448</td><td class="n">54</td><td class="n">0,5218</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>(c) ANOVA con umbrales ±0,5 % (n por grupo 10/32/14)</td><td><span class="chip">sensibilidad</span></td><td class="n">0,3023</td><td class="n">2; 53</td><td class="n">0,7404</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>(d) Spline con condición de borde not-a-knot</td><td><span class="chip">sensibilidad</span></td><td class="n">0,0072</td><td class="n">54</td><td class="n">0,9943</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>(f) Múltiple con errores HAC (Newey-West, 3 rezagos): β de Var PBI</td><td><span class="chip">sensibilidad</span></td><td class="n">−0,0687</td><td class="n">53</td><td class="n">0,9455</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>(g) Múltiple con CCL de cierres operados (AL30C con volumen &gt; 0): β de Var PBI</td><td><span class="chip">sensibilidad</span></td><td class="n">−0,1902</td><td class="n">49</td><td class="n">0,8499</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>(g) Múltiple con CCL de cierres operados (AL30C con volumen &gt; 0): β de Var CCL</td><td><span class="chip">sensibilidad</span></td><td class="n">−1,4465</td><td class="n">49</td><td class="n">0,1544</td><td class="n">0,05</td><td>No se rechaza H0</td></tr><tr><td>(h) PBI desestacionalizado por el INDEC (en lugar de STL)</td><td><span class="chip">sensibilidad</span></td><td class="n">0,2276</td><td class="n">54</td><td class="n">0,8208</td><td class="n">0,05</td><td>No se rechaza H0</td></tr></tbody>
     </table></div>
-    <p>Código, datos y tablas: <a href="https://github.com/matiasbellidor/trabajo_practico_AE2">https://github.com/matiasbellidor/trabajo_practico_AE2</a>. Todo se regenera con <code>python -m tp_ae2.run_all --config config.yaml</code>.</p>
+    <div class="anexo__repo revela"><a class="repo" href="https://github.com/matiasbellidor/trabajo_practico_AE2" target="_blank" rel="noopener" aria-label="Repositorio en GitHub: código en Python, datos de origen, tablas y tests del trabajo (se abre en otra pestaña)">
+  <span class="repo__logo"><svg class="icono" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></span>
+  <span class="repo__texto"><strong>Repositorio en GitHub</strong><span>Código en Python, datos de origen, tablas y tests. Todo se regenera con un comando.</span><span class="repo__url">github.com/matiasbellidor/trabajo_practico_AE2</span></span>
+  <svg class="repo__flecha" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a><p>Todo se regenera con <code>python -m tp_ae2.run_all --config config.yaml</code>.</p></div>
   </div>
 </section>
 
 </main>
-<footer class="pie">Análisis Estadístico 2 · Cátedra Tito Lasanta · FCE UBA · 2C 2026 · Grupo 1. Código bajo licencia MIT; los datos pertenecen a sus fuentes (Data912; INDEC vía datos.gob.ar).</footer>
+<footer class="pie">Análisis Estadístico 2 · Cátedra Tito Lasanta · FCE UBA · 2C 2026 · Grupo 1. <a href="https://github.com/matiasbellidor/trabajo_practico_AE2" target="_blank" rel="noopener">Código bajo licencia MIT</a>; los datos pertenecen a sus fuentes (Data912; INDEC vía datos.gob.ar).</footer>
 <script>
-// Navegación por secciones, barra de progreso, riel de puntos, tema claro/oscuro e impresión.
+// Navegación por secciones: sección actual e índice en la barra, progreso por tramos, riel con cursor, aviso
+// "Volver a…" después de un salto largo, hash en la URL, tema claro/oscuro e impresión.
 (function () {
   "use strict";
   var raiz = document.documentElement;
   raiz.classList.add("js");
 
-  var secciones = Array.prototype.slice.call(document.querySelectorAll(".diapo"));
-  var puntos = Array.prototype.slice.call(document.querySelectorAll(".riel a"));
-  var progreso = document.querySelector(".progreso");
-  var botonTema = document.querySelector("[data-tema]");
-  var movimientoReducido = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function lista(nodos) { return Array.prototype.slice.call(nodos); }
+  function dos(n) { return (n < 10 ? "0" : "") + n; }
+  function acotar(x) { return Math.min(1, Math.max(0, x)); }
 
+  var secciones = lista(document.querySelectorAll(".diapo"));
+  var puntos = lista(document.querySelectorAll(".riel a"));
+  var itemsIndice = lista(document.querySelectorAll(".indice a"));
+  var tramos = lista(document.querySelectorAll(".progreso__tramo i"));
+  var riel = document.querySelector(".riel");
+  var cursor = document.querySelector(".riel__cursor");
+  var relleno = document.querySelector(".riel__relleno");
+  var indice = document.getElementById("indice");
+  var botonIndice = document.querySelector("[data-indice-boton]");
+  var numActual = document.querySelector("[data-seccion-num]");
+  var tituloActual = document.querySelector("[data-seccion-titulo]");
+  var volver = document.querySelector("[data-volver]");
+  var volverDestino = document.querySelector("[data-volver-destino]");
+  var anuncio = document.querySelector("[data-anuncio]");
+  var botonTema = document.querySelector("[data-tema]");
+  var textoTema = document.querySelector("[data-tema-texto]");
+  var movimientoReducido = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var titulos = itemsIndice.map(function (a) { return a.getAttribute("data-titulo"); });
+  var total = secciones.length;
+
+  // --- Tema --------------------------------------------------------------------------------------
   function leerTema() {
     try { return localStorage.getItem("tp-ae2-tema"); } catch (e) { return null; }
   }
@@ -6303,8 +6539,10 @@ L 713.405625 370.135859
   function pintarBoton() {
     if (!botonTema) return;
     var oscuro = temaEfectivo() === "dark";
+    var texto = oscuro ? "Tema claro" : "Tema oscuro";
     botonTema.setAttribute("aria-pressed", oscuro ? "true" : "false");
-    botonTema.textContent = oscuro ? "Tema claro" : "Tema oscuro";
+    botonTema.setAttribute("aria-label", texto);
+    if (textoTema) textoTema.textContent = texto;
   }
   var guardado = leerTema();
   if (guardado === "light" || guardado === "dark") raiz.setAttribute("data-theme", guardado);
@@ -6318,36 +6556,208 @@ L 713.405625 370.135859
     });
   }
 
-  var pendiente = false;
-  function actualizarProgreso() {
-    pendiente = false;
-    var total = document.documentElement.scrollHeight - window.innerHeight;
-    var fraccion = total > 0 ? Math.min(1, Math.max(0, window.scrollY / total)) : 0;
-    if (progreso) progreso.style.transform = "scaleX(" + fraccion + ")";
-  }
-  window.addEventListener("scroll", function () {
-    if (!pendiente) { pendiente = true; window.requestAnimationFrame(actualizarProgreso); }
-  }, { passive: true });
-  actualizarProgreso();
+  // --- Sección actual ----------------------------------------------------------------------------
+  var actual = -1;
 
-  function indiceActual() {
+  // La sección actual es la última cuyo borde superior pasó el 40 % de la ventana; al final de la página, la última.
+  function medir() {
     var limite = window.innerHeight * 0.4;
-    var actual = 0;
-    secciones.forEach(function (s, i) { if (s.getBoundingClientRect().top <= limite) actual = i; });
-    return actual;
-  }
-  function marcarPunto(i) {
-    puntos.forEach(function (p, j) { p.setAttribute("aria-current", j === i ? "true" : "false"); });
-  }
-  function ir(i) {
-    var destino = secciones[Math.max(0, Math.min(secciones.length - 1, i))];
-    if (destino) destino.scrollIntoView({ behavior: movimientoReducido.matches ? "auto" : "smooth", block: "start" });
+    var i = 0;
+    for (var k = 0; k < total; k++) { if (secciones[k].getBoundingClientRect().top <= limite) i = k; }
+    var caja = secciones[i].getBoundingClientRect();
+    var avance = caja.height > 0 ? (limite - caja.top) / caja.height : 0;
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) { i = total - 1; avance = 1; }
+    return { i: i, avance: acotar(avance) };
   }
 
+  function moverCursor(i) {
+    var punto = puntos[i];
+    if (cursor && punto) cursor.style.setProperty("--y", (punto.offsetTop + punto.offsetHeight / 2) + "px");
+  }
+
+  var turnoRotulo = 0;
+  function rotular(i, anterior) {
+    if (!numActual || !tituloActual) return;
+    if (botonIndice) botonIndice.setAttribute("aria-label", "Abrir el índice. Sección " + (i + 1) + " de " + total + ": " + titulos[i]);
+    var aplicar = function () { numActual.textContent = dos(i + 1); tituloActual.textContent = titulos[i]; };
+    if (anterior === -1 || movimientoReducido.matches || typeof tituloActual.animate !== "function") { aplicar(); return; }
+    var turno = ++turnoRotulo;
+    var sentido = i > anterior ? 1 : -1;
+    var piezas = [numActual, tituloActual];
+    var salidas = piezas.map(function (el) {
+      return el.animate([{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(" + (-45 * sentido) + "%)" }],
+        { duration: 110, easing: "ease-in", fill: "forwards" });
+    });
+    salidas[1].onfinish = function () {
+      if (turno !== turnoRotulo) return;
+      aplicar();
+      piezas.forEach(function (el) {
+        el.getAnimations().forEach(function (a) { a.cancel(); });
+        el.animate([{ opacity: 0, transform: "translateY(" + (45 * sentido) + "%)" }, { opacity: 1, transform: "none" }],
+          { duration: 190, easing: "cubic-bezier(.2, .8, .2, 1)" });
+      });
+    };
+  }
+
+  var tAnuncia;
+  function cambiarSeccion(i) {
+    var anterior = actual;
+    actual = i;
+    secciones.forEach(function (s, k) { s.classList.toggle("activa", k === i); });
+    puntos.forEach(function (p, k) {
+      p.setAttribute("aria-current", k === i ? "true" : "false");
+      p.setAttribute("data-estado", k < i ? "pasada" : k === i ? "actual" : "pendiente");
+    });
+    itemsIndice.forEach(function (a, k) { a.setAttribute("aria-current", k === i ? "true" : "false"); });
+    moverCursor(i);
+    rotular(i, anterior);
+    if (anterior !== -1 && riel) {
+      riel.classList.add("anuncia");
+      clearTimeout(tAnuncia);
+      tAnuncia = setTimeout(function () { riel.classList.remove("anuncia"); }, 1600);
+    }
+  }
+
+  var pendiente = false;
+  function actualizar() {
+    pendiente = false;
+    var m = medir();
+    tramos.forEach(function (t, k) { t.style.transform = "scaleX(" + (k < m.i ? 1 : k === m.i ? m.avance.toFixed(3) : 0) + ")"; });
+    if (cursor) cursor.style.setProperty("--avance", m.avance.toFixed(3));
+    if (relleno && total > 1) relleno.style.transform = "scaleY(" + acotar((m.i + m.avance) / (total - 1)).toFixed(4) + ")";
+    if (m.i !== actual) cambiarSeccion(m.i);
+  }
+  function pedirActualizacion() {
+    if (!pendiente) { pendiente = true; window.requestAnimationFrame(actualizar); }
+  }
+
+  // --- Saltos intencionales, "Volver a…" y hash --------------------------------------------------
+  // asentada: la última sección donde el lector se quedó al menos 1,2 s. Si el scroll se detiene dos o más
+  // secciones lejos de ella y no fue un salto pedido (riel, índice, teclado), se ofrece volver.
+  var asentada = -1, origen = -1, intencional = false;
+  var tAsentar, tParada, tOcultar, tIntencional;
+
+  function escribirHash(i) {
+    var id = secciones[i] && secciones[i].id;
+    if (!id) return;
+    var hash = i === 0 ? "" : "#" + id;
+    if (location.hash === hash) return;
+    try { history.replaceState(null, "", hash || location.pathname + location.search); } catch (e) { /* sin historial */ }
+  }
+  function programarAsentar(i) {
+    clearTimeout(tAsentar);
+    tAsentar = setTimeout(function () {
+      if (actual !== i) return;
+      asentada = i;
+      escribirHash(i);
+    }, 1200);
+  }
+  function ocultarVolver() {
+    if (volver) volver.hidden = true;
+    origen = -1;
+    clearTimeout(tOcultar);
+  }
+  function mostrarVolver(destino) {
+    if (!volver || !volverDestino) return;
+    origen = destino;
+    var texto = dos(destino + 1) + " · " + titulos[destino];
+    volverDestino.textContent = texto;
+    volver.hidden = false;
+    volver.classList.remove("entra");
+    void volver.offsetWidth;  // reinicia la animación de entrada
+    volver.classList.add("entra");
+    if (anuncio) anuncio.textContent = "Saltaste varias secciones. Podés volver a " + texto + ".";
+    clearTimeout(tOcultar);
+    tOcultar = setTimeout(ocultarVolver, 15000);
+  }
+  function alPararScroll() {
+    var i = actual;
+    if (intencional) {
+      intencional = false;
+      clearTimeout(tIntencional);
+      asentada = i;
+      escribirHash(i);
+      return;
+    }
+    if (origen !== -1 && i === origen) ocultarVolver();
+    else if (origen === -1 && asentada !== -1 && Math.abs(i - asentada) >= 2) mostrarVolver(asentada);
+    programarAsentar(i);
+  }
+
+  function ir(i) {
+    i = Math.max(0, Math.min(total - 1, i));
+    var destino = secciones[i];
+    if (!destino) return;
+    if (i !== actual) {
+      intencional = true;
+      clearTimeout(tIntencional);
+      tIntencional = setTimeout(function () { intencional = false; }, 3000);
+    }
+    ocultarVolver();
+    destino.scrollIntoView({ behavior: movimientoReducido.matches ? "auto" : "smooth", block: "start" });
+    destino.setAttribute("tabindex", "-1");
+    destino.focus({ preventScroll: true });
+  }
+
+  window.addEventListener("scroll", function () {
+    pedirActualizacion();
+    if (!("onscrollend" in window)) { clearTimeout(tParada); tParada = setTimeout(alPararScroll, 180); }
+  }, { passive: true });
+  if ("onscrollend" in window) window.addEventListener("scrollend", function () { actualizar(); alPararScroll(); });
+  window.addEventListener("resize", function () { moverCursor(actual); pedirActualizacion(); });
+
+  if (volver) {
+    volver.querySelector("[data-volver-ir]").addEventListener("click", function () { var o = origen; if (o !== -1) ir(o); });
+    volver.querySelector("[data-volver-cerrar]").addEventListener("click", ocultarVolver);
+  }
+
+  // --- Índice: popover nativo, con respaldo por clase si el navegador no lo soporta -------------------
+  var conPopover = !!(indice && typeof indice.showPopover === "function");
+  function indiceAbierto() {
+    if (!indice) return false;
+    if (conPopover) { try { return indice.matches(":popover-open"); } catch (e) { return false; } }
+    return indice.classList.contains("abierta");
+  }
+  function cerrarIndice() {
+    if (!indiceAbierto()) return;
+    if (conPopover) indice.hidePopover();
+    else { indice.classList.remove("abierta"); if (botonIndice) botonIndice.setAttribute("aria-expanded", "false"); }
+  }
+  function alAbrirIndice() {
+    var item = itemsIndice[actual];
+    if (item) { item.focus({ preventScroll: true }); item.scrollIntoView({ block: "nearest" }); }
+  }
+  if (indice && conPopover) {
+    indice.addEventListener("toggle", function (ev) { if (ev.newState === "open") alAbrirIndice(); });
+  } else if (indice && botonIndice) {
+    botonIndice.removeAttribute("popovertarget");
+    botonIndice.setAttribute("aria-expanded", "false");
+    botonIndice.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      var abierta = indice.classList.toggle("abierta");
+      botonIndice.setAttribute("aria-expanded", abierta ? "true" : "false");
+      if (abierta) alAbrirIndice();
+    });
+    document.addEventListener("click", function (ev) { if (!indice.contains(ev.target)) cerrarIndice(); });
+  }
+  itemsIndice.concat(puntos).forEach(function (a) {
+    a.addEventListener("click", function (ev) {
+      var i = Number(a.getAttribute("data-ir"));
+      if (isNaN(i)) return;
+      ev.preventDefault();
+      cerrarIndice();
+      ir(i);
+    });
+  });
+
+  // --- Entradas: cada sección marca .vista la primera vez que aparece; cada bloque .revela, idem ------
   if ("IntersectionObserver" in window) {
-    var observadorSecciones = new IntersectionObserver(function () { marcarPunto(indiceActual()); },
-      { threshold: [0, 0.4, 1] });
-    secciones.forEach(function (s) { observadorSecciones.observe(s); });
+    var observadorVista = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("vista"); observadorVista.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -10% 0px" });
+    secciones.forEach(function (s) { observadorVista.observe(s); });
     var observadorRevela = new IntersectionObserver(function (entradas) {
       entradas.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add("visible"); observadorRevela.unobserve(e.target); }
@@ -6355,18 +6765,25 @@ L 713.405625 370.135859
     }, { rootMargin: "0px 0px -8% 0px" });
     document.querySelectorAll(".revela").forEach(function (el) { observadorRevela.observe(el); });
   } else {
+    secciones.forEach(function (s) { s.classList.add("vista"); });
     document.querySelectorAll(".revela").forEach(function (el) { el.classList.add("visible"); });
   }
-  marcarPunto(indiceActual());
 
+  actualizar();
+  asentada = actual;
+
+  // --- Teclado -----------------------------------------------------------------------------------
   document.addEventListener("keydown", function (ev) {
     if (ev.altKey || ev.ctrlKey || ev.metaKey) return;
     var objetivo = ev.target;
     if (objetivo && (objetivo.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(objetivo.tagName))) return;
-    if (ev.key === "ArrowRight" || ev.key === "PageDown") { ev.preventDefault(); ir(indiceActual() + 1); }
-    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); ir(indiceActual() - 1); }
+    if (indice && indice.contains(objetivo)) return;
+    if (ev.key === "Escape") { cerrarIndice(); return; }
+    if (ev.key === "ArrowRight" || ev.key === "PageDown") { ev.preventDefault(); ir(actual + 1); }
+    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); ir(actual - 1); }
   });
 
+  // --- Impresión ---------------------------------------------------------------------------------
   // Al imprimir, cada sección se escala para entrar en una hoja A4 apaisada (188 mm de alto útil).
   var MM = 96 / 25.4;
   function prepararImpresion() {

@@ -34,39 +34,90 @@
   <p>{{ partes[1] }}</p>
 </div>
 {%- endmacro -%}
+{%- macro logo_github(clase="icono") -%}
+<svg class="{{ clase }}" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+{%- endmacro -%}
+{%- macro tarjeta_repo(variante="") -%}
+<a class="repo{{ ' repo--' ~ variante if variante }}" href="{{ r.meta.repositorio }}" target="_blank" rel="noopener" aria-label="Repositorio en GitHub: código en Python, datos de origen, tablas y tests del trabajo (se abre en otra pestaña)">
+  <span class="repo__logo">{{ logo_github() }}</span>
+  <span class="repo__texto"><strong>Repositorio en GitHub</strong><span>Código en Python, datos de origen, tablas y tests. Todo se regenera con un comando.</span><span class="repo__url">{{ r.meta.repositorio | replace("https://", "") }}</span></span>
+  <svg class="repo__flecha" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a>
+{%- endmacro -%}
 {%- macro ver_formula(titulo="Ver fórmula y desarrollo") -%}
 <details class="revela"><summary>{{ titulo }}</summary><div class="desarrollo">{{ caller() }}</div></details>
 {%- endmacro -%}
 
 <a class="saltar" href="#contenido">Saltar al contenido</a>
+{%- set total = secciones | length %}
 <header class="barra">
-  <div class="barra__marca">TP {{ r.meta.materia }} <span>· {{ r.meta.grupo }} · Cátedra {{ r.meta.catedra }}</span></div>
+  <a class="barra__marca" href="#portada">TP {{ r.meta.materia }} <span>· {{ r.meta.grupo }} · Cátedra {{ r.meta.catedra }}</span></a>
+  <button class="seccion-actual" type="button" popovertarget="indice" data-indice-boton aria-label="Abrir el índice. Sección 1 de {{ total }}: {{ secciones[0].titulo }}">
+    <span class="seccion-actual__num" aria-hidden="true"><span data-seccion-num>01</span><span class="seccion-actual__total">/{{ "%02d" % total }}</span></span>
+    <span class="seccion-actual__titulo" aria-hidden="true"><span data-seccion-titulo>{{ secciones[0].titulo }}</span></span>
+    <svg class="seccion-actual__flecha" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
   <div class="barra__acciones">
-    <button class="boton" type="button" data-tema aria-pressed="false">Tema oscuro</button>
+    <a class="boton boton--repo" href="{{ r.meta.repositorio }}" target="_blank" rel="noopener" aria-label="Código del trabajo en GitHub (se abre en otra pestaña)">{{ logo_github() }}<span class="boton__texto">Código</span></a>
+    <button class="boton boton--tema" type="button" data-tema aria-pressed="false" aria-label="Tema oscuro"><svg class="icono" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg><span class="boton__texto" data-tema-texto>Tema oscuro</span></button>
   </div>
-  <div class="progreso" aria-hidden="true"></div>
+  <div class="progreso" aria-hidden="true">{% for s in secciones %}<span class="progreso__tramo"><i></i></span>{% endfor %}</div>
 </header>
-<nav class="riel" aria-label="Secciones">
+<nav class="indice" id="indice" popover aria-label="Índice de secciones">
+  <p class="indice__titulo">Índice</p>
   <ol>
   {%- for s in secciones %}
-    <li><a href="#{{ s.id }}" aria-current="false"><span>{{ loop.index }}. {{ s.titulo }}</span></a></li>
+    <li><a href="#{{ s.id }}" data-ir="{{ loop.index0 }}" data-titulo="{{ s.titulo }}" aria-current="false"><span class="indice__num">{{ "%02d" % loop.index }}</span><span>{{ s.titulo }}</span></a></li>
   {%- endfor %}
   </ol>
 </nav>
+<nav class="riel" aria-label="Secciones">
+  <span class="riel__pista" aria-hidden="true"><span class="riel__relleno"></span></span>
+  <ol>
+  {%- for s in secciones %}
+    <li><a href="#{{ s.id }}" data-ir="{{ loop.index0 }}" aria-current="false"><span class="riel__etiqueta">{{ "%02d" % loop.index }} · {{ s.titulo }}</span></a></li>
+  {%- endfor %}
+  </ol>
+  <span class="riel__cursor" aria-hidden="true"></span>
+</nav>
+<div class="volver" data-volver hidden>
+  <button class="volver__ir" type="button" data-volver-ir>
+    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M6.5 4 3 7.5 6.5 11M3.5 7.5H10a3 3 0 0 1 0 6H8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Volver a <strong data-volver-destino></strong></span>
+  </button>
+  <button class="volver__cerrar" type="button" data-volver-cerrar aria-label="Descartar el aviso">×</button>
+</div>
+<p class="sr-only" aria-live="polite" data-anuncio></p>
 
 <main id="contenido">
 
 <section class="diapo portada" id="portada" aria-labelledby="t-portada">
-  <div class="diapo__contenido">
-    <p class="diapo__num">Trabajo práctico · {{ r.meta.facultad }}</p>
-    <h1 id="t-portada">Variación del PBI real argentino y variación del bono AL30D</h1>
-    <p class="portada__materia">{{ r.meta.materia }} · Cátedra {{ r.meta.catedra }} · {{ r.meta.cuatrimestre }}</p>
-    <p class="portada__meta">Entrega: {{ fecha_entrega }}</p>
-    <div class="portada__grupo">
-      <span class="etiqueta" style="color: var(--noche-tenue)">{{ r.meta.grupo }}</span>
-      <ul>{% for i in r.meta.integrantes %}<li>{{ i }}</li>{% endfor %}</ul>
+  <div class="diapo__contenido portada__rejilla">
+    <div class="portada__texto">
+      <p class="diapo__num">Trabajo práctico · {{ r.meta.facultad }}</p>
+      <h1 id="t-portada">Variación del PBI real argentino y variación del bono AL30D</h1>
+      <p class="portada__materia">{{ r.meta.materia }} · Cátedra {{ r.meta.catedra }} · {{ r.meta.cuatrimestre }}</p>
+      <p class="portada__meta">Entrega: {{ fecha_entrega }}</p>
+      <div class="portada__grupo">
+        <span class="etiqueta" style="color: var(--noche-tenue)">{{ r.meta.grupo }}</span>
+        <ul>{% for i in r.meta.integrantes %}<li>{{ i }}</li>{% endfor %}</ul>
+      </div>
+      <p class="portada__pista no-imprimir">Avanzá con <kbd>→</kbd> o <kbd>Av Pág</kbd>; retrocedé con <kbd>←</kbd> o <kbd>Re Pág</kbd>. El índice está arriba, en la sección actual.</p>
     </div>
-    <p class="portada__pista no-imprimir">Avanzá con <kbd>→</kbd> o <kbd>Av Pág</kbd>; retrocedé con <kbd>←</kbd> o <kbd>Re Pág</kbd>.</p>
+    <div class="portada__lateral">
+      <figure class="trazo" role="img" aria-label="Recorrido mensual del AL30D y del PBI entre {{ trazo.inicio }} y {{ trazo.fin }}, en índices con base 100. El AL30D termina en {{ n(trazo.bono_final, 1) }} y el PBI en {{ n(trazo.pbi_final, 1) }}.">
+        <svg viewBox="0 0 {{ trazo.ancho }} {{ trazo.alto }}" aria-hidden="true" focusable="false">
+          <path class="trazo__linea trazo__linea--pbi" d="{{ trazo.pbi }}" pathLength="1"/>
+          <path class="trazo__linea trazo__linea--bono" d="{{ trazo.bono }}" pathLength="1"/>
+        </svg>
+        <figcaption>
+          <span class="trazo__serie trazo__serie--bono"><i></i>AL30D: 100 → {{ n(trazo.bono_final, 1) }}</span>
+          <span class="trazo__serie trazo__serie--pbi"><i></i>PBI: 100 → {{ n(trazo.pbi_final, 1) }}</span>
+          <span class="trazo__nota">Índices base 100, {{ trazo.inicio }} a {{ trazo.fin }}. Cada línea en su propia escala: lo que se compara es la forma.</span>
+        </figcaption>
+      </figure>
+      {{ tarjeta_repo("oscura") }}
+    </div>
   </div>
 </section>
 
@@ -119,7 +170,7 @@
           <thead><tr><th>Archivo</th><th>Fuente</th><th class="n">Filas</th><th>Rango</th></tr></thead>
           <tbody>
           {%- for l in r.datos.linaje if l.existe %}
-            <tr><td><code>{{ l.archivo }}</code></td><td>{{ l.fuente }}</td><td class="n">{{ l.filas }}</td><td>{{ l.fecha_min }} a {{ l.fecha_max }}</td></tr>
+            <tr><td><code>{{ l.archivo }}</code>{% if l.uso == "verificación" %}<span class="chip chip--bloque">verificación</span>{% endif %}</td><td>{{ l.fuente }}</td><td class="n">{{ l.filas }}</td><td class="rango"><time datetime="{{ l.fecha_min }}">{{ l.fecha_min }}</time><span class="rango__hasta"><span class="rango__a">a </span><time datetime="{{ l.fecha_max }}">{{ l.fecha_max }}</time></span></td></tr>
           {%- endfor %}
           </tbody>
         </table></div>
@@ -448,12 +499,12 @@
       <thead><tr><th>Prueba</th><th>Etiqueta</th><th class="n">Estadístico</th><th class="n">gl</th><th class="n">p</th><th class="n">Umbral</th><th>Decisión</th></tr></thead>
       <tbody>{% for f in r.p_valores %}<tr><td>{{ f.prueba }}</td><td><span class="chip{{ ' chip--principal' if f.etiqueta == 'principal' }}">{{ f.etiqueta }}</span></td><td class="n">{{ n(f.estadistico) }}</td><td class="n">{{ gl(f.gl) }}</td><td class="n">{{ pv(f.p_valor) }}</td><td class="n">{{ n(f.umbral, 2) }}</td><td>{{ f.decision }}</td></tr>{% endfor %}</tbody>
     </table></div>
-    <p>Código, datos y tablas: <a href="{{ r.meta.repositorio }}">{{ r.meta.repositorio }}</a>. Todo se regenera con <code>python -m tp_ae2.run_all --config config.yaml</code>.</p>
+    <div class="anexo__repo revela">{{ tarjeta_repo() }}<p>Todo se regenera con <code>python -m tp_ae2.run_all --config config.yaml</code>.</p></div>
   </div>
 </section>
 
 </main>
-<footer class="pie">{{ r.meta.materia }} · Cátedra {{ r.meta.catedra }} · {{ r.meta.facultad }} · {{ r.meta.cuatrimestre }} · {{ r.meta.grupo }}. Código bajo licencia MIT; los datos pertenecen a sus fuentes (Data912; INDEC vía datos.gob.ar).</footer>
+<footer class="pie">{{ r.meta.materia }} · Cátedra {{ r.meta.catedra }} · {{ r.meta.facultad }} · {{ r.meta.cuatrimestre }} · {{ r.meta.grupo }}. <a href="{{ r.meta.repositorio }}" target="_blank" rel="noopener">Código bajo licencia MIT</a>; los datos pertenecen a sus fuentes (Data912; INDEC vía datos.gob.ar).</footer>
 <script>
 {{ js | safe }}
 </script>
