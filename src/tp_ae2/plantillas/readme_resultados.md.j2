@@ -10,6 +10,8 @@
 {%- set q0 = v.respaldo -%}
 {%- set inf = v.influencia -%}
 {%- set alfa = v.alfa -%}
+{%- set sc = r.sumas_cuadrados.simple -%}
+{%- set scm = r.sumas_cuadrados.multiple -%}
 {%- set por = "por mes" if v.mensual else "por trimestre" -%}
 {%- set unidad_resp = "trimestres" if v.respaldo_frecuencia == "trimestral" else "meses" -%}
 ## 3. Qué demostramos
@@ -27,6 +29,7 @@
 {%- endif %}
 {%- if not v.rechaza %}
 - **Qué tan chica tendría que ser la relación.** Aun en el extremo del intervalo de β1, un movimiento típico del PBI (un desvío estándar, {{ n(e.var_pbi.desvio, 2) }} pp) se asociaría con unos {{ n(v.extremo_por_desvio, 1) }} pp de variación del bono, cuando el bono se mueve típicamente {{ n(e.var_bono.desvio, 1) }} pp {{ por }}. Si la relación existe, explica una parte chica de lo que hace el bono.
+- **Proyección por escenarios.** Con la recta estimada, para cualquier escenario de PBI entre {{ n(r.proyeccion.escenarios[0].x0, 1, signo=True) }} % y {{ n(r.proyeccion.escenarios[-1].x0, 1, signo=True) }} % {{ por }} el bono se proyecta entre {{ n(v.proy_min, 2, signo=True) }} % y {{ n(v.proy_max, 2, signo=True) }} %, con un intervalo de predicción de unos ±{{ n(v.proy_margen, 0) }} pp. Conocer el PBI no reduce la incertidumbre sobre el bono.
 {%- endif %}
 {%- if (q0.p_b1 < alfa) != v.rechaza %}
 {%- if v.mensual and not v.rechaza %}
@@ -81,11 +84,34 @@ $$s^2 = \frac{SCE}{n-2} \qquad EE(\hat\beta_1) = \sqrt{\frac{s^2}{S_{xx}}} \qqua
 
 SCE es la suma de los errores al cuadrado ({{ n(d0.sce, 2) }}). Queda s² = {{ n(d0.s2, 2) }}, EE(β̂1) = {{ n(d0.ee_b1) }} y **t = {{ n(d0.t_b1) }}**. El valor crítico de la t de Student con {{ d0.gl }} gl es ±{{ n(d0.valor_critico_t) }}: si |t| lo supera, se rechaza H0.
 
-*Paso 4. Intervalo de confianza y R².*
+*Paso 4. Método de las sumas de cuadrados y R².* La variabilidad total del bono (SCT) se divide en la parte que explica la recta (SCR) y la que queda en el error (SCE). Si el PBI explicara algo, SCR sería grande frente a SCE:
 
-$$IC_{95\%}(\beta_1) = \hat\beta_1 \pm t_{0{,}975;\,n-2} \cdot EE(\hat\beta_1) \qquad R^2 = 1 - \frac{SCE}{SCT}$$
+$$SCT = SCR + SCE \qquad F = \frac{CMR}{CME} = \frac{SCR/1}{SCE/(n-2)} \qquad R^2 = \frac{SCR}{SCT}$$
 
-*Paso 5. Extensión temporal.* Repetimos la regresión con el PBI del {{ "mes" if v.mensual else "trimestre" }} siguiente (d = +1, declarado antes de ver los datos) para ver si el bono se anticipa a la economía. Como exploración, también con desfases de −3 a +3, juzgados con un umbral más exigente (0,01) porque son varias pruebas.
+| Fuente | Suma de cuadrados | gl | Cuadrado medio | F | p-valor |
+|---|---|---|---|---|---|
+| Regresión (lo que explica el PBI) | {{ n(sc.filas[0].sc) }} | {{ sc.filas[0].gl }} | {{ n(sc.filas[0].cm) }} | {{ n(sc.f) }} | {{ pv(sc.p_valor) }} |
+| Error (lo que no explica) | {{ n(sc.filas[1].sc, 2) }} | {{ sc.filas[1].gl }} | {{ n(sc.filas[1].cm, 2) }} | | |
+| Total | {{ n(sc.filas[2].sc, 2) }} | {{ sc.filas[2].gl }} | | | |
+
+El coeficiente de determinación es **R² = {{ n(sc.filas[0].sc) }} / {{ n(sc.filas[2].sc, 2) }} = {{ n(sc.r2) }}**: el PBI explica el {{ n(sc.r2 * 100, 1) }} % de la variación del bono. El valor crítico de F con ({{ sc.gl_f[0] }}; {{ sc.gl_f[1] }}) gl es {{ n(sc.valor_critico, 2) }}. En la regresión simple F = t², así que este test y el del paso 3 son la misma prueba y dan el mismo p-valor.
+
+*Paso 5. Intervalo de confianza de la pendiente.*
+
+$$IC_{95\%}(\beta_1) = \hat\beta_1 \pm t_{0{,}975;\,n-2} \cdot EE(\hat\beta_1)$$
+
+*Paso 6. Proyección por escenarios (mirada actuarial).* Con la recta estimada se proyecta la variación del bono para distintos escenarios de PBI. Para cada uno hay dos rangos al 95 %: el del valor esperado (IC de la media) y el de un {{ "mes" if v.mensual else "trimestre" }} concreto (intervalo de predicción), que suma la variabilidad propia del bono. Si el PBI sirviera para anticipar el bono, la proyección cambiaría con el escenario y el rango se achicaría.
+
+$$\hat y_0 = \hat\beta_0 + \hat\beta_1 x_0 \qquad IC_{95\%}(\text{media}) = \hat y_0 \pm t \cdot s\sqrt{\frac{1}{n} + \frac{(x_0 - \bar x)^2}{S_{xx}}} \qquad IP_{95\%} = \hat y_0 \pm t \cdot s\sqrt{1 + \frac{1}{n} + \frac{(x_0 - \bar x)^2}{S_{xx}}}$$
+
+| Escenario | Var PBI | Var AL30D proyectada | IC 95 % de la media | Intervalo de predicción 95 % |
+|---|---|---|---|---|
+{% for e in r.proyeccion.escenarios -%}
+| {{ e.nombre }}{{ " (fuera del rango observado)" if not e.dentro_del_rango }} | {{ n(e.x0, 2, signo=True) }} % | {{ n(e.y0, 2, signo=True) }} % | {{ ic(e.ic_media.inferior, e.ic_media.superior, 2) }} % | {{ ic(e.intervalo_prediccion.inferior, e.intervalo_prediccion.superior, 2) }} % |
+{% endfor %}
+Los escenarios quedan dentro del rango observado de la Var PBI ({{ n(r.proyeccion.rango_observado[0], 2) }} % a {{ n(r.proyeccion.rango_observado[1], 2) }} %), para no extrapolar.
+
+*Paso 7. Extensión temporal.* Repetimos la regresión con el PBI del {{ "mes" if v.mensual else "trimestre" }} siguiente (d = +1, declarado antes de ver los datos) para ver si el bono se anticipa a la economía. Como exploración, también con desfases de −3 a +3, juzgados con un umbral más exigente (0,01) porque son varias pruebas.
 
 **Qué dio.**
 
@@ -100,7 +126,7 @@ De los {{ v.n_exploratorios }} desfases exploratorios, pasa el umbral de 0,01 {{
 Ninguno de los {{ v.n_exploratorios }} desfases exploratorios pasa el umbral de 0,01.
 {%- endif %}
 
-**Qué significa.** {% if v.rechaza %}La pendiente es distinta de cero: |t| = {{ n(d0.t_b1 | abs) }} supera el valor crítico, el intervalo no incluye al cero y el PBI explica el {{ n(d0.r2 * 100, 1) }} % de la variación del bono. **Se rechaza H0.**{% else %}La pendiente es prácticamente cero: |t| = {{ n(d0.t_b1 | abs) }} está muy por debajo de {{ n(d0.valor_critico_t, 2) }}, el intervalo incluye al cero y el PBI explica el {{ n(d0.r2 * 100, 1) }} % de la variación del bono. **No se rechaza H0.**{% endif %} Con el PBI del {{ "mes" if v.mensual else "trimestre" }} siguiente {{ "tampoco aparece relación" if d1.p_b1 >= alfa else "sí aparece relación" }}.{% if v.exploratorios_signif %} El desfase exploratorio significativo queda como pista para otro trabajo y no como resultado: con {{ v.n_exploratorios }} desfases probados alguno puede salir por azar, y el PBI mensualizado hace que meses vecinos estén muy correlacionados.{% endif %}
+**Qué significa.** {% if v.rechaza %}La pendiente es distinta de cero: |t| = {{ n(d0.t_b1 | abs) }} supera el valor crítico, el intervalo no incluye al cero y el PBI explica el {{ n(d0.r2 * 100, 1) }} % de la variación del bono. **Se rechaza H0.**{% else %}La pendiente es prácticamente cero: |t| = {{ n(d0.t_b1 | abs) }} está muy por debajo de {{ n(d0.valor_critico_t, 2) }}, el intervalo incluye al cero y el PBI explica el {{ n(d0.r2 * 100, 1) }} % de la variación del bono. **No se rechaza H0.**{% endif %} {% if v.rechaza %}La proyección cambia con el escenario: de {{ n(v.proy_min, 2, signo=True) }} % a {{ n(v.proy_max, 2, signo=True) }} %.{% else %}Por eso la proyección casi no cambia con el escenario: de {{ n(v.proy_min, 2, signo=True) }} % a {{ n(v.proy_max, 2, signo=True) }} %, alrededor del promedio del bono, con un intervalo de predicción de unos ±{{ n(v.proy_margen, 0) }} pp. Conocer el PBI no reduce la incertidumbre sobre el bono.{% endif %} Con el PBI del {{ "mes" if v.mensual else "trimestre" }} siguiente {{ "tampoco aparece relación" if d1.p_b1 >= alfa else "sí aparece relación" }}.{% if v.exploratorios_signif %} El desfase exploratorio significativo queda como pista para otro trabajo y no como resultado: con {{ v.n_exploratorios }} desfases probados alguno puede salir por azar, y el PBI mensualizado hace que meses vecinos estén muy correlacionados.{% endif %}
 
 **Dónde está el cálculo.** [`src/tp_ae2/herramientas/regresion.py`](src/tp_ae2/herramientas/regresion.py), función `regresion_simple`, escrita desde estas fórmulas y comparada contra statsmodels en los tests. Para rehacerla con calculadora, `outputs/tablas/cuadro_a_mano.csv` tiene las sumas: Σx = {{ n(d0.sumas.sum_x) }}, Σy = {{ n(d0.sumas.sum_y) }}, Σx² = {{ n(d0.sumas.sum_x2) }}, Σxy = {{ n(d0.sumas.sum_xy) }}.
 
@@ -124,11 +150,17 @@ con X₂ = {{ notro }}. Se testea cada coeficiente (H0: βj = 0) y el modelo com
 
 $$\hat\beta = (X^\top X)^{-1} X^\top y$$
 
-*Paso 3. Test t de cada coeficiente* con n − k − 1 = {{ m.gl }} grados de libertad (k = {{ m.k }} variables), y **test F global**:
+*Paso 3. Test t de cada coeficiente* con n − k − 1 = {{ m.gl }} grados de libertad (k = {{ m.k }} variables), y **test F global por el método de las sumas de cuadrados**:
 
-$$F = \frac{(SCT - SCE)/k}{SCE/(n-k-1)}$$
+$$F = \frac{SCR/k}{SCE/(n-k-1)} \qquad R^2 = \frac{SCR}{SCT}$$
 
-Con SCT = {{ n(m.sct, 2) }} y SCE = {{ n(m.sce, 2) }} queda F = {{ n(m.f) }}, con ({{ m.gl_f[0] }}; {{ m.gl_f[1] }}) grados de libertad.
+| Fuente | Suma de cuadrados | gl | Cuadrado medio | F | p-valor |
+|---|---|---|---|---|---|
+| Regresión (PBI y control) | {{ n(scm.filas[0].sc, 2) }} | {{ scm.filas[0].gl }} | {{ n(scm.filas[0].cm, 2) }} | {{ n(scm.f) }} | {{ pv(scm.p_valor) }} |
+| Error | {{ n(scm.filas[1].sc, 2) }} | {{ scm.filas[1].gl }} | {{ n(scm.filas[1].cm, 2) }} | | |
+| Total | {{ n(scm.filas[2].sc, 2) }} | {{ scm.filas[2].gl }} | | | |
+
+R² = {{ n(scm.filas[0].sc, 2) }} / {{ n(scm.filas[2].sc, 2) }} = {{ n(scm.r2) }}. El valor crítico de F con ({{ scm.gl_f[0] }}; {{ scm.gl_f[1] }}) gl es {{ n(scm.valor_critico, 2) }}.
 
 *Paso 4. R² ajustado*, que descuenta la cantidad de variables:
 

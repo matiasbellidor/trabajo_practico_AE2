@@ -1,0 +1,5 @@
+escenario,var_pbi,var_al30d_proyectada,ic_media_inferior,ic_media_superior,prediccion_inferior,prediccion_superior,dentro_del_rango
+Recesión,-1,2.498318053,-3.231193512,8.227829618,-23.49845407,28.49509017,True
+Estancamiento,0,2.513760679,-0.9176545977,5.945175955,-23.07489831,28.10241967,True
+Crecimiento,1,2.529203305,-2.370195825,7.428602435,-23.29731349,28.3557201,True
+Crecimiento fuerte,2,2.544645931,-5.792967989,10.88225985,-24.14843677,29.23772863,True

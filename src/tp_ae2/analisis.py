@@ -17,7 +17,8 @@ from .herramientas.bondad_ajuste import normalidad
 from .herramientas.diferencia_medias import prueba_complementaria
 from .herramientas.estimadores import estimar, estimar_proporcion
 from .herramientas.intervalos import ic_media, ic_proporcion_wald
-from .herramientas.regresion import (diagnosticos, hac_newey_west, regresion_multiple, regresion_simple)
+from .herramientas.regresion import (diagnosticos, hac_newey_west, prediccion, regresion_multiple, regresion_simple,
+                                     tabla_sumas_cuadrados)
 from .textos import NOMBRES
 
 log = logging.getLogger(__name__)
@@ -100,6 +101,13 @@ def bateria(panel: pd.DataFrame, cfg: Config, frecuencia: str) -> tuple[dict, di
     diag_multiple = diagnosticos(multiple["_residuos"], multiple["_X"], nombres, rezagos_bg, alfa)
     hac = hac_newey_west(Xm, ym, nombres, cfg["regresion_multiple"]["hac_maxlags"], conf)
 
+    # Método de las sumas de cuadrados (SCT = SCR + SCE, F y R²) para la regresión de la hipótesis y la múltiple.
+    sumas_cuadrados = {
+        "simple": tabla_sumas_cuadrados(principal["sct"], principal["sce"], principal["n"], 1, conf),
+        "multiple": tabla_sumas_cuadrados(multiple["sct"], multiple["sce"], multiple["n"], multiple["k"], conf),
+    }
+    proyeccion = proyectar(principal, x, cfg, frecuencia)
+
     anova = _anova_completo(y, panel["tercil_pbi"].to_numpy(), cfg)
     anova["factor"] = "terciles de la variación del PBI"
     if anova["aplicable"]:
@@ -150,6 +158,7 @@ def bateria(panel: pd.DataFrame, cfg: Config, frecuencia: str) -> tuple[dict, di
         "hipotesis_principal": {"d0": principal, "d1": extension},
         "desfases": desfases,
         "regresion_multiple": {**multiple, "hac": hac},
+        "sumas_cuadrados": sumas_cuadrados, "proyeccion": proyeccion,
         "anova": anova, "anova_umbral": anova_umbral,
         "prueba_complementaria": complementaria,
         "diagnosticos": {"regresion_simple": diag_simple, "regresion_multiple": diag_multiple},
@@ -158,6 +167,16 @@ def bateria(panel: pd.DataFrame, cfg: Config, frecuencia: str) -> tuple[dict, di
     extras = {"panel": panel, "principal": principal, "multiple": multiple, "regresiones": regresiones,
               "suba": suba, "baja": baja}
     return resultados, extras
+
+
+def proyectar(reg: dict, x: np.ndarray, cfg: Config, frecuencia: str) -> dict:
+    """Var AL30D proyectada con la regresión de la hipótesis para escenarios de Var PBI fijados en config.yaml."""
+    bajo, alto = float(np.min(x)), float(np.max(x))
+    escenarios = []
+    for esc in cfg["proyeccion"]["escenarios"][frecuencia]:
+        pred = prediccion(reg, float(esc["var_pbi"]), cfg.confianza)
+        escenarios.append({"nombre": esc["nombre"], **pred, "dentro_del_rango": bajo <= pred["x0"] <= alto})
+    return {"frecuencia": frecuencia, "rango_observado": [bajo, alto], "escenarios": escenarios}
 
 
 # --- Robustez y sensibilidades ------------------------------------------------------------------
@@ -466,7 +485,8 @@ def ejecutar(cfg: Config, linaje: list[dict] | None = None) -> tuple[dict, dict]
         "estimadores": res_p["estimadores"], "autocorrelaciones": res_p["autocorrelaciones"],
         "intervalos": res_p["intervalos"], "bondad_ajuste": res_p["bondad_ajuste"],
         "hipotesis_principal": res_p["hipotesis_principal"], "desfases": res_p["desfases"],
-        "regresion_multiple": res_p["regresion_multiple"], "anova": res_p["anova"],
+        "regresion_multiple": res_p["regresion_multiple"], "sumas_cuadrados": res_p["sumas_cuadrados"],
+        "proyeccion": res_p["proyeccion"], "anova": res_p["anova"],
         "anova_umbral": res_p["anova_umbral"], "prueba_complementaria": res_p["prueba_complementaria"],
         "diagnosticos": res_p["diagnosticos"],
         "robustez_trimestral": {"muestra_comparada": frec_r, "tabla": robustez, "bateria_respaldo": res_r,

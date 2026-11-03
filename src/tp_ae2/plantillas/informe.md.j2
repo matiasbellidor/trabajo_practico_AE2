@@ -124,6 +124,30 @@ SCE = {{ n(p0.sce) }}; S² = {{ n(p0.s2) }}; EE(b1) = {{ n(p0.ee_b1) }}; t = {{ 
 {% for p in t.simple.interpretacion %}- {{ p }}
 {% endfor %}
 
+**Método de las sumas de cuadrados.** {{ t.sumas_cuadrados.porque | join(" ") }}
+
+$$SCT = SCR + SCE,\qquad SCR = b_1 S_{xy},\qquad F = \frac{CMR}{CME} = \frac{SCR/1}{SCE/(n-2)},\qquad R^2 = \frac{SCR}{SCT}$$
+
+{% set sc = r.sumas_cuadrados.simple %}| Fuente | Suma de cuadrados | gl | Cuadrado medio | F | p-valor |
+|---|---|---|---|---|---|
+| Regresión (explicada por el PBI) | {{ n(sc.filas[0].sc) }} | {{ sc.filas[0].gl }} | {{ n(sc.filas[0].cm) }} | {{ n(sc.f) }} | {{ pv(sc.p_valor) }} |
+| Error (no explicada) | {{ n(sc.filas[1].sc) }} | {{ sc.filas[1].gl }} | {{ n(sc.filas[1].cm) }} | | |
+| Total | {{ n(sc.filas[2].sc) }} | {{ sc.filas[2].gl }} | | | |
+
+- {{ t.sumas_cuadrados.interpretacion[0] }}
+
+**Proyección por escenarios.** {{ t.proyeccion.porque | join(" ") }}
+
+$$\hat y_0 = b_0 + b_1 x_0,\qquad IC_{95\%}(\text{media}) = \hat y_0 \pm t_{n-2}\, S \sqrt{\frac{1}{n} + \frac{(x_0 - \bar x)^2}{S_{xx}}},\qquad IP_{95\%} = \hat y_0 \pm t_{n-2}\, S \sqrt{1 + \frac{1}{n} + \frac{(x_0 - \bar x)^2}{S_{xx}}}$$
+
+| Escenario | Var PBI | Var AL30D proyectada | IC 95 % de la media | Intervalo de predicción 95 % |
+|---|---|---|---|---|
+{% for e in r.proyeccion.escenarios %}| {{ e.nombre }}{{ " (fuera del rango observado)" if not e.dentro_del_rango }} | {{ n(e.x0, 2, signo=True) }} % | {{ n(e.y0, 2, signo=True) }} % | {{ ic(e.ic_media.inferior, e.ic_media.superior, 2) }} % | {{ ic(e.intervalo_prediccion.inferior, e.intervalo_prediccion.superior, 2) }} % |
+{% endfor %}
+
+{% for p in t.proyeccion.interpretacion %}- {{ p }}
+{% endfor %}
+
 ![Dispersión con recta de regresión]({{ fig }}dispersion.png)
 
 ### 4.5 Extensión temporal y desfases
@@ -152,6 +176,14 @@ $$\hat\beta = (X'X)^{-1}X'y,\qquad \widehat{\text{Var}}(\hat\beta) = S^2 (X'X)^{
 {% endfor %}
 
 n = {{ mu.n }}, k = {{ mu.k }}, gl = {{ mu.gl }}; R² = {{ n(mu.r2) }}; R² ajustado = {{ n(mu.r2_ajustado) }}; S = {{ n(mu.s) }}; F = {{ n(mu.f) }} con ({{ mu.gl_f[0] }}; {{ mu.gl_f[1] }}) gl, p = {{ pv(mu.p_f) }}.
+
+{% set scm = r.sumas_cuadrados.multiple %}| Fuente | Suma de cuadrados | gl | Cuadrado medio | F | p-valor |
+|---|---|---|---|---|---|
+| Regresión (PBI y control) | {{ n(scm.filas[0].sc) }} | {{ scm.filas[0].gl }} | {{ n(scm.filas[0].cm) }} | {{ n(scm.f) }} | {{ pv(scm.p_valor) }} |
+| Error | {{ n(scm.filas[1].sc) }} | {{ scm.filas[1].gl }} | {{ n(scm.filas[1].cm) }} | | |
+| Total | {{ n(scm.filas[2].sc) }} | {{ scm.filas[2].gl }} | | | |
+
+- {{ t.sumas_cuadrados.interpretacion[1] }}
 
 {% for p in t.multiple.interpretacion %}- {{ p }}
 {% endfor %}

@@ -114,6 +114,21 @@ regresion_multiple:
   # 67 % de las ruedas de 2022. Sensibilidad: CCL con el último cierre de AL30C con volumen positivo.
   sensibilidad_ccl_operado: true
 
+# Proyección con la regresión de la hipótesis: Var AL30D esperada (IC de la media) y rango para un período
+# (intervalo de predicción) según la Var PBI. Escenarios dentro del rango observado, para no extrapolar.
+proyeccion:
+  escenarios:
+    mensual:
+      - {nombre: "Recesión", var_pbi: -1.0}
+      - {nombre: "Estancamiento", var_pbi: 0.0}
+      - {nombre: "Crecimiento", var_pbi: 1.0}
+      - {nombre: "Crecimiento fuerte", var_pbi: 2.0}
+    trimestral:
+      - {nombre: "Recesión", var_pbi: -3.0}
+      - {nombre: "Estancamiento", var_pbi: 0.0}
+      - {nombre: "Crecimiento", var_pbi: 2.0}
+      - {nombre: "Crecimiento fuerte", var_pbi: 4.0}
+
 anova:
   factor: terciles
   etiquetas: [bajo, medio, alto]

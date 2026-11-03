@@ -3845,6 +3845,14 @@ L 774.377344 240.378359
             <tr><td>β<sub>0</sub></td><td class="n">2,5138</td><td class="n">1,7115</td><td class="n">1,4687</td><td class="n">0,1477</td><td class="n">[−0,9177 ; 5,9452]</td></tr>
             <tr class="resalta"><td>β<sub>1</sub></td><td class="n">0,0154</td><td class="n">2,0347</td><td class="n">0,0076</td><td class="n">0,9940</td><td class="n">[−4,0639 ; 4,0948]</td></tr>
           </tbody>
+        </table></div>        <div class="tabla-scroll"><table class="tabla">
+          <caption>Método de las sumas de cuadrados · R² = SCR/SCT = 0,0000</caption>
+          <thead><tr><th>Fuente</th><th class="n">SC</th><th class="n">gl</th><th class="n">CM</th><th class="n">F</th><th class="n">p</th></tr></thead>
+          <tbody>
+            <tr><td>Regresión</td><td class="n">0,0092</td><td class="n">1</td><td class="n">0,0092</td><td class="n">0,0001</td><td class="n">0,9940</td></tr>
+            <tr><td>Error</td><td class="n">8.638,37</td><td class="n">54</td><td class="n">159,97</td><td class="n"></td><td class="n"></td></tr>
+            <tr><td>Total</td><td class="n">8.638,37</td><td class="n">55</td><td class="n"></td><td class="n"></td><td class="n"></td></tr>
+          </tbody>
         </table></div>
       </div>
     </div>
@@ -3853,7 +3861,17 @@ L 774.377344 240.378359
       <p>b<sub>1</sub> = 0,5967 / 38,6396 = <strong>0,0154</strong>; b<sub>0</sub> = 2,5158 − (0,0154)·(0,1326) = <strong>2,5138</strong>.</p>
       <p>SCE = 8.638,3651; S² = SCE/(n − 2) = 159,9697; EE(b<sub>1</sub>) = 2,0347; t = 0,0076 con 54 gl; valor crítico ±2,0049; p = 2·P(t<sub>54</sub> &gt; |t|) = <strong>0,9940</strong>.</p>
       <p>R² = 1 − 8.638,3651/8.638,3743 = 0,0000; F = 0,0001 con (1; 54) gl, p = 0,9940. Detalle por observación en <code>outputs/tablas/cuadro_a_mano.csv</code>.</p>
-</div></details>    <div class="revela"><span class="etiqueta">Interpretación</span><ul class="interpretacion"><li>Pendiente positiva: en la muestra, cada 1 pp adicional de variación mensual del PBI se asocia, en promedio, con 0,0154 pp más de variación mensual del AL30D.</li><li>R² = 0,0000: la Var PBI da cuenta del 0,00 % de la variabilidad de la Var AL30D en la muestra. F = 0,0001 con (1; 54) gl, p = 0,9940 (igual al p del t, como corresponde en la regresión simple).</li><li>NO HAY EVIDENCIA SUFICIENTE para afirmar la extensión temporal (d = +1) (β1 = 1,8997; IC 95 % [−2,2037 ; 6,0030]; p = 0,3573; R² = 0,0160). No haber rechazado H0 no prueba que β1 sea cero.</li><li>Desfases exploratorios con p &lt; 0,01: d = −2 (β1 = −5,8701, p = 0,0025). Al ser exploratorios no confirman nada por sí solos: señalan una relación a contrastar con datos nuevos, y comparten la limitación del spline (la Var PBI mensual de meses vecinos está muy correlacionada).</li></ul></div>
+</div></details>    <div class="revela"><span class="etiqueta">Interpretación</span><ul class="interpretacion"><li>Pendiente positiva: en la muestra, cada 1 pp adicional de variación mensual del PBI se asocia, en promedio, con 0,0154 pp más de variación mensual del AL30D.</li><li>Regresión simple: SCR = 0,0092 de SCT = 8.638,37, así que R² = SCR/SCT = 0,0000. F = CMR/CME = 0,0092/159,97 = 0,0001 con (1; 54) gl, frente a un valor crítico de 4,02: p = 0,9940 (no se rechaza H0). En la regresión simple F = t², así que la decisión coincide con la del test t de β1.</li><li>NO HAY EVIDENCIA SUFICIENTE para afirmar la extensión temporal (d = +1) (β1 = 1,8997; IC 95 % [−2,2037 ; 6,0030]; p = 0,3573; R² = 0,0160). No haber rechazado H0 no prueba que β1 sea cero.</li><li>Desfases exploratorios con p &lt; 0,01: d = −2 (β1 = −5,8701, p = 0,0025). Al ser exploratorios no confirman nada por sí solos: señalan una relación a contrastar con datos nuevos, y comparten la limitación del spline (la Var PBI mensual de meses vecinos está muy correlacionada).</li></ul></div>
+    <div class="revela">
+      <span class="etiqueta">Proyección por escenarios</span>
+      <p>Con la recta de la hipótesis se proyecta la variación del bono para escenarios de variación del PBI. Para cada escenario hay dos rangos al 95 %: el del valor esperado (IC de la media) y el de un período concreto (intervalo de predicción), que suma la variabilidad propia del bono. Es la mirada actuarial de la hipótesis: si el PBI sirviera para anticipar el bono, cambiaría la proyección y achicaría el rango.</p>
+    </div>
+    <div class="tabla-scroll revela"><table class="tabla">
+      <caption>Var AL30D proyectada con la recta de la hipótesis (95 %)</caption>
+      <thead><tr><th>Escenario</th><th class="n">Var PBI</th><th class="n">Var AL30D proyectada</th><th class="n">IC de la media</th><th class="n">Intervalo de predicción</th></tr></thead>
+      <tbody><tr><td>Recesión</td><td class="n">−1,00 %</td><td class="n">+2,50 %</td><td class="n">[−3,23 ; 8,23] %</td><td class="n">[−23,50 ; 28,50] %</td></tr><tr><td>Estancamiento</td><td class="n">0,00 %</td><td class="n">+2,51 %</td><td class="n">[−0,92 ; 5,95] %</td><td class="n">[−23,07 ; 28,10] %</td></tr><tr><td>Crecimiento</td><td class="n">+1,00 %</td><td class="n">+2,53 %</td><td class="n">[−2,37 ; 7,43] %</td><td class="n">[−23,30 ; 28,36] %</td></tr><tr><td>Crecimiento fuerte</td><td class="n">+2,00 %</td><td class="n">+2,54 %</td><td class="n">[−5,79 ; 10,88] %</td><td class="n">[−24,15 ; 29,24] %</td></tr></tbody>
+    </table></div>
+    <div class="revela"><span class="etiqueta">Qué significa</span><ul class="interpretacion"><li>Entre los escenarios de −1,0 % y +2,0 % de variación mensual del PBI, la variación proyectada del bono va de +2,50 % a +2,54 %, casi igual a su promedio (+2,52 %), con un intervalo de predicción de unos ±26 pp. Conocer el PBI no cambia la proyección ni reduce la incertidumbre sobre el bono.</li></ul></div>
     <div class="tabla-scroll revela"><table class="tabla">
       <caption>Regresión simple por desfase d (X = Var PBI en t + d)</caption>
       <thead><tr><th class="n">d</th><th>Etiqueta</th><th class="n">n</th><th class="n">β<sub>1</sub></th><th class="n">IC 95 %</th><th class="n">t</th><th class="n">p</th><th class="n">Umbral</th><th>Decisión</th></tr></thead>
@@ -4604,7 +4622,7 @@ L 774.598359 254.547734
 </section><section class="diapo" id="multiple" aria-labelledby="t-multiple">
   <div class="diapo__contenido">
     <p class="diapo__num">08 · Regresión lineal múltiple y supuestos</p>
-    <h2 id="t-multiple">Con un control: la variación del CCL implícito</h2>
+    <h2 id="t-multiple">Sumándole otra variable independiente x2 = CCL</h2>
     <div class="dos-col" style="margin-top:1.4rem">
       <div>
         <div class="porque revela"><span class="etiqueta">Por qué esta herramienta</span><p>Agrega un control, la variación del CCL implícito (AL30 en pesos / AL30C en dólares cable), para ver si la asociación con el PBI cambia cuando esa variable se mantiene constante. El control requiere aprobación docente, porque la consigna habla de variables dadas. Además, el AL30D y el CCL implícito salen del mismo instrumento: si el dólar sube y el precio en pesos no, el precio en dólares baja, así que parte de la relación entre ambos es mecánica.</p></div>
@@ -4621,6 +4639,14 @@ L 774.598359 254.547734
           <caption>Coeficientes · n = 56, 53 gl · R² = 0,0342 · R² aj. = −0,0022 · F = 0,9389 (p = 0,3975)</caption>
           <thead><tr><th></th><th class="n">β</th><th class="n">EE</th><th class="n">t</th><th class="n">p</th><th class="n">IC 95 %</th></tr></thead>
           <tbody><tr><td>constante</td><td class="n">3,5270</td><td class="n">1,8518</td><td class="n">1,9046</td><td class="n">0,0623</td><td class="n">[−0,1873 ; 7,2413]</td></tr><tr><td>Var PBI</td><td class="n">−0,2222</td><td class="n">2,0258</td><td class="n">−0,1097</td><td class="n">0,9131</td><td class="n">[−4,2854 ; 3,8411]</td></tr><tr><td>Var CCL implícito</td><td class="n">−0,2240</td><td class="n">0,1634</td><td class="n">−1,3703</td><td class="n">0,1764</td><td class="n">[−0,5518 ; 0,1039]</td></tr></tbody>
+        </table></div>        <div class="tabla-scroll"><table class="tabla">
+          <caption>Método de las sumas de cuadrados · R² = SCR/SCT = 0,0342</caption>
+          <thead><tr><th>Fuente</th><th class="n">SC</th><th class="n">gl</th><th class="n">CM</th><th class="n">F</th><th class="n">p</th></tr></thead>
+          <tbody>
+            <tr><td>Regresión</td><td class="n">295,58</td><td class="n">2</td><td class="n">147,79</td><td class="n">0,9389</td><td class="n">0,3975</td></tr>
+            <tr><td>Error</td><td class="n">8.342,79</td><td class="n">53</td><td class="n">157,41</td><td class="n"></td><td class="n"></td></tr>
+            <tr><td>Total</td><td class="n">8.638,37</td><td class="n">55</td><td class="n"></td><td class="n"></td><td class="n"></td></tr>
+          </tbody>
         </table></div>
         <div class="tabla-scroll"><table class="tabla">
           <caption>Supuestos de Gauss-Markov</caption>
@@ -6461,7 +6487,7 @@ L 713.405625 370.135859
 <p>Las herramientas restantes son coherentes con eso. El ANOVA por terciles del PBI da F = 0,2581 (p = 0,7735). En la regresión múltiple con el CCL implícito como control, el F global da p = 0,3975 y el coeficiente del PBI, p = 0,9131.</p>
 <h3>Qué permiten descartar los datos</h3>
 <p>No haber rechazado H0 no prueba que la relación sea nula, pero los intervalos acotan su tamaño:</p>
-<ul><li><strong>Regresión.</strong> Aun en el extremo del IC de β1, un desvío estándar de la variación mensual del PBI (0,8382 pp) se asociaría con unos 3,4 pp de variación del bono, mientras que el desvío del propio bono es 12,5324 pp. Si existe una relación lineal, explica una parte chica de lo que se mueve el AL30D en un mes.</li><li><strong>Diferencia de medias.</strong> Con 80 % de potencia, la diferencia mínima detectable es 0,6516 pp. Una diferencia de ese tamaño en el crecimiento mensual medio del PBI entre meses de suba y de baja del bono probablemente se habría detectado; una menor no se puede descartar.</li></ul>
+<ul><li><strong>Sumas de cuadrados.</strong> De la variabilidad total del bono (SCT = 8.638,37), la recta explica SCR = 0,0092: R² = SCR/SCT = 0,0000 y F = 0,0001 con (1; 54) gl, p = 0,9940, el mismo resultado que el test t.</li><li><strong>Regresión.</strong> Aun en el extremo del IC de β1, un desvío estándar de la variación mensual del PBI (0,8382 pp) se asociaría con unos 3,4 pp de variación del bono, mientras que el desvío del propio bono es 12,5324 pp. Si existe una relación lineal, explica una parte chica de lo que se mueve el AL30D en un mes.</li><li><strong>Proyección por escenarios.</strong> Con la recta estimada, para cualquier escenario de PBI entre −1 % y +2 % mensual el bono se proyecta entre +2,50 % y +2,54 %, prácticamente su promedio, con un intervalo de predicción de unos ±26 pp. En términos actuariales, conocer el PBI no cambia la proyección ni reduce la incertidumbre sobre el bono.</li><li><strong>Diferencia de medias.</strong> Con 80 % de potencia, la diferencia mínima detectable es 0,6516 pp. Una diferencia de ese tamaño en el crecimiento mensual medio del PBI entre meses de suba y de baja del bono probablemente se habría detectado; una menor no se puede descartar.</li></ul>
 <h3>Qué tan sólido es el resultado</h3>
 <ul><li><strong>Sensibilidades.</strong> Ninguna de las variantes sobre la muestra mensual cambia el veredicto. En la regresión simple: bono sin ajuste ex-pago (p = 0,8915), PBI sin desestacionalizar (p = 0,5218), spline not-a-knot (p = 0,9943) y PBI desestacionalizado por el INDEC en lugar de STL (p = 0,8208). En la múltiple, para el coeficiente del PBI: errores HAC (p = 0,9455) y CCL con cierres operados (p = 0,8499).</li><li><strong>Supuestos.</strong> Durbin-Watson (1,9399) y Breusch-Godfrey (p = 0,8349) no muestran autocorrelación de los residuos. Breusch-Pagan no rechaza la homocedasticidad, aunque queda cerca del umbral (p = 0,0586). Los residuos no son normales (Shapiro-Wilk p = 0,0070). Con n = 56 el t de β1 es aproximadamente válido, y los errores HAC, que no suponen homocedasticidad ni normalidad, llevan a la misma decisión.</li><li><strong>La excepción: la muestra trimestral.</strong> Sin interpolar el PBI (n = 19), β1 = −4,5407, con IC 95 % [−8,0455 ; −1,0359] y p = 0,0142: el signo es opuesto y se rechaza H0. No se toma como resultado principal por tres motivos. Primero, n = 19 está por debajo del mínimo de 50 que pide la consigna. Segundo, depende de un solo trimestre: sin 2024Q1, el p-valor sube a 0,0527. Tercero, el patrón viene de los trimestres con caída del PBI: en los 5, el bono subió, mientras que en los 14 trimestres con suba del PBI el bono subió en 7, la mitad. El desfase exploratorio d = −2 apunta al mismo signo (β1 = −5,8701; p = 0,0025, menor que el umbral de 0,01), pero es exploratorio y comparte la limitación del spline.</li></ul>
 <h3>Lectura de los resultados</h3>

@@ -91,6 +91,35 @@ def regresion_multiple(X, y, nombres: list[str], confianza: float = 0.95) -> dic
     }
 
 
+def tabla_sumas_cuadrados(sct: float, sce: float, n: int, k: int, confianza: float = 0.95) -> dict:
+    """Tabla de la regresión: SCT = SCR + SCE; F = CMR/CME con (k; n − k − 1) gl; R² = SCR/SCT."""
+    scr = sct - sce
+    gl_r, gl_e = k, n - k - 1
+    cmr, cme = scr / gl_r, sce / gl_e
+    f = cmr / cme
+    return {
+        "filas": [{"fuente": "regresion", "sc": float(scr), "gl": int(gl_r), "cm": float(cmr)},
+                  {"fuente": "error", "sc": float(sce), "gl": int(gl_e), "cm": float(cme)},
+                  {"fuente": "total", "sc": float(sct), "gl": int(n - 1), "cm": None}],
+        "f": float(f), "gl_f": [int(gl_r), int(gl_e)], "p_valor": float(stats.f.sf(f, gl_r, gl_e)),
+        "valor_critico": float(stats.f.ppf(confianza, gl_r, gl_e)), "r2": float(scr / sct),
+    }
+
+
+def prediccion(reg: dict, x0: float, confianza: float = 0.95) -> dict:
+    """ŷ0 = b0 + b1·x0. IC de la media: ŷ0 ± t·S·√(1/n + (x0 − x̄)²/Sxx).
+    Intervalo de predicción de un valor: ŷ0 ± t·S·√(1 + 1/n + (x0 − x̄)²/Sxx). t con n − 2 gl."""
+    t = float(stats.t.ppf(1 - (1 - confianza) / 2, reg["gl"]))
+    y0 = reg["b0"] + reg["b1"] * x0
+    palanca = 1 / reg["n"] + (x0 - reg["x_media"]) ** 2 / reg["sxx"]
+    margen_media = t * reg["s"] * np.sqrt(palanca)
+    margen_valor = t * reg["s"] * np.sqrt(1 + palanca)
+    return {"x0": float(x0), "y0": float(y0), "cuantil": t,
+            "margen_media": float(margen_media), "margen_valor": float(margen_valor),
+            "ic_media": {"inferior": float(y0 - margen_media), "superior": float(y0 + margen_media)},
+            "intervalo_prediccion": {"inferior": float(y0 - margen_valor), "superior": float(y0 + margen_valor)}}
+
+
 # --- Diagnósticos -------------------------------------------------------------------------------
 
 def durbin_watson(residuos) -> float:

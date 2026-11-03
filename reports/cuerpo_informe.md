@@ -175,7 +175,33 @@ SCE = 8.638,3651; S² = 159,9697; EE(b1) = 2,0347; t = 0,0076 con 54 gl (valor c
 
 - NO HAY EVIDENCIA SUFICIENTE para afirmar la hipótesis principal (β1 = 0,0154; IC 95 % [−4,0639 ; 4,0948]; p = 0,9940; R² = 0,0000). No haber rechazado H0 no prueba que β1 sea cero.
 - Pendiente positiva: en la muestra, cada 1 pp adicional de variación mensual del PBI se asocia, en promedio, con 0,0154 pp más de variación mensual del AL30D.
-- R² = 0,0000: la Var PBI da cuenta del 0,00 % de la variabilidad de la Var AL30D en la muestra. F = 0,0001 con (1; 54) gl, p = 0,9940 (igual al p del t, como corresponde en la regresión simple).
+
+
+**Método de las sumas de cuadrados.** El método de las sumas de cuadrados descompone la variabilidad total del bono (SCT) en la parte que explica la recta (SCR) y la que queda en el error (SCE). Si el PBI explicara algo, SCR sería grande frente a SCE. El cociente de sus cuadrados medios es el estadístico F, y SCR/SCT es el coeficiente de determinación R².
+
+$$SCT = SCR + SCE,\qquad SCR = b_1 S_{xy},\qquad F = \frac{CMR}{CME} = \frac{SCR/1}{SCE/(n-2)},\qquad R^2 = \frac{SCR}{SCT}$$
+
+| Fuente | Suma de cuadrados | gl | Cuadrado medio | F | p-valor |
+|---|---|---|---|---|---|
+| Regresión (explicada por el PBI) | 0,0092 | 1 | 0,0092 | 0,0001 | 0,9940 |
+| Error (no explicada) | 8.638,3651 | 54 | 159,9697 | | |
+| Total | 8.638,3743 | 55 | | | |
+
+- Regresión simple: SCR = 0,0092 de SCT = 8.638,37, así que R² = SCR/SCT = 0,0000. F = CMR/CME = 0,0092/159,97 = 0,0001 con (1; 54) gl, frente a un valor crítico de 4,02: p = 0,9940 (no se rechaza H0). En la regresión simple F = t², así que la decisión coincide con la del test t de β1.
+
+**Proyección por escenarios.** Con la recta de la hipótesis se proyecta la variación del bono para escenarios de variación del PBI. Para cada escenario hay dos rangos al 95 %: el del valor esperado (IC de la media) y el de un período concreto (intervalo de predicción), que suma la variabilidad propia del bono. Es la mirada actuarial de la hipótesis: si el PBI sirviera para anticipar el bono, cambiaría la proyección y achicaría el rango.
+
+$$\hat y_0 = b_0 + b_1 x_0,\qquad IC_{95\%}(\text{media}) = \hat y_0 \pm t_{n-2}\, S \sqrt{\frac{1}{n} + \frac{(x_0 - \bar x)^2}{S_{xx}}},\qquad IP_{95\%} = \hat y_0 \pm t_{n-2}\, S \sqrt{1 + \frac{1}{n} + \frac{(x_0 - \bar x)^2}{S_{xx}}}$$
+
+| Escenario | Var PBI | Var AL30D proyectada | IC 95 % de la media | Intervalo de predicción 95 % |
+|---|---|---|---|---|
+| Recesión | −1,00 % | +2,50 % | [−3,23 ; 8,23] % | [−23,50 ; 28,50] % |
+| Estancamiento | 0,00 % | +2,51 % | [−0,92 ; 5,95] % | [−23,07 ; 28,10] % |
+| Crecimiento | +1,00 % | +2,53 % | [−2,37 ; 7,43] % | [−23,30 ; 28,36] % |
+| Crecimiento fuerte | +2,00 % | +2,54 % | [−5,79 ; 10,88] % | [−24,15 ; 29,24] % |
+
+
+- Entre los escenarios de −1,0 % y +2,0 % de variación mensual del PBI, la variación proyectada del bono va de +2,50 % a +2,54 %, casi igual a su promedio (+2,52 %), con un intervalo de predicción de unos ±26 pp. Conocer el PBI no cambia la proyección ni reduce la incertidumbre sobre el bono.
 
 
 ![Dispersión con recta de regresión](../outputs/figuras/dispersion.png)
@@ -215,6 +241,14 @@ $$\hat\beta = (X'X)^{-1}X'y,\qquad \widehat{\text{Var}}(\hat\beta) = S^2 (X'X)^{
 
 
 n = 56, k = 2, gl = 53; R² = 0,0342; R² ajustado = −0,0022; S = 12,5464; F = 0,9389 con (2; 53) gl, p = 0,3975.
+
+| Fuente | Suma de cuadrados | gl | Cuadrado medio | F | p-valor |
+|---|---|---|---|---|---|
+| Regresión (PBI y control) | 295,5820 | 2 | 147,7910 | 0,9389 | 0,3975 |
+| Error | 8.342,7923 | 53 | 157,4112 | | |
+| Total | 8.638,3743 | 55 | | | |
+
+- Regresión múltiple: SCR = 295,5820 de SCT = 8.638,37, así que R² = SCR/SCT = 0,0342. F = CMR/CME = 147,7910/157,41 = 0,9389 con (2; 53) gl, frente a un valor crítico de 3,17: p = 0,3975 (no se rechaza H0).
 
 - Ŷ = 3,5270 − 0,2222·Var PBI − 0,2240·Var CCL implícito. R² = 0,0342, R² ajustado = −0,0022, S = 12,5464 pp; F = 0,9389 con (2; 53) gl, p = 0,3975 (no se rechaza H0: no hay evidencia de que el modelo en conjunto se asocie con Y).
 - t de Var PBI = −0,1097, p = 0,9131; t de Var CCL implícito = −1,3703, p = 0,1764.
@@ -378,7 +412,9 @@ Las herramientas restantes son coherentes con eso. El ANOVA por terciles del PBI
 
 No haber rechazado H0 no prueba que la relación sea nula, pero los intervalos acotan su tamaño:
 
+- **Sumas de cuadrados.** De la variabilidad total del bono (SCT = 8.638,37), la recta explica SCR = 0,0092: R² = SCR/SCT = 0,0000 y F = 0,0001 con (1; 54) gl, p = 0,9940, el mismo resultado que el test t.
 - **Regresión.** Aun en el extremo del IC de β1, un desvío estándar de la variación mensual del PBI (0,8382 pp) se asociaría con unos 3,4 pp de variación del bono, mientras que el desvío del propio bono es 12,5324 pp. Si existe una relación lineal, explica una parte chica de lo que se mueve el AL30D en un mes.
+- **Proyección por escenarios.** Con la recta estimada, para cualquier escenario de PBI entre −1 % y +2 % mensual el bono se proyecta entre +2,50 % y +2,54 %, prácticamente su promedio, con un intervalo de predicción de unos ±26 pp. En términos actuariales, conocer el PBI no cambia la proyección ni reduce la incertidumbre sobre el bono.
 - **Diferencia de medias.** Con 80 % de potencia, la diferencia mínima detectable es 0,6516 pp. Una diferencia de ese tamaño en el crecimiento mensual medio del PBI entre meses de suba y de baja del bono probablemente se habría detectado; una menor no se puede descartar.
 
 ### Qué tan sólido es el resultado

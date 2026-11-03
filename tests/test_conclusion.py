@@ -54,6 +54,16 @@ def test_conclusion_cita_los_numeros_vigentes(corrida, conclusion):
         f"2022Q4 (+{num(por_periodo['2022Q4']['var_bono'], 2)} % con {num(por_periodo['2022Q4']['var_pbi'], 2)} %)",
         f"solo {r['datos']['trimestres_pbi_en_ventana']} trimestres reales",
     ]
+    sc = r["sumas_cuadrados"]["simple"]
+    esc = r["proyeccion"]["escenarios"]
+    margen = sum(e["margen_valor"] for e in esc) / len(esc)
+    esperados += [
+        f"SCT = {num(sc['filas'][2]['sc'], 2)}", f"SCR = {num(sc['filas'][0]['sc'])}", f"R² = SCR/SCT = {num(sc['r2'])}",
+        f"F = {num(sc['f'])} con ({sc['gl_f'][0]}; {sc['gl_f'][1]}) gl, p = {pval(sc['p_valor'])}",
+        f"entre {num(esc[0]['x0'], 0, signo=True)} % y {num(esc[-1]['x0'], 0, signo=True)} % mensual",
+        f"entre {num(min(e['y0'] for e in esc), 2, signo=True)} % y {num(max(e['y0'] for e in esc), 2, signo=True)} %",
+        f"unos ±{num(margen, 0)} pp",
+    ]
     assert inf["periodos_que_cambian_decision"] == ["2024Q1"]
     assert inf["signos"]["pbi_baja"] == inf["signos"]["pbi_baja_bono_sube"] == 5
     d_menos2 = next(f for f in r["desfases"] if f["d"] == -2)

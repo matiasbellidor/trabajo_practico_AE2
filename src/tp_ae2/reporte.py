@@ -140,6 +140,16 @@ def construir_tablas(r: dict, extras: dict) -> dict[str, pd.DataFrame]:
                "ic_superior": c[k]["ic"]["superior"]} for k in ("t_agrupada", "t_welch")]])
     tablas["robustez_trimestral"] = pd.DataFrame(r["robustez_trimestral"]["tabla"])
     tablas["influencia_respaldo"] = pd.DataFrame(r["robustez_trimestral"]["influencia"]["filas"])
+    tablas["sumas_cuadrados"] = pd.DataFrame([
+        {"modelo": modelo, **fila, "f": sc["f"] if fila["fuente"] == "regresion" else None,
+         "p_valor": sc["p_valor"] if fila["fuente"] == "regresion" else None, "r2": sc["r2"]}
+        for modelo, sc in r["sumas_cuadrados"].items() for fila in sc["filas"]])
+    tablas["proyeccion"] = pd.DataFrame([
+        {"escenario": e["nombre"], "var_pbi": e["x0"], "var_al30d_proyectada": e["y0"],
+         "ic_media_inferior": e["ic_media"]["inferior"], "ic_media_superior": e["ic_media"]["superior"],
+         "prediccion_inferior": e["intervalo_prediccion"]["inferior"],
+         "prediccion_superior": e["intervalo_prediccion"]["superior"], "dentro_del_rango": e["dentro_del_rango"]}
+        for e in r["proyeccion"]["escenarios"]])
     tablas["sensibilidades"] = pd.DataFrame(r["sensibilidades"])
     tablas["p_valores"] = pd.DataFrame(r["p_valores"]).assign(gl=lambda d: d["gl"].map(
         lambda g: "; ".join(map(str, g)) if isinstance(g, list) else g))
@@ -264,7 +274,11 @@ def _valores_readme(r: dict) -> dict:
     if cambian:
         motivos.append(("depende de un solo período" if len(cambian) == 1 else "depende de pocos períodos")
                        + f" (sin {', '.join(cambian)}, la decisión se invierte)")
+    escenarios = r["proyeccion"]["escenarios"]
     return {
+        "proy_min": min(e["y0"] for e in escenarios),
+        "proy_max": max(e["y0"] for e in escenarios),
+        "proy_margen": sum(e["margen_valor"] for e in escenarios) / len(escenarios),
         "motivos_excepcion": motivos,
         "alfa": alfa,
         "mensual": principal["frecuencia"] == "mensual",

@@ -47,6 +47,7 @@ Todas las decisiones de método (qué bono, qué ventana de tiempo, cómo tratar
 - **¿El bono se adelanta a la economía?** Con el PBI del mes siguiente, β1 = 1,8997 y p = 0,3573: no hay evidencia.
 - **La hipótesis que enviamos a los docentes.** El crecimiento medio del PBI en los meses de suba del bono menos el de los meses de baja da −0,0112 pp (IC 95 % [−0,4692 ; 0,4467]; p = 0,9610): no hay diferencia significativa.
 - **Qué tan chica tendría que ser la relación.** Aun en el extremo del intervalo de β1, un movimiento típico del PBI (un desvío estándar, 0,84 pp) se asociaría con unos 3,4 pp de variación del bono, cuando el bono se mueve típicamente 12,5 pp por mes. Si la relación existe, explica una parte chica de lo que hace el bono.
+- **Proyección por escenarios.** Con la recta estimada, para cualquier escenario de PBI entre −1,0 % y +2,0 % por mes el bono se proyecta entre +2,50 % y +2,54 %, con un intervalo de predicción de unos ±26 pp. Conocer el PBI no reduce la incertidumbre sobre el bono.
 - **La única excepción no alcanza.** Con datos trimestrales sin interpolar (n = 19), β1 = −4,5407 y p = 0,0142: el resultado cambia y el signo es opuesto. No se toma como resultado porque son menos de las 50 observaciones que pide la consigna y depende de un solo período (sin 2024Q1, la decisión se invierte).
 - **Lectura posible, que este trabajo no contrasta.** El precio del bono parece seguir más las expectativas sobre la capacidad de pago del Estado (situación fiscal, reservas, riesgo de default) que la actividad del período.
 
@@ -92,11 +93,36 @@ $$s^2 = \frac{SCE}{n-2} \qquad EE(\hat\beta_1) = \sqrt{\frac{s^2}{S_{xx}}} \qqua
 
 SCE es la suma de los errores al cuadrado (8.638,37). Queda s² = 159,97, EE(β̂1) = 2,0347 y **t = 0,0076**. El valor crítico de la t de Student con 54 gl es ±2,0049: si |t| lo supera, se rechaza H0.
 
-*Paso 4. Intervalo de confianza y R².*
+*Paso 4. Método de las sumas de cuadrados y R².* La variabilidad total del bono (SCT) se divide en la parte que explica la recta (SCR) y la que queda en el error (SCE). Si el PBI explicara algo, SCR sería grande frente a SCE:
 
-$$IC_{95\%}(\beta_1) = \hat\beta_1 \pm t_{0{,}975;\,n-2} \cdot EE(\hat\beta_1) \qquad R^2 = 1 - \frac{SCE}{SCT}$$
+$$SCT = SCR + SCE \qquad F = \frac{CMR}{CME} = \frac{SCR/1}{SCE/(n-2)} \qquad R^2 = \frac{SCR}{SCT}$$
 
-*Paso 5. Extensión temporal.* Repetimos la regresión con el PBI del mes siguiente (d = +1, declarado antes de ver los datos) para ver si el bono se anticipa a la economía. Como exploración, también con desfases de −3 a +3, juzgados con un umbral más exigente (0,01) porque son varias pruebas.
+| Fuente | Suma de cuadrados | gl | Cuadrado medio | F | p-valor |
+|---|---|---|---|---|---|
+| Regresión (lo que explica el PBI) | 0,0092 | 1 | 0,0092 | 0,0001 | 0,9940 |
+| Error (lo que no explica) | 8.638,37 | 54 | 159,97 | | |
+| Total | 8.638,37 | 55 | | | |
+
+El coeficiente de determinación es **R² = 0,0092 / 8.638,37 = 0,0000**: el PBI explica el 0,0 % de la variación del bono. El valor crítico de F con (1; 54) gl es 4,02. En la regresión simple F = t², así que este test y el del paso 3 son la misma prueba y dan el mismo p-valor.
+
+*Paso 5. Intervalo de confianza de la pendiente.*
+
+$$IC_{95\%}(\beta_1) = \hat\beta_1 \pm t_{0{,}975;\,n-2} \cdot EE(\hat\beta_1)$$
+
+*Paso 6. Proyección por escenarios (mirada actuarial).* Con la recta estimada se proyecta la variación del bono para distintos escenarios de PBI. Para cada uno hay dos rangos al 95 %: el del valor esperado (IC de la media) y el de un mes concreto (intervalo de predicción), que suma la variabilidad propia del bono. Si el PBI sirviera para anticipar el bono, la proyección cambiaría con el escenario y el rango se achicaría.
+
+$$\hat y_0 = \hat\beta_0 + \hat\beta_1 x_0 \qquad IC_{95\%}(\text{media}) = \hat y_0 \pm t \cdot s\sqrt{\frac{1}{n} + \frac{(x_0 - \bar x)^2}{S_{xx}}} \qquad IP_{95\%} = \hat y_0 \pm t \cdot s\sqrt{1 + \frac{1}{n} + \frac{(x_0 - \bar x)^2}{S_{xx}}}$$
+
+| Escenario | Var PBI | Var AL30D proyectada | IC 95 % de la media | Intervalo de predicción 95 % |
+|---|---|---|---|---|
+| Recesión | −1,00 % | +2,50 % | [−3,23 ; 8,23] % | [−23,50 ; 28,50] % |
+| Estancamiento | 0,00 % | +2,51 % | [−0,92 ; 5,95] % | [−23,07 ; 28,10] % |
+| Crecimiento | +1,00 % | +2,53 % | [−2,37 ; 7,43] % | [−23,30 ; 28,36] % |
+| Crecimiento fuerte | +2,00 % | +2,54 % | [−5,79 ; 10,88] % | [−24,15 ; 29,24] % |
+
+Los escenarios quedan dentro del rango observado de la Var PBI (−1,85 % a 2,30 %), para no extrapolar.
+
+*Paso 7. Extensión temporal.* Repetimos la regresión con el PBI del mes siguiente (d = +1, declarado antes de ver los datos) para ver si el bono se anticipa a la economía. Como exploración, también con desfases de −3 a +3, juzgados con un umbral más exigente (0,01) porque son varias pruebas.
 
 **Qué dio.**
 
@@ -107,7 +133,7 @@ $$IC_{95\%}(\beta_1) = \hat\beta_1 \pm t_{0{,}975;\,n-2} \cdot EE(\hat\beta_1) \
 
 De los 5 desfases exploratorios, pasa el umbral de 0,01 el desfase d = −2 (β̂1 = −5,8701, p = 0,0025).
 
-**Qué significa.** La pendiente es prácticamente cero: |t| = 0,0076 está muy por debajo de 2,00, el intervalo incluye al cero y el PBI explica el 0,0 % de la variación del bono. **No se rechaza H0.** Con el PBI del mes siguiente tampoco aparece relación. El desfase exploratorio significativo queda como pista para otro trabajo y no como resultado: con 5 desfases probados alguno puede salir por azar, y el PBI mensualizado hace que meses vecinos estén muy correlacionados.
+**Qué significa.** La pendiente es prácticamente cero: |t| = 0,0076 está muy por debajo de 2,00, el intervalo incluye al cero y el PBI explica el 0,0 % de la variación del bono. **No se rechaza H0.** Por eso la proyección casi no cambia con el escenario: de +2,50 % a +2,54 %, alrededor del promedio del bono, con un intervalo de predicción de unos ±26 pp. Conocer el PBI no reduce la incertidumbre sobre el bono. Con el PBI del mes siguiente tampoco aparece relación. El desfase exploratorio significativo queda como pista para otro trabajo y no como resultado: con 5 desfases probados alguno puede salir por azar, y el PBI mensualizado hace que meses vecinos estén muy correlacionados.
 
 **Dónde está el cálculo.** [`src/tp_ae2/herramientas/regresion.py`](src/tp_ae2/herramientas/regresion.py), función `regresion_simple`, escrita desde estas fórmulas y comparada contra statsmodels en los tests. Para rehacerla con calculadora, `outputs/tablas/cuadro_a_mano.csv` tiene las sumas: Σx = 7,4229, Σy = 140,8852, Σx² = 39,6235, Σxy = 19,2712.
 
@@ -127,11 +153,17 @@ con X₂ = Var CCL implícito. Se testea cada coeficiente (H0: βj = 0) y el mod
 
 $$\hat\beta = (X^\top X)^{-1} X^\top y$$
 
-*Paso 3. Test t de cada coeficiente* con n − k − 1 = 53 grados de libertad (k = 2 variables), y **test F global**:
+*Paso 3. Test t de cada coeficiente* con n − k − 1 = 53 grados de libertad (k = 2 variables), y **test F global por el método de las sumas de cuadrados**:
 
-$$F = \frac{(SCT - SCE)/k}{SCE/(n-k-1)}$$
+$$F = \frac{SCR/k}{SCE/(n-k-1)} \qquad R^2 = \frac{SCR}{SCT}$$
 
-Con SCT = 8.638,37 y SCE = 8.342,79 queda F = 0,9389, con (2; 53) grados de libertad.
+| Fuente | Suma de cuadrados | gl | Cuadrado medio | F | p-valor |
+|---|---|---|---|---|---|
+| Regresión (PBI y control) | 295,58 | 2 | 147,79 | 0,9389 | 0,3975 |
+| Error | 8.342,79 | 53 | 157,41 | | |
+| Total | 8.638,37 | 55 | | | |
+
+R² = 295,58 / 8.638,37 = 0,0342. El valor crítico de F con (2; 53) gl es 3,17.
 
 *Paso 4. R² ajustado*, que descuenta la cantidad de variables:
 

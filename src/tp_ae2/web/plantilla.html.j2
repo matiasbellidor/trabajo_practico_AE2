@@ -317,6 +317,16 @@
             <tr class="resalta"><td>β<sub>1</sub></td><td class="n">{{ n(p0.b1) }}</td><td class="n">{{ n(p0.ee_b1) }}</td><td class="n">{{ n(p0.t_b1) }}</td><td class="n">{{ pv(p0.p_b1) }}</td><td class="n">{{ ic(p0.ic_b1.inferior, p0.ic_b1.superior) }}</td></tr>
           </tbody>
         </table></div>
+        {%- set sc = r.sumas_cuadrados.simple %}
+        <div class="tabla-scroll"><table class="tabla">
+          <caption>Método de las sumas de cuadrados · R² = SCR/SCT = {{ n(sc.r2) }}</caption>
+          <thead><tr><th>Fuente</th><th class="n">SC</th><th class="n">gl</th><th class="n">CM</th><th class="n">F</th><th class="n">p</th></tr></thead>
+          <tbody>
+            <tr><td>Regresión</td><td class="n">{{ n(sc.filas[0].sc) }}</td><td class="n">{{ sc.filas[0].gl }}</td><td class="n">{{ n(sc.filas[0].cm) }}</td><td class="n">{{ n(sc.f) }}</td><td class="n">{{ pv(sc.p_valor) }}</td></tr>
+            <tr><td>Error</td><td class="n">{{ n(sc.filas[1].sc, 2) }}</td><td class="n">{{ sc.filas[1].gl }}</td><td class="n">{{ n(sc.filas[1].cm, 2) }}</td><td class="n"></td><td class="n"></td></tr>
+            <tr><td>Total</td><td class="n">{{ n(sc.filas[2].sc, 2) }}</td><td class="n">{{ sc.filas[2].gl }}</td><td class="n"></td><td class="n"></td><td class="n"></td></tr>
+          </tbody>
+        </table></div>
       </div>
     </div>
     {% call ver_formula("Ver el cuadro de cálculo a mano y el desarrollo") %}
@@ -326,7 +336,17 @@
       <p>SCE = {{ n(p0.sce) }}; S² = SCE/(n − 2) = {{ n(p0.s2) }}; EE(b<sub>1</sub>) = {{ n(p0.ee_b1) }}; t = {{ n(p0.t_b1) }} con {{ p0.gl }} gl; valor crítico ±{{ n(p0.valor_critico_t) }}; p = 2·P(t<sub>{{ p0.gl }}</sub> &gt; |t|) = <strong>{{ pv(p0.p_b1) }}</strong>.</p>
       <p>R² = 1 − {{ n(p0.sce) }}/{{ n(p0.sct) }} = {{ n(p0.r2) }}; F = {{ n(p0.f) }} con (1; {{ p0.gl }}) gl, p = {{ pv(p0.p_f) }}. Detalle por observación en <code>outputs/tablas/cuadro_a_mano.csv</code>.</p>
     {% endcall %}
-    {{ interpretacion(t.simple.interpretacion[1:] + t.desfases.interpretacion) }}
+    {{ interpretacion(t.simple.interpretacion[1:] + t.sumas_cuadrados.interpretacion[:1] + t.desfases.interpretacion) }}
+    <div class="revela">
+      <span class="etiqueta">Proyección por escenarios</span>
+      <p>{{ t.proyeccion.porque | join(" ") }}</p>
+    </div>
+    <div class="tabla-scroll revela"><table class="tabla">
+      <caption>Var AL30D proyectada con la recta de la hipótesis (95 %)</caption>
+      <thead><tr><th>Escenario</th><th class="n">Var PBI</th><th class="n">Var AL30D proyectada</th><th class="n">IC de la media</th><th class="n">Intervalo de predicción</th></tr></thead>
+      <tbody>{% for e in r.proyeccion.escenarios %}<tr><td>{{ e.nombre }}{{ " (extrapolado)" if not e.dentro_del_rango }}</td><td class="n">{{ n(e.x0, 2, signo=True) }} %</td><td class="n">{{ n(e.y0, 2, signo=True) }} %</td><td class="n">{{ ic(e.ic_media.inferior, e.ic_media.superior, 2) }} %</td><td class="n">{{ ic(e.intervalo_prediccion.inferior, e.intervalo_prediccion.superior, 2) }} %</td></tr>{% endfor %}</tbody>
+    </table></div>
+    {{ interpretacion(t.proyeccion.interpretacion, "Qué significa") }}
     <div class="tabla-scroll revela"><table class="tabla">
       <caption>Regresión simple por desfase d (X = Var PBI en t + d)</caption>
       <thead><tr><th class="n">d</th><th>Etiqueta</th><th class="n">n</th><th class="n">β<sub>1</sub></th><th class="n">IC 95 %</th><th class="n">t</th><th class="n">p</th><th class="n">Umbral</th><th>Decisión</th></tr></thead>
@@ -357,6 +377,16 @@
           <caption>Coeficientes · n = {{ mu.n }}, {{ mu.gl }} gl · R² = {{ n(mu.r2) }} · R² aj. = {{ n(mu.r2_ajustado) }} · F = {{ n(mu.f) }} (p = {{ pv(mu.p_f) }})</caption>
           <thead><tr><th></th><th class="n">β</th><th class="n">EE</th><th class="n">t</th><th class="n">p</th><th class="n">IC 95 %</th></tr></thead>
           <tbody>{% for c in mu.coeficientes %}<tr><td>{{ nombres.get(c.nombre, c.nombre) }}</td><td class="n">{{ n(c.coeficiente) }}</td><td class="n">{{ n(c.error_estandar) }}</td><td class="n">{{ n(c.t) }}</td><td class="n">{{ pv(c.p_valor) }}</td><td class="n">{{ ic(c.ic.inferior, c.ic.superior) }}</td></tr>{% endfor %}</tbody>
+        </table></div>
+        {%- set scm = r.sumas_cuadrados.multiple %}
+        <div class="tabla-scroll"><table class="tabla">
+          <caption>Método de las sumas de cuadrados · R² = SCR/SCT = {{ n(scm.r2) }}</caption>
+          <thead><tr><th>Fuente</th><th class="n">SC</th><th class="n">gl</th><th class="n">CM</th><th class="n">F</th><th class="n">p</th></tr></thead>
+          <tbody>
+            <tr><td>Regresión</td><td class="n">{{ n(scm.filas[0].sc, 2) }}</td><td class="n">{{ scm.filas[0].gl }}</td><td class="n">{{ n(scm.filas[0].cm, 2) }}</td><td class="n">{{ n(scm.f) }}</td><td class="n">{{ pv(scm.p_valor) }}</td></tr>
+            <tr><td>Error</td><td class="n">{{ n(scm.filas[1].sc, 2) }}</td><td class="n">{{ scm.filas[1].gl }}</td><td class="n">{{ n(scm.filas[1].cm, 2) }}</td><td class="n"></td><td class="n"></td></tr>
+            <tr><td>Total</td><td class="n">{{ n(scm.filas[2].sc, 2) }}</td><td class="n">{{ scm.filas[2].gl }}</td><td class="n"></td><td class="n"></td><td class="n"></td></tr>
+          </tbody>
         </table></div>
         <div class="tabla-scroll"><table class="tabla">
           <caption>Supuestos de Gauss-Markov</caption>

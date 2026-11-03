@@ -955,6 +955,145 @@
       ]
     }
   },
+  "sumas_cuadrados": {
+    "simple": {
+      "filas": [
+        {
+          "fuente": "regresion",
+          "sc": 0.00921456040851,
+          "gl": 1,
+          "cm": 0.00921456040851
+        },
+        {
+          "fuente": "error",
+          "sc": 8638.36509527,
+          "gl": 54,
+          "cm": 159.969723986
+        },
+        {
+          "fuente": "total",
+          "sc": 8638.37430983,
+          "gl": 55,
+          "cm": null
+        }
+      ],
+      "f": 5.7601902278e-05,
+      "gl_f": [
+        1,
+        54
+      ],
+      "p_valor": 0.993972409771,
+      "valor_critico": 4.01954096021,
+      "r2": 1.06670075619e-06
+    },
+    "multiple": {
+      "filas": [
+        {
+          "fuente": "regresion",
+          "sc": 295.582003974,
+          "gl": 2,
+          "cm": 147.791001987
+        },
+        {
+          "fuente": "error",
+          "sc": 8342.79230586,
+          "gl": 53,
+          "cm": 157.411175582
+        },
+        {
+          "fuente": "total",
+          "sc": 8638.37430983,
+          "gl": 55,
+          "cm": null
+        }
+      ],
+      "f": 0.938885066073,
+      "gl_f": [
+        2,
+        53
+      ],
+      "p_valor": 0.397470091418,
+      "valor_critico": 3.17162594804,
+      "r2": 0.0342173183718
+    }
+  },
+  "proyeccion": {
+    "frecuencia": "mensual",
+    "rango_observado": [
+      -1.85473206998,
+      2.2962913165
+    ],
+    "escenarios": [
+      {
+        "nombre": "Recesión",
+        "x0": -1.0,
+        "y0": 2.49831805274,
+        "cuantil": 2.00487928819,
+        "margen_media": 5.729511565,
+        "margen_valor": 25.9967721214,
+        "ic_media": {
+          "inferior": -3.23119351227,
+          "superior": 8.22782961774
+        },
+        "intervalo_prediccion": {
+          "inferior": -23.4984540686,
+          "superior": 28.4950901741
+        },
+        "dentro_del_rango": true
+      },
+      {
+        "nombre": "Estancamiento",
+        "x0": 0.0,
+        "y0": 2.51376067873,
+        "cuantil": 2.00487928819,
+        "margen_media": 3.43141527643,
+        "margen_valor": 25.5886589871,
+        "ic_media": {
+          "inferior": -0.917654597699,
+          "superior": 5.94517595516
+        },
+        "intervalo_prediccion": {
+          "inferior": -23.0748983083,
+          "superior": 28.1024196658
+        },
+        "dentro_del_rango": true
+      },
+      {
+        "nombre": "Crecimiento",
+        "x0": 1.0,
+        "y0": 2.52920330472,
+        "cuantil": 2.00487928819,
+        "margen_media": 4.89939912985,
+        "margen_valor": 25.8265167955,
+        "ic_media": {
+          "inferior": -2.37019582513,
+          "superior": 7.42860243457
+        },
+        "intervalo_prediccion": {
+          "inferior": -23.2973134908,
+          "superior": 28.3557201003
+        },
+        "dentro_del_rango": true
+      },
+      {
+        "nombre": "Crecimiento fuerte",
+        "x0": 2.0,
+        "y0": 2.54464593071,
+        "cuantil": 2.00487928819,
+        "margen_media": 8.33761391983,
+        "margen_valor": 26.6930826963,
+        "ic_media": {
+          "inferior": -5.79296798912,
+          "superior": 10.8822598505
+        },
+        "intervalo_prediccion": {
+          "inferior": -24.1484367656,
+          "superior": 29.237728627
+        },
+        "dentro_del_rango": true
+      }
+    ]
+  },
   "anova": {
     "N": 56,
     "k": 3,
@@ -2210,6 +2349,145 @@
             }
           ]
         }
+      },
+      "sumas_cuadrados": {
+        "simple": {
+          "filas": [
+            {
+              "fuente": "regresion",
+              "sc": 2133.8605433,
+              "gl": 1,
+              "cm": 2133.8605433
+            },
+            {
+              "fuente": "error",
+              "sc": 4855.29448879,
+              "gl": 17,
+              "cm": 285.605558164
+            },
+            {
+              "fuente": "total",
+              "sc": 6989.15503208,
+              "gl": 18,
+              "cm": null
+            }
+          ],
+          "f": 7.47135509902,
+          "gl_f": [
+            1,
+            17
+          ],
+          "p_valor": 0.014152301218,
+          "valor_critico": 4.45132177247,
+          "r2": 0.305310231852
+        },
+        "multiple": {
+          "filas": [
+            {
+              "fuente": "regresion",
+              "sc": 2460.03631654,
+              "gl": 2,
+              "cm": 1230.01815827
+            },
+            {
+              "fuente": "error",
+              "sc": 4529.11871554,
+              "gl": 16,
+              "cm": 283.069919721
+            },
+            {
+              "fuente": "total",
+              "sc": 6989.15503208,
+              "gl": 18,
+              "cm": null
+            }
+          ],
+          "f": 4.34528034446,
+          "gl_f": [
+            2,
+            16
+          ],
+          "p_valor": 0.0310965524363,
+          "valor_critico": 3.63372346759,
+          "r2": 0.351979074044
+        }
+      },
+      "proyeccion": {
+        "frecuencia": "trimestral",
+        "rango_observado": [
+          -3.44801851514,
+          5.45051112587
+        ],
+        "escenarios": [
+          {
+            "nombre": "Recesión",
+            "x0": -3.0,
+            "y0": 22.7850201157,
+            "cuantil": 2.10981557783,
+            "margen_media": 14.590812447,
+            "margen_valor": 38.5254986633,
+            "ic_media": {
+              "inferior": 8.19420766869,
+              "superior": 37.3758325626
+            },
+            "intervalo_prediccion": {
+              "inferior": -15.7404785476,
+              "superior": 61.3105187789
+            },
+            "dentro_del_rango": true
+          },
+          {
+            "nombre": "Estancamiento",
+            "x0": 0.0,
+            "y0": 9.16303027892,
+            "cuantil": 2.10981557783,
+            "margen_media": 8.32884746413,
+            "margen_valor": 36.6154603887,
+            "ic_media": {
+              "inferior": 0.834182814791,
+              "superior": 17.4918777431
+            },
+            "intervalo_prediccion": {
+              "inferior": -27.4524301097,
+              "superior": 45.7784906676
+            },
+            "dentro_del_rango": true
+          },
+          {
+            "nombre": "Crecimiento",
+            "x0": 2.0,
+            "y0": 0.0817037211046,
+            "cuantil": 2.10981557783,
+            "margen_media": 9.82471441111,
+            "margen_valor": 36.9844190525,
+            "ic_media": {
+              "inferior": -9.74301069001,
+              "superior": 9.90641813222
+            },
+            "intervalo_prediccion": {
+              "inferior": -36.9027153314,
+              "superior": 37.0661227736
+            },
+            "dentro_del_rango": true
+          },
+          {
+            "nombre": "Crecimiento fuerte",
+            "x0": 4.0,
+            "y0": -8.99962283671,
+            "cuantil": 2.10981557783,
+            "margen_media": 14.8979764107,
+            "margen_valor": 38.6428769701,
+            "ic_media": {
+              "inferior": -23.8975992474,
+              "superior": 5.89835357394
+            },
+            "intervalo_prediccion": {
+              "inferior": -47.6424998068,
+              "superior": 29.6432541334
+            },
+            "dentro_del_rango": true
+          }
+        ]
       },
       "anova": {
         "N": 19,

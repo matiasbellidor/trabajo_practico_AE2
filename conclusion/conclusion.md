@@ -15,7 +15,9 @@ Las herramientas restantes son coherentes con eso. El ANOVA por terciles del PBI
 
 No haber rechazado H0 no prueba que la relación sea nula, pero los intervalos acotan su tamaño:
 
+- **Sumas de cuadrados.** De la variabilidad total del bono (SCT = 8.638,37), la recta explica SCR = 0,0092: R² = SCR/SCT = 0,0000 y F = 0,0001 con (1; 54) gl, p = 0,9940, el mismo resultado que el test t.
 - **Regresión.** Aun en el extremo del IC de β1, un desvío estándar de la variación mensual del PBI (0,8382 pp) se asociaría con unos 3,4 pp de variación del bono, mientras que el desvío del propio bono es 12,5324 pp. Si existe una relación lineal, explica una parte chica de lo que se mueve el AL30D en un mes.
+- **Proyección por escenarios.** Con la recta estimada, para cualquier escenario de PBI entre −1 % y +2 % mensual el bono se proyecta entre +2,50 % y +2,54 %, prácticamente su promedio, con un intervalo de predicción de unos ±26 pp. En términos actuariales, conocer el PBI no cambia la proyección ni reduce la incertidumbre sobre el bono.
 - **Diferencia de medias.** Con 80 % de potencia, la diferencia mínima detectable es 0,6516 pp. Una diferencia de ese tamaño en el crecimiento mensual medio del PBI entre meses de suba y de baja del bono probablemente se habría detectado; una menor no se puede descartar.
 
 ## Qué tan sólido es el resultado

@@ -107,12 +107,10 @@ def construir(r: dict) -> dict:
     s["simple"] = {
         "porque": ["Es la herramienta que responde la pregunta: estima cuánto cambia en promedio la variación del bono por "
                    "cada punto porcentual de variación del PBI, y el estadístico t de β1 contrasta H0: β1 = 0 con n − 2 gl."],
+        # El R² y el F se explican desde la tabla de sumas de cuadrados (s["sumas_cuadrados"]).
         "interpretacion": [
             r["veredictos"]["hipotesis_principal"],
             r["veredictos"]["interpretacion_pendiente"],
-            f"R² = {num(p0['r2'])}: la Var PBI da cuenta del {num(p0['r2'] * 100, 2)} % de la variabilidad de la Var AL30D "
-            f"en la muestra. F = {num(p0['f'])} con ({p0['gl_f'][0]}; {p0['gl_f'][1]}) gl, {p_texto(p0['p_f'])} "
-            "(igual al p del t, como corresponde en la regresión simple).",
         ],
     }
 
@@ -225,6 +223,48 @@ def construir(r: dict) -> dict:
                 "de modo que su p-valor es optimista. La versión trimestral, sin interpolar, es el control.")
     else:
         s["complementaria"]["interpretacion"] = [f"No aplicable: {comp['motivo']}"]
+
+    def _sc_texto(nombre: str, sc: dict) -> str:
+        reg, err, tot = sc["filas"]
+        return (f"{nombre}: SCR = {num(reg['sc'])} de SCT = {num(tot['sc'], 2)}, así que R² = SCR/SCT = {num(sc['r2'])}. "
+                f"F = CMR/CME = {num(reg['cm'])}/{num(err['cm'], 2)} = {num(sc['f'])} con ({sc['gl_f'][0]}; {sc['gl_f'][1]}) gl, "
+                f"frente a un valor crítico de {num(sc['valor_critico'], 2)}: {p_texto(sc['p_valor'])} ({_rechaza(sc['p_valor'], a)}).")
+
+    sc = r["sumas_cuadrados"]
+    s["sumas_cuadrados"] = {
+        "porque": ["El método de las sumas de cuadrados descompone la variabilidad total del bono (SCT) en la parte que "
+                   "explica la recta (SCR) y la que queda en el error (SCE). Si el PBI explicara algo, SCR sería grande "
+                   "frente a SCE. El cociente de sus cuadrados medios es el estadístico F, y SCR/SCT es el coeficiente de "
+                   "determinación R²."],
+        "interpretacion": [
+            _sc_texto("Regresión simple", sc["simple"]) + " En la regresión simple F = t², así que la decisión coincide "
+            "con la del test t de β1.",
+            _sc_texto("Regresión múltiple", sc["multiple"]),
+        ],
+    }
+
+    pr = r["proyeccion"]
+    esc = pr["escenarios"]
+    fuera = [e["nombre"] for e in esc if not e["dentro_del_rango"]]
+    y0s = [e["y0"] for e in esc]
+    margen = sum(e["margen_valor"] for e in esc) / len(esc)
+    s["proyeccion"] = {
+        "porque": ["Con la recta de la hipótesis se proyecta la variación del bono para escenarios de variación del PBI. "
+                   "Para cada escenario hay dos rangos al 95 %: el del valor esperado (IC de la media) y el de un período "
+                   "concreto (intervalo de predicción), que suma la variabilidad propia del bono. Es la mirada actuarial de "
+                   "la hipótesis: si el PBI sirviera para anticipar el bono, cambiaría la proyección y achicaría el rango."],
+        "interpretacion": [
+            (f"Entre los escenarios de {num(esc[0]['x0'], 1, signo=True)} % y {num(esc[-1]['x0'], 1, signo=True)} % de "
+             f"variación {unidad} del PBI, la variación proyectada del bono va de {num(min(y0s), 2, signo=True)} % a "
+             f"{num(max(y0s), 2, signo=True)} %, casi igual a su promedio ({num(p0['y_media'], 2, signo=True)} %), con un "
+             f"intervalo de predicción de unos ±{num(margen, 0)} pp. Conocer el PBI no cambia la proyección ni reduce la "
+             "incertidumbre sobre el bono."
+             if p0["p_b1"] >= a else
+             f"La proyección cambia con el escenario: de {num(esc[0]['y0'], 2, signo=True)} % a "
+             f"{num(esc[-1]['y0'], 2, signo=True)} %, con un intervalo de predicción de unos ±{num(margen, 0)} pp."),
+        ] + ([f"Fuera del rango observado del PBI ({num(pr['rango_observado'][0], 2)} % a "
+              f"{num(pr['rango_observado'][1], 2)} %), y por lo tanto extrapolados: {', '.join(fuera)}."] if fuera else []),
+    }
 
     coincide = (p0["p_b1"] < a) == (q0["p_b1"] < a)
     mismo_signo = (p0["b1"] >= 0) == (q0["b1"] >= 0)

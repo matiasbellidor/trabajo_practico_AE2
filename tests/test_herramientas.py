@@ -138,3 +138,31 @@ def test_influencia_coincide_con_statsmodels(datos, cfg):
     sin_primero = sm.OLS(y[1:], sm.add_constant(x[1:])).fit()
     assert inf["filas"][0]["b1_sin"] == pytest.approx(sin_primero.params[1], rel=TOL)
     assert inf["filas"][0]["p_sin"] == pytest.approx(sin_primero.pvalues[1], rel=TOL)
+
+
+def test_sumas_de_cuadrados_y_prediccion_coinciden_con_statsmodels(datos):
+    x, y, z = datos
+    simple = regresion.regresion_simple(x, y)
+    modelo = sm.OLS(y, sm.add_constant(x)).fit()
+    sc = regresion.tabla_sumas_cuadrados(simple["sct"], simple["sce"], simple["n"], 1)
+    reg_, err, tot = sc["filas"]
+    assert reg_["sc"] == pytest.approx(modelo.ess, rel=TOL)
+    assert err["sc"] == pytest.approx(modelo.ssr, rel=TOL)
+    assert tot["sc"] == pytest.approx(modelo.centered_tss, rel=TOL)
+    assert sc["f"] == pytest.approx(modelo.fvalue, rel=TOL) and sc["f"] == pytest.approx(simple["t_b1"] ** 2, rel=TOL)
+    assert sc["p_valor"] == pytest.approx(modelo.f_pvalue, rel=TOL)
+    assert sc["r2"] == pytest.approx(modelo.rsquared, rel=TOL)
+
+    multiple = regresion.regresion_multiple(np.column_stack([x, z]), y, ["x", "z"])
+    modelo_m = sm.OLS(y, sm.add_constant(np.column_stack([x, z]))).fit()
+    scm = regresion.tabla_sumas_cuadrados(multiple["sct"], multiple["sce"], multiple["n"], multiple["k"])
+    assert scm["f"] == pytest.approx(modelo_m.fvalue, rel=TOL) and scm["r2"] == pytest.approx(modelo_m.rsquared, rel=TOL)
+
+    for x0 in (-1.0, 0.0, 2.5):
+        pred = regresion.prediccion(simple, x0)
+        marco = modelo.get_prediction(np.array([[1.0, x0]])).summary_frame(alpha=0.05).iloc[0]
+        assert pred["y0"] == pytest.approx(marco["mean"], rel=TOL)
+        assert (pred["ic_media"]["inferior"], pred["ic_media"]["superior"]) == \
+            pytest.approx((marco["mean_ci_lower"], marco["mean_ci_upper"]), rel=TOL)
+        assert (pred["intervalo_prediccion"]["inferior"], pred["intervalo_prediccion"]["superior"]) == \
+            pytest.approx((marco["obs_ci_lower"], marco["obs_ci_upper"]), rel=TOL)
