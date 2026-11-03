@@ -1,0 +1,65 @@
+[
+  {
+    "id": "series",
+    "titulo": "Figura 1. Variaciones mensuales del AL30D y del PBI",
+    "alt": "Dos paneles con las 56 variaciones mensuales del AL30D (barras) y del PBI mensualizado (línea) entre 2021-10 y 2026-05. El bono oscila con amplitud mucho mayor que el PBI.",
+    "png": "series.png",
+    "svg": "series.svg"
+  },
+  {
+    "id": "pbi",
+    "titulo": "Figura 2. PBI original, desestacionalizado (STL) y mensualizado (spline)",
+    "alt": "Nivel del PBI desde 2019: la serie original muestra el pico de cada segundo trimestre; la serie desestacionalizada y el spline mensual pasan por los niveles ajustados.",
+    "png": "pbi.png",
+    "svg": "pbi.svg"
+  },
+  {
+    "id": "histogramas",
+    "titulo": "Figura 3. Distribuciones y Normal ajustada",
+    "alt": "Tres histogramas con la densidad Normal ajustada superpuesta: variación del AL30D, variación del PBI y residuos de la regresión principal.",
+    "png": "histogramas.png",
+    "svg": "histogramas.svg"
+  },
+  {
+    "id": "dispersion",
+    "titulo": "Figura 4. Var AL30D vs. Var PBI con recta de regresión y banda de confianza",
+    "alt": "Dispersión de 56 meses: variación del PBI en el eje horizontal y del AL30D en el vertical. La recta de MCO tiene pendiente 0,0154 (p = 0,9940) y la banda de confianza al 95 % contiene la recta horizontal.",
+    "png": "dispersion.png",
+    "svg": "dispersion.svg"
+  },
+  {
+    "id": "desfases",
+    "titulo": "Figura 5. Coeficiente y p-valor por desfase",
+    "alt": "Coeficiente β1 con su intervalo al 95 % y p-valor para cada desfase d entre −3 y +3. Desfases exploratorios con p menor a 0,01: d = −2.",
+    "png": "desfases.png",
+    "svg": "desfases.svg"
+  },
+  {
+    "id": "residuos",
+    "titulo": "Figura 6. Diagnóstico de residuos de la regresión principal",
+    "alt": "Residuos contra valores ajustados y su función de autocorrelación hasta 12 rezagos. Durbin-Watson = 1,94.",
+    "png": "residuos.png",
+    "svg": "residuos.svg"
+  },
+  {
+    "id": "anova",
+    "titulo": "Figura 7. Medias del AL30D por tercil del PBI",
+    "alt": "Media de la variación del AL30D con su IC 95 % en cada tercil de la variación del PBI, con los meses individuales detrás.",
+    "png": "anova.png",
+    "svg": "anova.svg"
+  },
+  {
+    "id": "robustez",
+    "titulo": "Figura 8. Robustez: coeficiente e IC por muestra y especificación",
+    "alt": "Intervalos de β1 por muestra: mensual 0,0154 (p = 0,9940) y trimestral −4,5407 (p = 0,0142), más las sensibilidades de la serie mensual.",
+    "png": "robustez.png",
+    "svg": "robustez.svg"
+  },
+  {
+    "id": "complementaria",
+    "titulo": "Figura 9. Var PBI en meses de suba y de baja del bono",
+    "alt": "Diagrama de caja de la variación del PBI en los meses de suba y en los de baja del AL30D, con cada mes como punto.",
+    "png": "complementaria.png",
+    "svg": "complementaria.svg"
+  }
+]

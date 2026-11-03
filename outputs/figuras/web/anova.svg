@@ -1,0 +1,342 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 709.797578 322.922539" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="anova-figure_1">
+  <g id="anova-patch_1">
+   <path d="M -0 322.922539 
+L 709.797578 322.922539 
+L 709.797578 0 
+L -0 0 
+L -0 322.922539 
+z
+" style="fill: none"/>
+  </g>
+  <g id="anova-axes_1">
+   <g id="anova-patch_2">
+    <path d="M 50.359922 283.516797 
+L 702.597578 283.516797 
+L 702.597578 25.938203 
+L 50.359922 25.938203 
+L 50.359922 283.516797 
+z
+" style="fill: none"/>
+   </g>
+   <g id="anova-matplotlib.axis_1">
+    <g id="anova-xtick_1">
+     <g id="anova-line2d_1">
+      <defs>
+       <path id="anova-m7909aaca7d" d="M 0 0 
+L 0 3.5 
+" style="stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#anova-m7909aaca7d" x="149.183809" y="283.516797" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="anova-text_1">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); fill: var(--fig-tinta2)" transform="translate(137.693692 299.546182)">Bajo</text>
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); fill: var(--fig-tinta2)" transform="translate(105.546465 312.149053)">[−1,85 ; 0,07] %</text>
+     </g>
+    </g>
+    <g id="anova-xtick_2">
+     <g id="anova-line2d_2">
+      <g>
+       <use xlink:href="#anova-m7909aaca7d" x="346.831584" y="283.516797" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="anova-text_2">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); fill: var(--fig-tinta2)" transform="translate(331.067638 299.546182)">Medio</text>
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); fill: var(--fig-tinta2)" transform="translate(307.593576 312.149053)">[0,09 ; 0,27] %</text>
+     </g>
+    </g>
+    <g id="anova-xtick_3">
+     <g id="anova-line2d_3">
+      <g>
+       <use xlink:href="#anova-m7909aaca7d" x="544.479358" y="283.516797" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="anova-text_3">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); fill: var(--fig-tinta2)" transform="translate(534.159007 299.546182)">Alto</text>
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); fill: var(--fig-tinta2)" transform="translate(505.241351 312.149053)">[0,30 ; 2,30] %</text>
+     </g>
+    </g>
+   </g>
+   <g id="anova-matplotlib.axis_2">
+    <g id="anova-ytick_1">
+     <g id="anova-line2d_4">
+      <path d="M 50.359922 273.668757 
+L 702.597578 273.668757 
+" clip-path="url(#anova-pdf192ed7b0)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="anova-line2d_5">
+      <defs>
+       <path id="anova-m0a5f5023ec" d="M 0 0 
+L -3.5 0 
+" style="stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#anova-m0a5f5023ec" x="50.359922" y="273.668757" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="anova-text_4">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.359922" y="277.657527" transform="rotate(-0 43.359922 277.657527)">−20</text>
+     </g>
+    </g>
+    <g id="anova-ytick_2">
+     <g id="anova-line2d_6">
+      <path d="M 50.359922 233.987088 
+L 702.597578 233.987088 
+" clip-path="url(#anova-pdf192ed7b0)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="anova-line2d_7">
+      <g>
+       <use xlink:href="#anova-m0a5f5023ec" x="50.359922" y="233.987088" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="anova-text_5">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.359922" y="237.975857" transform="rotate(-0 43.359922 237.975857)">−10</text>
+     </g>
+    </g>
+    <g id="anova-ytick_3">
+     <g id="anova-line2d_8">
+      <path d="M 50.359922 194.305418 
+L 702.597578 194.305418 
+" clip-path="url(#anova-pdf192ed7b0)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="anova-line2d_9">
+      <g>
+       <use xlink:href="#anova-m0a5f5023ec" x="50.359922" y="194.305418" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="anova-text_6">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.359922" y="198.294187" transform="rotate(-0 43.359922 198.294187)">0</text>
+     </g>
+    </g>
+    <g id="anova-ytick_4">
+     <g id="anova-line2d_10">
+      <path d="M 50.359922 154.623748 
+L 702.597578 154.623748 
+" clip-path="url(#anova-pdf192ed7b0)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="anova-line2d_11">
+      <g>
+       <use xlink:href="#anova-m0a5f5023ec" x="50.359922" y="154.623748" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="anova-text_7">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.359922" y="158.612518" transform="rotate(-0 43.359922 158.612518)">10</text>
+     </g>
+    </g>
+    <g id="anova-ytick_5">
+     <g id="anova-line2d_12">
+      <path d="M 50.359922 114.942078 
+L 702.597578 114.942078 
+" clip-path="url(#anova-pdf192ed7b0)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="anova-line2d_13">
+      <g>
+       <use xlink:href="#anova-m0a5f5023ec" x="50.359922" y="114.942078" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="anova-text_8">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.359922" y="118.930848" transform="rotate(-0 43.359922 118.930848)">20</text>
+     </g>
+    </g>
+    <g id="anova-ytick_6">
+     <g id="anova-line2d_14">
+      <path d="M 50.359922 75.260409 
+L 702.597578 75.260409 
+" clip-path="url(#anova-pdf192ed7b0)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="anova-line2d_15">
+      <g>
+       <use xlink:href="#anova-m0a5f5023ec" x="50.359922" y="75.260409" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="anova-text_9">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.359922" y="79.249178" transform="rotate(-0 43.359922 79.249178)">30</text>
+     </g>
+    </g>
+    <g id="anova-ytick_7">
+     <g id="anova-line2d_16">
+      <path d="M 50.359922 35.578739 
+L 702.597578 35.578739 
+" clip-path="url(#anova-pdf192ed7b0)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="anova-line2d_17">
+      <g>
+       <use xlink:href="#anova-m0a5f5023ec" x="50.359922" y="35.578739" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="anova-text_10">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.359922" y="39.567509" transform="rotate(-0 43.359922 39.567509)">40</text>
+     </g>
+    </g>
+    <g id="anova-text_11">
+     <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="14.797656" y="154.7275" transform="rotate(-90 14.797656 154.7275)">Var AL30D (%)</text>
+    </g>
+   </g>
+   <g id="anova-PathCollection_1">
+    <defs>
+     <path id="anova-mc6d24d3d21" d="M 0 2.345208 
+C 0.621956 2.345208 1.218523 2.098102 1.658312 1.658312 
+C 2.098102 1.218523 2.345208 0.621956 2.345208 0 
+C 2.345208 -0.621956 2.098102 -1.218523 1.658312 -1.658312 
+C 1.218523 -2.098102 0.621956 -2.345208 0 -2.345208 
+C -0.621956 -2.345208 -1.218523 -2.098102 -1.658312 -1.658312 
+C -2.098102 -1.218523 -2.345208 -0.621956 -2.345208 0 
+C -2.345208 0.621956 -2.098102 1.218523 -1.658312 1.658312 
+C -1.218523 2.098102 -0.621956 2.345208 0 2.345208 
+z
+"/>
+    </defs>
+    <g clip-path="url(#anova-pdf192ed7b0)">
+     <use xlink:href="#anova-mc6d24d3d21" x="155.117771" y="211.220614" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="168.025831" y="262.995632" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="162.261088" y="163.126963" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="136.148884" y="110.009665" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="139.704604" y="188.803338" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="166.903491" y="236.408973" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="125.715838" y="235.432078" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="164.421429" y="271.808679" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="163.275436" y="170.997253" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="147.662789" y="246.632894" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="139.840561" y="252.409265" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="138.673325" y="37.646321" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="137.555934" y="159.526943" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="146.578478" y="175.958543" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="149.399558" y="132.678582" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="151.721481" y="122.054421" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="172.688096" y="170.723296" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="163.066364" y="197.953928" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="154.979438" y="86.010821" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+    </g>
+   </g>
+   <g id="anova-PathCollection_2">
+    <g clip-path="url(#anova-pdf192ed7b0)">
+     <use xlink:href="#anova-mc6d24d3d21" x="370.025636" y="148.862197" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="333.327119" y="207.41129" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="330.713583" y="166.410017" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="352.169952" y="65.705891" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="325.19826" y="160.405767" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="324.806361" y="150.152574" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="347.537842" y="209.533147" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="345.228551" y="195.547411" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="366.620131" y="197.503709" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="352.961491" y="200.344943" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="347.501261" y="252.803531" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="346.683274" y="188.219653" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="334.854836" y="178.281069" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="323.673306" y="182.577807" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="332.240536" y="195.680298" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="355.940717" y="189.640851" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="332.629724" y="180.019757" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="340.642978" y="190.168646" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+    </g>
+   </g>
+   <g id="anova-PathCollection_3">
+    <g clip-path="url(#anova-pdf192ed7b0)">
+     <use xlink:href="#anova-mc6d24d3d21" x="520.938761" y="209.485367" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="560.135326" y="264.998813" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="528.088559" y="214.008208" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="533.455323" y="188.231019" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="562.520591" y="226.820716" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="544.94379" y="219.805955" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="560.946592" y="265.91713" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="551.106907" y="54.937426" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="555.947876" y="177.743336" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="525.101762" y="155.916311" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="546.431035" y="209.177594" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="544.848038" y="203.786879" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="562.094015" y="202.273089" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="537.898354" y="161.533492" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="549.136765" y="166.075995" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="523.572255" y="155.965311" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="539.149121" y="171.567883" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="536.085005" y="188.236803" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+     <use xlink:href="#anova-mc6d24d3d21" x="527.88642" y="193.8992" style="fill: var(--fig-neutro); fill-opacity: 0.7"/>
+    </g>
+   </g>
+   <g id="anova-line2d_18">
+    <path d="M 50.359922 194.305418 
+L 702.597578 194.305418 
+" clip-path="url(#anova-pdf192ed7b0)" style="fill: none; stroke: var(--fig-eje); stroke-linecap: square"/>
+   </g>
+   <g id="anova-patch_3">
+    <path d="M 50.359922 283.516797 
+L 50.359922 25.938203 
+" style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="anova-patch_4">
+    <path d="M 50.359922 283.516797 
+L 702.597578 283.516797 
+" style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="anova-line2d_19">
+    <path d="M 149.183809 211.368482 
+L 149.183809 149.936593 
+" clip-path="url(#anova-pdf192ed7b0)" style="fill: none; stroke: var(--fig-s1); stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="anova-text_12">
+    <text style="font-size: 9px; font-family: var(--fig-fuente); fill: var(--fig-tinta2)" transform="translate(184.760409 177.589549)">x̄ = 3,44 %</text>
+    <text style="font-size: 9px; font-family: var(--fig-fuente); fill: var(--fig-tinta2)" transform="translate(184.760409 188.391307)">n = 19</text>
+   </g>
+   <g id="anova-line2d_20">
+    <path d="M 346.831584 199.70734 
+L 346.831584 162.433611 
+" clip-path="url(#anova-pdf192ed7b0)" style="fill: none; stroke: var(--fig-s1); stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="anova-text_13">
+    <text style="font-size: 9px; font-family: var(--fig-fuente); fill: var(--fig-tinta2)" transform="translate(382.408183 178.007487)">x̄ = 3,34 %</text>
+    <text style="font-size: 9px; font-family: var(--fig-fuente); fill: var(--fig-tinta2)" transform="translate(382.408183 188.809245)">n = 18</text>
+   </g>
+   <g id="anova-line2d_21">
+    <path d="M 544.479358 213.139845 
+L 544.479358 169.005473 
+" clip-path="url(#anova-pdf192ed7b0)" style="fill: none; stroke: var(--fig-s1); stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="anova-text_14">
+    <text style="font-size: 9px; font-family: var(--fig-fuente); fill: var(--fig-tinta2)" transform="translate(580.055958 188.009671)">x̄ = 0,81 %</text>
+    <text style="font-size: 9px; font-family: var(--fig-fuente); fill: var(--fig-tinta2)" transform="translate(580.055958 198.811429)">n = 19</text>
+   </g>
+   <g id="anova-text_15">
+    <text style="font-size: 11.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta)" x="50.359922" y="15.938203" transform="rotate(-0 50.359922 15.938203)">Var AL30D por tercil de la Var PBI: media e IC 95 % · F = 0,2581 · p = 0,7735</text>
+   </g>
+   <g id="anova-line2d_22">
+    <defs>
+     <path id="anova-m3607699b73" d="M 0 5 
+C 1.326016 5 2.597899 4.473168 3.535534 3.535534 
+C 4.473168 2.597899 5 1.326016 5 0 
+C 5 -1.326016 4.473168 -2.597899 3.535534 -3.535534 
+C 2.597899 -4.473168 1.326016 -5 0 -5 
+C -1.326016 -5 -2.597899 -4.473168 -3.535534 -3.535534 
+C -4.473168 -2.597899 -5 -1.326016 -5 0 
+C -5 1.326016 -4.473168 2.597899 -3.535534 3.535534 
+C -2.597899 4.473168 -1.326016 5 0 5 
+z
+" style="stroke: var(--fig-fondo); stroke-width: 2"/>
+    </defs>
+    <g clip-path="url(#anova-pdf192ed7b0)">
+     <use xlink:href="#anova-m3607699b73" x="149.183809" y="180.652537" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 2"/>
+    </g>
+   </g>
+   <g id="anova-line2d_23">
+    <g clip-path="url(#anova-pdf192ed7b0)">
+     <use xlink:href="#anova-m3607699b73" x="346.831584" y="181.070475" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 2"/>
+    </g>
+   </g>
+   <g id="anova-line2d_24">
+    <g clip-path="url(#anova-pdf192ed7b0)">
+     <use xlink:href="#anova-m3607699b73" x="544.479358" y="191.072659" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 2"/>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="anova-pdf192ed7b0">
+   <rect x="50.359922" y="25.938203" width="652.237656" height="257.578594"/>
+  </clipPath>
+ </defs>
+</svg>

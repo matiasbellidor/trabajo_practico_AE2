@@ -1,0 +1,323 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 710.317734 308.359023" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="complementaria-figure_1">
+  <g id="complementaria-patch_1">
+   <path d="M 0 308.359023 
+L 710.317734 308.359023 
+L 710.317734 0 
+L 0 0 
+L 0 308.359023 
+z
+" style="fill: none"/>
+  </g>
+  <g id="complementaria-axes_1">
+   <g id="complementaria-patch_2">
+    <path d="M 43.680078 283.658203 
+L 703.117734 283.658203 
+L 703.117734 26.398203 
+L 43.680078 26.398203 
+L 43.680078 283.658203 
+z
+" style="fill: none"/>
+   </g>
+   <g id="complementaria-matplotlib.axis_1">
+    <g id="complementaria-xtick_1">
+     <g id="complementaria-line2d_1">
+      <defs>
+       <path id="complementaria-m7909aaca7d" d="M 0 0 
+L 0 3.5 
+" style="stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#complementaria-m7909aaca7d" x="208.539492" y="283.658203" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="complementaria-text_1">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="208.539492" y="298.636563" transform="rotate(-0 208.539492 298.636563)">Meses de suba del AL30D (n = 32)</text>
+     </g>
+    </g>
+    <g id="complementaria-xtick_2">
+     <g id="complementaria-line2d_2">
+      <g>
+       <use xlink:href="#complementaria-m7909aaca7d" x="538.25832" y="283.658203" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="complementaria-text_2">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="538.25832" y="298.636563" transform="rotate(-0 538.25832 298.636563)">Meses de baja del AL30D (n = 24)</text>
+     </g>
+    </g>
+   </g>
+   <g id="complementaria-matplotlib.axis_2">
+    <g id="complementaria-ytick_1">
+     <g id="complementaria-line2d_3">
+      <path d="M 43.680078 280.149104 
+L 703.117734 280.149104 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="complementaria-line2d_4">
+      <defs>
+       <path id="complementaria-m0a5f5023ec" d="M 0 0 
+L -3.5 0 
+" style="stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#complementaria-m0a5f5023ec" x="43.680078" y="280.149104" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="complementaria-text_3">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="36.680078" y="284.137874" transform="rotate(-0 36.680078 284.137874)">−2</text>
+     </g>
+    </g>
+    <g id="complementaria-ytick_2">
+     <g id="complementaria-line2d_5">
+      <path d="M 43.680078 223.808124 
+L 703.117734 223.808124 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="complementaria-line2d_6">
+      <g>
+       <use xlink:href="#complementaria-m0a5f5023ec" x="43.680078" y="223.808124" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="complementaria-text_4">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="36.680078" y="227.796893" transform="rotate(-0 36.680078 227.796893)">−1</text>
+     </g>
+    </g>
+    <g id="complementaria-ytick_3">
+     <g id="complementaria-line2d_7">
+      <path d="M 43.680078 167.467144 
+L 703.117734 167.467144 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="complementaria-line2d_8">
+      <g>
+       <use xlink:href="#complementaria-m0a5f5023ec" x="43.680078" y="167.467144" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="complementaria-text_5">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="36.680078" y="171.455913" transform="rotate(-0 36.680078 171.455913)">0</text>
+     </g>
+    </g>
+    <g id="complementaria-ytick_4">
+     <g id="complementaria-line2d_9">
+      <path d="M 43.680078 111.126163 
+L 703.117734 111.126163 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="complementaria-line2d_10">
+      <g>
+       <use xlink:href="#complementaria-m0a5f5023ec" x="43.680078" y="111.126163" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="complementaria-text_6">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="36.680078" y="115.114933" transform="rotate(-0 36.680078 115.114933)">1</text>
+     </g>
+    </g>
+    <g id="complementaria-ytick_5">
+     <g id="complementaria-line2d_11">
+      <path d="M 43.680078 54.785183 
+L 703.117734 54.785183 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="complementaria-line2d_12">
+      <g>
+       <use xlink:href="#complementaria-m0a5f5023ec" x="43.680078" y="54.785183" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="complementaria-text_7">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="36.680078" y="58.773952" transform="rotate(-0 36.680078 58.773952)">2</text>
+     </g>
+    </g>
+    <g id="complementaria-text_8">
+     <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="14.798438" y="155.028203" transform="rotate(-90 14.798438 155.028203)">Var PBI mensualizado (%)</text>
+    </g>
+   </g>
+   <g id="complementaria-patch_3">
+    <path d="M 142.595727 170.901351 
+L 274.483258 170.901351 
+L 274.483258 149.581449 
+L 142.595727 149.581449 
+L 142.595727 170.901351 
+L 142.595727 170.901351 
+z
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-tinta2); stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="complementaria-line2d_13">
+    <path d="M 208.539492 170.901351 
+L 208.539492 200.588856 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-tinta2); stroke-width: 1.2; stroke-linecap: square"/>
+   </g>
+   <g id="complementaria-line2d_14">
+    <path d="M 208.539492 149.581449 
+L 208.539492 123.837246 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-tinta2); stroke-width: 1.2; stroke-linecap: square"/>
+   </g>
+   <g id="complementaria-line2d_15">
+    <path d="M 175.567609 200.588856 
+L 241.511375 200.588856 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-tinta2); stroke-linecap: square"/>
+   </g>
+   <g id="complementaria-line2d_16">
+    <path d="M 175.567609 123.837246 
+L 241.511375 123.837246 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-tinta2); stroke-linecap: square"/>
+   </g>
+   <g id="complementaria-patch_4">
+    <path d="M 472.314555 180.41887 
+L 604.202086 180.41887 
+L 604.202086 130.105169 
+L 472.314555 130.105169 
+L 472.314555 180.41887 
+L 472.314555 180.41887 
+z
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-tinta2); stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="complementaria-line2d_17">
+    <path d="M 538.25832 180.41887 
+L 538.25832 254.482116 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-tinta2); stroke-width: 1.2; stroke-linecap: square"/>
+   </g>
+   <g id="complementaria-line2d_18">
+    <path d="M 538.25832 130.105169 
+L 538.25832 80.29269 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-tinta2); stroke-width: 1.2; stroke-linecap: square"/>
+   </g>
+   <g id="complementaria-line2d_19">
+    <path d="M 505.286437 254.482116 
+L 571.230203 254.482116 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-tinta2); stroke-linecap: square"/>
+   </g>
+   <g id="complementaria-line2d_20">
+    <path d="M 505.286437 80.29269 
+L 571.230203 80.29269 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-tinta2); stroke-linecap: square"/>
+   </g>
+   <g id="complementaria-line2d_21">
+    <path d="M 43.680078 167.467144 
+L 703.117734 167.467144 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-eje); stroke-linecap: square"/>
+   </g>
+   <g id="complementaria-line2d_22">
+    <path d="M 142.595727 158.944951 
+L 274.483258 158.944951 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-tinta); stroke-width: 2"/>
+   </g>
+   <g id="complementaria-line2d_23">
+    <path d="M 472.314555 155.425844 
+L 604.202086 155.425844 
+" clip-path="url(#complementaria-pbbab61b622)" style="fill: none; stroke: var(--fig-tinta); stroke-width: 2"/>
+   </g>
+   <g id="complementaria-patch_5">
+    <path d="M 43.680078 283.658203 
+L 43.680078 26.398203 
+" style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="complementaria-patch_6">
+    <path d="M 43.680078 283.658203 
+L 703.117734 283.658203 
+" style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="complementaria-PathCollection_1">
+    <defs>
+     <path id="complementaria-m25635db07a" d="M 0 2.738613 
+C 0.726289 2.738613 1.422928 2.450055 1.936492 1.936492 
+C 2.450055 1.422928 2.738613 0.726289 2.738613 0 
+C 2.738613 -0.726289 2.450055 -1.422928 1.936492 -1.936492 
+C 1.422928 -2.450055 0.726289 -2.738613 0 -2.738613 
+C -0.726289 -2.738613 -1.422928 -2.450055 -1.936492 -1.936492 
+C -2.450055 -1.422928 -2.738613 -0.726289 -2.738613 0 
+C -2.738613 0.726289 -2.450055 1.422928 -1.936492 1.936492 
+C -1.422928 2.450055 -0.726289 2.738613 0 2.738613 
+z
+" style="stroke: var(--fig-fondo); stroke-width: 1.2"/>
+    </defs>
+    <g clip-path="url(#complementaria-pbbab61b622)">
+     <use xlink:href="#complementaria-m25635db07a" x="174.248621" y="154.839371" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="208.472824" y="112.393655" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="217.90995" y="158.854393" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="165.027462" y="220.29531" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="176.035581" y="200.588856" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="248.072478" y="165.501183" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="168.880173" y="159.035509" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="174.359752" y="191.818323" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="249.929745" y="83.713331" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="219.79194" y="38.091839" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="196.444771" y="78.816142" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="209.591033" y="271.964567" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="223.573361" y="254.691371" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="187.795716" y="230.180357" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="175.116244" y="207.434025" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="235.131674" y="185.386582" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="224.267398" y="158.494579" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="209.682643" y="93.148419" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="237.781003" y="123.837246" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="213.070183" y="148.604723" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="252.938051" y="162.178079" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="181.25943" y="166.072941" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="213.499948" y="149.843932" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="207.027703" y="148.793999" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="194.99364" y="150.686621" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="216.995687" y="163.678022" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="184.102165" y="160.831205" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="236.439228" y="155.316318" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="242.452193" y="152.44943" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="174.266113" y="157.600257" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="205.499649" y="160.919276" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m25635db07a" x="187.965225" y="162.575846" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+    </g>
+   </g>
+   <g id="complementaria-PathCollection_2">
+    <defs>
+     <path id="complementaria-m2278a40cc4" d="M 0 2.738613 
+C 0.726289 2.738613 1.422928 2.450055 1.936492 1.936492 
+C 2.450055 1.422928 2.738613 0.726289 2.738613 0 
+C 2.738613 -0.726289 2.450055 -1.422928 1.936492 -1.936492 
+C 1.422928 -2.450055 0.726289 -2.738613 0 -2.738613 
+C -0.726289 -2.738613 -1.422928 -2.450055 -1.936492 -1.936492 
+C -2.450055 -1.422928 -2.738613 -0.726289 -2.738613 0 
+C -2.738613 0.726289 -2.450055 1.422928 -1.936492 1.936492 
+C -1.422928 2.450055 -0.726289 2.738613 0 2.738613 
+z
+" style="stroke: var(--fig-fondo); stroke-width: 1.2"/>
+    </defs>
+    <g clip-path="url(#complementaria-pbbab61b622)">
+     <use xlink:href="#complementaria-m2278a40cc4" x="499.771151" y="127.931091" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="574.812402" y="139.286227" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="531.791094" y="156.58959" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="505.732733" y="140.199018" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="554.263354" y="99.273945" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="510.766525" y="106.745796" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="575.318948" y="130.829862" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="512.145088" y="188.053432" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="495.151182" y="214.410914" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="510.63293" y="192.276201" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="524.017568" y="247.696443" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="535.387882" y="254.482116" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="575.753159" y="177.874015" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="556.478947" y="248.673998" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="523.424199" y="125.608158" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="493.65581" y="92.506163" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="506.852811" y="80.29269" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="584.089912" y="165.24456" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="534.539248" y="160.922702" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="555.895368" y="154.262097" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="497.144709" y="153.941582" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="495.241249" y="158.162719" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="570.191335" y="162.515837" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+     <use xlink:href="#complementaria-m2278a40cc4" x="546.371693" y="153.53348" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.2"/>
+    </g>
+   </g>
+   <g id="complementaria-text_9">
+    <text style="font-size: 11.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta)" x="43.680078" y="16.398203" transform="rotate(-0 43.680078 16.398203)">Var PBI por signo de la variación del bono · diferencia = −0,0112 pp · p = 0,9610</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="complementaria-pbbab61b622">
+   <rect x="43.680078" y="26.398203" width="659.437656" height="257.26"/>
+  </clipPath>
+ </defs>
+</svg>

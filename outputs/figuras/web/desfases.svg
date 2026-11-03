@@ -1,0 +1,737 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 781.798359 293.248516" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="desfases-figure_1">
+  <g id="desfases-patch_1">
+   <path d="M 0 293.248516 
+L 781.798359 293.248516 
+L 781.798359 0 
+L 0 0 
+L 0 293.248516 
+z
+" style="fill: none"/>
+  </g>
+  <g id="desfases-axes_1">
+   <g id="desfases-patch_2">
+    <path d="M 50.360703 254.547734 
+L 379.948359 254.547734 
+L 379.948359 26.010078 
+L 50.360703 26.010078 
+L 50.360703 254.547734 
+z
+" style="fill: none"/>
+   </g>
+   <g id="desfases-matplotlib.axis_1">
+    <g id="desfases-xtick_1">
+     <g id="desfases-line2d_1">
+      <defs>
+       <path id="desfases-m7909aaca7d" d="M 0 0 
+L 0 3.5 
+" style="stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="76.727716" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_1">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="76.727716" y="269.525273" transform="rotate(-0 76.727716 269.525273)">−3</text>
+     </g>
+    </g>
+    <g id="desfases-xtick_2">
+     <g id="desfases-line2d_2">
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="120.672736" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_2">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="120.672736" y="269.525273" transform="rotate(-0 120.672736 269.525273)">−2</text>
+     </g>
+    </g>
+    <g id="desfases-xtick_3">
+     <g id="desfases-line2d_3">
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="164.617757" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_3">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="164.617757" y="269.525273" transform="rotate(-0 164.617757 269.525273)">−1</text>
+     </g>
+    </g>
+    <g id="desfases-xtick_4">
+     <g id="desfases-line2d_4">
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="208.562778" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_4">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="208.562778" y="269.525273" transform="rotate(-0 208.562778 269.525273)">0</text>
+     </g>
+    </g>
+    <g id="desfases-xtick_5">
+     <g id="desfases-line2d_5">
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="252.507799" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_5">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="252.507799" y="269.525273" transform="rotate(-0 252.507799 269.525273)">+1</text>
+     </g>
+    </g>
+    <g id="desfases-xtick_6">
+     <g id="desfases-line2d_6">
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="296.45282" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_6">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="296.45282" y="269.525273" transform="rotate(-0 296.45282 269.525273)">+2</text>
+     </g>
+    </g>
+    <g id="desfases-xtick_7">
+     <g id="desfases-line2d_7">
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="340.397841" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_7">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="340.397841" y="269.525273" transform="rotate(-0 340.397841 269.525273)">+3</text>
+     </g>
+    </g>
+    <g id="desfases-text_8">
+     <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="215.154531" y="283.646172" transform="rotate(-0 215.154531 283.646172)">d (meses): X = Var PBI en t + d</text>
+    </g>
+   </g>
+   <g id="desfases-matplotlib.axis_2">
+    <g id="desfases-ytick_1">
+     <g id="desfases-line2d_8">
+      <path d="M 50.360703 249.671986 
+L 379.948359 249.671986 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_9">
+      <defs>
+       <path id="desfases-m0a5f5023ec" d="M 0 0 
+L -3.5 0 
+" style="stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="50.360703" y="249.671986" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_9">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.360703" y="253.660755" transform="rotate(-0 43.360703 253.660755)">−10</text>
+     </g>
+    </g>
+    <g id="desfases-ytick_2">
+     <g id="desfases-line2d_10">
+      <path d="M 50.360703 223.017827 
+L 379.948359 223.017827 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_11">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="50.360703" y="223.017827" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_10">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.360703" y="227.006596" transform="rotate(-0 43.360703 227.006596)">−8</text>
+     </g>
+    </g>
+    <g id="desfases-ytick_3">
+     <g id="desfases-line2d_12">
+      <path d="M 50.360703 196.363668 
+L 379.948359 196.363668 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_13">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="50.360703" y="196.363668" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_11">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.360703" y="200.352437" transform="rotate(-0 43.360703 200.352437)">−6</text>
+     </g>
+    </g>
+    <g id="desfases-ytick_4">
+     <g id="desfases-line2d_14">
+      <path d="M 50.360703 169.709509 
+L 379.948359 169.709509 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_15">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="50.360703" y="169.709509" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_12">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.360703" y="173.698278" transform="rotate(-0 43.360703 173.698278)">−4</text>
+     </g>
+    </g>
+    <g id="desfases-ytick_5">
+     <g id="desfases-line2d_16">
+      <path d="M 50.360703 143.05535 
+L 379.948359 143.05535 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_17">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="50.360703" y="143.05535" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_13">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.360703" y="147.044119" transform="rotate(-0 43.360703 147.044119)">−2</text>
+     </g>
+    </g>
+    <g id="desfases-ytick_6">
+     <g id="desfases-line2d_18">
+      <path d="M 50.360703 116.401191 
+L 379.948359 116.401191 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_19">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="50.360703" y="116.401191" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_14">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.360703" y="120.38996" transform="rotate(-0 43.360703 120.38996)">0</text>
+     </g>
+    </g>
+    <g id="desfases-ytick_7">
+     <g id="desfases-line2d_20">
+      <path d="M 50.360703 89.747032 
+L 379.948359 89.747032 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_21">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="50.360703" y="89.747032" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_15">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.360703" y="93.735801" transform="rotate(-0 43.360703 93.735801)">2</text>
+     </g>
+    </g>
+    <g id="desfases-ytick_8">
+     <g id="desfases-line2d_22">
+      <path d="M 50.360703 63.092873 
+L 379.948359 63.092873 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_23">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="50.360703" y="63.092873" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_16">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.360703" y="67.081643" transform="rotate(-0 43.360703 67.081643)">4</text>
+     </g>
+    </g>
+    <g id="desfases-ytick_9">
+     <g id="desfases-line2d_24">
+      <path d="M 50.360703 36.438714 
+L 379.948359 36.438714 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_25">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="50.360703" y="36.438714" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_17">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.360703" y="40.427484" transform="rotate(-0 43.360703 40.427484)">6</text>
+     </g>
+    </g>
+    <g id="desfases-text_18">
+     <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="14.798438" y="140.278906" transform="rotate(-90 14.798438 140.278906)">pp de AL30D por pp de PBI</text>
+    </g>
+   </g>
+   <g id="desfases-line2d_26">
+    <path d="M 76.727716 225.394738 
+L 76.727716 122.459294 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-neutro); stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="desfases-line2d_27">
+    <defs>
+     <path id="desfases-md678ce9092" d="M 0 4 
+C 1.060812 4 2.078319 3.578535 2.828427 2.828427 
+C 3.578535 2.078319 4 1.060812 4 0 
+C 4 -1.060812 3.578535 -2.078319 2.828427 -2.828427 
+C 2.078319 -3.578535 1.060812 -4 0 -4 
+C -1.060812 -4 -2.078319 -3.578535 -2.828427 -2.828427 
+C -3.578535 -2.078319 -4 -1.060812 -4 0 
+C -4 1.060812 -3.578535 2.078319 -2.828427 2.828427 
+C -2.078319 3.578535 -1.060812 4 0 4 
+z
+" style="stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </defs>
+    <g clip-path="url(#desfases-pe37914d913)">
+     <use xlink:href="#desfases-md678ce9092" x="76.727716" y="173.927016" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_28">
+    <path d="M 120.672736 244.159659 
+L 120.672736 145.104765 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-neutro); stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="desfases-line2d_29">
+    <g clip-path="url(#desfases-pe37914d913)">
+     <use xlink:href="#desfases-md678ce9092" x="120.672736" y="194.632212" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_30">
+    <path d="M 164.617757 218.760376 
+L 164.617757 114.034431 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-neutro); stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="desfases-line2d_31">
+    <g clip-path="url(#desfases-pe37914d913)">
+     <use xlink:href="#desfases-md678ce9092" x="164.617757" y="166.397404" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_32">
+    <path d="M 208.562778 170.561208 
+L 208.562778 61.829564 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-s1); stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="desfases-line2d_33">
+    <defs>
+     <path id="desfases-m70f175e937" d="M 0 4 
+C 1.060812 4 2.078319 3.578535 2.828427 2.828427 
+C 3.578535 2.078319 4 1.060812 4 0 
+C 4 -1.060812 3.578535 -2.078319 2.828427 -2.828427 
+C 2.078319 -3.578535 1.060812 -4 0 -4 
+C -1.060812 -4 -2.078319 -3.578535 -2.828427 -2.828427 
+C -3.578535 -2.078319 -4 -1.060812 -4 0 
+C -4 1.060812 -3.578535 2.078319 -2.828427 2.828427 
+C -2.078319 3.578535 -1.060812 4 0 4 
+z
+" style="stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </defs>
+    <g clip-path="url(#desfases-pe37914d913)">
+     <use xlink:href="#desfases-m70f175e937" x="208.562778" y="116.195386" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_34">
+    <path d="M 252.507799 145.769765 
+L 252.507799 36.398153 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-s2); stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="desfases-line2d_35">
+    <defs>
+     <path id="desfases-m70371c49e7" d="M 0 4 
+C 1.060812 4 2.078319 3.578535 2.828427 2.828427 
+C 3.578535 2.078319 4 1.060812 4 0 
+C 4 -1.060812 3.578535 -2.078319 2.828427 -2.828427 
+C 2.078319 -3.578535 1.060812 -4 0 -4 
+C -1.060812 -4 -2.078319 -3.578535 -2.828427 -2.828427 
+C -3.578535 -2.078319 -4 -1.060812 -4 0 
+C -4 1.060812 -3.578535 2.078319 -2.828427 2.828427 
+C -2.078319 3.578535 -1.060812 4 0 4 
+z
+" style="stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </defs>
+    <g clip-path="url(#desfases-pe37914d913)">
+     <use xlink:href="#desfases-m70371c49e7" x="252.507799" y="91.083959" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_36">
+    <path d="M 296.45282 167.696151 
+L 296.45282 56.156387 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-neutro); stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="desfases-line2d_37">
+    <g clip-path="url(#desfases-pe37914d913)">
+     <use xlink:href="#desfases-md678ce9092" x="296.45282" y="111.926269" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_38">
+    <path d="M 340.397841 203.50031 
+L 340.397841 92.180529 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-neutro); stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="desfases-line2d_39">
+    <g clip-path="url(#desfases-pe37914d913)">
+     <use xlink:href="#desfases-md678ce9092" x="340.397841" y="147.84042" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_40">
+    <path d="M 50.360703 116.401191 
+L 379.948359 116.401191 
+" clip-path="url(#desfases-pe37914d913)" style="fill: none; stroke: var(--fig-eje); stroke-linecap: square"/>
+   </g>
+   <g id="desfases-patch_3">
+    <path d="M 50.360703 254.547734 
+L 50.360703 26.010078 
+" style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="desfases-patch_4">
+    <path d="M 50.360703 254.547734 
+L 379.948359 254.547734 
+" style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="desfases-text_19">
+    <text style="font-size: 11.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta)" x="50.360703" y="16.010078" transform="rotate(-0 50.360703 16.010078)">β1 e IC 95 % por desfase d</text>
+   </g>
+   <g id="desfases-legend_1">
+    <g id="desfases-line2d_41">
+     <defs>
+      <path id="desfases-m036e9e9a3a" d="M 0 4 
+C 1.060812 4 2.078319 3.578535 2.828427 2.828427 
+C 3.578535 2.078319 4 1.060812 4 0 
+C 4 -1.060812 3.578535 -2.078319 2.828427 -2.828427 
+C 2.078319 -3.578535 1.060812 -4 0 -4 
+C -1.060812 -4 -2.078319 -3.578535 -2.828427 -2.828427 
+C -3.578535 -2.078319 -4 -1.060812 -4 0 
+C -4 1.060812 -3.578535 2.078319 -2.828427 2.828427 
+C -2.078319 3.578535 -1.060812 4 0 4 
+z
+" style="stroke: var(--fig-s1)"/>
+     </defs>
+     <g>
+      <use xlink:href="#desfases-m036e9e9a3a" x="66.510703" y="37.14375" style="fill: var(--fig-s1); stroke: var(--fig-s1)"/>
+     </g>
+    </g>
+    <g id="desfases-text_20">
+     <text style="font-size: 8.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta2)" x="81.810703" y="40.11875" transform="rotate(-0 81.810703 40.11875)">principal (d = 0)</text>
+    </g>
+    <g id="desfases-line2d_42">
+     <defs>
+      <path id="desfases-m78a4e2ce20" d="M 0 4 
+C 1.060812 4 2.078319 3.578535 2.828427 2.828427 
+C 3.578535 2.078319 4 1.060812 4 0 
+C 4 -1.060812 3.578535 -2.078319 2.828427 -2.828427 
+C 2.078319 -3.578535 1.060812 -4 0 -4 
+C -1.060812 -4 -2.078319 -3.578535 -2.828427 -2.828427 
+C -3.578535 -2.078319 -4 -1.060812 -4 0 
+C -4 1.060812 -3.578535 2.078319 -2.828427 2.828427 
+C -2.078319 3.578535 -1.060812 4 0 4 
+z
+" style="stroke: var(--fig-s2)"/>
+     </defs>
+     <g>
+      <use xlink:href="#desfases-m78a4e2ce20" x="66.510703" y="50.234414" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
+     </g>
+    </g>
+    <g id="desfases-text_21">
+     <text style="font-size: 8.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta2)" x="81.810703" y="53.209414" transform="rotate(-0 81.810703 53.209414)">extensión (d = +1)</text>
+    </g>
+    <g id="desfases-line2d_43">
+     <defs>
+      <path id="desfases-m320cf3ea39" d="M 0 4 
+C 1.060812 4 2.078319 3.578535 2.828427 2.828427 
+C 3.578535 2.078319 4 1.060812 4 0 
+C 4 -1.060812 3.578535 -2.078319 2.828427 -2.828427 
+C 2.078319 -3.578535 1.060812 -4 0 -4 
+C -1.060812 -4 -2.078319 -3.578535 -2.828427 -2.828427 
+C -3.578535 -2.078319 -4 -1.060812 -4 0 
+C -4 1.060812 -3.578535 2.078319 -2.828427 2.828427 
+C -2.078319 3.578535 -1.060812 4 0 4 
+z
+" style="stroke: var(--fig-neutro)"/>
+     </defs>
+     <g>
+      <use xlink:href="#desfases-m320cf3ea39" x="66.510703" y="62.985078" style="fill: var(--fig-neutro); stroke: var(--fig-neutro)"/>
+     </g>
+    </g>
+    <g id="desfases-text_22">
+     <text style="font-size: 8.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta2)" x="81.810703" y="65.960078" transform="rotate(-0 81.810703 65.960078)">exploratorio</text>
+    </g>
+   </g>
+  </g>
+  <g id="desfases-axes_2">
+   <g id="desfases-patch_5">
+    <path d="M 445.010703 254.547734 
+L 774.598359 254.547734 
+L 774.598359 26.010078 
+L 445.010703 26.010078 
+L 445.010703 254.547734 
+z
+" style="fill: none"/>
+   </g>
+   <g id="desfases-matplotlib.axis_3">
+    <g id="desfases-xtick_8">
+     <g id="desfases-line2d_44">
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="471.377716" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_23">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="471.377716" y="269.525273" transform="rotate(-0 471.377716 269.525273)">−3</text>
+     </g>
+    </g>
+    <g id="desfases-xtick_9">
+     <g id="desfases-line2d_45">
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="515.322736" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_24">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="515.322736" y="269.525273" transform="rotate(-0 515.322736 269.525273)">−2</text>
+     </g>
+    </g>
+    <g id="desfases-xtick_10">
+     <g id="desfases-line2d_46">
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="559.267757" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_25">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="559.267757" y="269.525273" transform="rotate(-0 559.267757 269.525273)">−1</text>
+     </g>
+    </g>
+    <g id="desfases-xtick_11">
+     <g id="desfases-line2d_47">
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="603.212778" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_26">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="603.212778" y="269.525273" transform="rotate(-0 603.212778 269.525273)">0</text>
+     </g>
+    </g>
+    <g id="desfases-xtick_12">
+     <g id="desfases-line2d_48">
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="647.157799" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_27">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="647.157799" y="269.525273" transform="rotate(-0 647.157799 269.525273)">+1</text>
+     </g>
+    </g>
+    <g id="desfases-xtick_13">
+     <g id="desfases-line2d_49">
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="691.10282" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_28">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="691.10282" y="269.525273" transform="rotate(-0 691.10282 269.525273)">+2</text>
+     </g>
+    </g>
+    <g id="desfases-xtick_14">
+     <g id="desfases-line2d_50">
+      <g>
+       <use xlink:href="#desfases-m7909aaca7d" x="735.047841" y="254.547734" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_29">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="735.047841" y="269.525273" transform="rotate(-0 735.047841 269.525273)">+3</text>
+     </g>
+    </g>
+    <g id="desfases-text_30">
+     <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="609.804531" y="283.646172" transform="rotate(-0 609.804531 283.646172)">d (meses): X = Var PBI en t + d</text>
+    </g>
+   </g>
+   <g id="desfases-matplotlib.axis_4">
+    <g id="desfases-ytick_10">
+     <g id="desfases-line2d_51">
+      <path d="M 445.010703 234.402134 
+L 774.598359 234.402134 
+" clip-path="url(#desfases-p79a09b94df)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_52">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="445.010703" y="234.402134" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_31">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="438.010703" y="238.390903" transform="rotate(-0 438.010703 238.390903)">0,001</text>
+     </g>
+    </g>
+    <g id="desfases-ytick_11">
+     <g id="desfases-line2d_53">
+      <path d="M 445.010703 167.479896 
+L 774.598359 167.479896 
+" clip-path="url(#desfases-p79a09b94df)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_54">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="445.010703" y="167.479896" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_32">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="438.010703" y="171.468666" transform="rotate(-0 438.010703 171.468666)">0,01</text>
+     </g>
+    </g>
+    <g id="desfases-ytick_12">
+     <g id="desfases-line2d_55">
+      <path d="M 445.010703 120.70326 
+L 774.598359 120.70326 
+" clip-path="url(#desfases-p79a09b94df)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_56">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="445.010703" y="120.70326" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_33">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="438.010703" y="124.69203" transform="rotate(-0 438.010703 124.69203)">0,05</text>
+     </g>
+    </g>
+    <g id="desfases-ytick_13">
+     <g id="desfases-line2d_57">
+      <path d="M 445.010703 100.557659 
+L 774.598359 100.557659 
+" clip-path="url(#desfases-p79a09b94df)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_58">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="445.010703" y="100.557659" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_34">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="438.010703" y="104.546429" transform="rotate(-0 438.010703 104.546429)">0,1</text>
+     </g>
+    </g>
+    <g id="desfases-ytick_14">
+     <g id="desfases-line2d_59">
+      <path d="M 445.010703 53.781023 
+L 774.598359 53.781023 
+" clip-path="url(#desfases-p79a09b94df)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_60">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="445.010703" y="53.781023" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_35">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="438.010703" y="57.769792" transform="rotate(-0 438.010703 57.769792)">0,5</text>
+     </g>
+    </g>
+    <g id="desfases-ytick_15">
+     <g id="desfases-line2d_61">
+      <path d="M 445.010703 33.635422 
+L 774.598359 33.635422 
+" clip-path="url(#desfases-p79a09b94df)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="desfases-line2d_62">
+      <g>
+       <use xlink:href="#desfases-m0a5f5023ec" x="445.010703" y="33.635422" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="desfases-text_36">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="438.010703" y="37.624192" transform="rotate(-0 438.010703 37.624192)">1</text>
+     </g>
+    </g>
+    <g id="desfases-text_37">
+     <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="401.548828" y="140.278906" transform="rotate(-90 401.548828 140.278906)">p-valor</text>
+    </g>
+   </g>
+   <g id="desfases-line2d_63">
+    <defs>
+     <path id="desfases-m514c2f6b3e" d="M 0 4.5 
+C 1.193414 4.5 2.338109 4.025852 3.181981 3.181981 
+C 4.025852 2.338109 4.5 1.193414 4.5 0 
+C 4.5 -1.193414 4.025852 -2.338109 3.181981 -3.181981 
+C 2.338109 -4.025852 1.193414 -4.5 0 -4.5 
+C -1.193414 -4.5 -2.338109 -4.025852 -3.181981 -3.181981 
+C -4.025852 -2.338109 -4.5 -1.193414 -4.5 0 
+C -4.5 1.193414 -4.025852 2.338109 -3.181981 3.181981 
+C -2.338109 4.025852 -1.193414 4.5 0 4.5 
+z
+" style="stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </defs>
+    <g clip-path="url(#desfases-p79a09b94df)">
+     <use xlink:href="#desfases-m514c2f6b3e" x="471.377716" y="136.366512" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_64">
+    <g clip-path="url(#desfases-p79a09b94df)">
+     <use xlink:href="#desfases-m514c2f6b3e" x="515.322736" y="207.366903" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_65">
+    <g clip-path="url(#desfases-p79a09b94df)">
+     <use xlink:href="#desfases-m514c2f6b3e" x="559.267757" y="114.975353" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_66">
+    <defs>
+     <path id="desfases-mf5f92c525d" d="M 0 4.5 
+C 1.193414 4.5 2.338109 4.025852 3.181981 3.181981 
+C 4.025852 2.338109 4.5 1.193414 4.5 0 
+C 4.5 -1.193414 4.025852 -2.338109 3.181981 -3.181981 
+C 2.338109 -4.025852 1.193414 -4.5 0 -4.5 
+C -1.193414 -4.5 -2.338109 -4.025852 -3.181981 -3.181981 
+C -4.025852 -2.338109 -4.5 -1.193414 -4.5 0 
+C -4.5 1.193414 -4.025852 2.338109 -3.181981 3.181981 
+C -2.338109 4.025852 -1.193414 4.5 0 4.5 
+z
+" style="stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </defs>
+    <g clip-path="url(#desfases-p79a09b94df)">
+     <use xlink:href="#desfases-mf5f92c525d" x="603.212778" y="33.811138" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_67">
+    <defs>
+     <path id="desfases-m91f921e33d" d="M 0 4.5 
+C 1.193414 4.5 2.338109 4.025852 3.181981 3.181981 
+C 4.025852 2.338109 4.5 1.193414 4.5 0 
+C 4.5 -1.193414 4.025852 -2.338109 3.181981 -3.181981 
+C 2.338109 -4.025852 1.193414 -4.5 0 -4.5 
+C -1.193414 -4.5 -2.338109 -4.025852 -3.181981 -3.181981 
+C -4.025852 -2.338109 -4.5 -1.193414 -4.5 0 
+C -4.5 1.193414 -4.025852 2.338109 -3.181981 3.181981 
+C -2.338109 4.025852 -1.193414 4.5 0 4.5 
+z
+" style="stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </defs>
+    <g clip-path="url(#desfases-p79a09b94df)">
+     <use xlink:href="#desfases-m91f921e33d" x="647.157799" y="63.545935" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_68">
+    <g clip-path="url(#desfases-p79a09b94df)">
+     <use xlink:href="#desfases-m514c2f6b3e" x="691.10282" y="37.592592" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_69">
+    <g clip-path="url(#desfases-p79a09b94df)">
+     <use xlink:href="#desfases-m514c2f6b3e" x="735.047841" y="72.552069" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="desfases-line2d_70">
+    <path d="M 445.010703 120.70326 
+L 774.598359 120.70326 
+" clip-path="url(#desfases-p79a09b94df)" style="fill: none; stroke: var(--fig-tinta2); stroke-linecap: square"/>
+   </g>
+   <g id="desfases-line2d_71">
+    <path d="M 445.010703 167.479896 
+L 774.598359 167.479896 
+" clip-path="url(#desfases-p79a09b94df)" style="fill: none; stroke: var(--fig-tinta2); stroke-linecap: square"/>
+   </g>
+   <g id="desfases-patch_6">
+    <path d="M 445.010703 254.547734 
+L 445.010703 26.010078 
+" style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="desfases-patch_7">
+    <path d="M 445.010703 254.547734 
+L 774.598359 254.547734 
+" style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="desfases-text_38">
+    <text style="font-size: 9px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta2)" x="449.405205" y="115.247371" transform="rotate(-0 449.405205 115.247371)">α = 0,05</text>
+   </g>
+   <g id="desfases-text_39">
+    <text style="font-size: 9px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta2)" x="449.405205" y="162.024007" transform="rotate(-0 449.405205 162.024007)">α/5 = 0,01 (exploratorios)</text>
+   </g>
+   <g id="desfases-text_40">
+    <text style="font-size: 11.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta)" x="445.010703" y="16.010078" transform="rotate(-0 445.010703 16.010078)">p-valor de β1 por desfase d (escala log)</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="desfases-pe37914d913">
+   <rect x="50.360703" y="26.010078" width="329.587656" height="228.537656"/>
+  </clipPath>
+  <clipPath id="desfases-p79a09b94df">
+   <rect x="445.010703" y="26.010078" width="329.587656" height="228.537656"/>
+  </clipPath>
+ </defs>
+</svg>

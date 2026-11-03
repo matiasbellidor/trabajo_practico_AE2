@@ -1,0 +1,11 @@
+id,especificacion,herramienta,n,nombre_estadistico,estadistico,gl,coeficiente,ic_inferior,ic_superior,p_valor,decision,coincide_con_principal
+base,Especificación principal (referencia),Regresión simple (t de β1),56,t,0.007589591707,54,0.01544262599,-4.063907384,4.094792636,0.9939724098,No se rechaza H0,
+a,(a) Bono sin ajuste ex-pago (serie bruta),Regresión simple (t de β1),56,t,-0.1370414391,54,-0.2890467085,-4.517722087,3.93962867,0.8915077211,No se rechaza H0,True
+b,(b) PBI sin desestacionalizar,Regresión simple (t de β1),56,t,-0.6448259638,54,-0.5769715157,-2.370879185,1.216936153,0.521770116,No se rechaza H0,True
+c,"(c) ANOVA con umbrales ±0,5 % (n por grupo 10/32/14)",ANOVA (F),56,F,0.3023045095,2; 53,,,,0.7403788904,No se rechaza H0,
+d,(d) Spline con condición de borde not-a-knot,Regresión simple (t de β1),56,t,0.007166404952,54,0.01457743119,-4.063616595,4.092771458,0.9943084951,No se rechaza H0,True
+e,(e) Muestra trimestral (n = 19),Regresión simple (t de β1),19,t,-2.733377965,17,-4.540663279,-8.04547024,-1.035856318,0.01415230122,Se rechaza H0,False
+f,"(f) Múltiple con errores HAC (Newey-West, 3 rezagos): β de Var PBI",Regresión múltiple (t HAC),56,t,-0.068655916,53,-0.2221609468,-6.712474604,6.268152711,0.9455218829,No se rechaza H0,
+g1,(g) Múltiple con CCL de cierres operados (AL30C con volumen > 0): β de Var PBI,Regresión múltiple (t),52,t,-0.1902441811,49,-0.407261891,-4.709224803,3.894701021,0.8499037709,No se rechaza H0,
+g2,(g) Múltiple con CCL de cierres operados (AL30C con volumen > 0): β de Var CCL,Regresión múltiple (t),52,t,-1.446509999,49,-0.2469475421,-0.5900213306,0.09612624643,0.1544011452,No se rechaza H0,
+h,(h) PBI desestacionalizado por el INDEC (en lugar de STL),Regresión simple (t de β1),56,t,0.2276499067,54,0.6273129737,-4.897340238,6.151966186,0.8207781757,No se rechaza H0,True

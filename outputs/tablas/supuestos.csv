@@ -1,0 +1,11 @@
+modelo,prueba,estadistico,gl,p_valor
+regresion_simple,Durbin-Watson,1.939888673,,
+regresion_simple,Breusch-Pagan,3.575694416,1,0.0586309303
+regresion_simple,Breusch-Godfrey,0.8606146698,3,0.8349204581
+regresion_simple,Shapiro-Wilk residuos,0.9389773153,,0.007025453696
+regresion_multiple,Durbin-Watson,1.947548434,,
+regresion_multiple,Breusch-Pagan,3.352779546,2,0.1870480444
+regresion_multiple,Breusch-Godfrey,0.5713294996,3,0.9029632965
+regresion_multiple,Shapiro-Wilk residuos,0.9399387626,,0.007720538768
+regresion_multiple,VIF var_pbi,1.007380296,,
+regresion_multiple,VIF var_ccl,1.007380296,,

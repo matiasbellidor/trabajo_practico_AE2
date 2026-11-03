@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PBI y bono AL30D · TP AE2</title>
+<meta name="description" content="Trabajo práctico de {{ r.meta.materia }} (cátedra {{ r.meta.catedra }}, {{ r.meta.facultad }}, {{ r.meta.cuatrimestre }}): asociación entre la variación del PBI real argentino y la variación del bono AL30D.">
+<meta name="color-scheme" content="light dark">
+<script>try{var t=localStorage.getItem("tp-ae2-tema");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<style>
+{{ css | safe }}
+</style>
+</head>
+<body>
+{%- macro figura(id) -%}
+{%- set f = figs[id] -%}
+<figure class="figura revela" id="fig-{{ id }}">
+  <div class="figura__lienzo">{{ f.svg | safe }}</div>
+  <p class="pista-movil" aria-hidden="true">Deslizá la figura hacia los costados para verla completa.</p>
+  <figcaption id="cap-{{ id }}"><strong>{{ f.titulo }}.</strong> {{ f.alt }}</figcaption>
+</figure>
+{%- endmacro -%}
+{%- macro porque(parrafos) -%}
+<div class="porque revela"><span class="etiqueta">Por qué esta herramienta</span>{% for p in parrafos %}<p>{{ p }}</p>{% endfor %}</div>
+{%- endmacro -%}
+{%- macro interpretacion(items, etiqueta="Interpretación") -%}
+<div class="revela"><span class="etiqueta">{{ etiqueta }}</span><ul class="interpretacion">{% for p in items %}<li>{{ p }}</li>{% endfor %}</ul></div>
+{%- endmacro -%}
+{%- macro veredicto(texto, titulo, chico=False) -%}
+{%- set partes = partir(texto) -%}
+<div class="veredicto revela{{ ' veredicto--chico' if chico }}" role="group" aria-label="{{ titulo }}">
+  <span class="etiqueta">{{ titulo }}</span>
+  <strong class="veredicto__lead">{{ partes[0] }}</strong>
+  <p>{{ partes[1] }}</p>
+</div>
+{%- endmacro -%}
+{%- macro ver_formula(titulo="Ver fórmula y desarrollo") -%}
+<details class="revela"><summary>{{ titulo }}</summary><div class="desarrollo">{{ caller() }}</div></details>
+{%- endmacro -%}
+
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="barra">
+  <div class="barra__marca">TP {{ r.meta.materia }} <span>· {{ r.meta.grupo }} · Cátedra {{ r.meta.catedra }}</span></div>
+  <div class="barra__acciones">
+    <button class="boton" type="button" data-tema aria-pressed="false">Tema oscuro</button>
+  </div>
+  <div class="progreso" aria-hidden="true"></div>
+</header>
+<nav class="riel" aria-label="Secciones">
+  <ol>
+  {%- for s in secciones %}
+    <li><a href="#{{ s.id }}" aria-current="false"><span>{{ loop.index }}. {{ s.titulo }}</span></a></li>
+  {%- endfor %}
+  </ol>
+</nav>
+
+<main id="contenido">
+
+<section class="diapo portada" id="portada" aria-labelledby="t-portada">
+  <div class="diapo__contenido">
+    <p class="diapo__num">Trabajo práctico · {{ r.meta.facultad }}</p>
+    <h1 id="t-portada">Variación del PBI real argentino y variación del bono AL30D</h1>
+    <p class="portada__materia">{{ r.meta.materia }} · Cátedra {{ r.meta.catedra }} · {{ r.meta.cuatrimestre }}</p>
+    <p class="portada__meta">Entrega: {{ fecha_entrega }}</p>
+    <div class="portada__grupo">
+      <span class="etiqueta" style="color: var(--noche-tenue)">{{ r.meta.grupo }}</span>
+      <ul>{% for i in r.meta.integrantes %}<li>{{ i }}</li>{% endfor %}</ul>
+    </div>
+    <p class="portada__pista no-imprimir">Avanzá con <kbd>→</kbd> o <kbd>Av Pág</kbd>; retrocedé con <kbd>←</kbd> o <kbd>Re Pág</kbd>.</p>
+  </div>
+</section>
+
+<section class="diapo" id="hipotesis" aria-labelledby="t-hipotesis">
+  <div class="diapo__contenido">
+    <p class="diapo__num">02 · Pregunta e hipótesis</p>
+    <h2 id="t-hipotesis">¿La variación del PBI se asocia con la variación del AL30D?</h2>
+    <p class="diapo__bajada">{{ t.pregunta[0] }}</p>
+    <div class="tarjeta ecuacion revela" role="math" aria-label="Var AL30D en t igual a beta cero más beta uno por Var PBI en t más error">
+      Var AL30D<sub><var>t</var></sub> = <var>β</var><sub>0</sub> + <var>β</var><sub>1</sub> · Var PBI<sub><var>t</var></sub> + <var>ε</var><sub><var>t</var></sub>
+    </div>
+    <div class="hipotesis">
+      <div class="tarjeta revela"><span class="etiqueta">Hipótesis nula · H0</span><p><strong><var>β</var><sub>1</sub> = 0.</strong> La variación {{ "mensual del PBI mensualizado" if mensual else "trimestral del PBI" }} no se asocia de forma estadísticamente significativa con la variación de la cotización del AL30D.</p></div>
+      <div class="tarjeta revela"><span class="etiqueta">Hipótesis alternativa · H1</span><p><strong><var>β</var><sub>1</sub> ≠ 0.</strong> Sí se asocia. Contraste bilateral con α = {{ n(r.meta.alfa, 2) }}.</p></div>
+    </div>
+    <div class="dos-col">
+      <div class="revela">
+        <span class="etiqueta">Por qué bilateral</span>
+        {% for p in t.bilateral %}<p>{{ p }}</p>{% endfor %}
+      </div>
+      <div class="revela">
+        <span class="etiqueta">Asociación, no causalidad</span>
+        <p>El diseño es observacional: no hay variación controlada de ninguna de las dos series. Un β<sub>1</sub> distinto de cero indicaría que ambas se mueven juntas en la muestra, no que una mueva a la otra.</p>
+        <span class="etiqueta">Además</span>
+        <p><strong>Extensión temporal declarada:</strong> d = +1 (PBI del mes siguiente). <strong>Exploratorios:</strong> d = −3, −2, −1, +2, +3 con umbral 0,01. <strong>Complementaria:</strong> la hipótesis enviada a los docentes el 22/10 (diferencia de medias del PBI entre meses de suba y de baja del bono).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="diapo" id="datos" aria-labelledby="t-datos">
+  <div class="diapo__contenido">
+    <p class="diapo__num">03 · Datos y metodología</p>
+    <h2 id="t-datos">De los precios y el PBI trimestral a dos series comparables</h2>
+    <p class="diapo__bajada">Todas las decisiones de esta sección se fijaron en <code>config.yaml</code> antes de calcular cualquier p-valor.</p>
+    <ol class="lista-pasos revela">
+      <li><strong>Bono.</strong> Cierre diario del AL30D (Data912). Log-retorno diario con retorno 0 en los {{ r.datos.ex_pago | length }} días ex-pago.</li>
+      <li><strong>Variación mensual.</strong> (e<sup>Σ r</sup> − 1)·100. Septiembre de 2021 es parcial y no cuenta.</li>
+      <li><strong>PBI.</strong> Serie trimestral a precios de 2004 (INDEC), desestacionalizada con STL sobre el logaritmo.</li>
+      <li><strong>Mensualización.</strong> Spline cúbico natural por el mes central de cada trimestre, sin extrapolar.</li>
+      <li><strong>Ventana.</strong> {{ r.muestra.principal.inicio }} a {{ r.muestra.principal.fin }}: n = {{ r.muestra.principal.n }}{{ " (requiere conformidad docente)" if mensual }}.</li>
+      <li><strong>Herramientas.</strong> Estimador, IC, bondad de ajuste, regresión simple y múltiple, ANOVA, diferencia de medias.</li>
+      <li><strong>Diagnósticos.</strong> Gauss-Markov: Breusch-Pagan, Durbin-Watson, Breusch-Godfrey, VIF y normalidad.</li>
+      <li><strong>Robustez.</strong> Muestra {{ r.muestra.respaldo.frecuencia }} sin interpolar (n = {{ r.muestra.respaldo.n }}) y sensibilidades.</li>
+    </ol>
+    <div class="dos-col">
+      <div class="revela">
+        <span class="etiqueta">Fuentes</span>
+        <div class="tabla-scroll"><table class="tabla">
+          <thead><tr><th>Archivo</th><th>Fuente</th><th class="n">Filas</th><th>Rango</th></tr></thead>
+          <tbody>
+          {%- for l in r.datos.linaje if l.existe %}
+            <tr><td><code>{{ l.archivo }}</code></td><td>{{ l.fuente }}</td><td class="n">{{ l.filas }}</td><td>{{ l.fecha_min }} a {{ l.fecha_max }}</td></tr>
+          {%- endfor %}
+          </tbody>
+        </table></div>
+        <p style="font-size:.88rem;color:var(--tenue)">Huellas SHA-256 y modo de obtención de cada archivo en <code>outputs/linaje_datos.json</code>.</p>
+      </div>
+      <div class="revela">
+        <span class="etiqueta">Días ex-pago (pago de cupón y amortización)</span>
+        <div class="tabla-scroll"><table class="tabla">
+          <thead><tr><th>Fecha</th><th class="n">Variación de la rueda</th></tr></thead>
+          <tbody>{% for x in r.datos.ex_pago %}<tr><td>{{ x.fecha }}</td><td class="n">{{ n(x.variacion_pct, 2) }} %</td></tr>{% endfor %}</tbody>
+        </table></div>
+        <p>Son caídas mecánicas del precio y no pérdidas de valor: se les asigna retorno 0. Factores estacionales medios de la STL: {% for q, v in r.datos.factores_estacionales_stl.items() %}{{ q }} {{ n(v, 3) }}{{ "; " if not loop.last }}{% endfor %}.</p>
+      </div>
+    </div>
+    <div class="par-figuras">
+    {{ figura("series") }}
+    {{ figura("pbi") }}
+    </div>
+  </div>
+</section>
+
+{%- set p0 = r.hipotesis_principal.d0 %}
+<section class="diapo" id="resultado" aria-labelledby="t-resultado">
+  <div class="diapo__contenido">
+    <p class="diapo__num">04 · Resultado de la hipótesis principal</p>
+    <h2 id="t-resultado">Regresión de la Var AL30D sobre la Var PBI</h2>
+    <div style="margin-top:1.4rem">{{ veredicto(r.veredictos.hipotesis_principal, "Veredicto · hipótesis principal") }}</div>
+    <div class="kpis revela">
+      <div class="kpi"><span class="etiqueta"><span class="sin-mayus">β<sub>1</sub></span></span><span class="kpi__valor">{{ n(p0.b1) }}</span><span class="kpi__nota">pp de bono por pp de PBI</span></div>
+      <div class="kpi"><span class="etiqueta">IC 95 % de <span class="sin-mayus">β<sub>1</sub></span></span><span class="kpi__valor">{{ ic(p0.ic_b1.inferior, p0.ic_b1.superior, 2) }}</span><span class="kpi__nota">{{ "contiene el 0" if p0.ic_b1.inferior <= 0 <= p0.ic_b1.superior else "no contiene el 0" }}</span></div>
+      <div class="kpi"><span class="etiqueta">p-valor</span><span class="kpi__valor">{{ pv(p0.p_b1) }}</span><span class="kpi__nota">t = {{ n(p0.t_b1) }}, {{ p0.gl }} gl</span></div>
+      <div class="kpi"><span class="etiqueta">R²</span><span class="kpi__valor">{{ n(p0.r2) }}</span><span class="kpi__nota">r = {{ n(p0.r) }}</span></div>
+      <div class="kpi"><span class="etiqueta"><span class="sin-mayus">n</span></span><span class="kpi__valor">{{ p0.n }}</span><span class="kpi__nota">{{ r.muestra.principal.inicio }} a {{ r.muestra.principal.fin }}</span></div>
+    </div>
+    <p class="revela">{{ r.veredictos.interpretacion_pendiente }}</p>
+    {{ figura("dispersion") }}
+    <details class="no-imprimir"><summary>Ver los {{ panel | length }} períodos (tabla de datos de la figura)</summary>
+      <div class="tabla-scroll"><table class="tabla">
+        <thead><tr><th>Período</th><th class="n">Var PBI (%)</th><th class="n">Var AL30D (%)</th><th>Signo del bono</th><th>Tercil del PBI</th></tr></thead>
+        <tbody>{% for f in panel %}<tr><td>{{ f.periodo }}</td><td class="n">{{ n(f.var_pbi, 4) }}</td><td class="n">{{ n(f.var_bono, 4) }}</td><td>{{ f.grupo_bono }}</td><td>{{ f.tercil_pbi }}</td></tr>{% endfor %}</tbody>
+      </table></div>
+    </details>
+  </div>
+</section>
+
+{%- set e = r.estimadores %}{% set iv = r.intervalos %}
+<section class="diapo" id="estimador" aria-labelledby="t-estimador">
+  <div class="diapo__contenido">
+    <p class="diapo__num">05 · Estimador e intervalo de confianza</p>
+    <h2 id="t-estimador">Cómo se comportan las dos variables</h2>
+    <div class="dos-col" style="margin-top:1.4rem">
+      <div>
+        {{ porque(t.estimador.porque + t.ic.porque) }}
+        <div class="formula revela" role="math">
+          <span class="t"><var>x̄</var> = <span class="fr"><span>Σ <var>x<sub>i</sub></var></span><span><var>n</var></span></span></span>
+          <span class="t"><var>S</var><sup>2</sup> = <span class="fr"><span>Σ (<var>x<sub>i</sub></var> − <var>x̄</var>)<sup>2</sup></span><span><var>n</var> − 1</span></span></span>
+          <span class="t">IC: <var>x̄</var> ± <var>t</var><sub>α/2; <var>n</var>−1</sub> · <span class="fr"><span><var>S</var></span><span>√<var>n</var></span></span></span>
+          <span class="t"><var class="gorro">p</var> ± <var>z</var><sub>α/2</sub> √<span class="raiz"><var class="gorro">p</var>(1 − <var class="gorro">p</var>)/<var>n</var></span></span>
+        </div>
+      </div>
+      <div class="revela">
+        <div class="tabla-scroll"><table class="tabla">
+          <caption>Estimadores puntuales (%)</caption>
+          <thead><tr><th>Variable</th><th class="n">n</th><th class="n">x̄</th><th class="n">S²</th><th class="n">S</th><th class="n">EE</th></tr></thead>
+          <tbody>{% for k, v in e.items() if k != "proporcion_suba" %}<tr><td>{{ nombres[k] }}</td><td class="n">{{ v.n }}</td><td class="n">{{ n(v.media) }}</td><td class="n">{{ n(v.varianza) }}</td><td class="n">{{ n(v.desvio) }}</td><td class="n">{{ n(v.error_estandar) }}</td></tr>{% endfor %}
+          <tr><td>p̂ (períodos de suba)</td><td class="n">{{ e.proporcion_suba.n }}</td><td class="n">{{ n(e.proporcion_suba.proporcion) }}</td><td class="n">—</td><td class="n">—</td><td class="n">{{ n(e.proporcion_suba.error_estandar) }}</td></tr></tbody>
+        </table></div>
+        <div class="tabla-scroll"><table class="tabla">
+          <caption>Intervalos de confianza al 95 %</caption>
+          <thead><tr><th>Parámetro</th><th class="n">Estimación</th><th class="n">Cuantil</th><th class="n">IC 95 %</th></tr></thead>
+          <tbody>
+            <tr><td>μ Var AL30D (%)</td><td class="n">{{ n(iv.media_var_bono.estimacion) }}</td><td class="n">t = {{ n(iv.media_var_bono.cuantil) }}</td><td class="n">{{ ic(iv.media_var_bono.inferior, iv.media_var_bono.superior) }}</td></tr>
+            <tr><td>μ Var PBI (%)</td><td class="n">{{ n(iv.media_var_pbi.estimacion) }}</td><td class="n">t = {{ n(iv.media_var_pbi.cuantil) }}</td><td class="n">{{ ic(iv.media_var_pbi.inferior, iv.media_var_pbi.superior) }}</td></tr>
+            <tr><td>p (suba)</td><td class="n">{{ n(iv.proporcion_suba.estimacion) }}</td><td class="n">z = {{ n(iv.proporcion_suba.cuantil) }}</td><td class="n">{{ ic(iv.proporcion_suba.inferior, iv.proporcion_suba.superior) }}</td></tr>
+            <tr><td>β<sub>1</sub> (d = 0)</td><td class="n">{{ n(p0.b1) }}</td><td class="n">t = {{ n(p0.ic_b1.cuantil) }}</td><td class="n">{{ ic(p0.ic_b1.inferior, p0.ic_b1.superior) }}</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+    {{ interpretacion(t.estimador.interpretacion + t.ic.interpretacion) }}
+  </div>
+</section>
+
+<section class="diapo" id="bondad" aria-labelledby="t-bondad">
+  <div class="diapo__contenido">
+    <p class="diapo__num">06 · Bondad de ajuste</p>
+    <h2 id="t-bondad">¿Son normales las variaciones y los residuos?</h2>
+    <div class="dos-col" style="margin-top:1.4rem">
+      <div>
+        {{ porque(t.bondad.porque) }}
+        <div class="formula revela" role="math">
+          <span class="t"><var>χ</var><sup>2</sup> = Σ <span class="fr"><span>(<var>O<sub>j</sub></var> − <var>E<sub>j</sub></var>)<sup>2</sup></span><span><var>E<sub>j</sub></var></span></span>
+          ~ <var>χ</var><sup>2</sup><sub><var>k</var>−1−2</sub></span>
+          <span class="t"><var>k</var> = mín(8, ⌊<var>n</var>/5⌋)</span>
+          <span class="t"><var>E<sub>j</sub></var> = <var>n</var>/<var>k</var></span>
+        </div>
+      </div>
+      <div class="revela">
+        <div class="tabla-scroll"><table class="tabla">
+          <caption>χ² a la Normal y Shapiro-Wilk</caption>
+          <thead><tr><th>Serie</th><th class="n">χ²</th><th class="n">gl</th><th class="n">p (χ²)</th><th class="n">W</th><th class="n">p (SW)</th></tr></thead>
+          <tbody>{% for k, b in r.bondad_ajuste.items() %}<tr><td>{{ nombres[k] }}</td>
+            {% if b.chi2.aplicable %}<td class="n">{{ n(b.chi2.estadistico) }}</td><td class="n">{{ b.chi2.gl }}</td><td class="n">{{ pv(b.chi2.p_valor) }}</td>{% else %}<td class="n" colspan="3">no aplicable</td>{% endif %}
+            <td class="n">{{ n(b.shapiro.estadistico) }}</td><td class="n">{{ pv(b.shapiro.p_valor) }}</td></tr>{% endfor %}</tbody>
+        </table></div>
+      </div>
+    </div>
+    {% call ver_formula("Ver las tablas de clases (O, E y (O − E)²/E)") %}
+      {% for k, b in r.bondad_ajuste.items() if b.chi2.aplicable %}
+      <div class="tabla-scroll"><table class="tabla">
+        <caption>{{ nombres[k] }}: N(x̄ = {{ n(b.chi2.media) }}; S = {{ n(b.chi2.desvio) }}), valor crítico {{ n(b.chi2.valor_critico) }}</caption>
+        <thead><tr><th class="n">Clase</th><th class="n">Desde</th><th class="n">Hasta</th><th class="n">O</th><th class="n">E</th><th class="n">(O − E)²/E</th></tr></thead>
+        <tbody>{% for c in b.chi2.tabla %}<tr><td class="n">{{ c.clase }}</td><td class="n">{{ n(c.limite_inferior) }}</td><td class="n">{{ n(c.limite_superior) }}</td><td class="n">{{ c.observada }}</td><td class="n">{{ n(c.esperada, 2) }}</td><td class="n">{{ n(c.contribucion) }}</td></tr>{% endfor %}
+        <tr class="resalta"><td colspan="5">χ² = {{ n(b.chi2.estadistico) }} · gl = {{ b.chi2.gl }} · p = {{ pv(b.chi2.p_valor) }}</td><td class="n">{{ n(b.chi2.estadistico) }}</td></tr></tbody>
+      </table></div>
+      {% endfor %}
+    {% endcall %}
+    {{ interpretacion(t.bondad.interpretacion) }}
+    {{ figura("histogramas") }}
+  </div>
+</section>
+
+<section class="diapo" id="regresion" aria-labelledby="t-regresion">
+  <div class="diapo__contenido">
+    <p class="diapo__num">07 · Regresión lineal simple y desfases</p>
+    <h2 id="t-regresion">La pendiente y su dimensión temporal</h2>
+    <div class="dos-col" style="margin-top:1.4rem">
+      <div>
+        {{ porque(t.simple.porque + t.desfases.porque) }}
+        <div class="formula revela" role="math">
+          <span class="t"><var>b</var><sub>1</sub> = <span class="fr"><span><var>S<sub>xy</sub></var></span><span><var>S<sub>xx</sub></var></span></span></span>
+          <span class="t"><var>b</var><sub>0</sub> = <var>ȳ</var> − <var>b</var><sub>1</sub><var>x̄</var></span>
+          <span class="t">EE(<var>b</var><sub>1</sub>) = √<span class="raiz"><var>S</var><sup>2</sup>/<var>S<sub>xx</sub></var></span></span>
+          <span class="t"><var>t</var> = <span class="fr"><span><var>b</var><sub>1</sub></span><span>EE(<var>b</var><sub>1</sub>)</span></span> ~ <var>t</var><sub><var>n</var>−2</sub></span>
+          <span class="t"><var>R</var><sup>2</sup> = 1 − <span class="fr"><span>SCE</span><span>SCT</span></span></span>
+        </div>
+      </div>
+      <div class="revela">
+        <div class="tabla-scroll"><table class="tabla">
+          <caption>Coeficientes (d = 0)</caption>
+          <thead><tr><th></th><th class="n">Estimación</th><th class="n">EE</th><th class="n">t</th><th class="n">p</th><th class="n">IC 95 %</th></tr></thead>
+          <tbody>
+            <tr><td>β<sub>0</sub></td><td class="n">{{ n(p0.b0) }}</td><td class="n">{{ n(p0.ee_b0) }}</td><td class="n">{{ n(p0.t_b0) }}</td><td class="n">{{ pv(p0.p_b0) }}</td><td class="n">{{ ic(p0.ic_b0.inferior, p0.ic_b0.superior) }}</td></tr>
+            <tr class="resalta"><td>β<sub>1</sub></td><td class="n">{{ n(p0.b1) }}</td><td class="n">{{ n(p0.ee_b1) }}</td><td class="n">{{ n(p0.t_b1) }}</td><td class="n">{{ pv(p0.p_b1) }}</td><td class="n">{{ ic(p0.ic_b1.inferior, p0.ic_b1.superior) }}</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+    {% call ver_formula("Ver el cuadro de cálculo a mano y el desarrollo") %}
+      <p>n = {{ p0.sumas.n }}; Σx = {{ n(p0.sumas.sum_x) }}; Σy = {{ n(p0.sumas.sum_y) }}; Σx² = {{ n(p0.sumas.sum_x2) }}; Σy² = {{ n(p0.sumas.sum_y2) }}; Σxy = {{ n(p0.sumas.sum_xy) }}.</p>
+      <p>x̄ = {{ n(p0.x_media) }}; ȳ = {{ n(p0.y_media) }}; S<sub>xx</sub> = Σx² − n·x̄² = {{ n(p0.sxx) }}; S<sub>xy</sub> = Σxy − n·x̄·ȳ = {{ n(p0.sxy) }}; S<sub>yy</sub> = {{ n(p0.syy) }}.</p>
+      <p>b<sub>1</sub> = {{ n(p0.sxy) }} / {{ n(p0.sxx) }} = <strong>{{ n(p0.b1) }}</strong>; b<sub>0</sub> = {{ n(p0.y_media) }} − ({{ n(p0.b1) }})·({{ n(p0.x_media) }}) = <strong>{{ n(p0.b0) }}</strong>.</p>
+      <p>SCE = {{ n(p0.sce) }}; S² = SCE/(n − 2) = {{ n(p0.s2) }}; EE(b<sub>1</sub>) = {{ n(p0.ee_b1) }}; t = {{ n(p0.t_b1) }} con {{ p0.gl }} gl; valor crítico ±{{ n(p0.valor_critico_t) }}; p = 2·P(t<sub>{{ p0.gl }}</sub> &gt; |t|) = <strong>{{ pv(p0.p_b1) }}</strong>.</p>
+      <p>R² = 1 − {{ n(p0.sce) }}/{{ n(p0.sct) }} = {{ n(p0.r2) }}; F = {{ n(p0.f) }} con (1; {{ p0.gl }}) gl, p = {{ pv(p0.p_f) }}. Detalle por observación en <code>outputs/tablas/cuadro_a_mano.csv</code>.</p>
+    {% endcall %}
+    {{ interpretacion(t.simple.interpretacion[1:] + t.desfases.interpretacion) }}
+    <div class="tabla-scroll revela"><table class="tabla">
+      <caption>Regresión simple por desfase d (X = Var PBI en t + d)</caption>
+      <thead><tr><th class="n">d</th><th>Etiqueta</th><th class="n">n</th><th class="n">β<sub>1</sub></th><th class="n">IC 95 %</th><th class="n">t</th><th class="n">p</th><th class="n">Umbral</th><th>Decisión</th></tr></thead>
+      <tbody>{% for f in r.desfases %}<tr{% if f.etiqueta == "principal" %} class="resalta"{% endif %}><td class="n">{{ n(f.d, 0, True) }}</td><td><span class="chip{{ ' chip--principal' if f.etiqueta == 'principal' }}">{{ f.etiqueta }}</span></td><td class="n">{{ f.n }}</td><td class="n">{{ n(f.b1) }}</td><td class="n">{{ ic(f.ic_b1.inferior, f.ic_b1.superior) }}</td><td class="n">{{ n(f.t) }}</td><td class="n">{{ pv(f.p_valor) }}</td><td class="n">{{ n(f.umbral, 2) }}</td><td>{{ "Se rechaza H0" if f.significativo else "No se rechaza H0" }}</td></tr>{% endfor %}</tbody>
+    </table></div>
+    {{ figura("desfases") }}
+  </div>
+</section>
+
+{%- set mu = r.regresion_multiple %}{% set dm = r.diagnosticos.regresion_multiple %}{% set ds = r.diagnosticos.regresion_simple %}
+<section class="diapo" id="multiple" aria-labelledby="t-multiple">
+  <div class="diapo__contenido">
+    <p class="diapo__num">08 · Regresión lineal múltiple y supuestos</p>
+    <h2 id="t-multiple">Con un control: {{ "la variación del CCL implícito" if mu.modo == "ccl" else "el PBI adelantado" }}</h2>
+    <div class="dos-col" style="margin-top:1.4rem">
+      <div>
+        {{ porque(t.multiple.porque) }}
+        <div class="formula revela" role="math">
+          <span class="t"><var class="gorro">β</var> = (<var>X</var>′<var>X</var>)<sup>−1</sup><var>X</var>′<var>y</var></span>
+          <span class="t">Var(<var class="gorro">β</var>) = <var>S</var><sup>2</sup>(<var>X</var>′<var>X</var>)<sup>−1</sup></span>
+          <span class="t"><var>F</var> = <span class="fr"><span>(SCT − SCE)/<var>k</var></span><span>SCE/(<var>n</var> − <var>k</var> − 1)</span></span></span>
+          <span class="t">DW = <span class="fr"><span>Σ(<var>e<sub>t</sub></var> − <var>e</var><sub><var>t</var>−1</sub>)<sup>2</sup></span><span>Σ<var>e<sub>t</sub></var><sup>2</sup></span></span></span>
+          <span class="t">VIF<sub><var>j</var></sub> = <span class="fr"><span>1</span><span>1 − <var>R</var><sub><var>j</var></sub><sup>2</sup></span></span></span>
+        </div>
+      </div>
+      <div class="revela">
+        <div class="tabla-scroll"><table class="tabla">
+          <caption>Coeficientes · n = {{ mu.n }}, {{ mu.gl }} gl · R² = {{ n(mu.r2) }} · R² aj. = {{ n(mu.r2_ajustado) }} · F = {{ n(mu.f) }} (p = {{ pv(mu.p_f) }})</caption>
+          <thead><tr><th></th><th class="n">β</th><th class="n">EE</th><th class="n">t</th><th class="n">p</th><th class="n">IC 95 %</th></tr></thead>
+          <tbody>{% for c in mu.coeficientes %}<tr><td>{{ nombres.get(c.nombre, c.nombre) }}</td><td class="n">{{ n(c.coeficiente) }}</td><td class="n">{{ n(c.error_estandar) }}</td><td class="n">{{ n(c.t) }}</td><td class="n">{{ pv(c.p_valor) }}</td><td class="n">{{ ic(c.ic.inferior, c.ic.superior) }}</td></tr>{% endfor %}</tbody>
+        </table></div>
+        <div class="tabla-scroll"><table class="tabla">
+          <caption>Supuestos de Gauss-Markov</caption>
+          <thead><tr><th>Supuesto</th><th>Prueba</th><th class="n">Simple</th><th class="n">Múltiple</th></tr></thead>
+          <tbody>
+            <tr><td>Homocedasticidad</td><td>Breusch-Pagan (p)</td><td class="n">{{ pv(ds.breusch_pagan.p_valor) }}</td><td class="n">{{ pv(dm.breusch_pagan.p_valor) }}</td></tr>
+            <tr><td>No autocorrelación</td><td>Durbin-Watson</td><td class="n">{{ n(ds.durbin_watson, 4) }}</td><td class="n">{{ n(dm.durbin_watson, 4) }}</td></tr>
+            <tr><td>No autocorrelación</td><td>Breusch-Godfrey, {{ dm.breusch_godfrey.gl }} rezagos (p)</td><td class="n">{{ pv(ds.breusch_godfrey.p_valor) }}</td><td class="n">{{ pv(dm.breusch_godfrey.p_valor) }}</td></tr>
+            <tr><td>No multicolinealidad</td><td>VIF</td><td class="n">—</td><td class="n">{% for v in dm.vif %}{{ n(v.vif, 2) }}{{ " / " if not loop.last }}{% endfor %}</td></tr>
+            <tr><td>Normalidad de residuos</td><td>Shapiro-Wilk (p)</td><td class="n">{{ pv(ds.normalidad_residuos.shapiro.p_valor) }}</td><td class="n">{{ pv(dm.normalidad_residuos.shapiro.p_valor) }}</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+    {{ interpretacion(t.multiple.interpretacion) }}
+    {{ figura("residuos") }}
+  </div>
+</section>
+
+{%- set an = r.anova %}
+<section class="diapo" id="anova" aria-labelledby="t-anova">
+  <div class="diapo__contenido">
+    <p class="diapo__num">09 · ANOVA de un factor</p>
+    <h2 id="t-anova">¿Difiere el bono según el nivel de crecimiento del PBI?</h2>
+    <div class="dos-col" style="margin-top:1.4rem">
+      <div>
+        {{ porque(t.anova.porque) }}
+        <div class="formula revela" role="math">
+          <span class="t"><var>F</var> = <span class="fr"><span>CM<sub>entre</sub></span><span>CM<sub>dentro</sub></span></span>
+          = <span class="fr"><span>Σ <var>n<sub>j</sub></var>(<var>ȳ<sub>j</sub></var> − <var>ȳ</var>)<sup>2</sup> / (<var>k</var> − 1)</span><span>ΣΣ (<var>y<sub>ij</sub></var> − <var>ȳ<sub>j</sub></var>)<sup>2</sup> / (<var>N</var> − <var>k</var>)</span></span></span>
+          <span class="t"><var>η</var><sup>2</sup> = <span class="fr"><span>SC<sub>entre</sub></span><span>SC<sub>total</sub></span></span></span>
+        </div>
+      </div>
+      <div class="revela">
+        {% if an.aplicable %}
+        <div class="tabla-scroll"><table class="tabla">
+          <caption>Tabla de ANOVA</caption>
+          <thead><tr><th>Fuente</th><th class="n">SC</th><th class="n">gl</th><th class="n">CM</th><th class="n">F</th><th class="n">p</th></tr></thead>
+          <tbody>
+            <tr><td>Entre terciles</td><td class="n">{{ n(an.sc_entre) }}</td><td class="n">{{ an.gl_entre }}</td><td class="n">{{ n(an.cm_entre) }}</td><td class="n">{{ n(an.f) }}</td><td class="n">{{ pv(an.p_valor) }}</td></tr>
+            <tr><td>Dentro</td><td class="n">{{ n(an.sc_dentro) }}</td><td class="n">{{ an.gl_dentro }}</td><td class="n">{{ n(an.cm_dentro) }}</td><td></td><td></td></tr>
+            <tr><td>Total</td><td class="n">{{ n(an.sc_total) }}</td><td class="n">{{ an.gl_total }}</td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table></div>
+        <div class="tabla-scroll"><table class="tabla">
+          <caption>Var AL30D por tercil de la Var PBI</caption>
+          <thead><tr><th>Tercil</th><th class="n">Var PBI (%)</th><th class="n">n</th><th class="n">Media (%)</th><th class="n">IC 95 %</th></tr></thead>
+          <tbody>{% for g in an.grupos %}<tr><td>{{ g.grupo }}</td><td class="n">{{ ic(an.limites_terciles[g.grupo][0], an.limites_terciles[g.grupo][1], 2) }}</td><td class="n">{{ g.n }}</td><td class="n">{{ n(g.media) }}</td><td class="n">{{ ic(g.ic.inferior, g.ic.superior) }}</td></tr>{% endfor %}</tbody>
+        </table></div>
+        {% endif %}
+      </div>
+    </div>
+    {{ interpretacion(t.anova.interpretacion) }}
+    {{ figura("anova") }}
+  </div>
+</section>
+
+{%- set c = r.prueba_complementaria %}
+<section class="diapo" id="complementaria" aria-labelledby="t-complementaria">
+  <div class="diapo__contenido">
+    <p class="diapo__num">10 · Prueba complementaria</p>
+    <h2 id="t-complementaria">La hipótesis enviada a los docentes</h2>
+    <p class="diapo__bajada">“La variación porcentual media del PBI real argentino difiere entre los períodos en que los bonos soberanos suben y aquellos en que bajan.” H0: μ<sub>suba</sub> = μ<sub>baja</sub>, bilateral.</p>
+    {% if c.aplicable %}{{ veredicto(r.veredictos.prueba_complementaria, "Veredicto · hipótesis complementaria", True) }}{% endif %}
+    <div class="dos-col">
+      <div>
+        {{ porque(t.complementaria.porque) }}
+        <div class="formula revela" role="math">
+          <span class="t"><var>F</var> = <span class="fr"><span><var>S</var><sub>1</sub><sup>2</sup></span><span><var>S</var><sub>2</sub><sup>2</sup></span></span></span>
+          <span class="t"><var>t</var> = <span class="fr"><span><var>x̄</var><sub>1</sub> − <var>x̄</var><sub>2</sub></span><span><var>S<sub>p</sub></var> √<span class="raiz">1/<var>n</var><sub>1</sub> + 1/<var>n</var><sub>2</sub></span></span></span></span>
+          <span class="t"><var>d</var> = <span class="fr"><span><var>x̄</var><sub>1</sub> − <var>x̄</var><sub>2</sub></span><span><var>S<sub>p</sub></var></span></span></span>
+        </div>
+      </div>
+      <div class="revela">
+        {% if c.aplicable %}
+        <div class="tabla-scroll"><table class="tabla">
+          <caption>Suba: n = {{ c.grupo_1.n }}, x̄ = {{ n(c.grupo_1.media) }} % · Baja: n = {{ c.grupo_2.n }}, x̄ = {{ n(c.grupo_2.media) }} %</caption>
+          <thead><tr><th>Prueba</th><th class="n">Estadístico</th><th class="n">gl</th><th class="n">p</th></tr></thead>
+          <tbody>
+            <tr><td>F de igualdad de varianzas</td><td class="n">{{ n(c.prueba_f.estadistico) }}</td><td class="n">{{ c.prueba_f.gl[0] }}; {{ c.prueba_f.gl[1] }}</td><td class="n">{{ pv(c.prueba_f.p_valor) }}</td></tr>
+            <tr{% if c.test_de_decision == "varianza agrupada" %} class="resalta"{% endif %}><td>t con varianza agrupada</td><td class="n">{{ n(c.t_agrupada.estadistico) }}</td><td class="n">{{ n(c.t_agrupada.gl, 0) }}</td><td class="n">{{ pv(c.t_agrupada.p_valor) }}</td></tr>
+            <tr{% if c.test_de_decision == "Welch" %} class="resalta"{% endif %}><td>t de Welch</td><td class="n">{{ n(c.t_welch.estadistico) }}</td><td class="n">{{ n(c.t_welch.gl, 2) }}</td><td class="n">{{ pv(c.t_welch.p_valor) }}</td></tr>
+          </tbody>
+        </table></div>
+        {% endif %}
+      </div>
+    </div>
+    {{ interpretacion(t.complementaria.interpretacion[1:] if c.aplicable else t.complementaria.interpretacion) }}
+    {{ figura("complementaria") }}
+  </div>
+</section>
+
+<section class="diapo" id="robustez" aria-labelledby="t-robustez">
+  <div class="diapo__contenido">
+    <p class="diapo__num">11 · Robustez</p>
+    <h2 id="t-robustez">¿El veredicto sobrevive sin interpolar?</h2>
+    {{ porque(t.robustez.porque) }}
+    {{ interpretacion(t.robustez.interpretacion[:1] + [t.robustez.influencia], "Resultado") }}
+    <div class="tabla-scroll revela"><table class="tabla">
+      <caption>Mismos contrastes en las dos muestras</caption>
+      <thead><tr><th>Contraste</th><th>Muestra</th><th class="n">n</th><th class="n">Estimación</th><th class="n">IC 95 %</th><th class="n">Estadístico</th><th class="n">p</th><th>Decisión</th></tr></thead>
+      <tbody>{% for f in r.robustez_trimestral.tabla %}<tr{% if loop.index == 1 %} class="resalta"{% endif %}><td>{{ f.especificacion }}</td><td>{{ f.muestra }}</td><td class="n">{{ f.n }}</td><td class="n">{{ n(f.coeficiente) }}</td><td class="n">{% if f.ic_inferior is not none %}{{ ic(f.ic_inferior, f.ic_superior) }}{% else %}—{% endif %}</td><td class="n">{{ f.nombre_estadistico }} = {{ n(f.estadistico) }}</td><td class="n">{{ pv(f.p_valor) }}</td><td>{{ f.decision }}</td></tr>{% endfor %}</tbody>
+    </table></div>
+    <div class="tabla-scroll revela"><table class="tabla">
+      <caption>Sensibilidades (cada una cambia una decisión)</caption>
+      <thead><tr><th>Especificación</th><th class="n">n</th><th class="n">Coeficiente</th><th class="n">Estadístico</th><th class="n">p</th><th>Decisión</th></tr></thead>
+      <tbody>{% for f in r.sensibilidades %}<tr{% if f.id == "base" %} class="resalta"{% endif %}><td>{{ f.especificacion }}</td><td class="n">{{ f.n if f.n is not none else "—" }}</td><td class="n">{{ n(f.coeficiente) if f.coeficiente is not none else "—" }}</td><td class="n">{% if f.p_valor is not none %}{{ f.nombre_estadistico }} = {{ n(f.estadistico) }}{% else %}—{% endif %}</td><td class="n">{{ pv(f.p_valor) if f.p_valor is not none else "—" }}</td><td>{{ f.decision }}</td></tr>{% endfor %}</tbody>
+    </table></div>
+    {{ figura("robustez") }}
+  </div>
+</section>
+
+<section class="diapo" id="limitaciones" aria-labelledby="t-limitaciones">
+  <div class="diapo__contenido">
+    <p class="diapo__num">12 · Limitaciones</p>
+    <h2 id="t-limitaciones">Qué no permite afirmar este diseño</h2>
+    <ul class="limitaciones revela" style="margin-top:1.4rem">{% for p in t.limitaciones %}<li>{{ p }}</li>{% endfor %}</ul>
+  </div>
+</section>
+
+<section class="diapo" id="conclusion" aria-labelledby="t-conclusion">
+  <div class="diapo__contenido">
+    <p class="diapo__num">13 · Conclusión</p>
+    <h2 id="t-conclusion">Conclusión</h2>
+    <div style="margin-top:1.4rem">{{ veredicto(r.veredictos.hipotesis_principal, "Veredicto · hipótesis principal") }}</div>
+    {% if conclusion_html %}
+    <div class="conclusion revela">{{ conclusion_html | safe }}</div>
+    {% else %}
+    <p class="aviso revela">Conclusión final pendiente.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="diapo" id="anexo" aria-labelledby="t-anexo">
+  <div class="diapo__contenido">
+    <p class="diapo__num">14 · Anexo</p>
+    <h2 id="t-anexo">Todos los p-valores</h2>
+    <p class="diapo__bajada">Cada test con su estadístico, grados de libertad, p-valor, umbral y decisión. Las etiquetas separan la hipótesis principal de la extensión, lo exploratorio, lo complementario, las sensibilidades y los diagnósticos.</p>
+    <div class="tabla-scroll revela"><table class="tabla">
+      <thead><tr><th>Prueba</th><th>Etiqueta</th><th class="n">Estadístico</th><th class="n">gl</th><th class="n">p</th><th class="n">Umbral</th><th>Decisión</th></tr></thead>
+      <tbody>{% for f in r.p_valores %}<tr><td>{{ f.prueba }}</td><td><span class="chip{{ ' chip--principal' if f.etiqueta == 'principal' }}">{{ f.etiqueta }}</span></td><td class="n">{{ n(f.estadistico) }}</td><td class="n">{{ gl(f.gl) }}</td><td class="n">{{ pv(f.p_valor) }}</td><td class="n">{{ n(f.umbral, 2) }}</td><td>{{ f.decision }}</td></tr>{% endfor %}</tbody>
+    </table></div>
+    <p>Código, datos y tablas: <a href="{{ r.meta.repositorio }}">{{ r.meta.repositorio }}</a>. Todo se regenera con <code>python -m tp_ae2.run_all --config config.yaml</code>.</p>
+  </div>
+</section>
+
+</main>
+<footer class="pie">{{ r.meta.materia }} · Cátedra {{ r.meta.catedra }} · {{ r.meta.facultad }} · {{ r.meta.cuatrimestre }} · {{ r.meta.grupo }}. Código bajo licencia MIT; los datos pertenecen a sus fuentes (Data912; INDEC vía datos.gob.ar).</footer>
+<script>
+{{ js | safe }}
+</script>
+</body>
+</html>

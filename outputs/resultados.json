@@ -1,0 +1,3508 @@
+{
+  "meta": {
+    "titulo": "Variación del PBI real argentino y variación del bono AL30D",
+    "materia": "Análisis Estadístico 2",
+    "catedra": "Tito Lasanta",
+    "facultad": "FCE UBA",
+    "cuatrimestre": "2C 2026",
+    "grupo": "Grupo 1",
+    "integrantes": [
+      "Matías Rodrigo Bellido",
+      "Luka Orpianesi",
+      "Manuel Rodriguez",
+      "Melina Escalante",
+      "Maria Acevedo"
+    ],
+    "repositorio": "https://github.com/matiasbellidor/trabajo_practico_AE2",
+    "alfa": 0.05,
+    "confianza": 0.95,
+    "muestra_principal": "mensual_spline",
+    "decisiones_pre_registradas": "config.yaml",
+    "versiones": {
+      "python": "3.14.4",
+      "numpy": "2.5.4",
+      "pandas": "3.1.0",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0"
+    }
+  },
+  "muestra": {
+    "principal": {
+      "frecuencia": "mensual",
+      "n": 56,
+      "inicio": "2021-10",
+      "fin": "2026-05",
+      "cumple_minimo_50": true
+    },
+    "respaldo": {
+      "frecuencia": "trimestral",
+      "n": 19,
+      "inicio": "2021Q4",
+      "fin": "2026Q2",
+      "cumple_minimo_50": false
+    },
+    "n_minimo_consigna": 50
+  },
+  "datos": {
+    "linaje": [
+      {
+        "archivo": "al30d",
+        "ruta": "data_sets_ordenados/02_al30d_diario.csv",
+        "obligatorio": true,
+        "uso": "análisis",
+        "existe": true,
+        "fuente": "Data912, /historical/bonds/AL30D (cotización en dólares MEP)",
+        "url": "https://data912.com/historical/bonds/AL30D",
+        "obtencion": "Dataset ordenado por el grupo (2026-11-03). Coincide rueda por rueda con la descarga de verificación.",
+        "bytes": 80911,
+        "sha256": "ffa700689f43a3bfb85a6038dadb95774e06b4b984624ffb1bede208b67bcd15",
+        "filas": 1243,
+        "fecha_min": "2021-09-23",
+        "fecha_max": "2026-10-27"
+      },
+      {
+        "archivo": "pbi",
+        "ruta": "data_sets_ordenados/01_indec_cuentas_nacionales_largo.csv",
+        "obligatorio": true,
+        "uso": "análisis",
+        "existe": true,
+        "fuente": "INDEC, sh_oferta_demanda_09_26.xls, cuadro 1 (PBI a precios de 2004, trimestral, sin desestacionalizar)",
+        "url": "https://www.indec.gob.ar/ftp/cuadros/economia/sh_oferta_demanda_09_26.xls",
+        "obtencion": "Dataset ordenado por el grupo (2026-11-03) a partir de los cuadros del INDEC. Coincide trimestre por trimestre con la serie 9.2_PP2_2004_T_16 de datos.gob.ar.",
+        "bytes": 10371178,
+        "sha256": "6e790edaf0db32dab7aac0640ff8d397d2b04137d35112e6f07bd2ef2bb8c81f",
+        "filas": 90,
+        "fecha_min": "2004-01-01",
+        "fecha_max": "2026-04-01"
+      },
+      {
+        "archivo": "al30",
+        "ruta": "data/raw/al30.json",
+        "obligatorio": false,
+        "uso": "análisis",
+        "existe": true,
+        "fuente": "Data912, /historical/bonds/AL30 (cotización en pesos)",
+        "url": "https://data912.com/historical/bonds/AL30",
+        "obtencion": "Descargado el 2026-11-01.",
+        "bytes": 136760,
+        "sha256": "170b3db7df97fe9bc72b5e7c827558f6be083b69d5fa4226693a04e51bbb0999",
+        "filas": 1251,
+        "fecha_min": "2021-09-16",
+        "fecha_max": "2026-10-30"
+      },
+      {
+        "archivo": "al30c",
+        "ruta": "data/raw/al30c.json",
+        "obligatorio": false,
+        "uso": "análisis",
+        "existe": true,
+        "fuente": "Data912, /historical/bonds/AL30C (cotización en dólares cable)",
+        "url": "https://data912.com/historical/bonds/AL30C",
+        "obtencion": "Descargado el 2026-11-01.",
+        "bytes": 112229,
+        "sha256": "8f403a786cfb0afa1924543ed76df2f04fbb95b2b04680fd0dd2d2ac878547f1",
+        "filas": 1153,
+        "fecha_min": "2021-09-29",
+        "fecha_max": "2026-10-30"
+      },
+      {
+        "archivo": "pbi_indec_desest",
+        "ruta": "data_sets_ordenados/01_indec_cuentas_nacionales_largo.csv",
+        "obligatorio": false,
+        "uso": "análisis",
+        "existe": true,
+        "fuente": "INDEC, sh_oferta_demanda_desest_09_26.xls (PIB desestacionalizado, millones de pesos de 2004)",
+        "url": "https://www.indec.gob.ar/ftp/cuadros/economia/sh_oferta_demanda_desest_09_26.xls",
+        "obtencion": "Mismo dataset ordenado (cuadro OD_DESEST_NIVEL). Se usa solo en la sensibilidad (h).",
+        "bytes": 10371178,
+        "sha256": "6e790edaf0db32dab7aac0640ff8d397d2b04137d35112e6f07bd2ef2bb8c81f",
+        "filas": 90,
+        "fecha_min": "2004-01-01",
+        "fecha_max": "2026-04-01"
+      },
+      {
+        "archivo": "verificacion_al30d",
+        "ruta": "data/raw/al30d.json",
+        "obligatorio": false,
+        "uso": "verificación",
+        "existe": true,
+        "fuente": "Data912, /historical/bonds/AL30D",
+        "url": "https://data912.com/historical/bonds/AL30D",
+        "obtencion": "Descarga independiente del 2026-11-01 (1.243 ruedas).",
+        "bytes": 124348,
+        "sha256": "13341daf060635c4e8fb680acefe669611c8ebe078eaa948cd7d25ebf0c2d914",
+        "filas": 1243,
+        "fecha_min": "2021-09-23",
+        "fecha_max": "2026-10-27"
+      },
+      {
+        "archivo": "verificacion_pbi",
+        "ruta": "data/raw/pbi_trimestral.csv",
+        "obligatorio": false,
+        "uso": "verificación",
+        "existe": true,
+        "fuente": "INDEC vía datos.gob.ar, serie 9.2_PP2_2004_T_16",
+        "url": "https://apis.datos.gob.ar/series/api/series/?ids=9.2_PP2_2004_T_16&format=csv&limit=1000",
+        "obtencion": "Descarga independiente de la API oficial del 2026-11-01.",
+        "bytes": 2718,
+        "sha256": "d7ff5d0b16646682ed312541f2acbb0af7736bef6827c552b93b037423fea887",
+        "filas": 90,
+        "fecha_min": "2004-01-01",
+        "fecha_max": "2026-04-01"
+      }
+    ],
+    "huecos_bono": [
+      {
+        "desde": "2024-03-27",
+        "hasta": "2024-04-03",
+        "dias_corridos": 7
+      }
+    ],
+    "ruedas_al30d": 1243,
+    "ccl": {
+      "ruedas_al30": 1251,
+      "ruedas_al30c": 1153,
+      "ruedas_comunes": 1153,
+      "ruedas_al30_sin_al30c": 98,
+      "ruedas_al30c_sin_al30": 0,
+      "al30c_share_sin_volumen_por_anio": {
+        "2021": 0.097,
+        "2022": 0.672,
+        "2023": 0.096,
+        "2024": 0.004,
+        "2025": 0.0,
+        "2026": 0.0
+      }
+    },
+    "control_multiple": "ccl",
+    "ex_pago": [
+      {
+        "fecha": "2024-07-08",
+        "log_retorno": -0.0727629042275,
+        "variacion_pct": -7.01787394167
+      },
+      {
+        "fecha": "2025-01-08",
+        "log_retorno": -0.114863325553,
+        "variacion_pct": -10.8512020793
+      },
+      {
+        "fecha": "2025-07-08",
+        "log_retorno": -0.127172602792,
+        "variacion_pct": -11.9418331375
+      },
+      {
+        "fecha": "2026-01-08",
+        "log_retorno": -0.136793620867,
+        "variacion_pct": -12.7849798838
+      },
+      {
+        "fecha": "2026-07-08",
+        "log_retorno": -0.140476483313,
+        "variacion_pct": -13.1055900621
+      }
+    ],
+    "factores_estacionales_stl": {
+      "T1": 0.959744751108,
+      "T2": 1.07501682809,
+      "T3": 0.99140009207,
+      "T4": 0.977934522354
+    },
+    "factores_estacionales_indec": {
+      "T1": 0.956553394999,
+      "T2": 1.07577698009,
+      "T3": 0.988496961024,
+      "T4": 0.979789919435
+    },
+    "autocorrelacion_var_pbi_mensual": 0.782650638324,
+    "autocorrelacion_var_pbi_trimestral": -0.141285229897,
+    "trimestres_pbi_en_ventana": 20
+  },
+  "estimadores": {
+    "var_bono": {
+      "n": 56,
+      "media": 2.51580761773,
+      "varianza": 157.061351088,
+      "desvio": 12.5324120219,
+      "error_estandar": 1.67471400057,
+      "minimo": -19.53125,
+      "maximo": 39.4789579158,
+      "asimetria": 0.812370388787,
+      "curtosis_exceso": 1.32877019958
+    },
+    "var_pbi": {
+      "n": 56,
+      "media": 0.132551225482,
+      "varianza": 0.702537685208,
+      "desvio": 0.838175211521,
+      "error_estandar": 0.112005873986,
+      "minimo": -1.85473206998,
+      "maximo": 2.2962913165,
+      "asimetria": -0.165328777938,
+      "curtosis_exceso": 0.526671823746
+    },
+    "proporcion_suba": {
+      "n": 56,
+      "exitos": 32,
+      "proporcion": 0.571428571429,
+      "error_estandar": 0.0661300071266
+    },
+    "var_ccl": {
+      "n": 56,
+      "media": 4.38331480537,
+      "varianza": 107.92375705,
+      "desvio": 10.3886359571,
+      "error_estandar": 1.38823987384,
+      "minimo": -16.0902055446,
+      "maximo": 32.0381991105,
+      "asimetria": 0.642287887205,
+      "curtosis_exceso": 0.0874053132589
+    }
+  },
+  "autocorrelaciones": {
+    "var_bono": 0.0274707721896,
+    "var_pbi": 0.782650638324
+  },
+  "intervalos": {
+    "media_var_bono": {
+      "parametro": "media",
+      "estimacion": 2.51580761773,
+      "error_estandar": 1.67471400057,
+      "gl": 55,
+      "cuantil": 2.00404478329,
+      "margen": 3.35620185635,
+      "inferior": -0.840394238619,
+      "superior": 5.87200947408,
+      "confianza": 0.95
+    },
+    "media_var_pbi": {
+      "parametro": "media",
+      "estimacion": 0.132551225482,
+      "error_estandar": 0.112005873986,
+      "gl": 55,
+      "cuantil": 2.00404478329,
+      "margen": 0.224464787459,
+      "inferior": -0.0919135619768,
+      "superior": 0.35701601294,
+      "confianza": 0.95
+    },
+    "proporcion_suba": {
+      "parametro": "proporcion",
+      "estimacion": 0.571428571429,
+      "error_estandar": 0.0661300071266,
+      "cuantil": 1.95996398454,
+      "margen": 0.129612432266,
+      "inferior": 0.441816139163,
+      "superior": 0.701041003694,
+      "confianza": 0.95
+    }
+  },
+  "bondad_ajuste": {
+    "var_bono": {
+      "chi2": {
+        "aplicable": true,
+        "n": 56,
+        "k": 8,
+        "gl": 5,
+        "media": 2.51580761773,
+        "desvio": 12.5324120219,
+        "estadistico": 6.85714285714,
+        "valor_critico": 11.0704976935,
+        "p_valor": 0.231483428591,
+        "rechaza_h0": false,
+        "tabla": [
+          {
+            "clase": 1,
+            "limite_inferior": "-inf",
+            "limite_superior": -11.9008447863,
+            "observada": 7,
+            "esperada": 7.0,
+            "contribucion": 0.0
+          },
+          {
+            "clase": 2,
+            "limite_inferior": -11.9008447863,
+            "limite_superior": -5.93717583631,
+            "observada": 4,
+            "esperada": 7.0,
+            "contribucion": 1.28571428571
+          },
+          {
+            "clase": 3,
+            "limite_inferior": -5.93717583631,
+            "limite_superior": -1.47751217788,
+            "observada": 9,
+            "esperada": 7.0,
+            "contribucion": 0.571428571429
+          },
+          {
+            "clase": 4,
+            "limite_inferior": -1.47751217788,
+            "limite_superior": 2.51580761773,
+            "observada": 11,
+            "esperada": 7.0,
+            "contribucion": 2.28571428571
+          },
+          {
+            "clase": 5,
+            "limite_inferior": 2.51580761773,
+            "limite_superior": 6.50912741334,
+            "observada": 8,
+            "esperada": 7.0,
+            "contribucion": 0.142857142857
+          },
+          {
+            "clase": 6,
+            "limite_inferior": 6.50912741334,
+            "limite_superior": 10.9687910718,
+            "observada": 8,
+            "esperada": 7.0,
+            "contribucion": 0.142857142857
+          },
+          {
+            "clase": 7,
+            "limite_inferior": 10.9687910718,
+            "limite_superior": 16.9324600218,
+            "observada": 3,
+            "esperada": 7.0,
+            "contribucion": 2.28571428571
+          },
+          {
+            "clase": 8,
+            "limite_inferior": 16.9324600218,
+            "limite_superior": "inf",
+            "observada": 6,
+            "esperada": 7.0,
+            "contribucion": 0.142857142857
+          }
+        ]
+      },
+      "shapiro": {
+        "n": 56,
+        "estadistico": 0.939007404556,
+        "p_valor": 0.00704618029963,
+        "rechaza_h0": true
+      },
+      "coinciden": false
+    },
+    "var_pbi": {
+      "chi2": {
+        "aplicable": true,
+        "n": 56,
+        "k": 8,
+        "gl": 5,
+        "media": 0.132551225482,
+        "desvio": 0.838175211521,
+        "estadistico": 19.4285714286,
+        "valor_critico": 11.0704976935,
+        "p_valor": 0.00159891752205,
+        "rechaza_h0": true,
+        "tabla": [
+          {
+            "clase": 1,
+            "limite_inferior": "-inf",
+            "limite_superior": -0.831643109738,
+            "observada": 8,
+            "esperada": 7.0,
+            "contribucion": 0.142857142857
+          },
+          {
+            "clase": 2,
+            "limite_inferior": -0.831643109738,
+            "limite_superior": -0.432789363557,
+            "observada": 3,
+            "esperada": 7.0,
+            "contribucion": 2.28571428571
+          },
+          {
+            "clase": 3,
+            "limite_inferior": -0.432789363557,
+            "limite_superior": -0.134524390808,
+            "observada": 4,
+            "esperada": 7.0,
+            "contribucion": 1.28571428571
+          },
+          {
+            "clase": 4,
+            "limite_inferior": -0.134524390808,
+            "limite_superior": 0.132551225482,
+            "observada": 10,
+            "esperada": 7.0,
+            "contribucion": 1.28571428571
+          },
+          {
+            "clase": 5,
+            "limite_inferior": 0.132551225482,
+            "limite_superior": 0.399626841771,
+            "observada": 16,
+            "esperada": 7.0,
+            "contribucion": 11.5714285714
+          },
+          {
+            "clase": 6,
+            "limite_inferior": 0.399626841771,
+            "limite_superior": 0.697891814521,
+            "observada": 3,
+            "esperada": 7.0,
+            "contribucion": 2.28571428571
+          },
+          {
+            "clase": 7,
+            "limite_inferior": 0.697891814521,
+            "limite_superior": 1.0967455607,
+            "observada": 5,
+            "esperada": 7.0,
+            "contribucion": 0.571428571429
+          },
+          {
+            "clase": 8,
+            "limite_inferior": 1.0967455607,
+            "limite_superior": "inf",
+            "observada": 7,
+            "esperada": 7.0,
+            "contribucion": 0.0
+          }
+        ]
+      },
+      "shapiro": {
+        "n": 56,
+        "estadistico": 0.954154816085,
+        "p_valor": 0.0327365808335,
+        "rechaza_h0": true
+      },
+      "coinciden": true
+    },
+    "residuos_principal": {
+      "chi2": {
+        "aplicable": true,
+        "n": 56,
+        "k": 8,
+        "gl": 5,
+        "media": -7.61295788314e-16,
+        "desvio": 12.5324053378,
+        "estadistico": 6.85714285714,
+        "valor_critico": 11.0704976935,
+        "p_valor": 0.231483428591,
+        "rechaza_h0": false,
+        "tabla": [
+          {
+            "clase": 1,
+            "limite_inferior": "-inf",
+            "limite_superior": -14.4166447149,
+            "observada": 7,
+            "esperada": 7.0,
+            "contribucion": 0.0
+          },
+          {
+            "clase": 2,
+            "limite_inferior": -14.4166447149,
+            "limite_superior": -8.45297894563,
+            "observada": 4,
+            "esperada": 7.0,
+            "contribucion": 1.28571428571
+          },
+          {
+            "clase": 3,
+            "limite_inferior": -8.45297894563,
+            "limite_superior": -3.99331766577,
+            "observada": 9,
+            "esperada": 7.0,
+            "contribucion": 0.571428571429
+          },
+          {
+            "clase": 4,
+            "limite_inferior": -3.99331766577,
+            "limite_superior": -7.61295788314e-16,
+            "observada": 11,
+            "esperada": 7.0,
+            "contribucion": 2.28571428571
+          },
+          {
+            "clase": 5,
+            "limite_inferior": -7.61295788314e-16,
+            "limite_superior": 3.99331766577,
+            "observada": 8,
+            "esperada": 7.0,
+            "contribucion": 0.142857142857
+          },
+          {
+            "clase": 6,
+            "limite_inferior": 3.99331766577,
+            "limite_superior": 8.45297894563,
+            "observada": 8,
+            "esperada": 7.0,
+            "contribucion": 0.142857142857
+          },
+          {
+            "clase": 7,
+            "limite_inferior": 8.45297894563,
+            "limite_superior": 14.4166447149,
+            "observada": 3,
+            "esperada": 7.0,
+            "contribucion": 2.28571428571
+          },
+          {
+            "clase": 8,
+            "limite_inferior": 14.4166447149,
+            "limite_superior": "inf",
+            "observada": 6,
+            "esperada": 7.0,
+            "contribucion": 0.142857142857
+          }
+        ]
+      },
+      "shapiro": {
+        "n": 56,
+        "estadistico": 0.938977315309,
+        "p_valor": 0.00702545369568,
+        "rechaza_h0": true
+      },
+      "coinciden": false
+    }
+  },
+  "hipotesis_principal": {
+    "d0": {
+      "n": 56,
+      "gl": 54,
+      "b0": 2.51376067873,
+      "b1": 0.0154426259913,
+      "ee_b0": 1.71153210901,
+      "ee_b1": 2.03471103425,
+      "t_b0": 1.46871955571,
+      "t_b1": 0.0075895917068,
+      "p_b0": 0.147710542706,
+      "p_b1": 0.993972409771,
+      "valor_critico_t": 2.00487928819,
+      "ic_b0": {
+        "estimacion": 2.51376067873,
+        "error_estandar": 1.71153210901,
+        "gl": 54,
+        "cuantil": 2.00487928819,
+        "inferior": -0.917654597699,
+        "superior": 5.94517595516,
+        "confianza": 0.95
+      },
+      "ic_b1": {
+        "estimacion": 0.0154426259913,
+        "error_estandar": 2.03471103425,
+        "gl": 54,
+        "cuantil": 2.00487928819,
+        "inferior": -4.06390738402,
+        "superior": 4.09479263601,
+        "confianza": 0.95
+      },
+      "r2": 1.06670075617e-06,
+      "r": 0.00103281206236,
+      "s2": 159.969723986,
+      "s": 12.6479138195,
+      "f": 5.76019022759e-05,
+      "gl_f": [
+        1,
+        54
+      ],
+      "p_f": 0.993972409771,
+      "sce": 8638.36509527,
+      "scr": 0.00921456040817,
+      "sct": 8638.37430983,
+      "sxx": 38.6395726864,
+      "syy": 8638.37430983,
+      "sxy": 0.596696469459,
+      "x_media": 0.132551225482,
+      "y_media": 2.51580761773,
+      "sumas": {
+        "n": 56,
+        "sum_x": 7.42286862698,
+        "sum_y": 140.885226593,
+        "sum_x2": 39.6234830195,
+        "sum_y2": 8992.81443612,
+        "sum_xy": 19.2712059066
+      }
+    },
+    "d1": {
+      "n": 55,
+      "gl": 53,
+      "b0": 2.31044905965,
+      "b1": 1.89968339846,
+      "ee_b0": 1.72561203034,
+      "ee_b1": 2.04580245278,
+      "t_b0": 1.33891571166,
+      "t_b1": 0.928576166231,
+      "p_b0": 0.186312747538,
+      "p_b1": 0.357318658819,
+      "valor_critico_t": 2.00574599532,
+      "ic_b0": {
+        "estimacion": 2.31044905965,
+        "error_estandar": 1.72561203034,
+        "gl": 53,
+        "cuantil": 2.00574599532,
+        "inferior": -1.15069035968,
+        "superior": 5.77158847898,
+        "confianza": 0.95
+      },
+      "ic_b1": {
+        "estimacion": 1.89968339846,
+        "error_estandar": 2.04580245278,
+        "gl": 53,
+        "cuantil": 2.00574599532,
+        "inferior": -2.2036766784,
+        "superior": 6.00304347533,
+        "confianza": 0.95
+      },
+      "r2": 0.0160084964389,
+      "r": 0.126524687073,
+      "s2": 160.337965527,
+      "s": 12.6624628539,
+      "f": 0.862253696493,
+      "gl_f": [
+        1,
+        53
+      ],
+      "p_f": 0.357318658819,
+      "sce": 8497.91217295,
+      "scr": 138.252003464,
+      "sct": 8636.16417641,
+      "sxx": 38.3097200846,
+      "syy": 8636.16417641,
+      "sxy": 72.7763392446,
+      "x_media": 0.122202554042,
+      "y_media": 2.54259522281,
+      "sumas": {
+        "n": 55,
+        "sum_x": 6.72114047229,
+        "sum_y": 139.842737255,
+        "sum_x2": 39.1310606164,
+        "sum_y2": 8991.7276521,
+        "sum_xy": 89.8654789013
+      }
+    }
+  },
+  "desfases": [
+    {
+      "d": -3,
+      "etiqueta": "exploratoria",
+      "n": 56,
+      "b1": -4.31646148248,
+      "ee_b1": 1.92624591358,
+      "t": -2.24086730154,
+      "gl": 54,
+      "p_valor": 0.0291687943801,
+      "ic_b1": {
+        "estimacion": -4.31646148248,
+        "error_estandar": 1.92624591358,
+        "gl": 54,
+        "cuantil": 2.00487928819,
+        "inferior": -8.17835201858,
+        "superior": -0.454570946378,
+        "confianza": 0.95
+      },
+      "r2": 0.0850789531246,
+      "umbral": 0.01,
+      "significativo": false,
+      "periodo_inicio": "2021-10",
+      "periodo_fin": "2026-05"
+    },
+    {
+      "d": -2,
+      "etiqueta": "exploratoria",
+      "n": 56,
+      "b1": -5.87007986797,
+      "ee_b1": 1.85362862339,
+      "t": -3.16680471692,
+      "gl": 54,
+      "p_valor": 0.002535010582,
+      "ic_b1": {
+        "estimacion": -5.87007986797,
+        "error_estandar": 1.85362862339,
+        "gl": 54,
+        "cuantil": 2.00487928819,
+        "inferior": -9.586381503,
+        "superior": -2.15377823294,
+        "confianza": 0.95
+      },
+      "r2": 0.156627568812,
+      "umbral": 0.01,
+      "significativo": true,
+      "periodo_inicio": "2021-10",
+      "periodo_fin": "2026-05"
+    },
+    {
+      "d": -1,
+      "etiqueta": "exploratoria",
+      "n": 56,
+      "b1": -3.7514755591,
+      "ee_b1": 1.9597518116,
+      "t": -1.91426053896,
+      "gl": 54,
+      "p_valor": 0.0608920357939,
+      "ic_b1": {
+        "estimacion": -3.7514755591,
+        "error_estandar": 1.9597518116,
+        "gl": 54,
+        "cuantil": 2.00487928819,
+        "inferior": -7.68054137618,
+        "superior": 0.177590257971,
+        "confianza": 0.95
+      },
+      "r2": 0.0635468994686,
+      "umbral": 0.01,
+      "significativo": false,
+      "periodo_inicio": "2021-10",
+      "periodo_fin": "2026-05"
+    },
+    {
+      "d": 0,
+      "etiqueta": "principal",
+      "n": 56,
+      "b1": 0.0154426259913,
+      "ee_b1": 2.03471103425,
+      "t": 0.0075895917068,
+      "gl": 54,
+      "p_valor": 0.993972409771,
+      "ic_b1": {
+        "estimacion": 0.0154426259913,
+        "error_estandar": 2.03471103425,
+        "gl": 54,
+        "cuantil": 2.00487928819,
+        "inferior": -4.06390738402,
+        "superior": 4.09479263601,
+        "confianza": 0.95
+      },
+      "r2": 1.06670075617e-06,
+      "umbral": 0.05,
+      "significativo": false,
+      "periodo_inicio": "2021-10",
+      "periodo_fin": "2026-05"
+    },
+    {
+      "d": 1,
+      "etiqueta": "extensión",
+      "n": 55,
+      "b1": 1.89968339846,
+      "ee_b1": 2.04580245278,
+      "t": 0.928576166231,
+      "gl": 53,
+      "p_valor": 0.357318658819,
+      "ic_b1": {
+        "estimacion": 1.89968339846,
+        "error_estandar": 2.04580245278,
+        "gl": 53,
+        "cuantil": 2.00574599532,
+        "inferior": -2.2036766784,
+        "superior": 6.00304347533,
+        "confianza": 0.95
+      },
+      "r2": 0.0160084964389,
+      "umbral": 0.05,
+      "significativo": false,
+      "periodo_inicio": "2021-10",
+      "periodo_fin": "2026-04"
+    },
+    {
+      "d": 2,
+      "etiqueta": "exploratoria",
+      "n": 54,
+      "b1": 0.335776605845,
+      "ee_b1": 2.0854212741,
+      "t": 0.161011403315,
+      "gl": 52,
+      "p_valor": 0.872708341446,
+      "ic_b1": {
+        "estimacion": 0.335776605845,
+        "error_estandar": 2.0854212741,
+        "gl": 52,
+        "cuantil": 2.00664680506,
+        "inferior": -3.84892733103,
+        "superior": 4.52048054272,
+        "confianza": 0.95
+      },
+      "r2": 0.000498302954939,
+      "umbral": 0.01,
+      "significativo": false,
+      "periodo_inicio": "2021-10",
+      "periodo_fin": "2026-03"
+    },
+    {
+      "d": 3,
+      "etiqueta": "exploratoria",
+      "n": 53,
+      "b1": -2.35904863373,
+      "ee_b1": 2.08033696864,
+      "t": -1.13397428844,
+      "gl": 51,
+      "p_valor": 0.262107584428,
+      "ic_b1": {
+        "estimacion": -2.35904863373,
+        "error_estandar": 2.08033696864,
+        "gl": 51,
+        "cuantil": 2.00758377032,
+        "inferior": -6.53549936876,
+        "superior": 1.81740210129,
+        "confianza": 0.95
+      },
+      "r2": 0.0245935853402,
+      "umbral": 0.01,
+      "significativo": false,
+      "periodo_inicio": "2021-10",
+      "periodo_fin": "2026-02"
+    }
+  ],
+  "regresion_multiple": {
+    "n": 56,
+    "k": 2,
+    "gl": 53,
+    "coeficientes": [
+      {
+        "nombre": "constante",
+        "coeficiente": 3.52698459663,
+        "error_estandar": 1.85181851673,
+        "t": 1.90460596693,
+        "p_valor": 0.0622646884328,
+        "ic": {
+          "estimacion": 3.52698459663,
+          "error_estandar": 1.85181851673,
+          "gl": 53,
+          "cuantil": 2.00574599532,
+          "inferior": -0.187292977353,
+          "superior": 7.24126217061,
+          "confianza": 0.95
+        }
+      },
+      {
+        "nombre": "var_pbi",
+        "coeficiente": -0.222160946757,
+        "error_estandar": 2.02580831675,
+        "t": -0.109665334534,
+        "p_valor": 0.913088980248,
+        "ic": {
+          "estimacion": -0.222160946757,
+          "error_estandar": 2.02580831675,
+          "gl": 53,
+          "cuantil": 2.00574599532,
+          "inferior": -4.28541786536,
+          "superior": 3.84109597184,
+          "confianza": 0.95
+        }
+      },
+      {
+        "nombre": "var_ccl",
+        "coeficiente": -0.223969602172,
+        "error_estandar": 0.163446127229,
+        "t": -1.37029617017,
+        "p_valor": 0.176371017343,
+        "ic": {
+          "estimacion": -0.223969602172,
+          "error_estandar": 0.163446127229,
+          "gl": 53,
+          "cuantil": 2.00574599532,
+          "inferior": -0.551801017312,
+          "superior": 0.103861812969,
+          "confianza": 0.95
+        }
+      }
+    ],
+    "r2": 0.0342173183718,
+    "r2_ajustado": -0.0022273111236,
+    "s": 12.5463610494,
+    "s2": 157.411175582,
+    "sce": 8342.79230586,
+    "sct": 8638.37430983,
+    "f": 0.938885066073,
+    "gl_f": [
+      2,
+      53
+    ],
+    "p_f": 0.397470091418,
+    "modo": "ccl",
+    "periodo_inicio": "2021-10",
+    "periodo_fin": "2026-05",
+    "hac": {
+      "maxlags": 3,
+      "gl": 53,
+      "coeficientes": [
+        {
+          "nombre": "constante",
+          "coeficiente": 3.52698459663,
+          "error_estandar": 1.86625579282,
+          "t": 1.8898720155,
+          "p_valor": 0.0642495289199,
+          "ic": {
+            "inferior": -0.216250486068,
+            "superior": 7.27021967932
+          }
+        },
+        {
+          "nombre": "var_pbi",
+          "coeficiente": -0.222160946757,
+          "error_estandar": 3.23586020988,
+          "t": -0.0686559160001,
+          "p_valor": 0.94552188291,
+          "ic": {
+            "inferior": -6.71247460413,
+            "superior": 6.26815271062
+          }
+        },
+        {
+          "nombre": "var_ccl",
+          "coeficiente": -0.223969602172,
+          "error_estandar": 0.151171624486,
+          "t": -1.48155847986,
+          "p_valor": 0.144379151798,
+          "ic": {
+            "inferior": -0.527181482591,
+            "superior": 0.0792422782476
+          }
+        }
+      ]
+    }
+  },
+  "anova": {
+    "N": 56,
+    "k": 3,
+    "gran_media": 2.51580761773,
+    "grupos": [
+      {
+        "grupo": "bajo",
+        "n": 19,
+        "media": 3.44060129576,
+        "desvio": 16.0598245864,
+        "ic": {
+          "parametro": "media",
+          "estimacion": 3.44060129576,
+          "error_estandar": 3.68437644332,
+          "gl": 18,
+          "cuantil": 2.10092204024,
+          "margen": 7.74058767432,
+          "inferior": -4.29998637857,
+          "superior": 11.1811889701,
+          "confianza": 0.95
+        }
+      },
+      {
+        "grupo": "medio",
+        "n": 18,
+        "media": 3.33527860268,
+        "desvio": 9.44440636059,
+        "ic": {
+          "parametro": "media",
+          "estimacion": 3.33527860268,
+          "error_estandar": 2.22606792728,
+          "gl": 17,
+          "cuantil": 2.10981557783,
+          "margen": 4.6965927903,
+          "inferior": -1.36131418761,
+          "superior": 8.03187139298,
+          "confianza": 0.95
+        }
+      },
+      {
+        "grupo": "alto",
+        "n": 19,
+        "media": 0.814673006585,
+        "desvio": 11.5378233033,
+        "ic": {
+          "parametro": "media",
+          "estimacion": 0.814673006585,
+          "error_estandar": 2.64695820039,
+          "gl": 18,
+          "cuantil": 2.10092204024,
+          "margen": 5.56105282279,
+          "inferior": -4.7463798162,
+          "superior": 6.37572582937,
+          "confianza": 0.95
+        }
+      }
+    ],
+    "sc_entre": 83.3205324442,
+    "sc_dentro": 8555.05377739,
+    "sc_total": 8638.37430983,
+    "gl_entre": 2,
+    "gl_dentro": 53,
+    "gl_total": 55,
+    "cm_entre": 41.6602662221,
+    "cm_dentro": 161.416109007,
+    "f": 0.258092370571,
+    "valor_critico": 3.17162594804,
+    "p_valor": 0.773489141003,
+    "eta2": 0.00964539500787,
+    "aplicable": true,
+    "supuestos": {
+      "shapiro_por_grupo": [
+        {
+          "grupo": "bajo",
+          "n": 19,
+          "estadistico": 0.962459227366,
+          "p_valor": 0.621679084242,
+          "rechaza_h0": false
+        },
+        {
+          "grupo": "medio",
+          "n": 18,
+          "estadistico": 0.851171034095,
+          "p_valor": 0.00883704473127,
+          "rechaza_h0": true
+        },
+        {
+          "grupo": "alto",
+          "n": 19,
+          "estadistico": 0.895674659027,
+          "p_valor": 0.0406561546595,
+          "rechaza_h0": true
+        }
+      ],
+      "levene": {
+        "estadistico": 3.13122071583,
+        "gl": [
+          2,
+          53
+        ],
+        "p_valor": 0.0518385395649,
+        "rechaza_h0": false
+      }
+    },
+    "tukey": null,
+    "grupos_chicos": [],
+    "factor": "terciles de la variación del PBI",
+    "limites_terciles": {
+      "bajo": [
+        -1.85473206998,
+        0.0672533905618
+      ],
+      "medio": [
+        0.08681598753,
+        0.266550445661
+      ],
+      "alto": [
+        0.29783865946,
+        2.2962913165
+      ]
+    }
+  },
+  "anova_umbral": {
+    "N": 56,
+    "k": 3,
+    "gran_media": 2.51580761773,
+    "grupos": [
+      {
+        "grupo": "bajo",
+        "n": 10,
+        "media": 3.56490811611,
+        "desvio": 19.1102591097,
+        "ic": {
+          "parametro": "media",
+          "estimacion": 3.56490811611,
+          "error_estandar": 6.04319454626,
+          "gl": 9,
+          "cuantil": 2.2621571628,
+          "margen": 13.670655829,
+          "inferior": -10.1057477129,
+          "superior": 17.2355639451,
+          "confianza": 0.95
+        }
+      },
+      {
+        "grupo": "medio",
+        "n": 32,
+        "media": 3.18174196593,
+        "desvio": 9.83632597895,
+        "ic": {
+          "parametro": "media",
+          "estimacion": 3.18174196593,
+          "error_estandar": 1.73883320042,
+          "gl": 31,
+          "cuantil": 2.0395134464,
+          "margen": 3.54637369329,
+          "inferior": -0.364631727365,
+          "superior": 6.72811565922,
+          "confianza": 0.95
+        }
+      },
+      {
+        "grupo": "alto",
+        "n": 14,
+        "media": 0.244314465854,
+        "desvio": 13.1698112266,
+        "ic": {
+          "parametro": "media",
+          "estimacion": 0.244314465854,
+          "error_estandar": 3.51978010418,
+          "gl": 13,
+          "cuantil": 2.16036865646,
+          "margen": 7.60402261471,
+          "inferior": -7.35970814886,
+          "superior": 7.84833708056,
+          "confianza": 0.95
+        }
+      }
+    ],
+    "sc_entre": 97.4326482989,
+    "sc_dentro": 8540.94166153,
+    "sc_total": 8638.37430983,
+    "gl_entre": 2,
+    "gl_dentro": 53,
+    "gl_total": 55,
+    "cm_entre": 48.7163241495,
+    "cm_dentro": 161.14984267,
+    "f": 0.302304509531,
+    "valor_critico": 3.17162594804,
+    "p_valor": 0.740378890434,
+    "eta2": 0.0112790491364,
+    "aplicable": true,
+    "supuestos": {
+      "shapiro_por_grupo": [
+        {
+          "grupo": "bajo",
+          "n": 10,
+          "estadistico": 0.936607280809,
+          "p_valor": 0.515915292428,
+          "rechaza_h0": false
+        },
+        {
+          "grupo": "medio",
+          "n": 32,
+          "estadistico": 0.913317673786,
+          "p_valor": 0.0137537310737,
+          "rechaza_h0": true
+        },
+        {
+          "grupo": "alto",
+          "n": 14,
+          "estadistico": 0.894506022738,
+          "p_valor": 0.0938944542771,
+          "rechaza_h0": false
+        }
+      ],
+      "levene": {
+        "estadistico": 4.01222038754,
+        "gl": [
+          2,
+          53
+        ],
+        "p_valor": 0.0238484207756,
+        "rechaza_h0": true
+      }
+    },
+    "tukey": null,
+    "grupos_chicos": [],
+    "factor": "umbrales fijos de ±0,5 % en la variación del PBI"
+  },
+  "prueba_complementaria": {
+    "grupo_1": {
+      "n": 32,
+      "media": 0.127744986256,
+      "varianza": 0.727467964782,
+      "desvio": 0.852917325877,
+      "error_estandar": 0.15077590623,
+      "minimo": -1.85473206998,
+      "maximo": 2.2962913165,
+      "asimetria": 0.0830954614176,
+      "curtosis_exceso": 1.16198725259
+    },
+    "grupo_2": {
+      "n": 24,
+      "media": 0.138959544449,
+      "varianza": 0.699406129696,
+      "desvio": 0.836305045839,
+      "error_estandar": 0.170710052635,
+      "minimo": -1.5444348366,
+      "maximo": 1.54726546689,
+      "asimetria": -0.538901973759,
+      "curtosis_exceso": -0.00753129100772
+    },
+    "prueba_f": {
+      "estadistico": 1.0401223751,
+      "gl": [
+        31,
+        23
+      ],
+      "p_valor": 0.935669889852,
+      "rechaza_h0": false
+    },
+    "t_agrupada": {
+      "tipo": "varianza agrupada",
+      "diferencia": -0.0112145581927,
+      "error_estandar": 0.228414141232,
+      "estadistico": -0.049097477644,
+      "gl": 54.0,
+      "p_valor": 0.961022762731,
+      "rechaza_h0": false,
+      "ic": {
+        "estimacion": -0.0112145581927,
+        "error_estandar": 0.228414141232,
+        "gl": 54,
+        "cuantil": 2.00487928819,
+        "inferior": -0.469157339079,
+        "superior": 0.446728222693,
+        "confianza": 0.95,
+        "parametro": "diferencia de medias"
+      }
+    },
+    "t_welch": {
+      "tipo": "Welch",
+      "diferencia": -0.0112145581927,
+      "error_estandar": 0.227761489216,
+      "estadistico": -0.0492381667827,
+      "gl": 50.2106276874,
+      "p_valor": 0.960924839592,
+      "rechaza_h0": false,
+      "ic": {
+        "estimacion": -0.0112145581927,
+        "error_estandar": 0.227761489216,
+        "gl": 50.2106276874,
+        "cuantil": 2.00835037141,
+        "inferior": -0.468639429654,
+        "superior": 0.446210313269,
+        "confianza": 0.95,
+        "parametro": "diferencia de medias"
+      }
+    },
+    "test_de_decision": "varianza agrupada",
+    "decision": {
+      "tipo": "varianza agrupada",
+      "diferencia": -0.0112145581927,
+      "error_estandar": 0.228414141232,
+      "estadistico": -0.049097477644,
+      "gl": 54.0,
+      "p_valor": 0.961022762731,
+      "rechaza_h0": false,
+      "ic": {
+        "estimacion": -0.0112145581927,
+        "error_estandar": 0.228414141232,
+        "gl": 54,
+        "cuantil": 2.00487928819,
+        "inferior": -0.469157339079,
+        "superior": 0.446728222693,
+        "confianza": 0.95,
+        "parametro": "diferencia de medias"
+      }
+    },
+    "d_cohen": -0.0132578342315,
+    "desvio_agrupado": 0.8458816121,
+    "diferencia_minima_detectable": {
+      "d": 0.770303882783,
+      "en_unidades": 0.651585890176,
+      "potencia": 0.8
+    },
+    "aplicable": true,
+    "normalidad": {
+      "suba": {
+        "n": 32,
+        "estadistico": 0.932550806758,
+        "p_valor": 0.0461463087339,
+        "rechaza_h0": true
+      },
+      "baja": {
+        "n": 24,
+        "estadistico": 0.944369045376,
+        "p_valor": 0.203964819793,
+        "rechaza_h0": false
+      }
+    },
+    "autocorrelacion_var_pbi": 0.782650638324,
+    "sin_cambio": 0
+  },
+  "diagnosticos": {
+    "regresion_simple": {
+      "durbin_watson": 1.93988867274,
+      "breusch_pagan": {
+        "estadistico": 3.57569441591,
+        "gl": 1,
+        "p_valor": 0.0586309302992,
+        "rechaza_h0": false
+      },
+      "breusch_godfrey": {
+        "estadistico": 0.860614669755,
+        "gl": 3,
+        "p_valor": 0.834920458091,
+        "rechaza_h0": false
+      },
+      "normalidad_residuos": {
+        "chi2": {
+          "aplicable": true,
+          "n": 56,
+          "k": 8,
+          "gl": 5,
+          "media": -7.61295788314e-16,
+          "desvio": 12.5324053378,
+          "estadistico": 6.85714285714,
+          "valor_critico": 11.0704976935,
+          "p_valor": 0.231483428591,
+          "rechaza_h0": false,
+          "tabla": [
+            {
+              "clase": 1,
+              "limite_inferior": "-inf",
+              "limite_superior": -14.4166447149,
+              "observada": 7,
+              "esperada": 7.0,
+              "contribucion": 0.0
+            },
+            {
+              "clase": 2,
+              "limite_inferior": -14.4166447149,
+              "limite_superior": -8.45297894563,
+              "observada": 4,
+              "esperada": 7.0,
+              "contribucion": 1.28571428571
+            },
+            {
+              "clase": 3,
+              "limite_inferior": -8.45297894563,
+              "limite_superior": -3.99331766577,
+              "observada": 9,
+              "esperada": 7.0,
+              "contribucion": 0.571428571429
+            },
+            {
+              "clase": 4,
+              "limite_inferior": -3.99331766577,
+              "limite_superior": -7.61295788314e-16,
+              "observada": 11,
+              "esperada": 7.0,
+              "contribucion": 2.28571428571
+            },
+            {
+              "clase": 5,
+              "limite_inferior": -7.61295788314e-16,
+              "limite_superior": 3.99331766577,
+              "observada": 8,
+              "esperada": 7.0,
+              "contribucion": 0.142857142857
+            },
+            {
+              "clase": 6,
+              "limite_inferior": 3.99331766577,
+              "limite_superior": 8.45297894563,
+              "observada": 8,
+              "esperada": 7.0,
+              "contribucion": 0.142857142857
+            },
+            {
+              "clase": 7,
+              "limite_inferior": 8.45297894563,
+              "limite_superior": 14.4166447149,
+              "observada": 3,
+              "esperada": 7.0,
+              "contribucion": 2.28571428571
+            },
+            {
+              "clase": 8,
+              "limite_inferior": 14.4166447149,
+              "limite_superior": "inf",
+              "observada": 6,
+              "esperada": 7.0,
+              "contribucion": 0.142857142857
+            }
+          ]
+        },
+        "shapiro": {
+          "n": 56,
+          "estadistico": 0.938977315309,
+          "p_valor": 0.00702545369568,
+          "rechaza_h0": true
+        },
+        "coinciden": false
+      }
+    },
+    "regresion_multiple": {
+      "durbin_watson": 1.94754843422,
+      "breusch_pagan": {
+        "estadistico": 3.35277954621,
+        "gl": 2,
+        "p_valor": 0.187048044418,
+        "rechaza_h0": false
+      },
+      "breusch_godfrey": {
+        "estadistico": 0.57132949955,
+        "gl": 3,
+        "p_valor": 0.902963296495,
+        "rechaza_h0": false
+      },
+      "normalidad_residuos": {
+        "chi2": {
+          "aplicable": true,
+          "n": 56,
+          "k": 8,
+          "gl": 5,
+          "media": 7.61295788314e-16,
+          "desvio": 12.3161330309,
+          "estadistico": 8.57142857143,
+          "valor_critico": 11.0704976935,
+          "p_valor": 0.127428679776,
+          "rechaza_h0": false,
+          "tabla": [
+            {
+              "clase": 1,
+              "limite_inferior": "-inf",
+              "limite_superior": -14.1678560007,
+              "observada": 8,
+              "esperada": 7.0,
+              "contribucion": 0.142857142857
+            },
+            {
+              "clase": 2,
+              "limite_inferior": -14.1678560007,
+              "limite_superior": -8.30710549136,
+              "observada": 5,
+              "esperada": 7.0,
+              "contribucion": 0.571428571429
+            },
+            {
+              "clase": 3,
+              "limite_inferior": -8.30710549136,
+              "limite_superior": -3.92440479545,
+              "observada": 6,
+              "esperada": 7.0,
+              "contribucion": 0.142857142857
+            },
+            {
+              "clase": 4,
+              "limite_inferior": -3.92440479545,
+              "limite_superior": 7.61295788314e-16,
+              "observada": 13,
+              "esperada": 7.0,
+              "contribucion": 5.14285714286
+            },
+            {
+              "clase": 5,
+              "limite_inferior": 7.61295788314e-16,
+              "limite_superior": 3.92440479545,
+              "observada": 5,
+              "esperada": 7.0,
+              "contribucion": 0.571428571429
+            },
+            {
+              "clase": 6,
+              "limite_inferior": 3.92440479545,
+              "limite_superior": 8.30710549136,
+              "observada": 9,
+              "esperada": 7.0,
+              "contribucion": 0.571428571429
+            },
+            {
+              "clase": 7,
+              "limite_inferior": 8.30710549136,
+              "limite_superior": 14.1678560007,
+              "observada": 4,
+              "esperada": 7.0,
+              "contribucion": 1.28571428571
+            },
+            {
+              "clase": 8,
+              "limite_inferior": 14.1678560007,
+              "limite_superior": "inf",
+              "observada": 6,
+              "esperada": 7.0,
+              "contribucion": 0.142857142857
+            }
+          ]
+        },
+        "shapiro": {
+          "n": 56,
+          "estadistico": 0.939938762591,
+          "p_valor": 0.00772053876819,
+          "rechaza_h0": true
+        },
+        "coinciden": false
+      },
+      "vif": [
+        {
+          "variable": "var_pbi",
+          "r2_auxiliar": 0.00732622657862,
+          "vif": 1.0073802963
+        },
+        {
+          "variable": "var_ccl",
+          "r2_auxiliar": 0.00732622657862,
+          "vif": 1.0073802963
+        }
+      ],
+      "correlaciones": [
+        [
+          1.0,
+          -0.085593379292
+        ],
+        [
+          -0.085593379292,
+          1.0
+        ]
+      ]
+    }
+  },
+  "robustez_trimestral": {
+    "muestra_comparada": "trimestral",
+    "tabla": [
+      {
+        "especificacion": "Hipótesis principal: β1 (d = 0)",
+        "herramienta": "Regresión simple (t de β1)",
+        "n": 56,
+        "nombre_estadistico": "t",
+        "estadistico": 0.0075895917068,
+        "gl": 54,
+        "coeficiente": 0.0154426259913,
+        "ic_inferior": -4.06390738402,
+        "ic_superior": 4.09479263601,
+        "p_valor": 0.993972409771,
+        "decision": "No se rechaza H0",
+        "muestra": "mensual",
+        "r2": 1.06670075617e-06
+      },
+      {
+        "especificacion": "Hipótesis principal: β1 (d = 0)",
+        "herramienta": "Regresión simple (t de β1)",
+        "n": 19,
+        "nombre_estadistico": "t",
+        "estadistico": -2.7333779649,
+        "gl": 17,
+        "coeficiente": -4.54066327891,
+        "ic_inferior": -8.04547024031,
+        "ic_superior": -1.03585631751,
+        "p_valor": 0.014152301218,
+        "decision": "Se rechaza H0",
+        "muestra": "trimestral",
+        "r2": 0.305310231852
+      },
+      {
+        "especificacion": "Extensión: β1 (d = +1)",
+        "herramienta": "Regresión simple (t de β1)",
+        "n": 55,
+        "nombre_estadistico": "t",
+        "estadistico": 0.928576166231,
+        "gl": 53,
+        "coeficiente": 1.89968339846,
+        "ic_inferior": -2.2036766784,
+        "ic_superior": 6.00304347533,
+        "p_valor": 0.357318658819,
+        "decision": "No se rechaza H0",
+        "muestra": "mensual",
+        "r2": 0.0160084964389
+      },
+      {
+        "especificacion": "Extensión: β1 (d = +1)",
+        "herramienta": "Regresión simple (t de β1)",
+        "n": 18,
+        "nombre_estadistico": "t",
+        "estadistico": -0.102205921223,
+        "gl": 16,
+        "coeficiente": -0.212318905819,
+        "ic_inferior": -4.61613395082,
+        "ic_superior": 4.19149613919,
+        "p_valor": 0.919863190349,
+        "decision": "No se rechaza H0",
+        "muestra": "trimestral",
+        "r2": 0.00065245217405
+      },
+      {
+        "especificacion": "Múltiple: β de Var PBI",
+        "herramienta": "Regresión múltiple (t)",
+        "muestra": "mensual",
+        "n": 56,
+        "nombre_estadistico": "t",
+        "estadistico": -0.109665334534,
+        "gl": 53,
+        "coeficiente": -0.222160946757,
+        "ic_inferior": -4.28541786536,
+        "ic_superior": 3.84109597184,
+        "p_valor": 0.913088980248,
+        "r2": 0.0342173183718,
+        "decision": "No se rechaza H0"
+      },
+      {
+        "especificacion": "Múltiple: β de Var PBI",
+        "herramienta": "Regresión múltiple (t)",
+        "muestra": "trimestral",
+        "n": 19,
+        "nombre_estadistico": "t",
+        "estadistico": -2.75568572528,
+        "gl": 16,
+        "coeficiente": -4.55756111611,
+        "ic_inferior": -8.06362056002,
+        "ic_superior": -1.05150167219,
+        "p_valor": 0.0140686301895,
+        "r2": 0.351979074044,
+        "decision": "Se rechaza H0"
+      },
+      {
+        "especificacion": "ANOVA por terciles del PBI",
+        "herramienta": "ANOVA (F)",
+        "muestra": "mensual",
+        "n": 56,
+        "nombre_estadistico": "F",
+        "estadistico": 0.258092370571,
+        "gl": "2; 53",
+        "coeficiente": null,
+        "ic_inferior": null,
+        "ic_superior": null,
+        "p_valor": 0.773489141003,
+        "r2": 0.00964539500787,
+        "decision": "No se rechaza H0"
+      },
+      {
+        "especificacion": "ANOVA por terciles del PBI",
+        "herramienta": "ANOVA (F)",
+        "muestra": "trimestral",
+        "n": 19,
+        "nombre_estadistico": "F",
+        "estadistico": 4.54162035566,
+        "gl": "2; 16",
+        "coeficiente": null,
+        "ic_inferior": null,
+        "ic_superior": null,
+        "p_valor": 0.0274088424325,
+        "r2": 0.362123890444,
+        "decision": "Se rechaza H0"
+      },
+      {
+        "especificacion": "Complementaria: μ suba − μ baja (Var PBI)",
+        "herramienta": "t (varianza agrupada)",
+        "muestra": "mensual",
+        "n": 56,
+        "nombre_estadistico": "t",
+        "estadistico": -0.049097477644,
+        "gl": 54.0,
+        "coeficiente": -0.0112145581927,
+        "ic_inferior": -0.469157339079,
+        "ic_superior": 0.446728222693,
+        "p_valor": 0.961022762731,
+        "r2": null,
+        "decision": "No se rechaza H0"
+      },
+      {
+        "especificacion": "Complementaria: μ suba − μ baja (Var PBI)",
+        "herramienta": "t (varianza agrupada)",
+        "muestra": "trimestral",
+        "n": 19,
+        "nombre_estadistico": "t",
+        "estadistico": -2.12636696331,
+        "gl": 17.0,
+        "coeficiente": -2.21770341535,
+        "ic_inferior": -4.41814449323,
+        "ic_superior": -0.0172623374686,
+        "p_valor": 0.0484187948133,
+        "r2": null,
+        "decision": "Se rechaza H0"
+      }
+    ],
+    "bateria_respaldo": {
+      "frecuencia": "trimestral",
+      "n": 19,
+      "periodo_inicio": "2021Q4",
+      "periodo_fin": "2026Q2",
+      "estimadores": {
+        "var_bono": {
+          "n": 19,
+          "media": 7.13185958128,
+          "varianza": 388.286390671,
+          "desvio": 19.7049839044,
+          "error_estandar": 4.52063334333,
+          "minimo": -29.5968534907,
+          "maximo": 42.8797886394,
+          "asimetria": 0.152348132664,
+          "curtosis_exceso": -0.644753103994
+        },
+        "var_pbi": {
+          "n": 19,
+          "media": 0.447329073503,
+          "varianza": 5.74982906077,
+          "desvio": 2.3978801181,
+          "error_estandar": 0.550111427027,
+          "minimo": -3.44801851514,
+          "maximo": 5.45051112587,
+          "asimetria": 0.0771902368043,
+          "curtosis_exceso": 0.219902377965
+        },
+        "proporcion_suba": {
+          "n": 19,
+          "exitos": 12,
+          "proporcion": 0.631578947368,
+          "error_estandar": 0.110664733271
+        },
+        "var_ccl": {
+          "n": 19,
+          "media": 13.3592220162,
+          "varianza": 277.849963044,
+          "desvio": 16.668832084,
+          "error_estandar": 3.82409234531,
+          "minimo": -8.4057102925,
+          "maximo": 48.0132669107,
+          "asimetria": 0.450239965337,
+          "curtosis_exceso": -0.742433543194
+        }
+      },
+      "autocorrelaciones": {
+        "var_bono": 0.0655702057504,
+        "var_pbi": -0.141285229897
+      },
+      "intervalos": {
+        "media_var_bono": {
+          "parametro": "media",
+          "estimacion": 7.13185958128,
+          "error_estandar": 4.52063334333,
+          "gl": 18,
+          "cuantil": 2.10092204024,
+          "margen": 9.49749822684,
+          "inferior": -2.36563864556,
+          "superior": 16.6293578081,
+          "confianza": 0.95
+        },
+        "media_var_pbi": {
+          "parametro": "media",
+          "estimacion": 0.447329073503,
+          "error_estandar": 0.550111427027,
+          "gl": 18,
+          "cuantil": 2.10092204024,
+          "margen": 1.15574122163,
+          "inferior": -0.708412148127,
+          "superior": 1.60307029513,
+          "confianza": 0.95
+        },
+        "proporcion_suba": {
+          "parametro": "proporcion",
+          "estimacion": 0.631578947368,
+          "error_estandar": 0.110664733271,
+          "cuantil": 1.95996398454,
+          "margen": 0.21689889157,
+          "inferior": 0.414680055798,
+          "superior": 0.848477838939,
+          "confianza": 0.95
+        }
+      },
+      "bondad_ajuste": {
+        "var_bono": {
+          "chi2": {
+            "aplicable": false,
+            "n": 19,
+            "k": 3,
+            "gl": 0,
+            "motivo": "Con n = 19 solo se pueden formar 3 clases con esperada ≥ 5: gl = 0 < 1. Se usa Shapiro-Wilk."
+          },
+          "shapiro": {
+            "n": 19,
+            "estadistico": 0.970085308926,
+            "p_valor": 0.778166005208,
+            "rechaza_h0": false
+          },
+          "coinciden": null
+        },
+        "var_pbi": {
+          "chi2": {
+            "aplicable": false,
+            "n": 19,
+            "k": 3,
+            "gl": 0,
+            "motivo": "Con n = 19 solo se pueden formar 3 clases con esperada ≥ 5: gl = 0 < 1. Se usa Shapiro-Wilk."
+          },
+          "shapiro": {
+            "n": 19,
+            "estadistico": 0.917232205507,
+            "p_valor": 0.100594936583,
+            "rechaza_h0": false
+          },
+          "coinciden": null
+        },
+        "residuos_principal": {
+          "chi2": {
+            "aplicable": false,
+            "n": 19,
+            "k": 3,
+            "gl": 0,
+            "motivo": "Con n = 19 solo se pueden formar 3 clases con esperada ≥ 5: gl = 0 < 1. Se usa Shapiro-Wilk."
+          },
+          "shapiro": {
+            "n": 19,
+            "estadistico": 0.937811068065,
+            "p_valor": 0.240725139471,
+            "rechaza_h0": false
+          },
+          "coinciden": null
+        }
+      },
+      "hipotesis_principal": {
+        "d0": {
+          "n": 19,
+          "gl": 17,
+          "b0": 9.16303027892,
+          "b1": -4.54066327891,
+          "ee_b0": 3.94766611435,
+          "ee_b1": 1.66119114781,
+          "t_b0": 2.32112595481,
+          "t_b1": -2.7333779649,
+          "p_b0": 0.03296497634,
+          "p_b1": 0.014152301218,
+          "valor_critico_t": 2.10981557783,
+          "ic_b0": {
+            "estimacion": 9.16303027892,
+            "error_estandar": 3.94766611435,
+            "gl": 17,
+            "cuantil": 2.10981557783,
+            "inferior": 0.834182814791,
+            "superior": 17.4918777431,
+            "confianza": 0.95
+          },
+          "ic_b1": {
+            "estimacion": -4.54066327891,
+            "error_estandar": 1.66119114781,
+            "gl": 17,
+            "cuantil": 2.10981557783,
+            "inferior": -8.04547024031,
+            "superior": -1.03585631751,
+            "confianza": 0.95
+          },
+          "r2": 0.305310231852,
+          "r": -0.552548850195,
+          "s2": 285.605558164,
+          "s": 16.8998685842,
+          "f": 7.47135509902,
+          "gl_f": [
+            1,
+            17
+          ],
+          "p_f": 0.014152301218,
+          "sce": 4855.29448879,
+          "scr": 2133.8605433,
+          "sct": 6989.15503208,
+          "sxx": 103.496923094,
+          "syy": 6989.15503208,
+          "sxy": -469.944678173,
+          "x_media": 0.447329073503,
+          "y_media": 7.13185958128,
+          "sumas": {
+            "n": 19,
+            "sum_x": 8.49925239655,
+            "sum_y": 135.505332044,
+            "sum_x2": 107.298885794,
+            "sum_y2": 7955.56003274,
+            "sum_xy": -409.329203535
+          }
+        },
+        "d1": {
+          "n": 18,
+          "gl": 16,
+          "b0": 7.33157015454,
+          "b1": -0.212318905819,
+          "ee_b0": 4.98034616529,
+          "ee_b1": 2.07736404387,
+          "t_b0": 1.47210051495,
+          "t_b1": -0.102205921223,
+          "p_b0": 0.160390507162,
+          "p_b1": 0.919863190349,
+          "valor_critico_t": 2.11990529922,
+          "ic_b0": {
+            "estimacion": 7.33157015454,
+            "error_estandar": 4.98034616529,
+            "gl": 16,
+            "cuantil": 2.11990529922,
+            "inferior": -3.22629207322,
+            "superior": 17.8894323823,
+            "confianza": 0.95
+          },
+          "ic_b1": {
+            "estimacion": -0.212318905819,
+            "error_estandar": 2.07736404387,
+            "gl": 16,
+            "cuantil": 2.11990529922,
+            "inferior": -4.61613395082,
+            "superior": 4.19149613919,
+            "confianza": 0.95
+          },
+          "r2": 0.00065245217405,
+          "r": -0.0255431433863,
+          "s2": 436.216252017,
+          "s": 20.8857906725,
+          "f": 0.0104460503331,
+          "gl_f": [
+            1,
+            16
+          ],
+          "p_f": 0.919863190349,
+          "sce": 6979.46003227,
+          "scr": 4.55673692467,
+          "sct": 6984.01676919,
+          "sxx": 101.082650543,
+          "syy": 6984.01676919,
+          "sxy": -21.4617577605,
+          "x_media": 0.363309572995,
+          "y_media": 7.25443266353,
+          "sumas": {
+            "n": 18,
+            "sum_x": 6.5395723139,
+            "sum_y": 130.579787944,
+            "sum_x2": 103.458539768,
+            "sum_y2": 7931.29904805,
+            "sum_xy": 25.979129239
+          }
+        }
+      },
+      "desfases": [
+        {
+          "d": -3,
+          "etiqueta": "exploratoria",
+          "n": 19,
+          "b1": -3.8547657394,
+          "ee_b1": 1.69308336129,
+          "t": -2.27677256036,
+          "gl": 17,
+          "p_valor": 0.0360163026952,
+          "ic_b1": {
+            "estimacion": -3.8547657394,
+            "error_estandar": 1.69308336129,
+            "gl": 17,
+            "cuantil": 2.10981557783,
+            "inferior": -7.42685938963,
+            "superior": -0.28267208917,
+            "confianza": 0.95
+          },
+          "r2": 0.233671337927,
+          "umbral": 0.01,
+          "significativo": false,
+          "periodo_inicio": "2021Q4",
+          "periodo_fin": "2026Q2"
+        },
+        {
+          "d": -2,
+          "etiqueta": "exploratoria",
+          "n": 19,
+          "b1": 0.0968987157672,
+          "ee_b1": 1.9633339569,
+          "t": 0.049354168926,
+          "gl": 17,
+          "p_valor": 0.961212280477,
+          "ic_b1": {
+            "estimacion": 0.0968987157672,
+            "error_estandar": 1.9633339569,
+            "gl": 17,
+            "cuantil": 2.10981557783,
+            "inferior": -4.04537385099,
+            "superior": 4.23917128253,
+            "confianza": 0.95
+          },
+          "r2": 0.000143263824911,
+          "umbral": 0.01,
+          "significativo": false,
+          "periodo_inicio": "2021Q4",
+          "periodo_fin": "2026Q2"
+        },
+        {
+          "d": -1,
+          "etiqueta": "exploratoria",
+          "n": 19,
+          "b1": -0.342740069047,
+          "ee_b1": 1.97501073027,
+          "t": -0.173538332625,
+          "gl": 17,
+          "p_valor": 0.864277914622,
+          "ic_b1": {
+            "estimacion": -0.342740069047,
+            "error_estandar": 1.97501073027,
+            "gl": 17,
+            "cuantil": 2.10981557783,
+            "inferior": -4.50964847416,
+            "superior": 3.82416833607,
+            "confianza": 0.95
+          },
+          "r2": 0.00176837043745,
+          "umbral": 0.01,
+          "significativo": false,
+          "periodo_inicio": "2021Q4",
+          "periodo_fin": "2026Q2"
+        },
+        {
+          "d": 0,
+          "etiqueta": "principal",
+          "n": 19,
+          "b1": -4.54066327891,
+          "ee_b1": 1.66119114781,
+          "t": -2.7333779649,
+          "gl": 17,
+          "p_valor": 0.014152301218,
+          "ic_b1": {
+            "estimacion": -4.54066327891,
+            "error_estandar": 1.66119114781,
+            "gl": 17,
+            "cuantil": 2.10981557783,
+            "inferior": -8.04547024031,
+            "superior": -1.03585631751,
+            "confianza": 0.95
+          },
+          "r2": 0.305310231852,
+          "umbral": 0.05,
+          "significativo": true,
+          "periodo_inicio": "2021Q4",
+          "periodo_fin": "2026Q2"
+        },
+        {
+          "d": 1,
+          "etiqueta": "extensión",
+          "n": 18,
+          "b1": -0.212318905819,
+          "ee_b1": 2.07736404387,
+          "t": -0.102205921223,
+          "gl": 16,
+          "p_valor": 0.919863190349,
+          "ic_b1": {
+            "estimacion": -0.212318905819,
+            "error_estandar": 2.07736404387,
+            "gl": 16,
+            "cuantil": 2.11990529922,
+            "inferior": -4.61613395082,
+            "superior": 4.19149613919,
+            "confianza": 0.95
+          },
+          "r2": 0.00065245217405,
+          "umbral": 0.05,
+          "significativo": false,
+          "periodo_inicio": "2021Q4",
+          "periodo_fin": "2026Q1"
+        },
+        {
+          "d": 2,
+          "etiqueta": "exploratoria",
+          "n": 17,
+          "b1": 0.918269472655,
+          "ee_b1": 2.13441371337,
+          "t": 0.430220939315,
+          "gl": 15,
+          "p_valor": 0.673152002332,
+          "ic_b1": {
+            "estimacion": 0.918269472655,
+            "error_estandar": 2.13441371337,
+            "gl": 15,
+            "cuantil": 2.13144954556,
+            "inferior": -3.63112566675,
+            "superior": 5.46766461206,
+            "confianza": 0.95
+          },
+          "r2": 0.0121889337459,
+          "umbral": 0.01,
+          "significativo": false,
+          "periodo_inicio": "2021Q4",
+          "periodo_fin": "2025Q4"
+        },
+        {
+          "d": 3,
+          "etiqueta": "exploratoria",
+          "n": 16,
+          "b1": 4.04339527771,
+          "ee_b1": 1.91692663427,
+          "t": 2.10931143917,
+          "gl": 14,
+          "p_valor": 0.0534045915759,
+          "ic_b1": {
+            "estimacion": 4.04339527771,
+            "error_estandar": 1.91692663427,
+            "gl": 14,
+            "cuantil": 2.14478668792,
+            "inferior": -0.0680034491821,
+            "superior": 8.15479400459,
+            "confianza": 0.95
+          },
+          "r2": 0.241159292225,
+          "umbral": 0.01,
+          "significativo": false,
+          "periodo_inicio": "2021Q4",
+          "periodo_fin": "2025Q3"
+        }
+      ],
+      "regresion_multiple": {
+        "n": 19,
+        "k": 2,
+        "gl": 16,
+        "coeficientes": [
+          {
+            "nombre": "constante",
+            "coeficiente": 12.5824025416,
+            "error_estandar": 5.05891723306,
+            "t": 2.48717303761,
+            "p_valor": 0.0242927035162,
+            "ic": {
+              "estimacion": 12.5824025416,
+              "error_estandar": 5.05891723306,
+              "gl": 16,
+              "cuantil": 2.11990529922,
+              "inferior": 1.85797709089,
+              "superior": 23.3068279923,
+              "confianza": 0.95
+            }
+          },
+          {
+            "nombre": "var_pbi",
+            "coeficiente": -4.55756111611,
+            "error_estandar": 1.6538755034,
+            "t": -2.75568572528,
+            "p_valor": 0.0140686301895,
+            "ic": {
+              "estimacion": -4.55756111611,
+              "error_estandar": 1.6538755034,
+              "gl": 16,
+              "cuantil": 2.11990529922,
+              "inferior": -8.06362056002,
+              "superior": -1.05150167219,
+              "confianza": 0.95
+            }
+          },
+          {
+            "nombre": "var_ccl",
+            "coeficiente": -0.255390124114,
+            "error_estandar": 0.237916799896,
+            "t": -1.07344300288,
+            "p_valor": 0.298995836863,
+            "ic": {
+              "estimacion": -0.255390124114,
+              "error_estandar": 0.237916799896,
+              "gl": 16,
+              "cuantil": 2.11990529922,
+              "inferior": -0.759751208987,
+              "superior": 0.248970960758,
+              "confianza": 0.95
+            }
+          }
+        ],
+        "r2": 0.351979074044,
+        "r2_ajustado": 0.2709764583,
+        "s": 16.8246818609,
+        "s2": 283.069919721,
+        "sce": 4529.11871554,
+        "sct": 6989.15503208,
+        "f": 4.34528034446,
+        "gl_f": [
+          2,
+          16
+        ],
+        "p_f": 0.0310965524363,
+        "modo": "ccl",
+        "periodo_inicio": "2021Q4",
+        "periodo_fin": "2026Q2",
+        "hac": {
+          "maxlags": 3,
+          "gl": 16,
+          "coeficientes": [
+            {
+              "nombre": "constante",
+              "coeficiente": 12.5824025416,
+              "error_estandar": 4.81783739903,
+              "t": 2.61162872456,
+              "p_valor": 0.0188891101557,
+              "ic": {
+                "inferior": 2.36904350859,
+                "superior": 22.7957615746
+              }
+            },
+            {
+              "nombre": "var_pbi",
+              "coeficiente": -4.55756111611,
+              "error_estandar": 1.30991539464,
+              "t": -3.4792789937,
+              "p_valor": 0.00309611678177,
+              "ic": {
+                "inferior": -7.33445770274,
+                "superior": -1.78066452947
+              }
+            },
+            {
+              "nombre": "var_ccl",
+              "coeficiente": -0.255390124114,
+              "error_estandar": 0.259047479054,
+              "t": -0.985881526612,
+              "p_valor": 0.338866230885,
+              "ic": {
+                "inferior": -0.80454624771,
+                "superior": 0.293765999481
+              }
+            }
+          ]
+        }
+      },
+      "anova": {
+        "N": 19,
+        "k": 3,
+        "gran_media": 7.13185958128,
+        "grupos": [
+          {
+            "grupo": "bajo",
+            "n": 7,
+            "media": 22.2291360872,
+            "desvio": 17.2699360867,
+            "ic": {
+              "parametro": "media",
+              "estimacion": 22.2291360872,
+              "error_estandar": 6.5274222919,
+              "gl": 6,
+              "cuantil": 2.44691185114,
+              "margen": 15.9720269635,
+              "inferior": 6.25710912367,
+              "superior": 38.2011630506,
+              "confianza": 0.95
+            }
+          },
+          {
+            "grupo": "medio",
+            "n": 6,
+            "media": -2.30342134053,
+            "desvio": 10.7612804715,
+            "ic": {
+              "parametro": "media",
+              "estimacion": -2.30342134053,
+              "error_estandar": 4.39327435569,
+              "gl": 5,
+              "cuantil": 2.57058183564,
+              "margen": 11.2932712577,
+              "inferior": -13.5966925982,
+              "superior": 8.98984991718,
+              "confianza": 0.95
+            }
+          },
+          {
+            "grupo": "alto",
+            "n": 6,
+            "media": -1.04634875376,
+            "desvio": 20.4435079152,
+            "ic": {
+              "parametro": "media",
+              "estimacion": -1.04634875376,
+              "error_estandar": 8.34602715746,
+              "gl": 5,
+              "cuantil": 2.57058183564,
+              "margen": 21.4541458107,
+              "inferior": -22.5004945645,
+              "superior": 20.407797057,
+              "confianza": 0.95
+            }
+          }
+        ],
+        "sc_entre": 2530.94001113,
+        "sc_dentro": 4458.21502095,
+        "sc_total": 6989.15503208,
+        "gl_entre": 2,
+        "gl_dentro": 16,
+        "gl_total": 18,
+        "cm_entre": 1265.47000557,
+        "cm_dentro": 278.638438809,
+        "f": 4.54162035566,
+        "valor_critico": 3.63372346759,
+        "p_valor": 0.0274088424325,
+        "eta2": 0.362123890444,
+        "aplicable": true,
+        "supuestos": {
+          "shapiro_por_grupo": [
+            {
+              "grupo": "bajo",
+              "n": 7,
+              "estadistico": 0.935161463485,
+              "p_valor": 0.595598261629,
+              "rechaza_h0": false
+            },
+            {
+              "grupo": "medio",
+              "n": 6,
+              "estadistico": 0.78891014254,
+              "p_valor": 0.0466014824084,
+              "rechaza_h0": true
+            },
+            {
+              "grupo": "alto",
+              "n": 6,
+              "estadistico": 0.987762793177,
+              "p_valor": 0.983018833332,
+              "rechaza_h0": false
+            }
+          ],
+          "levene": {
+            "estadistico": 0.897475571342,
+            "gl": [
+              2,
+              16
+            ],
+            "p_valor": 0.427154967847,
+            "rechaza_h0": false
+          }
+        },
+        "tukey": [
+          {
+            "par": "bajo − medio",
+            "diferencia": 24.5325574277,
+            "p_valor": 0.044413175191,
+            "ic": {
+              "inferior": 0.569460418753,
+              "superior": 48.4956544366
+            }
+          },
+          {
+            "par": "bajo − alto",
+            "diferencia": 23.2754848409,
+            "p_valor": 0.057611999382,
+            "ic": {
+              "inferior": -0.687612168018,
+              "superior": 47.2385818498
+            }
+          },
+          {
+            "par": "medio − alto",
+            "diferencia": -1.25707258677,
+            "p_valor": 0.990669484096,
+            "ic": {
+              "inferior": -26.1247535829,
+              "superior": 23.6106084094
+            }
+          }
+        ],
+        "grupos_chicos": [
+          "bajo",
+          "medio",
+          "alto"
+        ],
+        "factor": "terciles de la variación del PBI",
+        "limites_terciles": {
+          "bajo": [
+            -3.44801851514,
+            0.273158097631
+          ],
+          "medio": [
+            0.37861925235,
+            0.881152899985
+          ],
+          "alto": [
+            0.90363551805,
+            5.45051112587
+          ]
+        }
+      },
+      "anova_umbral": {
+        "N": 19,
+        "k": 3,
+        "gran_media": 7.13185958128,
+        "grupos": [
+          {
+            "grupo": "bajo",
+            "n": 4,
+            "media": 30.0174108663,
+            "desvio": 11.464649677,
+            "ic": {
+              "parametro": "media",
+              "estimacion": 30.0174108663,
+              "error_estandar": 5.73232483848,
+              "gl": 3,
+              "cuantil": 3.18244630528,
+              "margen": 18.2428160029,
+              "inferior": 11.7745948634,
+              "superior": 48.2602268692,
+              "confianza": 0.95
+            }
+          },
+          {
+            "grupo": "medio",
+            "n": 5,
+            "media": 5.03796692474,
+            "desvio": 18.5774062742,
+            "ic": {
+              "parametro": "media",
+              "estimacion": 5.03796692474,
+              "error_estandar": 8.30806865497,
+              "gl": 4,
+              "cuantil": 2.7764451052,
+              "margen": 23.0668965507,
+              "inferior": -18.028929626,
+              "superior": 28.1048634755,
+              "confianza": 0.95
+            }
+          },
+          {
+            "grupo": "alto",
+            "n": 10,
+            "media": -0.975414604452,
+            "desvio": 16.4660109516,
+            "ic": {
+              "parametro": "media",
+              "estimacion": -0.975414604452,
+              "error_estandar": 5.20700985844,
+              "gl": 9,
+              "cuantil": 2.2621571628,
+              "margen": 11.779074648,
+              "inferior": -12.7544892525,
+              "superior": 10.8036600436,
+              "confianza": 0.95
+            }
+          }
+        ],
+        "sc_entre": 2774.19470999,
+        "sc_dentro": 4214.96032209,
+        "sc_total": 6989.15503208,
+        "gl_entre": 2,
+        "gl_dentro": 16,
+        "gl_total": 18,
+        "cm_entre": 1387.09735499,
+        "cm_dentro": 263.435020131,
+        "f": 5.26542505361,
+        "valor_critico": 3.63372346759,
+        "p_valor": 0.0174964739118,
+        "eta2": 0.396928483809,
+        "aplicable": true,
+        "supuestos": {
+          "shapiro_por_grupo": [
+            {
+              "grupo": "bajo",
+              "n": 4,
+              "estadistico": 0.973709211835,
+              "p_valor": 0.864299992045,
+              "rechaza_h0": false
+            },
+            {
+              "grupo": "medio",
+              "n": 5,
+              "estadistico": 0.925080421565,
+              "p_valor": 0.563228369083,
+              "rechaza_h0": false
+            },
+            {
+              "grupo": "alto",
+              "n": 10,
+              "estadistico": 0.992579587456,
+              "p_valor": 0.999011289637,
+              "rechaza_h0": false
+            }
+          ],
+          "levene": {
+            "estadistico": 0.291348434561,
+            "gl": [
+              2,
+              16
+            ],
+            "p_valor": 0.75113598052,
+            "rechaza_h0": false
+          }
+        },
+        "tukey": [
+          {
+            "par": "bajo − medio",
+            "diferencia": 24.9794439416,
+            "p_valor": 0.0856425905802,
+            "ic": {
+              "inferior": -3.11486874659,
+              "superior": 53.0737566297
+            }
+          },
+          {
+            "par": "bajo − alto",
+            "diferencia": 30.9928254708,
+            "p_valor": 0.0137713621379,
+            "ic": {
+              "inferior": 6.21597059471,
+              "superior": 55.7696803468
+            }
+          },
+          {
+            "par": "medio − alto",
+            "diferencia": 6.01338152919,
+            "p_valor": 0.780273150154,
+            "ic": {
+              "inferior": -16.9255287242,
+              "superior": 28.9522917826
+            }
+          }
+        ],
+        "grupos_chicos": [
+          "bajo",
+          "medio"
+        ],
+        "factor": "umbrales fijos de ±0,5 % en la variación del PBI"
+      },
+      "prueba_complementaria": {
+        "grupo_1": {
+          "n": 12,
+          "media": -0.369719553206,
+          "varianza": 5.4251769556,
+          "desvio": 2.32920092641,
+          "error_estandar": 0.672382390931,
+          "minimo": -3.44801851514,
+          "maximo": 4.25565921241,
+          "asimetria": 0.154781643079,
+          "curtosis_exceso": -0.115129157369
+        },
+        "grupo_2": {
+          "n": 7,
+          "media": 1.84798386215,
+          "varianza": 3.67938637046,
+          "desvio": 1.9181726644,
+          "error_estandar": 0.725001120242,
+          "minimo": 0.180436668283,
+          "maximo": 5.45051112587,
+          "asimetria": 1.32357409303,
+          "curtosis_exceso": 1.04978198967
+        },
+        "prueba_f": {
+          "estadistico": 1.47447873351,
+          "gl": [
+            11,
+            6
+          ],
+          "p_valor": 0.658253140567,
+          "rechaza_h0": false
+        },
+        "t_agrupada": {
+          "tipo": "varianza agrupada",
+          "diferencia": -2.21770341535,
+          "error_estandar": 1.04295422832,
+          "estadistico": -2.12636696331,
+          "gl": 17.0,
+          "p_valor": 0.0484187948133,
+          "rechaza_h0": true,
+          "ic": {
+            "estimacion": -2.21770341535,
+            "error_estandar": 1.04295422832,
+            "gl": 17,
+            "cuantil": 2.10981557783,
+            "inferior": -4.41814449323,
+            "superior": -0.0172623374686,
+            "confianza": 0.95,
+            "parametro": "diferencia de medias"
+          }
+        },
+        "t_welch": {
+          "tipo": "Welch",
+          "diferencia": -2.21770341535,
+          "error_estandar": 0.988799627824,
+          "estadistico": -2.2428238775,
+          "gl": 14.7914220249,
+          "p_valor": 0.0406721645107,
+          "rechaza_h0": true,
+          "ic": {
+            "estimacion": -2.21770341535,
+            "error_estandar": 0.988799627824,
+            "gl": 14.7914220249,
+            "cuantil": 2.13407033629,
+            "inferior": -4.32787136963,
+            "superior": -0.107535461074,
+            "confianza": 0.95,
+            "parametro": "diferencia de medias"
+          }
+        },
+        "test_de_decision": "varianza agrupada",
+        "decision": {
+          "tipo": "varianza agrupada",
+          "diferencia": -2.21770341535,
+          "error_estandar": 1.04295422832,
+          "estadistico": -2.12636696331,
+          "gl": 17.0,
+          "p_valor": 0.0484187948133,
+          "rechaza_h0": true,
+          "ic": {
+            "estimacion": -2.21770341535,
+            "error_estandar": 1.04295422832,
+            "gl": 17,
+            "cuantil": 2.10981557783,
+            "inferior": -4.41814449323,
+            "superior": -0.0172623374686,
+            "confianza": 0.95,
+            "parametro": "diferencia de medias"
+          }
+        },
+        "d_cohen": -1.01128921014,
+        "desvio_agrupado": 2.19294677834,
+        "diferencia_minima_detectable": {
+          "d": 1.41390455391,
+          "en_unidades": 3.10061743638,
+          "potencia": 0.8
+        },
+        "aplicable": true,
+        "normalidad": {
+          "suba": {
+            "n": 12,
+            "estadistico": 0.891876238143,
+            "p_valor": 0.124591909418,
+            "rechaza_h0": false
+          },
+          "baja": {
+            "n": 7,
+            "estadistico": 0.848960155422,
+            "p_valor": 0.120235895227,
+            "rechaza_h0": false
+          }
+        },
+        "autocorrelacion_var_pbi": -0.141285229897,
+        "sin_cambio": 0
+      },
+      "diagnosticos": {
+        "regresion_simple": {
+          "durbin_watson": 1.96339733222,
+          "breusch_pagan": {
+            "estadistico": 1.92792309501,
+            "gl": 1,
+            "p_valor": 0.164985847945,
+            "rechaza_h0": false
+          },
+          "breusch_godfrey": {
+            "estadistico": 0.537110691159,
+            "gl": 3,
+            "p_valor": 0.910665901851,
+            "rechaza_h0": false
+          },
+          "normalidad_residuos": {
+            "chi2": {
+              "aplicable": false,
+              "n": 19,
+              "k": 3,
+              "gl": 0,
+              "motivo": "Con n = 19 solo se pueden formar 3 clases con esperada ≥ 5: gl = 0 < 1. Se usa Shapiro-Wilk."
+            },
+            "shapiro": {
+              "n": 19,
+              "estadistico": 0.937811068065,
+              "p_valor": 0.240725139471,
+              "rechaza_h0": false
+            },
+            "coinciden": null
+          }
+        },
+        "regresion_multiple": {
+          "durbin_watson": 1.80630144164,
+          "breusch_pagan": {
+            "estadistico": 2.62710538575,
+            "gl": 2,
+            "p_valor": 0.268863169362,
+            "rechaza_h0": false
+          },
+          "breusch_godfrey": {
+            "estadistico": 0.659643394915,
+            "gl": 3,
+            "p_valor": 0.882652615979,
+            "rechaza_h0": false
+          },
+          "normalidad_residuos": {
+            "chi2": {
+              "aplicable": false,
+              "n": 19,
+              "k": 3,
+              "gl": 0,
+              "motivo": "Con n = 19 solo se pueden formar 3 clases con esperada ≥ 5: gl = 0 < 1. Se usa Shapiro-Wilk."
+            },
+            "shapiro": {
+              "n": 19,
+              "estadistico": 0.919385515113,
+              "p_valor": 0.110246264893,
+              "rechaza_h0": false
+            },
+            "coinciden": null
+          },
+          "vif": [
+            {
+              "variable": "var_pbi",
+              "r2_auxiliar": 9.05938330219e-05,
+              "vif": 1.00009060204
+            },
+            {
+              "variable": "var_ccl",
+              "r2_auxiliar": 9.05938330222e-05,
+              "vif": 1.00009060204
+            }
+          ],
+          "correlaciones": [
+            [
+              1.0,
+              -0.00951807927168
+            ],
+            [
+              -0.00951807927168,
+              1.0
+            ]
+          ]
+        }
+      },
+      "veredictos": {
+        "hipotesis_principal": "SE AFIRMA la hipótesis principal: la variación trimestral del PBI desestacionalizado se asocia de forma estadísticamente significativa con la variación del AL30D (β1 = −4,5407; IC 95 % [−8,0455 ; −1,0359]; p = 0,0142; R² = 0,3053). Es una asociación estadística, no una relación causal.",
+        "interpretacion_pendiente": "Pendiente negativa: en la muestra, cada 1 pp adicional de variación trimestral del PBI se asocia, en promedio, con 4,5407 pp menos de variación trimestral del AL30D.",
+        "extension_d1": "NO HAY EVIDENCIA SUFICIENTE para afirmar la extensión temporal (d = +1) (β1 = −0,2123; IC 95 % [−4,6161 ; 4,1915]; p = 0,9199; R² = 0,0007). No haber rechazado H0 no prueba que β1 sea cero.",
+        "principal_rechaza_h0": true,
+        "extension_rechaza_h0": false,
+        "prueba_complementaria": "SE AFIRMA la hipótesis complementaria: la variación media del PBI difiere entre los períodos de suba y de baja del AL30D (diferencia suba − baja = −2,2177 pp; IC 95 % [−4,4181 ; −0,0173]; p = 0,0484). Es una asociación estadística, no una relación causal.",
+        "complementaria_rechaza_h0": true
+      }
+    },
+    "influencia": {
+      "frecuencia": "trimestral",
+      "n": 19,
+      "b1": -4.54066327891,
+      "p_b1": 0.014152301218,
+      "decision": "Se rechaza H0",
+      "umbral_cook": 0.210526315789,
+      "filas": [
+        {
+          "periodo": "2021Q4",
+          "var_bono": -11.9073275862,
+          "var_pbi": 1.95968008265,
+          "palanca": 0.0747308405146,
+          "cook": 0.0226411672855,
+          "b1_sin": -4.34843248461,
+          "p_sin": 0.0213105951073,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2022Q1",
+          "var_bono": -6.69724770642,
+          "var_pbi": 0.90363551805,
+          "palanca": 0.054643383406,
+          "cook": 0.0147963787549,
+          "b1_sin": -4.48583098462,
+          "p_sin": 0.0172116155524,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2022Q2",
+          "var_bono": -29.5968534907,
+          "var_pbi": 3.30115508846,
+          "palanca": 0.131323028704,
+          "cook": 0.172148178823,
+          "b1_sin": -3.7861286949,
+          "p_sin": 0.0370057302595,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2022Q3",
+          "var_bono": -15.270018622,
+          "var_pbi": 0.435814357449,
+          "palanca": 0.0526328600356,
+          "cook": 0.0517627586968,
+          "b1_sin": -4.54330024376,
+          "p_sin": 0.0125302506991,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2022Q4",
+          "var_bono": 32.5824175824,
+          "var_pbi": -2.34056148718,
+          "palanca": 0.127728823832,
+          "cook": 0.0480888929734,
+          "b1_sin": -4.14563831567,
+          "p_sin": 0.030734756451,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2023Q1",
+          "var_bono": 6.09200165769,
+          "var_pbi": -0.256550681272,
+          "palanca": 0.0574186459864,
+          "cook": 0.00203010255388,
+          "b1_sin": -4.57122669374,
+          "p_sin": 0.0168355742249,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2023Q2",
+          "var_bono": 15.1171875,
+          "var_pbi": -3.3659135699,
+          "palanca": 0.193126764918,
+          "cook": 0.0451996891182,
+          "b1_sin": -4.96666545623,
+          "p_sin": 0.0155445658442,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2023Q3",
+          "var_bono": -0.814387512725,
+          "var_pbi": 5.45051112587,
+          "palanca": 0.29449220534,
+          "cook": 0.226007979566,
+          "b1_sin": -5.55280698056,
+          "p_sin": 0.0106137264775,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2023Q4",
+          "var_bono": 29.4902497434,
+          "var_pbi": -3.44801851514,
+          "palanca": 0.199242051826,
+          "cook": 0.011868293024,
+          "b1_sin": -4.32111970452,
+          "p_sin": 0.0334454161325,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2024Q1",
+          "var_bono": 42.8797886394,
+          "var_pbi": -3.33463662067,
+          "palanca": 0.190831479817,
+          "cook": 0.176054410954,
+          "b1_sin": -3.70180823928,
+          "p_sin": 0.0527450517619,
+          "decision_sin": "No se rechaza H0"
+        },
+        {
+          "periodo": "2024Q2",
+          "var_bono": 1.97855029586,
+          "var_pbi": 0.582469282481,
+          "palanca": 0.0528080371022,
+          "cook": 0.00212362798757,
+          "b1_sin": -4.53440514747,
+          "p_sin": 0.0173336572412,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2024Q3",
+          "var_bono": 13.6318373825,
+          "var_pbi": 4.25565921241,
+          "palanca": 0.192765005269,
+          "cook": 0.293160370803,
+          "b1_sin": -5.62519937329,
+          "p_sin": 0.00472929082649,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2024Q4",
+          "var_bono": 29.1058863909,
+          "var_pbi": 1.2066927732,
+          "palanca": 0.0582030801204,
+          "cook": 0.07424302159,
+          "b1_sin": -4.73871360163,
+          "p_sin": 0.00888272360583,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2025Q1",
+          "var_bono": -5.01984390726,
+          "var_pbi": 0.180436668283,
+          "palanca": 0.0533198270018,
+          "cook": 0.0186007577177,
+          "b1_sin": -4.57706551436,
+          "p_sin": 0.0149678602019,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2025Q2",
+          "var_bono": 7.4568288854,
+          "var_pbi": 0.881152899985,
+          "palanca": 0.0544500205667,
+          "cook": 0.000561472667473,
+          "b1_sin": -4.55083629129,
+          "p_sin": 0.0172327155994,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2025Q3",
+          "var_bono": -16.7161824043,
+          "var_pbi": 0.704654194257,
+          "palanca": 0.0532713681874,
+          "cook": 0.0535201772181,
+          "b1_sin": -4.48110187611,
+          "p_sin": 0.0134919300726,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2025Q4",
+          "var_bono": 34.4621513944,
+          "var_pbi": 0.273158097631,
+          "palanca": 0.0529246845579,
+          "cook": 0.0727572212846,
+          "b1_sin": -4.49350525646,
+          "p_sin": 0.0115508303901,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2026Q1",
+          "var_bono": 3.80474970101,
+          "var_pbi": 0.731294717629,
+          "palanca": 0.0534106986027,
+          "cook": 0.000433307671604,
+          "b1_sin": -4.5347569076,
+          "p_sin": 0.0175254322074,
+          "decision_sin": "Se rechaza H0"
+        },
+        {
+          "periodo": "2026Q2",
+          "var_bono": 4.9255441008,
+          "var_pbi": 0.37861925235,
+          "palanca": 0.0526771942119,
+          "cook": 0.000651697696728,
+          "b1_sin": -4.54242810323,
+          "p_sin": 0.0173072891281,
+          "decision_sin": "Se rechaza H0"
+        }
+      ],
+      "periodos_que_cambian_decision": [
+        "2024Q1"
+      ],
+      "p_sin_min": 0.00472929082649,
+      "p_sin_max": 0.0527450517619,
+      "signos": {
+        "pbi_baja": 5,
+        "pbi_baja_bono_sube": 5,
+        "pbi_sube": 14,
+        "pbi_sube_bono_sube": 7
+      }
+    }
+  },
+  "sensibilidades": [
+    {
+      "id": "base",
+      "especificacion": "Especificación principal (referencia)",
+      "herramienta": "Regresión simple (t de β1)",
+      "n": 56,
+      "nombre_estadistico": "t",
+      "estadistico": 0.0075895917068,
+      "gl": 54,
+      "coeficiente": 0.0154426259913,
+      "ic_inferior": -4.06390738402,
+      "ic_superior": 4.09479263601,
+      "p_valor": 0.993972409771,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "id": "a",
+      "especificacion": "(a) Bono sin ajuste ex-pago (serie bruta)",
+      "herramienta": "Regresión simple (t de β1)",
+      "n": 56,
+      "nombre_estadistico": "t",
+      "estadistico": -0.137041439081,
+      "gl": 54,
+      "coeficiente": -0.289046708514,
+      "ic_inferior": -4.51772208659,
+      "ic_superior": 3.93962866956,
+      "p_valor": 0.891507721099,
+      "decision": "No se rechaza H0",
+      "coincide_con_principal": true
+    },
+    {
+      "id": "b",
+      "especificacion": "(b) PBI sin desestacionalizar",
+      "herramienta": "Regresión simple (t de β1)",
+      "n": 56,
+      "nombre_estadistico": "t",
+      "estadistico": -0.644825963807,
+      "gl": 54,
+      "coeficiente": -0.576971515655,
+      "ic_inferior": -2.37087918461,
+      "ic_superior": 1.2169361533,
+      "p_valor": 0.521770115951,
+      "decision": "No se rechaza H0",
+      "coincide_con_principal": true
+    },
+    {
+      "id": "c",
+      "especificacion": "(c) ANOVA con umbrales ±0,5 % (n por grupo 10/32/14)",
+      "herramienta": "ANOVA (F)",
+      "n": 56,
+      "nombre_estadistico": "F",
+      "estadistico": 0.302304509531,
+      "gl": "2; 53",
+      "coeficiente": null,
+      "ic_inferior": null,
+      "ic_superior": null,
+      "p_valor": 0.740378890434,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "id": "d",
+      "especificacion": "(d) Spline con condición de borde not-a-knot",
+      "herramienta": "Regresión simple (t de β1)",
+      "n": 56,
+      "nombre_estadistico": "t",
+      "estadistico": 0.00716640495199,
+      "gl": 54,
+      "coeficiente": 0.0145774311901,
+      "ic_inferior": -4.06361659549,
+      "ic_superior": 4.09277145787,
+      "p_valor": 0.994308495117,
+      "decision": "No se rechaza H0",
+      "coincide_con_principal": true
+    },
+    {
+      "id": "e",
+      "especificacion": "(e) Muestra trimestral (n = 19)",
+      "herramienta": "Regresión simple (t de β1)",
+      "n": 19,
+      "nombre_estadistico": "t",
+      "estadistico": -2.7333779649,
+      "gl": 17,
+      "coeficiente": -4.54066327891,
+      "ic_inferior": -8.04547024031,
+      "ic_superior": -1.03585631751,
+      "p_valor": 0.014152301218,
+      "decision": "Se rechaza H0",
+      "coincide_con_principal": false
+    },
+    {
+      "id": "f",
+      "especificacion": "(f) Múltiple con errores HAC (Newey-West, 3 rezagos): β de Var PBI",
+      "herramienta": "Regresión múltiple (t HAC)",
+      "n": 56,
+      "nombre_estadistico": "t",
+      "estadistico": -0.0686559160001,
+      "gl": 53,
+      "coeficiente": -0.222160946757,
+      "ic_inferior": -6.71247460413,
+      "ic_superior": 6.26815271062,
+      "p_valor": 0.94552188291,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "id": "g1",
+      "especificacion": "(g) Múltiple con CCL de cierres operados (AL30C con volumen > 0): β de Var PBI",
+      "herramienta": "Regresión múltiple (t)",
+      "n": 52,
+      "nombre_estadistico": "t",
+      "estadistico": -0.190244181075,
+      "gl": 49,
+      "coeficiente": -0.407261891002,
+      "ic_inferior": -4.70922480286,
+      "ic_superior": 3.89470102086,
+      "p_valor": 0.849903770906,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "id": "g2",
+      "especificacion": "(g) Múltiple con CCL de cierres operados (AL30C con volumen > 0): β de Var CCL",
+      "herramienta": "Regresión múltiple (t)",
+      "n": 52,
+      "nombre_estadistico": "t",
+      "estadistico": -1.44650999894,
+      "gl": 49,
+      "coeficiente": -0.246947542109,
+      "ic_inferior": -0.590021330645,
+      "ic_superior": 0.0961262464264,
+      "p_valor": 0.154401145197,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "id": "h",
+      "especificacion": "(h) PBI desestacionalizado por el INDEC (en lugar de STL)",
+      "herramienta": "Regresión simple (t de β1)",
+      "n": 56,
+      "nombre_estadistico": "t",
+      "estadistico": 0.227649906694,
+      "gl": 54,
+      "coeficiente": 0.627312973742,
+      "ic_inferior": -4.89734023844,
+      "ic_superior": 6.15196618592,
+      "p_valor": 0.820778175699,
+      "decision": "No se rechaza H0",
+      "coincide_con_principal": true
+    }
+  ],
+  "p_valores": [
+    {
+      "prueba": "Regresión simple, β1 con d = −3",
+      "etiqueta": "exploratoria",
+      "estadistico": -2.24086730154,
+      "gl": 54,
+      "p_valor": 0.0291687943801,
+      "umbral": 0.01,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Regresión simple, β1 con d = −2",
+      "etiqueta": "exploratoria",
+      "estadistico": -3.16680471692,
+      "gl": 54,
+      "p_valor": 0.002535010582,
+      "umbral": 0.01,
+      "decision": "Se rechaza H0"
+    },
+    {
+      "prueba": "Regresión simple, β1 con d = −1",
+      "etiqueta": "exploratoria",
+      "estadistico": -1.91426053896,
+      "gl": 54,
+      "p_valor": 0.0608920357939,
+      "umbral": 0.01,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Regresión simple, β1 con d = 0",
+      "etiqueta": "principal",
+      "estadistico": 0.0075895917068,
+      "gl": 54,
+      "p_valor": 0.993972409771,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Regresión simple, β1 con d = +1",
+      "etiqueta": "extensión",
+      "estadistico": 0.928576166231,
+      "gl": 53,
+      "p_valor": 0.357318658819,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Regresión simple, β1 con d = +2",
+      "etiqueta": "exploratoria",
+      "estadistico": 0.161011403315,
+      "gl": 52,
+      "p_valor": 0.872708341446,
+      "umbral": 0.01,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Regresión simple, β1 con d = +3",
+      "etiqueta": "exploratoria",
+      "estadistico": -1.13397428844,
+      "gl": 51,
+      "p_valor": 0.262107584428,
+      "umbral": 0.01,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Regresión simple, F global (d = 0)",
+      "etiqueta": "herramienta",
+      "estadistico": 5.76019022759e-05,
+      "gl": [
+        1,
+        54
+      ],
+      "p_valor": 0.993972409771,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Bondad de ajuste χ² a la Normal: Var AL30D",
+      "etiqueta": "herramienta",
+      "estadistico": 6.85714285714,
+      "gl": 5,
+      "p_valor": 0.231483428591,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Shapiro-Wilk: Var AL30D",
+      "etiqueta": "herramienta",
+      "estadistico": 0.939007404556,
+      "gl": null,
+      "p_valor": 0.00704618029963,
+      "umbral": 0.05,
+      "decision": "Se rechaza H0"
+    },
+    {
+      "prueba": "Bondad de ajuste χ² a la Normal: Var PBI",
+      "etiqueta": "herramienta",
+      "estadistico": 19.4285714286,
+      "gl": 5,
+      "p_valor": 0.00159891752205,
+      "umbral": 0.05,
+      "decision": "Se rechaza H0"
+    },
+    {
+      "prueba": "Shapiro-Wilk: Var PBI",
+      "etiqueta": "herramienta",
+      "estadistico": 0.954154816085,
+      "gl": null,
+      "p_valor": 0.0327365808335,
+      "umbral": 0.05,
+      "decision": "Se rechaza H0"
+    },
+    {
+      "prueba": "Bondad de ajuste χ² a la Normal: residuos de la regresión principal",
+      "etiqueta": "herramienta",
+      "estadistico": 6.85714285714,
+      "gl": 5,
+      "p_valor": 0.231483428591,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Shapiro-Wilk: residuos de la regresión principal",
+      "etiqueta": "herramienta",
+      "estadistico": 0.938977315309,
+      "gl": null,
+      "p_valor": 0.00702545369568,
+      "umbral": 0.05,
+      "decision": "Se rechaza H0"
+    },
+    {
+      "prueba": "Regresión múltiple, F global",
+      "etiqueta": "herramienta",
+      "estadistico": 0.938885066073,
+      "gl": [
+        2,
+        53
+      ],
+      "p_valor": 0.397470091418,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Regresión múltiple, t de constante",
+      "etiqueta": "herramienta",
+      "estadistico": 1.90460596693,
+      "gl": 53,
+      "p_valor": 0.0622646884328,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Regresión múltiple, t de Var PBI",
+      "etiqueta": "herramienta",
+      "estadistico": -0.109665334534,
+      "gl": 53,
+      "p_valor": 0.913088980248,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Regresión múltiple, t de Var CCL implícito",
+      "etiqueta": "herramienta",
+      "estadistico": -1.37029617017,
+      "gl": 53,
+      "p_valor": 0.176371017343,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Breusch-Pagan (regresión simple)",
+      "etiqueta": "diagnóstico",
+      "estadistico": 3.57569441591,
+      "gl": 1,
+      "p_valor": 0.0586309302992,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Breusch-Godfrey (regresión simple)",
+      "etiqueta": "diagnóstico",
+      "estadistico": 0.860614669755,
+      "gl": 3,
+      "p_valor": 0.834920458091,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Shapiro-Wilk de residuos (regresión simple)",
+      "etiqueta": "diagnóstico",
+      "estadistico": 0.938977315309,
+      "gl": null,
+      "p_valor": 0.00702545369568,
+      "umbral": 0.05,
+      "decision": "Se rechaza H0"
+    },
+    {
+      "prueba": "Breusch-Pagan (regresión múltiple)",
+      "etiqueta": "diagnóstico",
+      "estadistico": 3.35277954621,
+      "gl": 2,
+      "p_valor": 0.187048044418,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Breusch-Godfrey (regresión múltiple)",
+      "etiqueta": "diagnóstico",
+      "estadistico": 0.57132949955,
+      "gl": 3,
+      "p_valor": 0.902963296495,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Shapiro-Wilk de residuos (regresión múltiple)",
+      "etiqueta": "diagnóstico",
+      "estadistico": 0.939938762591,
+      "gl": null,
+      "p_valor": 0.00772053876819,
+      "umbral": 0.05,
+      "decision": "Se rechaza H0"
+    },
+    {
+      "prueba": "ANOVA de un factor (terciles del PBI)",
+      "etiqueta": "herramienta",
+      "estadistico": 0.258092370571,
+      "gl": [
+        2,
+        53
+      ],
+      "p_valor": 0.773489141003,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Levene (ANOVA)",
+      "etiqueta": "diagnóstico",
+      "estadistico": 3.13122071583,
+      "gl": [
+        2,
+        53
+      ],
+      "p_valor": 0.0518385395649,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Shapiro-Wilk grupo bajo (ANOVA)",
+      "etiqueta": "diagnóstico",
+      "estadistico": 0.962459227366,
+      "gl": null,
+      "p_valor": 0.621679084242,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Shapiro-Wilk grupo medio (ANOVA)",
+      "etiqueta": "diagnóstico",
+      "estadistico": 0.851171034095,
+      "gl": null,
+      "p_valor": 0.00883704473127,
+      "umbral": 0.05,
+      "decision": "Se rechaza H0"
+    },
+    {
+      "prueba": "Shapiro-Wilk grupo alto (ANOVA)",
+      "etiqueta": "diagnóstico",
+      "estadistico": 0.895674659027,
+      "gl": null,
+      "p_valor": 0.0406561546595,
+      "umbral": 0.05,
+      "decision": "Se rechaza H0"
+    },
+    {
+      "prueba": "F de igualdad de varianzas (complementaria)",
+      "etiqueta": "complementaria",
+      "estadistico": 1.0401223751,
+      "gl": [
+        31,
+        23
+      ],
+      "p_valor": 0.935669889852,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "t varianza agrupada (complementaria) — decisión",
+      "etiqueta": "complementaria",
+      "estadistico": -0.049097477644,
+      "gl": 54.0,
+      "p_valor": 0.961022762731,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "t Welch (complementaria)",
+      "etiqueta": "complementaria",
+      "estadistico": -0.0492381667827,
+      "gl": 50.2106276874,
+      "p_valor": 0.960924839592,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Hipótesis principal: β1 (d = 0) — muestra trimestral",
+      "etiqueta": "robustez",
+      "estadistico": -2.7333779649,
+      "gl": 17,
+      "p_valor": 0.014152301218,
+      "umbral": 0.05,
+      "decision": "Se rechaza H0"
+    },
+    {
+      "prueba": "Extensión: β1 (d = +1) — muestra trimestral",
+      "etiqueta": "robustez",
+      "estadistico": -0.102205921223,
+      "gl": 16,
+      "p_valor": 0.919863190349,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "Múltiple: β de Var PBI — muestra trimestral",
+      "etiqueta": "robustez",
+      "estadistico": -2.75568572528,
+      "gl": 16,
+      "p_valor": 0.0140686301895,
+      "umbral": 0.05,
+      "decision": "Se rechaza H0"
+    },
+    {
+      "prueba": "ANOVA por terciles del PBI — muestra trimestral",
+      "etiqueta": "robustez",
+      "estadistico": 4.54162035566,
+      "gl": "2; 16",
+      "p_valor": 0.0274088424325,
+      "umbral": 0.05,
+      "decision": "Se rechaza H0"
+    },
+    {
+      "prueba": "Complementaria: μ suba − μ baja (Var PBI) — muestra trimestral",
+      "etiqueta": "robustez",
+      "estadistico": -2.12636696331,
+      "gl": 17.0,
+      "p_valor": 0.0484187948133,
+      "umbral": 0.05,
+      "decision": "Se rechaza H0"
+    },
+    {
+      "prueba": "(a) Bono sin ajuste ex-pago (serie bruta)",
+      "etiqueta": "sensibilidad",
+      "estadistico": -0.137041439081,
+      "gl": 54,
+      "p_valor": 0.891507721099,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "(b) PBI sin desestacionalizar",
+      "etiqueta": "sensibilidad",
+      "estadistico": -0.644825963807,
+      "gl": 54,
+      "p_valor": 0.521770115951,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "(c) ANOVA con umbrales ±0,5 % (n por grupo 10/32/14)",
+      "etiqueta": "sensibilidad",
+      "estadistico": 0.302304509531,
+      "gl": "2; 53",
+      "p_valor": 0.740378890434,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "(d) Spline con condición de borde not-a-knot",
+      "etiqueta": "sensibilidad",
+      "estadistico": 0.00716640495199,
+      "gl": 54,
+      "p_valor": 0.994308495117,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "(f) Múltiple con errores HAC (Newey-West, 3 rezagos): β de Var PBI",
+      "etiqueta": "sensibilidad",
+      "estadistico": -0.0686559160001,
+      "gl": 53,
+      "p_valor": 0.94552188291,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "(g) Múltiple con CCL de cierres operados (AL30C con volumen > 0): β de Var PBI",
+      "etiqueta": "sensibilidad",
+      "estadistico": -0.190244181075,
+      "gl": 49,
+      "p_valor": 0.849903770906,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "(g) Múltiple con CCL de cierres operados (AL30C con volumen > 0): β de Var CCL",
+      "etiqueta": "sensibilidad",
+      "estadistico": -1.44650999894,
+      "gl": 49,
+      "p_valor": 0.154401145197,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    },
+    {
+      "prueba": "(h) PBI desestacionalizado por el INDEC (en lugar de STL)",
+      "etiqueta": "sensibilidad",
+      "estadistico": 0.227649906694,
+      "gl": 54,
+      "p_valor": 0.820778175699,
+      "umbral": 0.05,
+      "decision": "No se rechaza H0"
+    }
+  ],
+  "veredictos": {
+    "hipotesis_principal": "NO HAY EVIDENCIA SUFICIENTE para afirmar la hipótesis principal (β1 = 0,0154; IC 95 % [−4,0639 ; 4,0948]; p = 0,9940; R² = 0,0000). No haber rechazado H0 no prueba que β1 sea cero.",
+    "interpretacion_pendiente": "Pendiente positiva: en la muestra, cada 1 pp adicional de variación mensual del PBI se asocia, en promedio, con 0,0154 pp más de variación mensual del AL30D.",
+    "extension_d1": "NO HAY EVIDENCIA SUFICIENTE para afirmar la extensión temporal (d = +1) (β1 = 1,8997; IC 95 % [−2,2037 ; 6,0030]; p = 0,3573; R² = 0,0160). No haber rechazado H0 no prueba que β1 sea cero.",
+    "principal_rechaza_h0": false,
+    "extension_rechaza_h0": false,
+    "prueba_complementaria": "NO HAY EVIDENCIA SUFICIENTE para afirmar la hipótesis complementaria (diferencia suba − baja = −0,0112 pp; IC 95 % [−0,4692 ; 0,4467]; p = 0,9610). No haber rechazado H0 no prueba que las medias sean iguales.",
+    "complementaria_rechaza_h0": false
+  }
+}

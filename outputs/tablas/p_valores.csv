@@ -1,0 +1,46 @@
+prueba,etiqueta,estadistico,gl,p_valor,umbral,decision
+"Regresión simple, β1 con d = −3",exploratoria,-2.240867302,54,0.02916879438,0.01,No se rechaza H0
+"Regresión simple, β1 con d = −2",exploratoria,-3.166804717,54,0.002535010582,0.01,Se rechaza H0
+"Regresión simple, β1 con d = −1",exploratoria,-1.914260539,54,0.06089203579,0.01,No se rechaza H0
+"Regresión simple, β1 con d = 0",principal,0.007589591707,54,0.9939724098,0.05,No se rechaza H0
+"Regresión simple, β1 con d = +1",extensión,0.9285761662,53,0.3573186588,0.05,No se rechaza H0
+"Regresión simple, β1 con d = +2",exploratoria,0.1610114033,52,0.8727083414,0.01,No se rechaza H0
+"Regresión simple, β1 con d = +3",exploratoria,-1.133974288,51,0.2621075844,0.01,No se rechaza H0
+"Regresión simple, F global (d = 0)",herramienta,5.760190228e-05,1; 54,0.9939724098,0.05,No se rechaza H0
+Bondad de ajuste χ² a la Normal: Var AL30D,herramienta,6.857142857,5,0.2314834286,0.05,No se rechaza H0
+Shapiro-Wilk: Var AL30D,herramienta,0.9390074046,,0.0070461803,0.05,Se rechaza H0
+Bondad de ajuste χ² a la Normal: Var PBI,herramienta,19.42857143,5,0.001598917522,0.05,Se rechaza H0
+Shapiro-Wilk: Var PBI,herramienta,0.9541548161,,0.03273658083,0.05,Se rechaza H0
+Bondad de ajuste χ² a la Normal: residuos de la regresión principal,herramienta,6.857142857,5,0.2314834286,0.05,No se rechaza H0
+Shapiro-Wilk: residuos de la regresión principal,herramienta,0.9389773153,,0.007025453696,0.05,Se rechaza H0
+"Regresión múltiple, F global",herramienta,0.9388850661,2; 53,0.3974700914,0.05,No se rechaza H0
+"Regresión múltiple, t de constante",herramienta,1.904605967,53,0.06226468843,0.05,No se rechaza H0
+"Regresión múltiple, t de Var PBI",herramienta,-0.1096653345,53,0.9130889802,0.05,No se rechaza H0
+"Regresión múltiple, t de Var CCL implícito",herramienta,-1.37029617,53,0.1763710173,0.05,No se rechaza H0
+Breusch-Pagan (regresión simple),diagnóstico,3.575694416,1,0.0586309303,0.05,No se rechaza H0
+Breusch-Godfrey (regresión simple),diagnóstico,0.8606146698,3,0.8349204581,0.05,No se rechaza H0
+Shapiro-Wilk de residuos (regresión simple),diagnóstico,0.9389773153,,0.007025453696,0.05,Se rechaza H0
+Breusch-Pagan (regresión múltiple),diagnóstico,3.352779546,2,0.1870480444,0.05,No se rechaza H0
+Breusch-Godfrey (regresión múltiple),diagnóstico,0.5713294996,3,0.9029632965,0.05,No se rechaza H0
+Shapiro-Wilk de residuos (regresión múltiple),diagnóstico,0.9399387626,,0.007720538768,0.05,Se rechaza H0
+ANOVA de un factor (terciles del PBI),herramienta,0.2580923706,2; 53,0.773489141,0.05,No se rechaza H0
+Levene (ANOVA),diagnóstico,3.131220716,2; 53,0.05183853956,0.05,No se rechaza H0
+Shapiro-Wilk grupo bajo (ANOVA),diagnóstico,0.9624592274,,0.6216790842,0.05,No se rechaza H0
+Shapiro-Wilk grupo medio (ANOVA),diagnóstico,0.8511710341,,0.008837044731,0.05,Se rechaza H0
+Shapiro-Wilk grupo alto (ANOVA),diagnóstico,0.895674659,,0.04065615466,0.05,Se rechaza H0
+F de igualdad de varianzas (complementaria),complementaria,1.040122375,31; 23,0.9356698899,0.05,No se rechaza H0
+t varianza agrupada (complementaria) — decisión,complementaria,-0.04909747764,54.0,0.9610227627,0.05,No se rechaza H0
+t Welch (complementaria),complementaria,-0.04923816678,50.2106276874,0.9609248396,0.05,No se rechaza H0
+Hipótesis principal: β1 (d = 0) — muestra trimestral,robustez,-2.733377965,17,0.01415230122,0.05,Se rechaza H0
+Extensión: β1 (d = +1) — muestra trimestral,robustez,-0.1022059212,16,0.9198631903,0.05,No se rechaza H0
+Múltiple: β de Var PBI — muestra trimestral,robustez,-2.755685725,16,0.01406863019,0.05,Se rechaza H0
+ANOVA por terciles del PBI — muestra trimestral,robustez,4.541620356,2; 16,0.02740884243,0.05,Se rechaza H0
+Complementaria: μ suba − μ baja (Var PBI) — muestra trimestral,robustez,-2.126366963,17.0,0.04841879481,0.05,Se rechaza H0
+(a) Bono sin ajuste ex-pago (serie bruta),sensibilidad,-0.1370414391,54,0.8915077211,0.05,No se rechaza H0
+(b) PBI sin desestacionalizar,sensibilidad,-0.6448259638,54,0.521770116,0.05,No se rechaza H0
+"(c) ANOVA con umbrales ±0,5 % (n por grupo 10/32/14)",sensibilidad,0.3023045095,2; 53,0.7403788904,0.05,No se rechaza H0
+(d) Spline con condición de borde not-a-knot,sensibilidad,0.007166404952,54,0.9943084951,0.05,No se rechaza H0
+"(f) Múltiple con errores HAC (Newey-West, 3 rezagos): β de Var PBI",sensibilidad,-0.068655916,53,0.9455218829,0.05,No se rechaza H0
+(g) Múltiple con CCL de cierres operados (AL30C con volumen > 0): β de Var PBI,sensibilidad,-0.1902441811,49,0.8499037709,0.05,No se rechaza H0
+(g) Múltiple con CCL de cierres operados (AL30C con volumen > 0): β de Var CCL,sensibilidad,-1.446509999,49,0.1544011452,0.05,No se rechaza H0
+(h) PBI desestacionalizado por el INDEC (en lugar de STL),sensibilidad,0.2276499067,54,0.8207781757,0.05,No se rechaza H0

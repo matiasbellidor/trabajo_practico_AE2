@@ -1,0 +1,76 @@
+# Resumen para la conclusión
+
+{{ r.meta.materia }} · Cátedra {{ r.meta.catedra }} · {{ r.meta.cuatrimestre }} · {{ r.meta.grupo }}
+Fuente única: `outputs/resultados.json`. α = {{ n(r.meta.alfa, 2) }}; IC al 95 %.
+
+## Veredicto de la hipótesis principal
+
+> {{ r.veredictos.hipotesis_principal }}
+
+- {{ r.veredictos.interpretacion_pendiente }}
+- Muestra principal: {{ r.muestra.principal.frecuencia }}, {{ r.muestra.principal.inicio }} a {{ r.muestra.principal.fin }}, n = {{ r.muestra.principal.n }}{% if r.muestra.principal.frecuencia == "mensual" %} (PBI mensualizado por spline; requiere conformidad docente){% endif %}{% if not r.muestra.principal.cumple_minimo_50 %}; **no cumple el mínimo de 50 de la consigna**{% endif %}.
+- Modelo: Var AL30D_t = β0 + β1 · Var PBI_t + ε_t; H0: β1 = 0; H1: β1 ≠ 0 (bilateral).
+
+## Extensión temporal y prueba complementaria
+
+- Extensión (d = +1, declarada a priori): {{ r.veredictos.extension_d1 }}
+- Complementaria (hipótesis enviada a los docentes): {{ r.veredictos.prueba_complementaria }}
+
+## Resultado por herramienta
+
+| Herramienta | Resultado | p-valor |
+|---|---|---|
+| Estimador | x̄ Var AL30D = {{ n(r.estimadores.var_bono.media) }} % (S = {{ n(r.estimadores.var_bono.desvio) }}); x̄ Var PBI = {{ n(r.estimadores.var_pbi.media) }} % (S = {{ n(r.estimadores.var_pbi.desvio) }}); p̂ suba = {{ n(r.estimadores.proporcion_suba.proporcion) }} | — |
+| Intervalo de confianza | μ bono {{ ic(r.intervalos.media_var_bono.inferior, r.intervalos.media_var_bono.superior) }}; μ PBI {{ ic(r.intervalos.media_var_pbi.inferior, r.intervalos.media_var_pbi.superior) }}; β1 {{ ic(r.hipotesis_principal.d0.ic_b1.inferior, r.hipotesis_principal.d0.ic_b1.superior) }} | — |
+{% for clave, b in r.bondad_ajuste.items() %}| Bondad de ajuste: {{ nombres[clave] }} | {% if b.chi2.aplicable %}χ² = {{ n(b.chi2.estadistico) }} ({{ b.chi2.gl }} gl); {% endif %}Shapiro W = {{ n(b.shapiro.estadistico) }} | {% if b.chi2.aplicable %}χ²: {{ pv(b.chi2.p_valor) }}; {% endif %}SW: {{ pv(b.shapiro.p_valor) }} |
+{% endfor %}| Regresión simple (d = 0) | β1 = {{ n(r.hipotesis_principal.d0.b1) }}; R² = {{ n(r.hipotesis_principal.d0.r2) }}; t = {{ n(r.hipotesis_principal.d0.t_b1) }} | {{ pv(r.hipotesis_principal.d0.p_b1) }} |
+| Regresión simple (d = +1) | β1 = {{ n(r.hipotesis_principal.d1.b1) }}; R² = {{ n(r.hipotesis_principal.d1.r2) }} | {{ pv(r.hipotesis_principal.d1.p_b1) }} |
+{% for c in r.regresion_multiple.coeficientes[1:] %}| Regresión múltiple: {{ nombres.get(c.nombre, c.nombre) }} | β = {{ n(c.coeficiente) }}; t = {{ n(c.t) }} | {{ pv(c.p_valor) }} |
+{% endfor %}| Regresión múltiple: F global | F = {{ n(r.regresion_multiple.f) }}; R² = {{ n(r.regresion_multiple.r2) }}; R² aj. = {{ n(r.regresion_multiple.r2_ajustado) }} | {{ pv(r.regresion_multiple.p_f) }} |
+{% if r.anova.aplicable %}| ANOVA (terciles del PBI) | F = {{ n(r.anova.f) }}; η² = {{ n(r.anova.eta2) }}; medias {% for g in r.anova.grupos %}{{ g.grupo }} {{ n(g.media, 2) }} %{{ ", " if not loop.last }}{% endfor %} | {{ pv(r.anova.p_valor) }} |
+{% endif %}{% if r.prueba_complementaria.aplicable %}| Complementaria ({{ r.prueba_complementaria.test_de_decision }}) | diferencia = {{ n(r.prueba_complementaria.decision.diferencia) }} pp; d de Cohen = {{ n(r.prueba_complementaria.d_cohen) }}; DMD 80 % = {{ n(r.prueba_complementaria.diferencia_minima_detectable.en_unidades) }} pp | {{ pv(r.prueba_complementaria.decision.p_valor) }} |
+{% endif %}
+
+## Desfases (X = Var PBI en t + d)
+
+| d | Etiqueta | n | β1 | p-valor | Umbral | ¿Significativo? |
+|---|---|---|---|---|---|---|
+{% for f in r.desfases %}| {{ n(f.d, 0, True) }} | {{ f.etiqueta }} | {{ f.n }} | {{ n(f.b1) }} | {{ pv(f.p_valor) }} | {{ n(f.umbral, 2) }} | {{ "sí" if f.significativo else "no" }} |
+{% endfor %}
+
+{% for p in t.desfases.interpretacion[1:] %}{{ p }}
+{% endfor %}
+
+## Diagnóstico de supuestos
+
+{% for p in t.multiple.interpretacion[2:] %}- {{ p }}
+{% endfor %}- Regresión simple: Durbin-Watson = {{ n(r.diagnosticos.regresion_simple.durbin_watson) }}; Breusch-Pagan p = {{ pv(r.diagnosticos.regresion_simple.breusch_pagan.p_valor) }}; Breusch-Godfrey p = {{ pv(r.diagnosticos.regresion_simple.breusch_godfrey.p_valor) }}; Shapiro de residuos p = {{ pv(r.diagnosticos.regresion_simple.normalidad_residuos.shapiro.p_valor) }}.
+{% if r.anova.aplicable %}- ANOVA: Levene p = {{ pv(r.anova.supuestos.levene.p_valor) }}; Shapiro por grupo: {% for g in r.anova.supuestos.shapiro_por_grupo %}{{ g.grupo }} {{ pv(g.p_valor) }}{{ "; " if not loop.last }}{% endfor %}.
+{% endif %}
+
+## Robustez
+
+{% for p in t.robustez.interpretacion %}- {{ p }}
+{% endfor %}
+- {{ t.robustez.influencia }}
+
+| Especificación | Muestra | n | Coeficiente | p-valor | Decisión |
+|---|---|---|---|---|---|
+{% for f in r.robustez_trimestral.tabla %}| {{ f.especificacion }} | {{ f.muestra }} | {{ f.n }} | {{ n(f.coeficiente) }} | {{ pv(f.p_valor) }} | {{ f.decision }} |
+{% endfor %}
+
+**Datos de la muestra {{ r.robustez_trimestral.muestra_comparada }}** (para leer la robustez período por período):
+
+| Período | Var AL30D (%) | Var PBI (%) |
+|---|---|---|
+{% for p in panel_respaldo %}| {{ p.periodo }} | {{ n(p.var_bono, 2) }} | {{ n(p.var_pbi, 2) }} |
+{% endfor %}
+
+## Limitaciones
+
+{% for p in t.limitaciones %}- {{ p }}
+{% endfor %}
+
+## Tabla final de p-valores
+
+{{ tabla_p }}

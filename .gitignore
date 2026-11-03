@@ -1,0 +1,21 @@
+# Material de la cátedra y archivos de referencia: no se publican
+material_catedra/
+referencia/
+
+# Entorno y caché de Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+
+# Verificación visual local
+.capturas/
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini

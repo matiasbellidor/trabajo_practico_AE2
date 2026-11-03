@@ -1,0 +1,131 @@
+# Decisiones PRE-REGISTRADAS del trabajo práctico.
+# Se fijaron antes de ver cualquier p-valor y no se modifican después de ver resultados.
+# Toda especificación agregada más tarde se rotula "exploratoria" o "sensibilidad".
+
+proyecto:
+  titulo: "Variación del PBI real argentino y variación del bono AL30D"
+  materia: "Análisis Estadístico 2"
+  catedra: "Tito Lasanta"
+  facultad: "FCE UBA"
+  cuatrimestre: "2C 2026"
+  autor: "Matías Rodrigo Bellido"
+  grupo: "Grupo 1"
+  integrantes:
+    - "Matías Rodrigo Bellido"
+    - "Luka Orpianesi"
+    - "Manuel Rodriguez"
+    - "Melina Escalante"
+    - "Maria Acevedo"
+  github: "matiasbellidor"
+  repositorio: "https://github.com/matiasbellidor/trabajo_practico_AE2"
+  pages: "https://matiasbellidor.github.io/trabajo_practico_AE2/"
+  fecha_entrega: "2026-11-12"
+
+rutas:
+  al30d: data_sets_ordenados/02_al30d_diario.csv
+  pbi: data_sets_ordenados/01_indec_cuentas_nacionales_largo.csv               # cuadro OD_C01
+  al30: data/raw/al30.json             # opcional: CCL implícito
+  al30c: data/raw/al30c.json           # opcional: CCL implícito
+  pbi_indec_desest: data_sets_ordenados/01_indec_cuentas_nacionales_largo.csv  # opcional: solo sensibilidad (h)
+  # Descargas independientes de las mismas series: los tests verifican que coinciden con las de arriba.
+  verificacion_al30d: data/raw/al30d.json
+  verificacion_pbi: data/raw/pbi_trimestral.csv
+  conclusion: conclusion/conclusion.md # opcional: texto final de la conclusión
+  salidas: outputs
+  docs: docs
+  informe: reports/cuerpo_informe.md
+  readme: README.md
+
+# Origen declarado de cada archivo (el hash, las filas y las fechas se calculan al correr).
+fuentes:
+  al30d:
+    fuente: "Data912, /historical/bonds/AL30D (cotización en dólares MEP)"
+    url: "https://data912.com/historical/bonds/AL30D"
+    obtencion: "Dataset ordenado por el grupo (2026-11-03). Coincide rueda por rueda con la descarga de verificación."
+  pbi:
+    fuente: "INDEC, sh_oferta_demanda_09_26.xls, cuadro 1 (PBI a precios de 2004, trimestral, sin desestacionalizar)"
+    url: "https://www.indec.gob.ar/ftp/cuadros/economia/sh_oferta_demanda_09_26.xls"
+    obtencion: "Dataset ordenado por el grupo (2026-11-03) a partir de los cuadros del INDEC. Coincide trimestre por trimestre con la serie 9.2_PP2_2004_T_16 de datos.gob.ar."
+  pbi_indec_desest:
+    fuente: "INDEC, sh_oferta_demanda_desest_09_26.xls (PIB desestacionalizado, millones de pesos de 2004)"
+    url: "https://www.indec.gob.ar/ftp/cuadros/economia/sh_oferta_demanda_desest_09_26.xls"
+    obtencion: "Mismo dataset ordenado (cuadro OD_DESEST_NIVEL). Se usa solo en la sensibilidad (h)."
+  verificacion_al30d:
+    fuente: "Data912, /historical/bonds/AL30D"
+    url: "https://data912.com/historical/bonds/AL30D"
+    obtencion: "Descarga independiente del 2026-11-01 (1.243 ruedas)."
+  verificacion_pbi:
+    fuente: "INDEC vía datos.gob.ar, serie 9.2_PP2_2004_T_16"
+    url: "https://apis.datos.gob.ar/series/api/series/?ids=9.2_PP2_2004_T_16&format=csv&limit=1000"
+    obtencion: "Descarga independiente de la API oficial del 2026-11-01."
+  al30:
+    fuente: "Data912, /historical/bonds/AL30 (cotización en pesos)"
+    url: "https://data912.com/historical/bonds/AL30"
+    obtencion: "Descargado el 2026-11-01."
+  al30c:
+    fuente: "Data912, /historical/bonds/AL30C (cotización en dólares cable)"
+    url: "https://data912.com/historical/bonds/AL30C"
+    obtencion: "Descargado el 2026-11-01."
+
+alfa: 0.05
+confianza: 0.95
+n_minimo: 50
+
+# mensual_spline (default; requiere conformidad docente) | trimestral (n = 19, no cumple el mínimo de 50)
+muestra_principal: mensual_spline
+
+ventana_mensual:
+  inicio: "2021-10"
+  fin: "2026-05"
+ventana_trimestral:
+  inicio: "2021Q4"
+  fin: "2026Q2"
+
+bono:
+  # Pagos de cupón y amortización: caídas de 7 a 13 % en una rueda. Se les asigna retorno 0.
+  dias_ex_pago:
+    - "2024-07-08"
+    - "2025-01-08"
+    - "2025-07-08"
+    - "2026-01-08"
+    - "2026-07-08"
+  hueco_maximo_dias: 5
+
+pbi:
+  desestacionalizar: stl        # stl | ninguna | indec (serie desestacionalizada publicada por el INDEC)
+  stl_periodo: 4
+  stl_robusto: true
+  spline_bc: natural            # natural | not-a-knot
+  # Cada nivel trimestral se ubica en el mes central del trimestre (feb, may, ago, nov).
+  desplazamiento_mes_central: 1
+
+desfases:
+  principal: 0
+  extension: 1
+  exploratorios: [-3, -2, -1, 2, 3]
+  alfa_exploratorio: 0.01       # 0,05 / 5 (Bonferroni sobre los 5 exploratorios)
+
+regresion_multiple:
+  # ccl si existen al30.json y al30c.json; si no, se usa el PBI adelantado (d = +1) como X2.
+  control_preferido: ccl
+  hac_maxlags: 3
+  breusch_godfrey_nlags: 3
+  # Agregado al inspeccionar los datos y antes de calcular p-valores: AL30C no operó (volumen 0) en el
+  # 67 % de las ruedas de 2022. Sensibilidad: CCL con el último cierre de AL30C con volumen positivo.
+  sensibilidad_ccl_operado: true
+
+anova:
+  factor: terciles
+  etiquetas: [bajo, medio, alto]
+  umbrales_sensibilidad: [-0.5, 0.5]
+  n_minimo_grupo: 8
+
+prueba_complementaria:
+  umbral_k: 0
+  # Regla de la cátedra: si la F no rechaza igualdad de varianzas, t con varianza agrupada; si rechaza, Welch.
+  regla_t: segun_prueba_f
+  potencia: 0.80
+
+bondad_ajuste:
+  max_clases: 8
+  esperada_minima: 5

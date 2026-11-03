@@ -1,0 +1,11 @@
+especificacion,herramienta,n,nombre_estadistico,estadistico,gl,coeficiente,ic_inferior,ic_superior,p_valor,decision,muestra,r2
+Hipótesis principal: β1 (d = 0),Regresión simple (t de β1),56,t,0.007589591707,54,0.01544262599,-4.063907384,4.094792636,0.9939724098,No se rechaza H0,mensual,1.066700756e-06
+Hipótesis principal: β1 (d = 0),Regresión simple (t de β1),19,t,-2.733377965,17,-4.540663279,-8.04547024,-1.035856318,0.01415230122,Se rechaza H0,trimestral,0.3053102319
+Extensión: β1 (d = +1),Regresión simple (t de β1),55,t,0.9285761662,53,1.899683398,-2.203676678,6.003043475,0.3573186588,No se rechaza H0,mensual,0.01600849644
+Extensión: β1 (d = +1),Regresión simple (t de β1),18,t,-0.1022059212,16,-0.2123189058,-4.616133951,4.191496139,0.9198631903,No se rechaza H0,trimestral,0.000652452174
+Múltiple: β de Var PBI,Regresión múltiple (t),56,t,-0.1096653345,53,-0.2221609468,-4.285417865,3.841095972,0.9130889802,No se rechaza H0,mensual,0.03421731837
+Múltiple: β de Var PBI,Regresión múltiple (t),19,t,-2.755685725,16,-4.557561116,-8.06362056,-1.051501672,0.01406863019,Se rechaza H0,trimestral,0.351979074
+ANOVA por terciles del PBI,ANOVA (F),56,F,0.2580923706,2; 53,,,,0.773489141,No se rechaza H0,mensual,0.009645395008
+ANOVA por terciles del PBI,ANOVA (F),19,F,4.541620356,2; 16,,,,0.02740884243,Se rechaza H0,trimestral,0.3621238904
+Complementaria: μ suba − μ baja (Var PBI),t (varianza agrupada),56,t,-0.04909747764,54.0,-0.01121455819,-0.4691573391,0.4467282227,0.9610227627,No se rechaza H0,mensual,
+Complementaria: μ suba − μ baja (Var PBI),t (varianza agrupada),19,t,-2.126366963,17.0,-2.217703415,-4.418144493,-0.01726233747,0.04841879481,Se rechaza H0,trimestral,

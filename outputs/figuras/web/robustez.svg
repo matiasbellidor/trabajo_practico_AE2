@@ -1,0 +1,387 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 766.115391 409.236641" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="robustez-figure_1">
+  <g id="robustez-patch_1">
+   <path d="M 0 409.236641 
+L 766.115391 409.236641 
+L 766.115391 0 
+L 0 0 
+L 0 409.236641 
+z
+" style="fill: none"/>
+  </g>
+  <g id="robustez-axes_1">
+   <g id="robustez-patch_2">
+    <path d="M 377.325625 370.135859 
+L 713.405625 370.135859 
+L 713.405625 26.398203 
+L 377.325625 26.398203 
+L 377.325625 370.135859 
+z
+" style="fill: none"/>
+   </g>
+   <g id="robustez-matplotlib.axis_1">
+    <g id="robustez-xtick_1">
+     <g id="robustez-line2d_1">
+      <path d="M 393.580503 370.135859 
+L 393.580503 26.398203 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="robustez-line2d_2">
+      <defs>
+       <path id="robustez-m7909aaca7d" d="M 0 0 
+L 0 3.5 
+" style="stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#robustez-m7909aaca7d" x="393.580503" y="370.135859" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_1">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="393.580503" y="385.113398" transform="rotate(-0 393.580503 385.113398)">−8</text>
+     </g>
+    </g>
+    <g id="robustez-xtick_2">
+     <g id="robustez-line2d_3">
+      <path d="M 436.620284 370.135859 
+L 436.620284 26.398203 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="robustez-line2d_4">
+      <g>
+       <use xlink:href="#robustez-m7909aaca7d" x="436.620284" y="370.135859" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_2">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="436.620284" y="385.113398" transform="rotate(-0 436.620284 385.113398)">−6</text>
+     </g>
+    </g>
+    <g id="robustez-xtick_3">
+     <g id="robustez-line2d_5">
+      <path d="M 479.660064 370.135859 
+L 479.660064 26.398203 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="robustez-line2d_6">
+      <g>
+       <use xlink:href="#robustez-m7909aaca7d" x="479.660064" y="370.135859" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_3">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="479.660064" y="385.113398" transform="rotate(-0 479.660064 385.113398)">−4</text>
+     </g>
+    </g>
+    <g id="robustez-xtick_4">
+     <g id="robustez-line2d_7">
+      <path d="M 522.699844 370.135859 
+L 522.699844 26.398203 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="robustez-line2d_8">
+      <g>
+       <use xlink:href="#robustez-m7909aaca7d" x="522.699844" y="370.135859" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_4">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="522.699844" y="385.113398" transform="rotate(-0 522.699844 385.113398)">−2</text>
+     </g>
+    </g>
+    <g id="robustez-xtick_5">
+     <g id="robustez-line2d_9">
+      <path d="M 565.739625 370.135859 
+L 565.739625 26.398203 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="robustez-line2d_10">
+      <g>
+       <use xlink:href="#robustez-m7909aaca7d" x="565.739625" y="370.135859" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_5">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="565.739625" y="385.113398" transform="rotate(-0 565.739625 385.113398)">0</text>
+     </g>
+    </g>
+    <g id="robustez-xtick_6">
+     <g id="robustez-line2d_11">
+      <path d="M 608.779405 370.135859 
+L 608.779405 26.398203 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="robustez-line2d_12">
+      <g>
+       <use xlink:href="#robustez-m7909aaca7d" x="608.779405" y="370.135859" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_6">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="608.779405" y="385.113398" transform="rotate(-0 608.779405 385.113398)">2</text>
+     </g>
+    </g>
+    <g id="robustez-xtick_7">
+     <g id="robustez-line2d_13">
+      <path d="M 651.819185 370.135859 
+L 651.819185 26.398203 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="robustez-line2d_14">
+      <g>
+       <use xlink:href="#robustez-m7909aaca7d" x="651.819185" y="370.135859" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_7">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="651.819185" y="385.113398" transform="rotate(-0 651.819185 385.113398)">4</text>
+     </g>
+    </g>
+    <g id="robustez-xtick_8">
+     <g id="robustez-line2d_15">
+      <path d="M 694.858966 370.135859 
+L 694.858966 26.398203 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="robustez-line2d_16">
+      <g>
+       <use xlink:href="#robustez-m7909aaca7d" x="694.858966" y="370.135859" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_8">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="694.858966" y="385.113398" transform="rotate(-0 694.858966 385.113398)">6</text>
+     </g>
+    </g>
+    <g id="robustez-text_9">
+     <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="545.365625" y="399.634297" transform="rotate(-0 545.365625 399.634297)">β1: pp de variación del AL30D por pp de variación del PBI (IC 95 %)</text>
+    </g>
+   </g>
+   <g id="robustez-matplotlib.axis_2">
+    <g id="robustez-ytick_1">
+     <g id="robustez-line2d_17">
+      <defs>
+       <path id="robustez-m0a5f5023ec" d="M 0 0 
+L -3.5 0 
+" style="stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#robustez-m0a5f5023ec" x="377.325625" y="354.51142" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_10">
+      <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="370.325625" y="358.120678" transform="rotate(-0 370.325625 358.120678)">PBI desestacionalizado por el INDEC (en lugar de STL)  ·  n = 56, p = 0,8208</text>
+     </g>
+    </g>
+    <g id="robustez-ytick_2">
+     <g id="robustez-line2d_18">
+      <g>
+       <use xlink:href="#robustez-m0a5f5023ec" x="377.325625" y="309.870166" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_11">
+      <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="370.325625" y="313.669424" transform="rotate(-0 370.325625 313.669424)">Spline con condición de borde not-a-knot  ·  n = 56, p = 0,9943</text>
+     </g>
+    </g>
+    <g id="robustez-ytick_3">
+     <g id="robustez-line2d_19">
+      <g>
+       <use xlink:href="#robustez-m0a5f5023ec" x="377.325625" y="265.228912" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_12">
+      <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="370.325625" y="268.83817" transform="rotate(-0 370.325625 268.83817)">PBI sin desestacionalizar  ·  n = 56, p = 0,5218</text>
+     </g>
+    </g>
+    <g id="robustez-ytick_4">
+     <g id="robustez-line2d_20">
+      <g>
+       <use xlink:href="#robustez-m0a5f5023ec" x="377.325625" y="220.587658" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_13">
+      <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="370.325625" y="224.196916" transform="rotate(-0 370.325625 224.196916)">Bono sin ajuste ex-pago (serie bruta)  ·  n = 56, p = 0,8915</text>
+     </g>
+    </g>
+    <g id="robustez-ytick_5">
+     <g id="robustez-line2d_21">
+      <g>
+       <use xlink:href="#robustez-m0a5f5023ec" x="377.325625" y="175.946404" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_14">
+      <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="370.325625" y="179.555662" transform="rotate(-0 370.325625 179.555662)">Trimestral, d = +1  ·  n = 18, p = 0,9199</text>
+     </g>
+    </g>
+    <g id="robustez-ytick_6">
+     <g id="robustez-line2d_22">
+      <g>
+       <use xlink:href="#robustez-m0a5f5023ec" x="377.325625" y="131.30515" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_15">
+      <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="370.325625" y="134.914408" transform="rotate(-0 370.325625 134.914408)">Trimestral, d = 0  ·  n = 19, p = 0,0142</text>
+     </g>
+    </g>
+    <g id="robustez-ytick_7">
+     <g id="robustez-line2d_23">
+      <g>
+       <use xlink:href="#robustez-m0a5f5023ec" x="377.325625" y="86.663896" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_16">
+      <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="370.325625" y="90.463154" transform="rotate(-0 370.325625 90.463154)">Mensual, d = +1 (extensión)  ·  n = 55, p = 0,3573</text>
+     </g>
+    </g>
+    <g id="robustez-ytick_8">
+     <g id="robustez-line2d_24">
+      <g>
+       <use xlink:href="#robustez-m0a5f5023ec" x="377.325625" y="42.022642" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="robustez-text_17">
+      <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="370.325625" y="45.6319" transform="rotate(-0 370.325625 45.6319)">Mensual, d = 0 (principal)  ·  n = 56, p = 0,9940</text>
+     </g>
+    </g>
+   </g>
+   <g id="robustez-line2d_25">
+    <path d="M 478.284784 42.022642 
+L 653.859112 42.022642 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-s1); stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="robustez-line2d_26">
+    <defs>
+     <path id="robustez-mf5f92c525d" d="M 0 4.5 
+C 1.193414 4.5 2.338109 4.025852 3.181981 3.181981 
+C 4.025852 2.338109 4.5 1.193414 4.5 0 
+C 4.5 -1.193414 4.025852 -2.338109 3.181981 -3.181981 
+C 2.338109 -4.025852 1.193414 -4.5 0 -4.5 
+C -1.193414 -4.5 -2.338109 -4.025852 -3.181981 -3.181981 
+C -4.025852 -2.338109 -4.5 -1.193414 -4.5 0 
+C -4.5 1.193414 -4.025852 2.338109 -3.181981 3.181981 
+C -2.338109 4.025852 -1.193414 4.5 0 4.5 
+z
+" style="stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </defs>
+    <g clip-path="url(#robustez-p8577304cb5)">
+     <use xlink:href="#robustez-mf5f92c525d" x="566.071948" y="42.022642" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="robustez-line2d_27">
+    <path d="M 518.316745 86.663896 
+L 694.924461 86.663896 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-s1); stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="robustez-line2d_28">
+    <g clip-path="url(#robustez-p8577304cb5)">
+     <use xlink:href="#robustez-mf5f92c525d" x="606.620603" y="86.663896" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="robustez-line2d_29">
+    <path d="M 392.601989 131.30515 
+L 543.44811 131.30515 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-s2); stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="robustez-line2d_30">
+    <defs>
+     <path id="robustez-m91f921e33d" d="M 0 4.5 
+C 1.193414 4.5 2.338109 4.025852 3.181981 3.181981 
+C 4.025852 2.338109 4.5 1.193414 4.5 0 
+C 4.5 -1.193414 4.025852 -2.338109 3.181981 -3.181981 
+C 2.338109 -4.025852 1.193414 -4.5 0 -4.5 
+C -1.193414 -4.5 -2.338109 -4.025852 -3.181981 -3.181981 
+C -4.025852 -2.338109 -4.5 -1.193414 -4.5 0 
+C -4.5 1.193414 -4.025852 2.338109 -3.181981 3.181981 
+C -2.338109 4.025852 -1.193414 4.5 0 4.5 
+z
+" style="stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </defs>
+    <g clip-path="url(#robustez-p8577304cb5)">
+     <use xlink:href="#robustez-m91f921e33d" x="468.02505" y="131.30515" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="robustez-line2d_31">
+    <path d="M 466.400929 175.946404 
+L 655.940161 175.946404 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-s2); stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="robustez-line2d_32">
+    <g clip-path="url(#robustez-p8577304cb5)">
+     <use xlink:href="#robustez-m91f921e33d" x="561.170545" y="175.946404" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="robustez-line2d_33">
+    <path d="M 468.518741 220.587658 
+L 650.520001 220.587658 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-neutro); stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="robustez-line2d_34">
+    <defs>
+     <path id="robustez-m514c2f6b3e" d="M 0 4.5 
+C 1.193414 4.5 2.338109 4.025852 3.181981 3.181981 
+C 4.025852 2.338109 4.5 1.193414 4.5 0 
+C 4.5 -1.193414 4.025852 -2.338109 3.181981 -3.181981 
+C 2.338109 -4.025852 1.193414 -4.5 0 -4.5 
+C -1.193414 -4.5 -2.338109 -4.025852 -3.181981 -3.181981 
+C -4.025852 -2.338109 -4.5 -1.193414 -4.5 0 
+C -4.5 1.193414 -4.025852 2.338109 -3.181981 3.181981 
+C -2.338109 4.025852 -1.193414 4.5 0 4.5 
+z
+" style="stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </defs>
+    <g clip-path="url(#robustez-p8577304cb5)">
+     <use xlink:href="#robustez-m514c2f6b3e" x="559.519371" y="220.587658" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="robustez-line2d_35">
+    <path d="M 514.718565 265.228912 
+L 591.927957 265.228912 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-neutro); stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="robustez-line2d_36">
+    <g clip-path="url(#robustez-p8577304cb5)">
+     <use xlink:href="#robustez-m514c2f6b3e" x="553.323261" y="265.228912" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="robustez-line2d_37">
+    <path d="M 478.291042 309.870166 
+L 653.815617 309.870166 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-neutro); stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="robustez-line2d_38">
+    <g clip-path="url(#robustez-p8577304cb5)">
+     <use xlink:href="#robustez-m514c2f6b3e" x="566.053329" y="309.870166" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="robustez-line2d_39">
+    <path d="M 460.349401 354.51142 
+L 698.129261 354.51142 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-neutro); stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="robustez-line2d_40">
+    <g clip-path="url(#robustez-p8577304cb5)">
+     <use xlink:href="#robustez-m514c2f6b3e" x="579.239331" y="354.51142" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </g>
+   </g>
+   <g id="robustez-line2d_41">
+    <path d="M 565.739625 370.135859 
+L 565.739625 26.398203 
+" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-tinta2); stroke-linecap: square"/>
+   </g>
+   <g id="robustez-patch_3">
+    <path d="M 377.325625 370.135859 
+L 377.325625 26.398203 
+" style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="robustez-patch_4">
+    <path d="M 377.325625 370.135859 
+L 713.405625 370.135859 
+" style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="robustez-text_18">
+    <text style="font-size: 11.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta)" x="377.325625" y="16.398203" transform="rotate(-0 377.325625 16.398203)">Coeficiente de la regresión simple según muestra y especificación</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="robustez-p8577304cb5">
+   <rect x="377.325625" y="26.398203" width="336.08" height="343.737656"/>
+  </clipPath>
+ </defs>
+</svg>

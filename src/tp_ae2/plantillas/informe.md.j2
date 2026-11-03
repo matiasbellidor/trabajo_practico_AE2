@@ -1,0 +1,248 @@
+# {{ r.meta.titulo }}
+
+**{{ r.meta.materia }}** · Cátedra {{ r.meta.catedra }} · {{ r.meta.facultad }} · {{ r.meta.cuatrimestre }}
+{{ r.meta.grupo }}: {{ r.meta.integrantes | join(", ") }}
+
+> Documento generado por `python -m tp_ae2.run_all` a partir de `outputs/resultados.json`. Ningún número está escrito a mano.
+
+## 1. Introducción y pregunta de investigación
+
+{% for p in t.pregunta %}{{ p }}
+{% endfor %}
+Las variables asignadas al grupo son la **variación del bono soberano argentino** (AL30D, cotización en dólares) y la **variación del PBI argentino** (real, a precios de 2004). El trabajo usa las herramientas obligatorias de la consigna (estimador, intervalo de confianza, bondad de ajuste, regresión lineal simple y múltiple) y ANOVA como herramienta a elección, con 95 % de confianza y el p-valor de cada test.
+
+## 2. Hipótesis
+
+**Hipótesis principal (regresión lineal simple).**
+
+$$\text{Var AL30D}_t = \beta_0 + \beta_1 \cdot \text{Var PBI}_t + \varepsilon_t$$
+
+- $H_0: \beta_1 = 0$. La variación del PBI mensualizado no se asocia de forma estadísticamente significativa con la variación de la cotización del AL30D.
+- $H_1: \beta_1 \neq 0$. La variación del PBI mensualizado se asocia de forma estadísticamente significativa con la variación del AL30D.
+- Contraste bilateral, $\alpha = {{ n(r.meta.alfa, 2) }}$.
+
+{% for p in t.bilateral %}{{ p }}
+
+{% endfor %}
+La hipótesis se formula como **asociación estadística**: el diseño (datos observacionales, sin variación controlada) no permite inferir causalidad.
+
+**Extensión temporal (declarada a priori).** Se define el desfase $d$ con $X_t = \text{Var PBI}_{t+d}$. $d = 0$ es la hipótesis principal; $d = +1$ (PBI del mes siguiente: el bono se movería antes) es la extensión declarada; $d \in \{-3, -2, -1, +2, +3\}$ son exploratorios y se comparan con $\alpha/5 = 0{,}01$.
+
+**Hipótesis complementaria (enviada a los docentes el 22/10).** La variación porcentual media del PBI real difiere entre los períodos en que el bono sube y aquellos en que baja: $H_0: \mu_{\text{suba}} = \mu_{\text{baja}}$ contra $H_1: \mu_{\text{suba}} \neq \mu_{\text{baja}}$.
+
+## 3. Datos y metodología
+
+| Serie | Fuente | Detalle |
+|---|---|---|
+{% for l in r.datos.linaje if l.existe and l.uso == "análisis" %}| `{{ l.ruta }}` | {{ l.fuente }} | {{ l.filas }} filas, {{ l.fecha_min }} a {{ l.fecha_max }}. {{ l.obtencion }} |
+{% endfor %}
+
+**Verificación cruzada.** Las series del análisis se compararon con descargas independientes de las mismas fuentes: {% for l in r.datos.linaje if l.existe and l.uso == "verificación" %}`{{ l.ruta }}` ({{ l.fuente }}, {{ l.filas }} filas){{ "; " if not loop.last }}{% endfor %}. Coinciden valor por valor (lo comprueba `tests/test_datos.py`). Huellas SHA-256, tamaños y rangos en `outputs/linaje_datos.json`.
+
+**Bono.** Cierre diario del AL30D. Log-retorno diario $r_d = \ln(P_d / P_{d-1})$, con $r_d = 0$ en los {{ r.datos.ex_pago | length }} días ex-pago ({% for x in r.datos.ex_pago %}{{ x.fecha }}: {{ n(x.variacion_pct, 2) }} %{{ "; " if not loop.last }}{% endfor %}), que son caídas mecánicas por pago de cupón y amortización. Variación del período: $\left(e^{\sum r_d} - 1\right) \cdot 100$. Septiembre de 2021 es un mes parcial y no genera variación. Hubo {{ r.datos.huecos_bono | length }} hueco(s) de más de 5 días corridos entre ruedas{% for h in r.datos.huecos_bono %} ({{ h.desde }} a {{ h.hasta }}, {{ h.dias_corridos }} días){% endfor %}.
+
+**PBI.** La serie original es estacional (el segundo trimestre siempre es alto). Se desestacionaliza con STL sobre el logaritmo del nivel (período 4, versión robusta): $\text{SA} = \exp(\ln y - \hat s)$. Factores estacionales medios: {% for q, v in r.datos.factores_estacionales_stl.items() %}{{ q }} {{ n(v) }}{{ "; " if not loop.last }}{% endfor %}.{% if r.datos.factores_estacionales_indec %} Los factores implícitos en la serie desestacionalizada que publica el INDEC son {% for q, v in r.datos.factores_estacionales_indec.items() %}{{ q }} {{ n(v) }}{{ "; " if not loop.last }}{% endfor %}: la STL los reproduce con una diferencia menor a 0,005, y la sensibilidad (h) repite la regresión con la serie del INDEC.{% endif %}Luego se mensualiza con un spline cúbico natural que pasa por cada nivel ubicado en el mes central del trimestre (febrero, mayo, agosto y noviembre), sin extrapolar: la ventana termina en mayo de 2026. $\text{Var PBI}_t = (\text{nivel}_t / \text{nivel}_{t-1} - 1) \cdot 100$.
+
+**Muestras.** Principal: {{ r.muestra.principal.frecuencia }}, {{ r.muestra.principal.inicio }} a {{ r.muestra.principal.fin }}, n = {{ r.muestra.principal.n }}{% if not r.muestra.principal.cumple_minimo_50 %} (**no cumple el mínimo de 50 muestras de la consigna**){% endif %}. Respaldo: {{ r.muestra.respaldo.frecuencia }} sin interpolar, {{ r.muestra.respaldo.inicio }} a {{ r.muestra.respaldo.fin }}, n = {{ r.muestra.respaldo.n }}{% if not r.muestra.respaldo.cumple_minimo_50 %} (por debajo del mínimo de 50){% endif %}. La muestra mensual con PBI mensualizado **requiere conformidad docente**.
+
+**Decisiones pre-registradas** (fijadas en `config.yaml` antes de ver p-valores): bono AL30D con ajuste ex-pago; PBI con STL y spline natural; hipótesis principal con $d = 0$; extensión $d = +1$; múltiple con {{ "la variación del CCL implícito como control" if r.regresion_multiple.modo == "ccl" else "el PBI adelantado como segundo regresor" }}; ANOVA por terciles de la Var PBI; complementaria con grupos por signo del bono; $\alpha = 0{,}05$. Todo lo demás se rotula exploratorio, sensibilidad o complementario.
+
+![Variaciones mensuales]({{ fig }}series.png)
+
+![PBI original, desestacionalizado y mensualizado]({{ fig }}pbi.png)
+
+## 4. Desarrollo por herramienta
+
+### 4.1 Estimador
+
+**Por qué.** {{ t.estimador.porque | join(" ") }}
+
+**Fórmulas.**
+
+$$\bar x = \frac{1}{n}\sum_{i=1}^{n} x_i \qquad S^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar x)^2 \qquad \text{EE}(\bar x) = \frac{S}{\sqrt n} \qquad \hat p = \frac{X}{n}$$
+
+| Variable | n | x̄ | S² | S | EE | Mín. | Máx. | Asimetría | Curtosis (exceso) |
+|---|---|---|---|---|---|---|---|---|---|
+{% for k, e in r.estimadores.items() if k != "proporcion_suba" %}| {{ nombres[k] }} (%) | {{ e.n }} | {{ n(e.media) }} | {{ n(e.varianza) }} | {{ n(e.desvio) }} | {{ n(e.error_estandar) }} | {{ n(e.minimo) }} | {{ n(e.maximo) }} | {{ n(e.asimetria) }} | {{ n(e.curtosis_exceso) }} |
+{% endfor %}
+
+{% for p in t.estimador.interpretacion %}- {{ p }}
+{% endfor %}
+
+### 4.2 Intervalo de confianza (95 %)
+
+**Por qué.** {{ t.ic.porque | join(" ") }}
+
+$$\bar x \pm t_{\alpha/2;\,n-1}\,\frac{S}{\sqrt n} \qquad \hat p \pm z_{\alpha/2}\sqrt{\frac{\hat p(1-\hat p)}{n}} \qquad b_1 \pm t_{\alpha/2;\,n-2}\,\text{EE}(b_1)$$
+
+| Parámetro | Estimación | EE | Cuantil | IC 95 % |
+|---|---|---|---|---|
+{% for k, v in r.intervalos.items() %}| {{ {"media_var_bono": "μ Var AL30D (%)", "media_var_pbi": "μ Var PBI (%)", "proporcion_suba": "p (períodos de suba)"}[k] }} | {{ n(v.estimacion) }} | {{ n(v.error_estandar) }} | {{ n(v.cuantil) }} | {{ ic(v.inferior, v.superior) }} |
+{% endfor %}| β1 (d = 0) | {{ n(r.hipotesis_principal.d0.b1) }} | {{ n(r.hipotesis_principal.d0.ee_b1) }} | {{ n(r.hipotesis_principal.d0.ic_b1.cuantil) }} | {{ ic(r.hipotesis_principal.d0.ic_b1.inferior, r.hipotesis_principal.d0.ic_b1.superior) }} |
+
+{% for p in t.ic.interpretacion %}- {{ p }}
+{% endfor %}
+
+### 4.3 Bondad de ajuste (χ² a la Normal)
+
+**Por qué.** {{ t.bondad.porque | join(" ") }}
+
+$$\chi^2 = \sum_{j=1}^{k}\frac{(O_j - E_j)^2}{E_j} \sim \chi^2_{k-1-2} \qquad k = \min(8, \lfloor n/5 \rfloor),\; E_j = n/k$$
+
+{% for clave, b in r.bondad_ajuste.items() %}{% if b.chi2.aplicable %}**{{ nombres[clave] }}** (x̄ = {{ n(b.chi2.media) }}, S = {{ n(b.chi2.desvio) }}):
+
+| Clase | Límite inferior | Límite superior | O | E | (O − E)²/E |
+|---|---|---|---|---|---|
+{% for c in b.chi2.tabla %}| {{ c.clase }} | {{ n(c.limite_inferior) }} | {{ n(c.limite_superior) }} | {{ c.observada }} | {{ n(c.esperada, 2) }} | {{ n(c.contribucion) }} |
+{% endfor %}| **Total** | | | {{ r.muestra.principal.n }} | {{ n(r.muestra.principal.n, 2) }} | **χ² = {{ n(b.chi2.estadistico) }}** (gl = {{ b.chi2.gl }}; valor crítico {{ n(b.chi2.valor_critico) }}; p = {{ pv(b.chi2.p_valor) }}) |
+
+{% endif %}{% endfor %}
+{% for p in t.bondad.interpretacion %}- {{ p }}
+{% endfor %}
+
+![Histogramas con Normal ajustada]({{ fig }}histogramas.png)
+
+### 4.4 Regresión lineal simple (hipótesis principal)
+
+**Por qué.** {{ t.simple.porque | join(" ") }}
+
+$$b_1 = \frac{S_{xy}}{S_{xx}},\quad b_0 = \bar y - b_1 \bar x,\quad S^2 = \frac{SCE}{n-2},\quad \text{EE}(b_1) = \sqrt{\frac{S^2}{S_{xx}}},\quad t = \frac{b_1}{\text{EE}(b_1)} \sim t_{n-2}$$
+
+$$S_{xx} = \sum x^2 - n\bar x^2,\qquad S_{xy} = \sum xy - n\bar x\bar y,\qquad R^2 = 1 - \frac{SCE}{SCT},\qquad F = \frac{SCR/1}{SCE/(n-2)}$$
+
+{% set p0 = r.hipotesis_principal.d0 %}**Cuadro de cálculo a mano** (detalle por observación en `outputs/tablas/cuadro_a_mano.csv`): n = {{ p0.sumas.n }}, Σx = {{ n(p0.sumas.sum_x) }}, Σy = {{ n(p0.sumas.sum_y) }}, Σx² = {{ n(p0.sumas.sum_x2) }}, Σy² = {{ n(p0.sumas.sum_y2) }}, Σxy = {{ n(p0.sumas.sum_xy) }}.
+
+**Desarrollo.** x̄ = {{ n(p0.x_media) }}; ȳ = {{ n(p0.y_media) }}; Sxx = {{ n(p0.sxx) }}; Sxy = {{ n(p0.sxy) }}; Syy = {{ n(p0.syy) }}.
+b1 = {{ n(p0.sxy) }} / {{ n(p0.sxx) }} = **{{ n(p0.b1) }}**; b0 = {{ n(p0.y_media) }} − ({{ n(p0.b1) }})·({{ n(p0.x_media) }}) = **{{ n(p0.b0) }}**.
+SCE = {{ n(p0.sce) }}; S² = {{ n(p0.s2) }}; EE(b1) = {{ n(p0.ee_b1) }}; t = {{ n(p0.t_b1) }} con {{ p0.gl }} gl (valor crítico ±{{ n(p0.valor_critico_t) }}); **p = {{ pv(p0.p_b1) }}**. R² = {{ n(p0.r2) }}; r = {{ n(p0.r) }}; F = {{ n(p0.f) }} (p = {{ pv(p0.p_f) }}).
+
+| Coeficiente | Estimación | EE | t | p-valor | IC 95 % |
+|---|---|---|---|---|---|
+| β0 | {{ n(p0.b0) }} | {{ n(p0.ee_b0) }} | {{ n(p0.t_b0) }} | {{ pv(p0.p_b0) }} | {{ ic(p0.ic_b0.inferior, p0.ic_b0.superior) }} |
+| β1 | {{ n(p0.b1) }} | {{ n(p0.ee_b1) }} | {{ n(p0.t_b1) }} | {{ pv(p0.p_b1) }} | {{ ic(p0.ic_b1.inferior, p0.ic_b1.superior) }} |
+
+{% for p in t.simple.interpretacion %}- {{ p }}
+{% endfor %}
+
+![Dispersión con recta de regresión]({{ fig }}dispersion.png)
+
+### 4.5 Extensión temporal y desfases
+
+**Por qué.** {{ t.desfases.porque | join(" ") }}
+
+| d | Etiqueta | n | β1 | EE | t | p-valor | Umbral | IC 95 % | R² |
+|---|---|---|---|---|---|---|---|---|---|
+{% for f in r.desfases %}| {{ n(f.d, 0, True) }} | {{ f.etiqueta }} | {{ f.n }} | {{ n(f.b1) }} | {{ n(f.ee_b1) }} | {{ n(f.t) }} | {{ pv(f.p_valor) }} | {{ n(f.umbral, 2) }} | {{ ic(f.ic_b1.inferior, f.ic_b1.superior) }} | {{ n(f.r2) }} |
+{% endfor %}
+
+{% for p in t.desfases.interpretacion %}- {{ p }}
+{% endfor %}
+
+![Coeficiente y p-valor por desfase]({{ fig }}desfases.png)
+
+### 4.6 Regresión lineal múltiple
+
+**Por qué.** {{ t.multiple.porque | join(" ") }}
+
+$$\hat\beta = (X'X)^{-1}X'y,\qquad \widehat{\text{Var}}(\hat\beta) = S^2 (X'X)^{-1},\qquad S^2 = \frac{e'e}{n-k-1},\qquad F = \frac{(SCT - SCE)/k}{SCE/(n-k-1)}$$
+
+{% set mu = r.regresion_multiple %}| Coeficiente | Estimación | EE | t | p-valor | IC 95 % |
+|---|---|---|---|---|---|
+{% for c in mu.coeficientes %}| {{ nombres.get(c.nombre, c.nombre) }} | {{ n(c.coeficiente) }} | {{ n(c.error_estandar) }} | {{ n(c.t) }} | {{ pv(c.p_valor) }} | {{ ic(c.ic.inferior, c.ic.superior) }} |
+{% endfor %}
+
+n = {{ mu.n }}, k = {{ mu.k }}, gl = {{ mu.gl }}; R² = {{ n(mu.r2) }}; R² ajustado = {{ n(mu.r2_ajustado) }}; S = {{ n(mu.s) }}; F = {{ n(mu.f) }} con ({{ mu.gl_f[0] }}; {{ mu.gl_f[1] }}) gl, p = {{ pv(mu.p_f) }}.
+
+{% for p in t.multiple.interpretacion %}- {{ p }}
+{% endfor %}
+
+### 4.7 ANOVA de un factor
+
+**Por qué.** {{ t.anova.porque | join(" ") }}
+
+$$SC_{\text{entre}} = \sum_{j} n_j(\bar y_j - \bar y)^2,\quad SC_{\text{dentro}} = \sum_j\sum_i (y_{ij} - \bar y_j)^2,\quad F = \frac{SC_{\text{entre}}/(k-1)}{SC_{\text{dentro}}/(N-k)},\quad \eta^2 = \frac{SC_{\text{entre}}}{SC_{\text{total}}}$$
+
+{% set an = r.anova %}{% if an.aplicable %}| Fuente | SC | gl | CM | F | p-valor |
+|---|---|---|---|---|---|
+| Entre grupos | {{ n(an.sc_entre) }} | {{ an.gl_entre }} | {{ n(an.cm_entre) }} | {{ n(an.f) }} | {{ pv(an.p_valor) }} |
+| Dentro de grupos | {{ n(an.sc_dentro) }} | {{ an.gl_dentro }} | {{ n(an.cm_dentro) }} | | |
+| Total | {{ n(an.sc_total) }} | {{ an.gl_total }} | | | |
+
+| Tercil de Var PBI | Rango de Var PBI (%) | n | Media Var AL30D (%) | S | IC 95 % |
+|---|---|---|---|---|---|
+{% for g in an.grupos %}| {{ g.grupo }} | {{ ic(an.limites_terciles[g.grupo][0], an.limites_terciles[g.grupo][1], 2) }} | {{ g.n }} | {{ n(g.media) }} | {{ n(g.desvio) }} | {{ ic(g.ic.inferior, g.ic.superior) }} |
+{% endfor %}{% endif %}
+
+{% for p in t.anova.interpretacion %}- {{ p }}
+{% endfor %}
+
+![Medias por tercil]({{ fig }}anova.png)
+
+### 4.8 Prueba complementaria (hipótesis enviada a los docentes)
+
+**Por qué.** {{ t.complementaria.porque | join(" ") }}
+
+$$F = \frac{S_1^2}{S_2^2},\qquad t = \frac{\bar x_1 - \bar x_2}{S_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}},\qquad S_p^2 = \frac{(n_1-1)S_1^2 + (n_2-1)S_2^2}{n_1 + n_2 - 2},\qquad d = \frac{\bar x_1 - \bar x_2}{S_p}$$
+
+{% set c = r.prueba_complementaria %}{% if c.aplicable %}| Prueba | Estadístico | gl | p-valor | Decisión |
+|---|---|---|---|---|
+| F de igualdad de varianzas | {{ n(c.prueba_f.estadistico) }} | {{ c.prueba_f.gl[0] }}; {{ c.prueba_f.gl[1] }} | {{ pv(c.prueba_f.p_valor) }} | {{ dec(c.prueba_f.p_valor) }} |
+| t con varianza agrupada | {{ n(c.t_agrupada.estadistico) }} | {{ n(c.t_agrupada.gl, 2) }} | {{ pv(c.t_agrupada.p_valor) }} | {{ dec(c.t_agrupada.p_valor) }} |
+| t de Welch | {{ n(c.t_welch.estadistico) }} | {{ n(c.t_welch.gl, 2) }} | {{ pv(c.t_welch.p_valor) }} | {{ dec(c.t_welch.p_valor) }} |
+{% endif %}
+
+{% for p in t.complementaria.interpretacion %}- {{ p }}
+{% endfor %}
+
+![Var PBI por signo del bono]({{ fig }}complementaria.png)
+
+## 5. Supuestos y diagnósticos
+
+| Diagnóstico | Regresión simple | Regresión múltiple |
+|---|---|---|
+{% set ds = r.diagnosticos.regresion_simple %}{% set dm = r.diagnosticos.regresion_multiple %}| Durbin-Watson | {{ n(ds.durbin_watson) }} | {{ n(dm.durbin_watson) }} |
+| Breusch-Godfrey (LM, p) | {{ n(ds.breusch_godfrey.estadistico) }}; p = {{ pv(ds.breusch_godfrey.p_valor) }} | {{ n(dm.breusch_godfrey.estadistico) }}; p = {{ pv(dm.breusch_godfrey.p_valor) }} |
+| Breusch-Pagan (LM, p) | {{ n(ds.breusch_pagan.estadistico) }}; p = {{ pv(ds.breusch_pagan.p_valor) }} | {{ n(dm.breusch_pagan.estadistico) }}; p = {{ pv(dm.breusch_pagan.p_valor) }} |
+| Shapiro-Wilk de residuos | W = {{ n(ds.normalidad_residuos.shapiro.estadistico) }}; p = {{ pv(ds.normalidad_residuos.shapiro.p_valor) }} | W = {{ n(dm.normalidad_residuos.shapiro.estadistico) }}; p = {{ pv(dm.normalidad_residuos.shapiro.p_valor) }} |
+| VIF | — | {% for v in dm.vif %}{{ nombres.get(v.variable, v.variable) }}: {{ n(v.vif, 2) }}{{ "; " if not loop.last }}{% endfor %} |
+
+![Diagnóstico de residuos]({{ fig }}residuos.png)
+
+## 6. Robustez
+
+{% for p in t.robustez.porque %}{{ p }}
+{% endfor %}
+
+| Especificación | Muestra | n | Coeficiente | IC 95 % | Estadístico | p-valor | Decisión |
+|---|---|---|---|---|---|---|---|
+{% for f in r.robustez_trimestral.tabla %}| {{ f.especificacion }} | {{ f.muestra }} | {{ f.n }} | {{ n(f.coeficiente) }} | {% if f.ic_inferior is not none %}{{ ic(f.ic_inferior, f.ic_superior) }}{% else %}—{% endif %} | {{ f.nombre_estadistico }} = {{ n(f.estadistico) }} | {{ pv(f.p_valor) }} | {{ f.decision }} |
+{% endfor %}
+
+**Sensibilidades** (cada una cambia una sola decisión):
+
+| Especificación | n | Estadístico | p-valor | Decisión |
+|---|---|---|---|---|
+{% for f in r.sensibilidades %}| {{ f.especificacion }} | {{ f.n if f.n is not none else "—" }} | {% if f.p_valor is not none %}{{ f.nombre_estadistico }} = {{ n(f.estadistico) }}{% else %}—{% endif %} | {{ pv(f.p_valor) if f.p_valor is not none else "—" }} | {{ f.decision }} |
+{% endfor %}
+
+{% for p in t.robustez.interpretacion %}- {{ p }}
+{% endfor %}
+
+**Influencia por período.** {{ t.robustez.influencia }} La distancia de Cook es $D_i = \dfrac{e_i^2}{p \, s^2} \cdot \dfrac{h_{ii}}{(1 - h_{ii})^2}$, con $p = 2$ y palanca $h_{ii} = \frac{1}{n} + \frac{(x_i - \bar x)^2}{S_{xx}}$; se marca con * cuando supera $4/n = {{ n(r.robustez_trimestral.influencia.umbral_cook) }}$.
+
+| Período | Var AL30D (%) | Var PBI (%) | Cook | β1 sin el período | p-valor sin el período | Decisión |
+|---|---|---|---|---|---|---|
+{% for f in r.robustez_trimestral.influencia.filas %}| {{ f.periodo }} | {{ n(f.var_bono, 2) }} | {{ n(f.var_pbi, 2) }} | {{ n(f.cook) }}{{ " *" if f.cook > r.robustez_trimestral.influencia.umbral_cook }} | {{ n(f.b1_sin) }} | {{ pv(f.p_sin) }} | {{ f.decision_sin }} |
+{% endfor %}
+
+![Robustez del coeficiente]({{ fig }}robustez.png)
+
+## 7. Limitaciones
+
+{% for p in t.limitaciones %}- {{ p }}
+{% endfor %}
+
+{% if conclusion %}## 8. Conclusión
+
+{{ conclusion }}{% else %}## 8. Conclusión (se redacta aparte)
+{% endif %}

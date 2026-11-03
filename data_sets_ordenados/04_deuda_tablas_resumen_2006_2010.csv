@@ -1,0 +1,148 @@
+tabla,item,fecha_corte,moneda,alcance,valor,valor_texto,unidad,archivos_origen,anio_archivo_fuente,fila_excel
+stock_letras_intrasector,Administración Federal de Ingresos Públicos (AFIP),2007-12-31,ARS,,1450.0,,millones de la moneda indicada,2008;2009;2010,2010,80
+stock_letras_intrasector,Administración Federal de Ingresos Públicos (AFIP),2008-12-31,ARS,,1600.0,,millones de la moneda indicada,2008;2009;2010,2010,80
+stock_letras_intrasector,Administración Federal de Ingresos Públicos (AFIP),2008-12-31,USD,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,80
+stock_letras_intrasector,Administración Federal de Ingresos Públicos (AFIP),2009-12-31,ARS,,500.0,,millones de la moneda indicada,2009;2010,2010,80
+stock_letras_intrasector,Administración Federal de Ingresos Públicos (AFIP),2009-12-31,USD,,0.0,,millones de la moneda indicada,2009;2010,2010,80
+stock_letras_intrasector,Administración Federal de Ingresos Públicos (AFIP),2010-12-31,ARS,,0.0,,millones de la moneda indicada,2010,2010,80
+stock_letras_intrasector,Administración Federal de Ingresos Públicos (AFIP),2010-12-31,USD,,0.0,,millones de la moneda indicada,2010,2010,80
+stock_letras_intrasector,Administración Nacional de la Seguridad Social (ANSES),2007-12-31,ARS,,4050.0,,millones de la moneda indicada,2008;2009;2010,2010,81
+stock_letras_intrasector,Administración Nacional de la Seguridad Social (ANSES),2008-12-31,ARS,,8450.0,,millones de la moneda indicada,2008;2009;2010,2010,81
+stock_letras_intrasector,Administración Nacional de la Seguridad Social (ANSES),2008-12-31,USD,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,81
+stock_letras_intrasector,Administración Nacional de la Seguridad Social (ANSES),2009-12-31,ARS,,0.0,,millones de la moneda indicada,2009;2010,2010,81
+stock_letras_intrasector,Administración Nacional de la Seguridad Social (ANSES),2009-12-31,USD,,0.0,,millones de la moneda indicada,2009;2010,2010,81
+stock_letras_intrasector,Administración Nacional de la Seguridad Social (ANSES),2010-12-31,ARS,,0.0,,millones de la moneda indicada,2010,2010,81
+stock_letras_intrasector,Administración Nacional de la Seguridad Social (ANSES),2010-12-31,USD,,0.0,,millones de la moneda indicada,2010,2010,81
+stock_letras_intrasector,Fondo Fiduciario de Recuperación de Empresas (FFRE),2007-12-31,ARS,,506.993896,,millones de la moneda indicada,2008;2009;2010,2010,82
+stock_letras_intrasector,Fondo Fiduciario de Recuperación de Empresas (FFRE),2008-12-31,ARS,,1095.593896,,millones de la moneda indicada,2008;2009;2010,2010,82
+stock_letras_intrasector,Fondo Fiduciario de Recuperación de Empresas (FFRE),2008-12-31,USD,,34.78,,millones de la moneda indicada,2008;2009;2010,2010,82
+stock_letras_intrasector,Fondo Fiduciario de Recuperación de Empresas (FFRE),2009-12-31,ARS,,1316.611016,,millones de la moneda indicada,2009;2010,2010,82
+stock_letras_intrasector,Fondo Fiduciario de Recuperación de Empresas (FFRE),2009-12-31,USD,,37.0,,millones de la moneda indicada,2009;2010,2010,82
+stock_letras_intrasector,Fondo Fiduciario de Recuperación de Empresas (FFRE),2010-12-31,ARS,,1511.5,,millones de la moneda indicada,2010,2010,82
+stock_letras_intrasector,Fondo Fiduciario de Recuperación de Empresas (FFRE),2010-12-31,USD,,52.0,,millones de la moneda indicada,2010,2010,82
+stock_letras_intrasector,LOTERIA NACIONAL S.E.,2007-12-31,ARS,,149.0,,millones de la moneda indicada,2008;2009;2010,2010,83
+stock_letras_intrasector,LOTERIA NACIONAL S.E.,2008-12-31,ARS,,149.0,,millones de la moneda indicada,2008;2009;2010,2010,83
+stock_letras_intrasector,LOTERIA NACIONAL S.E.,2008-12-31,USD,,57.0,,millones de la moneda indicada,2008;2009;2010,2010,83
+stock_letras_intrasector,LOTERIA NACIONAL S.E.,2009-12-31,ARS,,149.0,,millones de la moneda indicada,2009;2010,2010,83
+stock_letras_intrasector,LOTERIA NACIONAL S.E.,2009-12-31,USD,,47.0,,millones de la moneda indicada,2009;2010,2010,83
+stock_letras_intrasector,LOTERIA NACIONAL S.E.,2010-12-31,ARS,,160.0,,millones de la moneda indicada,2010,2010,83
+stock_letras_intrasector,LOTERIA NACIONAL S.E.,2010-12-31,USD,,47.0,,millones de la moneda indicada,2010,2010,83
+stock_letras_intrasector,Fondo Fiduciario de Refinanciación Hipotecaria (FFRH),2007-12-31,ARS,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,84
+stock_letras_intrasector,Fondo Fiduciario de Refinanciación Hipotecaria (FFRH),2008-12-31,ARS,,120.0,,millones de la moneda indicada,2008;2009;2010,2010,84
+stock_letras_intrasector,Fondo Fiduciario de Refinanciación Hipotecaria (FFRH),2008-12-31,USD,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,84
+stock_letras_intrasector,Fondo Fiduciario de Refinanciación Hipotecaria (FFRH),2009-12-31,ARS,,127.4,,millones de la moneda indicada,2009;2010,2010,84
+stock_letras_intrasector,Fondo Fiduciario de Refinanciación Hipotecaria (FFRH),2009-12-31,USD,,0.0,,millones de la moneda indicada,2009;2010,2010,84
+stock_letras_intrasector,Fondo Fiduciario de Refinanciación Hipotecaria (FFRH),2010-12-31,ARS,,136.042222,,millones de la moneda indicada,2010,2010,84
+stock_letras_intrasector,Fondo Fiduciario de Refinanciación Hipotecaria (FFRH),2010-12-31,USD,,0.0,,millones de la moneda indicada,2010,2010,84
+stock_letras_intrasector,Superintendencia de Riesgos de Trabajo (SRT),2007-12-31,ARS,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,85
+stock_letras_intrasector,Superintendencia de Riesgos de Trabajo (SRT),2008-12-31,ARS,,33.0,,millones de la moneda indicada,2008;2009;2010,2010,85
+stock_letras_intrasector,Superintendencia de Riesgos de Trabajo (SRT),2008-12-31,USD,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,85
+stock_letras_intrasector,Superintendencia de Riesgos de Trabajo (SRT),2009-12-31,ARS,,36.25,,millones de la moneda indicada,2009;2010,2010,85
+stock_letras_intrasector,Superintendencia de Riesgos de Trabajo (SRT),2009-12-31,USD,,0.0,,millones de la moneda indicada,2009;2010,2010,85
+stock_letras_intrasector,Superintendencia de Riesgos de Trabajo (SRT),2010-12-31,ARS,,41.549473,,millones de la moneda indicada,2010,2010,85
+stock_letras_intrasector,Superintendencia de Riesgos de Trabajo (SRT),2010-12-31,USD,,0.0,,millones de la moneda indicada,2010,2010,85
+stock_letras_intrasector,Fondo Fiduciario Federal de Infraestructura Regional (FFFIR),2007-12-31,ARS,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,86
+stock_letras_intrasector,Fondo Fiduciario Federal de Infraestructura Regional (FFFIR),2008-12-31,ARS,,94.0,,millones de la moneda indicada,2008;2009;2010,2010,86
+stock_letras_intrasector,Fondo Fiduciario Federal de Infraestructura Regional (FFFIR),2008-12-31,USD,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,86
+stock_letras_intrasector,Fondo Fiduciario Federal de Infraestructura Regional (FFFIR),2009-12-31,ARS,,0.0,,millones de la moneda indicada,2009;2010,2010,86
+stock_letras_intrasector,Fondo Fiduciario Federal de Infraestructura Regional (FFFIR),2009-12-31,USD,,0.0,,millones de la moneda indicada,2009;2010,2010,86
+stock_letras_intrasector,Fondo Fiduciario Federal de Infraestructura Regional (FFFIR),2010-12-31,ARS,,0.0,,millones de la moneda indicada,2010,2010,86
+stock_letras_intrasector,Fondo Fiduciario Federal de Infraestructura Regional (FFFIR),2010-12-31,USD,,0.0,,millones de la moneda indicada,2010,2010,86
+stock_letras_intrasector,Instituto Nacional de Reaseguros – en liquidación (INDER - EL),2007-12-31,ARS,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,87
+stock_letras_intrasector,Instituto Nacional de Reaseguros – en liquidación (INDER - EL),2008-12-31,ARS,,141.0,,millones de la moneda indicada,2008;2009;2010,2010,87
+stock_letras_intrasector,Instituto Nacional de Reaseguros – en liquidación (INDER - EL),2008-12-31,USD,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,87
+stock_letras_intrasector,Instituto Nacional de Reaseguros – en liquidación (INDER - EL),2009-12-31,ARS,,143.72,,millones de la moneda indicada,2009;2010,2010,87
+stock_letras_intrasector,Instituto Nacional de Reaseguros – en liquidación (INDER - EL),2009-12-31,USD,,0.0,,millones de la moneda indicada,2009;2010,2010,87
+stock_letras_intrasector,Instituto Nacional de Reaseguros – en liquidación (INDER - EL),2010-12-31,ARS,,152.163172,,millones de la moneda indicada,2010,2010,87
+stock_letras_intrasector,Instituto Nacional de Reaseguros – en liquidación (INDER - EL),2010-12-31,USD,,0.0,,millones de la moneda indicada,2010,2010,87
+stock_letras_intrasector,Banco de Inversión y Comercio Exterior (BICE),2007-12-31,ARS,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,88
+stock_letras_intrasector,Banco de Inversión y Comercio Exterior (BICE),2008-12-31,ARS,,70.0,,millones de la moneda indicada,2008;2009;2010,2010,88
+stock_letras_intrasector,Banco de Inversión y Comercio Exterior (BICE),2008-12-31,USD,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,88
+stock_letras_intrasector,Banco de Inversión y Comercio Exterior (BICE),2009-12-31,ARS,,0.0,,millones de la moneda indicada,2009;2010,2010,88
+stock_letras_intrasector,Banco de Inversión y Comercio Exterior (BICE),2009-12-31,USD,,0.0,,millones de la moneda indicada,2009;2010,2010,88
+stock_letras_intrasector,Banco de Inversión y Comercio Exterior (BICE),2010-12-31,ARS,,0.0,,millones de la moneda indicada,2010,2010,88
+stock_letras_intrasector,Banco de Inversión y Comercio Exterior (BICE),2010-12-31,USD,,0.0,,millones de la moneda indicada,2010,2010,88
+stock_letras_intrasector,Instituto de Ayuda Financiara (IAF),2007-12-31,ARS,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,89
+stock_letras_intrasector,Instituto de Ayuda Financiara (IAF),2008-12-31,ARS,,150.0,,millones de la moneda indicada,2008;2009;2010,2010,89
+stock_letras_intrasector,Instituto de Ayuda Financiara (IAF),2008-12-31,USD,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,89
+stock_letras_intrasector,Instituto de Ayuda Financiara (IAF),2009-12-31,ARS,,150.0,,millones de la moneda indicada,2009;2010,2010,89
+stock_letras_intrasector,Instituto de Ayuda Financiara (IAF),2009-12-31,USD,,0.0,,millones de la moneda indicada,2009;2010,2010,89
+stock_letras_intrasector,Instituto de Ayuda Financiara (IAF),2010-12-31,ARS,,150.0,,millones de la moneda indicada,2010,2010,89
+stock_letras_intrasector,Instituto de Ayuda Financiara (IAF),2010-12-31,USD,,0.0,,millones de la moneda indicada,2010,2010,89
+stock_letras_intrasector,Fondo Fiduciario de Infraestructura de Transporte (FFIT),2007-12-31,ARS,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,90
+stock_letras_intrasector,Fondo Fiduciario de Infraestructura de Transporte (FFIT),2008-12-31,ARS,,200.0,,millones de la moneda indicada,2008;2009;2010,2010,90
+stock_letras_intrasector,Fondo Fiduciario de Infraestructura de Transporte (FFIT),2008-12-31,USD,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,90
+stock_letras_intrasector,Fondo Fiduciario de Infraestructura de Transporte (FFIT),2009-12-31,ARS,,0.0,,millones de la moneda indicada,2009;2010,2010,90
+stock_letras_intrasector,Fondo Fiduciario de Infraestructura de Transporte (FFIT),2009-12-31,USD,,0.0,,millones de la moneda indicada,2009;2010,2010,90
+stock_letras_intrasector,Fondo Fiduciario de Infraestructura de Transporte (FFIT),2010-12-31,ARS,,0.0,,millones de la moneda indicada,2010,2010,90
+stock_letras_intrasector,Fondo Fiduciario de Infraestructura de Transporte (FFIT),2010-12-31,USD,,0.0,,millones de la moneda indicada,2010,2010,90
+stock_letras_intrasector,Agua y Saneamientos Argentinos (AySA),2007-12-31,ARS,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,91
+stock_letras_intrasector,Agua y Saneamientos Argentinos (AySA),2008-12-31,ARS,,645.0,,millones de la moneda indicada,2008;2009;2010,2010,91
+stock_letras_intrasector,Agua y Saneamientos Argentinos (AySA),2008-12-31,USD,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,91
+stock_letras_intrasector,Agua y Saneamientos Argentinos (AySA),2009-12-31,ARS,,0.0,,millones de la moneda indicada,2009;2010,2010,91
+stock_letras_intrasector,Agua y Saneamientos Argentinos (AySA),2009-12-31,USD,,0.0,,millones de la moneda indicada,2009;2010,2010,91
+stock_letras_intrasector,Agua y Saneamientos Argentinos (AySA),2010-12-31,ARS,,0.0,,millones de la moneda indicada,2010,2010,91
+stock_letras_intrasector,Agua y Saneamientos Argentinos (AySA),2010-12-31,USD,,0.0,,millones de la moneda indicada,2010,2010,91
+stock_letras_intrasector,Programa de Asistencia Medica Integral (PAMI),2007-12-31,ARS,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,92
+stock_letras_intrasector,Programa de Asistencia Medica Integral (PAMI),2008-12-31,ARS,,1000.0,,millones de la moneda indicada,2008;2009;2010,2010,92
+stock_letras_intrasector,Programa de Asistencia Medica Integral (PAMI),2008-12-31,USD,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,92
+stock_letras_intrasector,Programa de Asistencia Medica Integral (PAMI),2009-12-31,ARS,,2830.0,,millones de la moneda indicada,2009;2010,2010,92
+stock_letras_intrasector,Programa de Asistencia Medica Integral (PAMI),2009-12-31,USD,,0.0,,millones de la moneda indicada,2009;2010,2010,92
+stock_letras_intrasector,Programa de Asistencia Medica Integral (PAMI),2010-12-31,ARS,,2830.0,,millones de la moneda indicada,2010,2010,92
+stock_letras_intrasector,Programa de Asistencia Medica Integral (PAMI),2010-12-31,USD,,0.0,,millones de la moneda indicada,2010,2010,92
+stock_letras_intrasector,Administracion General de Puertos (AGP SE),2007-12-31,ARS,,0.0,,millones de la moneda indicada,2008;2009;2010,2010,93
+stock_letras_intrasector,Administracion General de Puertos (AGP SE),2008-12-31,ARS,,38.5,,millones de la moneda indicada,2008;2009;2010,2010,93
+stock_letras_intrasector,Administracion General de Puertos (AGP SE),2008-12-31,USD,,4.6,,millones de la moneda indicada,2008;2009;2010,2010,93
+stock_letras_intrasector,Administracion General de Puertos (AGP SE),2009-12-31,ARS,,40.0,,millones de la moneda indicada,2009;2010,2010,93
+stock_letras_intrasector,Administracion General de Puertos (AGP SE),2009-12-31,USD,,0.0,,millones de la moneda indicada,2009;2010,2010,93
+stock_letras_intrasector,Administracion General de Puertos (AGP SE),2010-12-31,ARS,,40.0,,millones de la moneda indicada,2010,2010,93
+stock_letras_intrasector,Administracion General de Puertos (AGP SE),2010-12-31,USD,,0.0,,millones de la moneda indicada,2010,2010,93
+stock_letras_intrasector,Fondo de Garantia de Sustentabilidad (FGS),2007-12-31,ARS,,0.0,,millones de la moneda indicada,2009;2010,2010,94
+stock_letras_intrasector,Fondo de Garantia de Sustentabilidad (FGS),2008-12-31,ARS,,0.0,,millones de la moneda indicada,2009;2010,2010,94
+stock_letras_intrasector,Fondo de Garantia de Sustentabilidad (FGS),2008-12-31,USD,,0.0,,millones de la moneda indicada,2009;2010,2010,94
+stock_letras_intrasector,Fondo de Garantia de Sustentabilidad (FGS),2009-12-31,ARS,,1750.0,,millones de la moneda indicada,2009;2010,2010,94
+stock_letras_intrasector,Fondo de Garantia de Sustentabilidad (FGS),2009-12-31,USD,,829.680477,,millones de la moneda indicada,2009;2010,2010,94
+stock_letras_intrasector,Fondo de Garantia de Sustentabilidad (FGS),2010-12-31,USD,,2598.777,,millones de la moneda indicada,2010,2010,94
+stock_letras_intrasector,TOTAL,2007-12-31,ARS,,6155.993896,,millones de la moneda indicada,2008;2009;2010,2010,95
+stock_letras_intrasector,TOTAL,2008-12-31,ARS,,13786.093896,,millones de la moneda indicada,2008;2009;2010,2010,95
+stock_letras_intrasector,TOTAL,2008-12-31,USD,,96.38,,millones de la moneda indicada,2008;2009;2010,2010,95
+stock_letras_intrasector,TOTAL,2009-12-31,ARS,,7042.981016,,millones de la moneda indicada,2009;2010,2010,95
+stock_letras_intrasector,TOTAL,2009-12-31,USD,,913.680477,,millones de la moneda indicada,2009;2010,2010,95
+stock_letras_intrasector,TOTAL,2010-12-31,ARS,,5021.254867,,millones de la moneda indicada,2010,2010,95
+stock_letras_intrasector,TOTAL,2010-12-31,USD,,2697.777,,millones de la moneda indicada,2010,2010,95
+ratios_emision,Monto aceptado/ monto colocado (%),2006-12-31,USD,licitaciones,1.0,,fraccion (1.0 = 100%),2006,2006,4
+ratios_emision,Monto aceptado/ monto colocado (%),2006-12-31,USD,total_colocaciones (licitaciones + colocaciones privadas),,-,fraccion (1.0 = 100%),2006,2006,4
+ratios_emision,Bid to cover ratio,2006-12-31,USD,licitaciones,3.4878199999999993,,veces,2006,2006,5
+ratios_emision,Bid to cover ratio,2006-12-31,USD,total_colocaciones (licitaciones + colocaciones privadas),,-,veces,2006,2006,5
+ratios_emision,Vida promedio (años)*,2006-12-31,USD,licitaciones,5.664,,anios,2006,2006,6
+ratios_emision,Vida promedio (años)*,2006-12-31,USD,total_colocaciones (licitaciones + colocaciones privadas),4.398069561756924,,anios,2006,2006,6
+ratios_emision,Yield (%)*,2006-12-31,USD,licitaciones,0.08244800000000001,,fraccion anual (0.0824 = 8.24%),2006,2006,7
+ratios_emision,Yield (%)*,2006-12-31,USD,total_colocaciones (licitaciones + colocaciones privadas),0.08171765710291533,,fraccion anual (0.0824 = 8.24%),2006,2006,7
+ratios_emision,Spread sobre US Treasuries (bp)*,2006-12-31,USD,licitaciones,351.6,,puntos basicos,2006,2006,8
+ratios_emision,Spread sobre US Treasuries (bp)*,2006-12-31,USD,total_colocaciones (licitaciones + colocaciones privadas),341.90278742838933,,puntos basicos,2006,2006,8
+ratios_emision,Monto emitido en VN (millones de dólares),2006-12-31,USD,licitaciones,2500.0,,millones de valor nominal,2006,2006,9
+ratios_emision,Monto emitido en VN (millones de dólares),2006-12-31,USD,total_colocaciones (licitaciones + colocaciones privadas),5364.945,,millones de valor nominal,2006,2006,9
+ratios_emision,Monto aceptado/ monto anunciado (%),2007-12-31,USD,licitaciones,1.0,,fraccion (1.0 = 100%),2007,2007,4
+ratios_emision,Monto aceptado/ monto anunciado (%),2007-12-31,USD,total_colocaciones (licitaciones + colocaciones privadas),,-,fraccion (1.0 = 100%),2007,2007,4
+ratios_emision,Monto aceptado/ monto anunciado (%),2007-12-31,ARS,licitaciones,1.0,,fraccion (1.0 = 100%),2007,2007,4
+ratios_emision,Monto aceptado/ monto anunciado (%),2007-12-31,ARS,total_colocaciones (licitaciones + colocaciones privadas),1.0,,fraccion (1.0 = 100%),2007,2007,4
+ratios_emision,Bid to cover ratio promedio,2007-12-31,USD,licitaciones,2.9937199999999997,,veces,2007,2007,5
+ratios_emision,Bid to cover ratio promedio,2007-12-31,USD,total_colocaciones (licitaciones + colocaciones privadas),,-,veces,2007,2007,5
+ratios_emision,Bid to cover ratio promedio,2007-12-31,ARS,licitaciones,3.5095,,veces,2007,2007,5
+ratios_emision,Bid to cover ratio promedio,2007-12-31,ARS,total_colocaciones (licitaciones + colocaciones privadas),3.5095,,veces,2007,2007,5
+ratios_emision,Vida promedio (años)*,2007-12-31,USD,licitaciones,8.760449794540438,,anios,2007,2007,6
+ratios_emision,Vida promedio (años)*,2007-12-31,USD,total_colocaciones (licitaciones + colocaciones privadas),9.634155102751775,,anios,2007,2007,6
+ratios_emision,Vida promedio (años)*,2007-12-31,ARS,licitaciones,5.0,,anios,2007,2007,6
+ratios_emision,Vida promedio (años)*,2007-12-31,ARS,total_colocaciones (licitaciones + colocaciones privadas),5.0,,anios,2007,2007,6
+ratios_emision,Rendimiento (%)*,2007-12-31,USD,licitaciones,0.08591818112817005,,fraccion anual (0.0824 = 8.24%),2007,2007,7
+ratios_emision,Rendimiento (%)*,2007-12-31,USD,total_colocaciones (licitaciones + colocaciones privadas),0.09110334494128237,,fraccion anual (0.0824 = 8.24%),2007,2007,7
+ratios_emision,Rendimiento (%)*,2007-12-31,ARS,licitaciones,0.117,,fraccion anual (0.0824 = 8.24%),2007,2007,7
+ratios_emision,Rendimiento (%)*,2007-12-31,ARS,total_colocaciones (licitaciones + colocaciones privadas),0.117,,fraccion anual (0.0824 = 8.24%),2007,2007,7
+ratios_emision,Margen sobre US Treasuries (bp)*,2007-12-31,USD,licitaciones,395.9903230136183,,puntos basicos,2007,2007,8
+ratios_emision,Margen sobre US Treasuries (bp)*,2007-12-31,USD,total_colocaciones (licitaciones + colocaciones privadas),460.98244662770577,,puntos basicos,2007,2007,8
+ratios_emision,Margen sobre US Treasuries (bp)*,2007-12-31,ARS,licitaciones,,-,puntos basicos,2007,2007,8
+ratios_emision,Margen sobre US Treasuries (bp)*,2007-12-31,ARS,total_colocaciones (licitaciones + colocaciones privadas),,-,puntos basicos,2007,2007,8
+ratios_emision,Monto emitido en VNO,2007-12-31,USD,licitaciones,3073.922,,millones de valor nominal,2007,2007,9
+ratios_emision,Monto emitido en VNO,2007-12-31,USD,total_colocaciones (licitaciones + colocaciones privadas),6106.333388000001,,millones de valor nominal,2007,2007,9
+ratios_emision,Monto emitido en VNO,2007-12-31,ARS,licitaciones,1500.0,,millones de valor nominal,2007,2007,9
+ratios_emision,Monto emitido en VNO,2007-12-31,ARS,total_colocaciones (licitaciones + colocaciones privadas),1500.0,,millones de valor nominal,2007,2007,9

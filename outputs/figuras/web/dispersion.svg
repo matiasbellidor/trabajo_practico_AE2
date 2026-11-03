@@ -1,0 +1,776 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 710.198359 392.080443" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="dispersion-figure_1">
+  <g id="dispersion-patch_1">
+   <path d="M 0 392.080443 
+L 710.198359 392.080443 
+L 710.198359 0 
+L 0 0 
+L 0 392.080443 
+z
+" style="fill: none"/>
+  </g>
+  <g id="dispersion-axes_1">
+   <g id="dispersion-patch_2">
+    <path d="M 50.760703 324.257532 
+L 702.998359 324.257532 
+L 702.998359 26.010078 
+L 50.760703 26.010078 
+L 50.760703 324.257532 
+z
+" style="fill: none"/>
+   </g>
+   <g id="dispersion-matplotlib.axis_1">
+    <g id="dispersion-xtick_1">
+     <g id="dispersion-line2d_1">
+      <path d="M 59.657408 324.257532 
+L 59.657408 26.010078 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="dispersion-line2d_2">
+      <defs>
+       <path id="dispersion-m7909aaca7d" d="M 0 0 
+L 0 3.5 
+" style="stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#dispersion-m7909aaca7d" x="59.657408" y="324.257532" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="dispersion-text_1">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="59.657408" y="339.235071" transform="rotate(-0 59.657408 339.235071)">−2</text>
+     </g>
+    </g>
+    <g id="dispersion-xtick_2">
+     <g id="dispersion-line2d_3">
+      <path d="M 202.500093 324.257532 
+L 202.500093 26.010078 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="dispersion-line2d_4">
+      <g>
+       <use xlink:href="#dispersion-m7909aaca7d" x="202.500093" y="324.257532" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="dispersion-text_2">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="202.500093" y="339.235071" transform="rotate(-0 202.500093 339.235071)">−1</text>
+     </g>
+    </g>
+    <g id="dispersion-xtick_3">
+     <g id="dispersion-line2d_5">
+      <path d="M 345.342777 324.257532 
+L 345.342777 26.010078 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="dispersion-line2d_6">
+      <g>
+       <use xlink:href="#dispersion-m7909aaca7d" x="345.342777" y="324.257532" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="dispersion-text_3">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="345.342777" y="339.235071" transform="rotate(-0 345.342777 339.235071)">0</text>
+     </g>
+    </g>
+    <g id="dispersion-xtick_4">
+     <g id="dispersion-line2d_7">
+      <path d="M 488.185462 324.257532 
+L 488.185462 26.010078 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="dispersion-line2d_8">
+      <g>
+       <use xlink:href="#dispersion-m7909aaca7d" x="488.185462" y="324.257532" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="dispersion-text_4">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="488.185462" y="339.235071" transform="rotate(-0 488.185462 339.235071)">1</text>
+     </g>
+    </g>
+    <g id="dispersion-xtick_5">
+     <g id="dispersion-line2d_9">
+      <path d="M 631.028146 324.257532 
+L 631.028146 26.010078 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="dispersion-line2d_10">
+      <g>
+       <use xlink:href="#dispersion-m7909aaca7d" x="631.028146" y="324.257532" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="dispersion-text_5">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="631.028146" y="339.235071" transform="rotate(-0 631.028146 339.235071)">2</text>
+     </g>
+    </g>
+    <g id="dispersion-text_6">
+     <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="376.879531" y="353.755969" transform="rotate(-0 376.879531 353.755969)">Variación mensual del PBI mensualizado (%)</text>
+    </g>
+   </g>
+   <g id="dispersion-matplotlib.axis_2">
+    <g id="dispersion-ytick_1">
+     <g id="dispersion-line2d_11">
+      <path d="M 50.760703 312.854594 
+L 702.998359 312.854594 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="dispersion-line2d_12">
+      <defs>
+       <path id="dispersion-m0a5f5023ec" d="M 0 0 
+L -3.5 0 
+" style="stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#dispersion-m0a5f5023ec" x="50.760703" y="312.854594" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="dispersion-text_7">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.760703" y="316.843363" transform="rotate(-0 43.760703 316.843363)">−20</text>
+     </g>
+    </g>
+    <g id="dispersion-ytick_2">
+     <g id="dispersion-line2d_13">
+      <path d="M 50.760703 266.90762 
+L 702.998359 266.90762 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="dispersion-line2d_14">
+      <g>
+       <use xlink:href="#dispersion-m0a5f5023ec" x="50.760703" y="266.90762" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="dispersion-text_8">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.760703" y="270.896389" transform="rotate(-0 43.760703 270.896389)">−10</text>
+     </g>
+    </g>
+    <g id="dispersion-ytick_3">
+     <g id="dispersion-line2d_15">
+      <path d="M 50.760703 220.960646 
+L 702.998359 220.960646 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="dispersion-line2d_16">
+      <g>
+       <use xlink:href="#dispersion-m0a5f5023ec" x="50.760703" y="220.960646" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="dispersion-text_9">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.760703" y="224.949415" transform="rotate(-0 43.760703 224.949415)">0</text>
+     </g>
+    </g>
+    <g id="dispersion-ytick_4">
+     <g id="dispersion-line2d_17">
+      <path d="M 50.760703 175.013672 
+L 702.998359 175.013672 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="dispersion-line2d_18">
+      <g>
+       <use xlink:href="#dispersion-m0a5f5023ec" x="50.760703" y="175.013672" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="dispersion-text_10">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.760703" y="179.002441" transform="rotate(-0 43.760703 179.002441)">10</text>
+     </g>
+    </g>
+    <g id="dispersion-ytick_5">
+     <g id="dispersion-line2d_19">
+      <path d="M 50.760703 129.066698 
+L 702.998359 129.066698 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="dispersion-line2d_20">
+      <g>
+       <use xlink:href="#dispersion-m0a5f5023ec" x="50.760703" y="129.066698" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="dispersion-text_11">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.760703" y="133.055467" transform="rotate(-0 43.760703 133.055467)">20</text>
+     </g>
+    </g>
+    <g id="dispersion-ytick_6">
+     <g id="dispersion-line2d_21">
+      <path d="M 50.760703 83.119724 
+L 702.998359 83.119724 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="dispersion-line2d_22">
+      <g>
+       <use xlink:href="#dispersion-m0a5f5023ec" x="50.760703" y="83.119724" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="dispersion-text_12">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.760703" y="87.108493" transform="rotate(-0 43.760703 87.108493)">30</text>
+     </g>
+    </g>
+    <g id="dispersion-ytick_7">
+     <g id="dispersion-line2d_23">
+      <path d="M 50.760703 37.17275 
+L 702.998359 37.17275 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="dispersion-line2d_24">
+      <g>
+       <use xlink:href="#dispersion-m0a5f5023ec" x="50.760703" y="37.17275" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="dispersion-text_13">
+      <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: end; fill: var(--fig-tinta2)" x="43.760703" y="41.161519" transform="rotate(-0 43.760703 41.161519)">40</text>
+     </g>
+    </g>
+    <g id="dispersion-text_14">
+     <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="15.198438" y="175.133805" transform="rotate(-90 15.198438 175.133805)">Variación mensual del AL30D (%)</text>
+    </g>
+   </g>
+   <g id="dispersion-FillBetweenPolyCollection_1">
+    <defs>
+     <path id="dispersion-md54708104a" d="M 80.407869 -222.909538 
+L 80.407869 -142.166793 
+L 83.387484 -142.528721 
+L 86.367099 -142.890069 
+L 89.346713 -143.250824 
+L 92.326328 -143.610968 
+L 95.305943 -143.970483 
+L 98.285557 -144.329353 
+L 101.265172 -144.68756 
+L 104.244787 -145.045083 
+L 107.224402 -145.401904 
+L 110.204016 -145.758002 
+L 113.183631 -146.113356 
+L 116.163246 -146.467945 
+L 119.14286 -146.821745 
+L 122.122475 -147.174733 
+L 125.10209 -147.526884 
+L 128.081704 -147.878174 
+L 131.061319 -148.228576 
+L 134.040934 -148.578062 
+L 137.020548 -148.926603 
+L 140.000163 -149.274172 
+L 142.979778 -149.620736 
+L 145.959393 -149.966265 
+L 148.939007 -150.310724 
+L 151.918622 -150.654079 
+L 154.898237 -150.996295 
+L 157.877851 -151.337334 
+L 160.857466 -151.677158 
+L 163.837081 -152.015725 
+L 166.816695 -152.352995 
+L 169.79631 -152.688923 
+L 172.775925 -153.023464 
+L 175.755539 -153.35657 
+L 178.735154 -153.688192 
+L 181.714769 -154.018278 
+L 184.694384 -154.346776 
+L 187.673998 -154.673628 
+L 190.653613 -154.998778 
+L 193.633228 -155.322163 
+L 196.612842 -155.643722 
+L 199.592457 -155.963388 
+L 202.572072 -156.281092 
+L 205.551686 -156.596763 
+L 208.531301 -156.910327 
+L 211.510916 -157.221705 
+L 214.49053 -157.530817 
+L 217.470145 -157.837578 
+L 220.44976 -158.1419 
+L 223.429375 -158.443691 
+L 226.408989 -158.742857 
+L 229.388604 -159.039297 
+L 232.368219 -159.332907 
+L 235.347833 -159.623581 
+L 238.327448 -159.911206 
+L 241.307063 -160.195664 
+L 244.286677 -160.476836 
+L 247.266292 -160.754593 
+L 250.245907 -161.028807 
+L 253.225521 -161.299339 
+L 256.205136 -161.56605 
+L 259.184751 -161.828794 
+L 262.164366 -162.087418 
+L 265.14398 -162.341766 
+L 268.123595 -162.591677 
+L 271.10321 -162.836983 
+L 274.082824 -163.077512 
+L 277.062439 -163.313087 
+L 280.042054 -163.543525 
+L 283.021668 -163.76864 
+L 286.001283 -163.98824 
+L 288.980898 -164.202129 
+L 291.960513 -164.410109 
+L 294.940127 -164.611974 
+L 297.919742 -164.807521 
+L 300.899357 -164.99654 
+L 303.878971 -165.17882 
+L 306.858586 -165.354152 
+L 309.838201 -165.522323 
+L 312.817815 -165.683122 
+L 315.79743 -165.83634 
+L 318.777045 -165.981769 
+L 321.756659 -166.119207 
+L 324.736274 -166.248454 
+L 327.715889 -166.369319 
+L 330.695504 -166.481615 
+L 333.675118 -166.585165 
+L 336.654733 -166.679802 
+L 339.634348 -166.765369 
+L 342.613962 -166.841722 
+L 345.593577 -166.908729 
+L 348.573192 -166.966273 
+L 351.552806 -167.014253 
+L 354.532421 -167.052583 
+L 357.512036 -167.081195 
+L 360.49165 -167.100038 
+L 363.471265 -167.109079 
+L 366.45088 -167.108305 
+L 369.430495 -167.097718 
+L 372.410109 -167.077343 
+L 375.389724 -167.04722 
+L 378.369339 -167.007408 
+L 381.348953 -166.957983 
+L 384.328568 -166.899039 
+L 387.308183 -166.830684 
+L 390.287797 -166.753042 
+L 393.267412 -166.66625 
+L 396.247027 -166.570458 
+L 399.226641 -166.46583 
+L 402.206256 -166.352536 
+L 405.185871 -166.230757 
+L 408.165486 -166.100683 
+L 411.1451 -165.96251 
+L 414.124715 -165.816438 
+L 417.10433 -165.662672 
+L 420.083944 -165.501421 
+L 423.063559 -165.332895 
+L 426.043174 -165.157305 
+L 429.022788 -164.974863 
+L 432.002403 -164.78578 
+L 434.982018 -164.590265 
+L 437.961632 -164.388526 
+L 440.941247 -164.180767 
+L 443.920862 -163.96719 
+L 446.900477 -163.747993 
+L 449.880091 -163.52337 
+L 452.859706 -163.293509 
+L 455.839321 -163.058597 
+L 458.818935 -162.818812 
+L 461.79855 -162.57433 
+L 464.778165 -162.32532 
+L 467.757779 -162.071948 
+L 470.737394 -161.814373 
+L 473.717009 -161.552749 
+L 476.696623 -161.287224 
+L 479.676238 -161.017944 
+L 482.655853 -160.745046 
+L 485.635468 -160.468664 
+L 488.615082 -160.188928 
+L 491.594697 -159.905961 
+L 494.574312 -159.619881 
+L 497.553926 -159.330805 
+L 500.533541 -159.038842 
+L 503.513156 -158.744097 
+L 506.49277 -158.446674 
+L 509.472385 -158.146668 
+L 512.452 -157.844175 
+L 515.431614 -157.539283 
+L 518.411229 -157.23208 
+L 521.390844 -156.922649 
+L 524.370459 -156.611068 
+L 527.350073 -156.297413 
+L 530.329688 -155.98176 
+L 533.309303 -155.664176 
+L 536.288917 -155.344731 
+L 539.268532 -155.023487 
+L 542.248147 -154.700508 
+L 545.227761 -154.375853 
+L 548.207376 -154.049579 
+L 551.186991 -153.721741 
+L 554.166605 -153.392391 
+L 557.14622 -153.06158 
+L 560.125835 -152.729357 
+L 563.10545 -152.395767 
+L 566.085064 -152.060856 
+L 569.064679 -151.724666 
+L 572.044294 -151.38724 
+L 575.023908 -151.048615 
+L 578.003523 -150.708832 
+L 580.983138 -150.367925 
+L 583.962752 -150.025931 
+L 586.942367 -149.682883 
+L 589.921982 -149.338813 
+L 592.901596 -148.993754 
+L 595.881211 -148.647735 
+L 598.860826 -148.300785 
+L 601.840441 -147.952933 
+L 604.820055 -147.604204 
+L 607.79967 -147.254625 
+L 610.779285 -146.904221 
+L 613.758899 -146.553017 
+L 616.738514 -146.201034 
+L 619.718129 -145.848295 
+L 622.697743 -145.494822 
+L 625.677358 -145.140636 
+L 628.656973 -144.785757 
+L 631.636587 -144.430204 
+L 634.616202 -144.073995 
+L 637.595817 -143.717149 
+L 640.575432 -143.359683 
+L 643.555046 -143.001613 
+L 646.534661 -142.642957 
+L 649.514276 -142.283729 
+L 652.49389 -141.923945 
+L 655.473505 -141.563619 
+L 658.45312 -141.202765 
+L 661.432734 -140.841398 
+L 664.412349 -140.47953 
+L 667.391964 -140.117173 
+L 670.371578 -139.754342 
+L 673.351193 -139.391047 
+L 673.351193 -226.27435 
+L 673.351193 -226.27435 
+L 670.371578 -225.908094 
+L 667.391964 -225.542303 
+L 664.412349 -225.176987 
+L 661.432734 -224.812158 
+L 658.45312 -224.447831 
+L 655.473505 -224.084017 
+L 652.49389 -223.720731 
+L 649.514276 -223.357987 
+L 646.534661 -222.995799 
+L 643.555046 -222.634182 
+L 640.575432 -222.273152 
+L 637.595817 -221.912726 
+L 634.616202 -221.55292 
+L 631.636587 -221.193751 
+L 628.656973 -220.835237 
+L 625.677358 -220.477398 
+L 622.697743 -220.120252 
+L 619.718129 -219.763819 
+L 616.738514 -219.40812 
+L 613.758899 -219.053177 
+L 610.779285 -218.699012 
+L 607.79967 -218.345648 
+L 604.820055 -217.99311 
+L 601.840441 -217.641421 
+L 598.860826 -217.290608 
+L 595.881211 -216.940698 
+L 592.901596 -216.591719 
+L 589.921982 -216.2437 
+L 586.942367 -215.89667 
+L 583.962752 -215.550662 
+L 580.983138 -215.205707 
+L 578.003523 -214.861841 
+L 575.023908 -214.519097 
+L 572.044294 -214.177512 
+L 569.064679 -213.837126 
+L 566.085064 -213.497976 
+L 563.10545 -213.160105 
+L 560.125835 -212.823555 
+L 557.14622 -212.488371 
+L 554.166605 -212.1546 
+L 551.186991 -211.82229 
+L 548.207376 -211.491492 
+L 545.227761 -211.162258 
+L 542.248147 -210.834643 
+L 539.268532 -210.508704 
+L 536.288917 -210.1845 
+L 533.309303 -209.862094 
+L 530.329688 -209.541551 
+L 527.350073 -209.222937 
+L 524.370459 -208.906323 
+L 521.390844 -208.591781 
+L 518.411229 -208.279389 
+L 515.431614 -207.969226 
+L 512.452 -207.661375 
+L 509.472385 -207.355921 
+L 506.49277 -207.052956 
+L 503.513156 -206.752572 
+L 500.533541 -206.454867 
+L 497.553926 -206.159944 
+L 494.574312 -205.867908 
+L 491.594697 -205.578868 
+L 488.615082 -205.292941 
+L 485.635468 -205.010244 
+L 482.655853 -204.730902 
+L 479.676238 -204.455044 
+L 476.696623 -204.182804 
+L 473.717009 -203.914319 
+L 470.737394 -203.649735 
+L 467.757779 -203.3892 
+L 464.778165 -203.132867 
+L 461.79855 -202.880898 
+L 458.818935 -202.633456 
+L 455.839321 -202.390711 
+L 452.859706 -202.152838 
+L 449.880091 -201.920017 
+L 446.900477 -201.692434 
+L 443.920862 -201.470276 
+L 440.941247 -201.253739 
+L 437.961632 -201.043021 
+L 434.982018 -200.838321 
+L 432.002403 -200.639846 
+L 429.022788 -200.447803 
+L 426.043174 -200.262401 
+L 423.063559 -200.083851 
+L 420.083944 -199.912365 
+L 417.10433 -199.748154 
+L 414.124715 -199.591428 
+L 411.1451 -199.442395 
+L 408.165486 -199.301262 
+L 405.185871 -199.168228 
+L 402.206256 -199.043489 
+L 399.226641 -198.927235 
+L 396.247027 -198.819646 
+L 393.267412 -198.720895 
+L 390.287797 -198.631143 
+L 387.308183 -198.55054 
+L 384.328568 -198.479225 
+L 381.348953 -198.417321 
+L 378.369339 -198.364936 
+L 375.389724 -198.322164 
+L 372.410109 -198.289081 
+L 369.430495 -198.265745 
+L 366.45088 -198.252199 
+L 363.471265 -198.248464 
+L 360.49165 -198.254545 
+L 357.512036 -198.270428 
+L 354.532421 -198.29608 
+L 351.552806 -198.33145 
+L 348.573192 -198.37647 
+L 345.593577 -198.431054 
+L 342.613962 -198.495101 
+L 339.634348 -198.568493 
+L 336.654733 -198.6511 
+L 333.675118 -198.742777 
+L 330.695504 -198.843367 
+L 327.715889 -198.952703 
+L 324.736274 -199.070608 
+L 321.756659 -199.196895 
+L 318.777045 -199.331372 
+L 315.79743 -199.473842 
+L 312.817815 -199.624099 
+L 309.838201 -199.781938 
+L 306.858586 -199.947149 
+L 303.878971 -200.11952 
+L 300.899357 -200.298841 
+L 297.919742 -200.4849 
+L 294.940127 -200.677486 
+L 291.960513 -200.876392 
+L 288.980898 -201.081411 
+L 286.001283 -201.29234 
+L 283.021668 -201.50898 
+L 280.042054 -201.731134 
+L 277.062439 -201.958613 
+L 274.082824 -202.191227 
+L 271.10321 -202.428796 
+L 268.123595 -202.671142 
+L 265.14398 -202.918093 
+L 262.164366 -203.169481 
+L 259.184751 -203.425145 
+L 256.205136 -203.684928 
+L 253.225521 -203.948679 
+L 250.245907 -204.216252 
+L 247.266292 -204.487505 
+L 244.286677 -204.762303 
+L 241.307063 -205.040514 
+L 238.327448 -205.322012 
+L 235.347833 -205.606677 
+L 232.368219 -205.89439 
+L 229.388604 -206.185041 
+L 226.408989 -206.478521 
+L 223.429375 -206.774726 
+L 220.44976 -207.073558 
+L 217.470145 -207.37492 
+L 214.49053 -207.67872 
+L 211.510916 -207.984872 
+L 208.531301 -208.29329 
+L 205.551686 -208.603894 
+L 202.572072 -208.916605 
+L 199.592457 -209.231349 
+L 196.612842 -209.548055 
+L 193.633228 -209.866653 
+L 190.653613 -210.187078 
+L 187.673998 -210.509268 
+L 184.694384 -210.83316 
+L 181.714769 -211.158697 
+L 178.735154 -211.485824 
+L 175.755539 -211.814486 
+L 172.775925 -212.144631 
+L 169.79631 -212.476212 
+L 166.816695 -212.80918 
+L 163.837081 -213.143489 
+L 160.857466 -213.479097 
+L 157.877851 -213.81596 
+L 154.898237 -214.154039 
+L 151.918622 -214.493295 
+L 148.939007 -214.833691 
+L 145.959393 -215.17519 
+L 142.979778 -215.517758 
+L 140.000163 -215.861362 
+L 137.020548 -216.20597 
+L 134.040934 -216.551552 
+L 131.061319 -216.898078 
+L 128.081704 -217.245519 
+L 125.10209 -217.593849 
+L 122.122475 -217.94304 
+L 119.14286 -218.293068 
+L 116.163246 -218.643908 
+L 113.183631 -218.995536 
+L 110.204016 -219.34793 
+L 107.224402 -219.701068 
+L 104.244787 -220.054929 
+L 101.265172 -220.409493 
+L 98.285557 -220.764739 
+L 95.305943 -221.120649 
+L 92.326328 -221.477204 
+L 89.346713 -221.834388 
+L 86.367099 -222.192182 
+L 83.387484 -222.550571 
+L 80.407869 -222.909538 
+z
+"/>
+    </defs>
+    <g clip-path="url(#dispersion-p7bc6e8739d)">
+     <use xlink:href="#dispersion-md54708104a" x="0" y="392.080443" style="fill: var(--fig-s1); fill-opacity: 0.15"/>
+    </g>
+   </g>
+   <g id="dispersion-line2d_25">
+    <path d="M 50.760703 220.960646 
+L 702.998359 220.960646 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-eje); stroke-linecap: square"/>
+   </g>
+   <g id="dispersion-line2d_26">
+    <path d="M 345.342777 324.257532 
+L 345.342777 26.010078 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-eje); stroke-linecap: square"/>
+   </g>
+   <g id="dispersion-line2d_27">
+    <path d="M 80.407869 209.542277 
+L 673.351193 209.247745 
+L 673.351193 209.247745 
+" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-s1); stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="dispersion-patch_3">
+    <path d="M 50.760703 324.257532 
+L 50.760703 26.010078 
+" style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="dispersion-patch_4">
+    <path d="M 50.760703 324.257532 
+L 702.998359 324.257532 
+" style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="dispersion-puntos-dispersion">
+    <defs>
+     <path id="dispersion-m61e306bbf7" d="M 0 3.391165 
+C 0.899347 3.391165 1.761981 3.03385 2.397916 2.397916 
+C 3.03385 1.761981 3.391165 0.899347 3.391165 0 
+C 3.391165 -0.899347 3.03385 -1.761981 2.397916 -2.397916 
+C 1.761981 -3.03385 0.899347 -3.391165 0 -3.391165 
+C -0.899347 -3.391165 -1.761981 -3.03385 -2.397916 -2.397916 
+C -3.03385 -1.761981 -3.391165 -0.899347 -3.391165 0 
+C -3.391165 0.899347 -3.03385 1.761981 -2.397916 2.397916 
+C -1.761981 3.03385 -0.899347 3.391165 0 3.391165 
+z
+" style="stroke: var(--fig-fondo); stroke-width: 1.5"/>
+    </defs>
+    <g clip-path="url(#dispersion-p7bc6e8739d)">
+     <use xlink:href="#dispersion-m61e306bbf7" x="445.579511" y="238.537344" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2021-10: PBI +0,70 %, AL30D −3,83 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="416.790554" y="302.815759" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2021-11: PBI +0,50 %, AL30D −17,82 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="377.358282" y="168.342434" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2021-12: PBI +0,22 %, AL30D +11,45 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="372.920907" y="236.135793" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-01: PBI +0,19 %, AL30D −3,30 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="414.476331" y="243.774292" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-02: PBI +0,48 %, AL30D −4,97 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="484.971959" y="213.927165" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-03: PBI +0,98 %, AL30D +1,53 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="518.234685" y="258.609756" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-04: PBI +1,21 %, AL30D −8,19 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="499.291115" y="250.487441" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-05: PBI +1,08 %, AL30D −6,43 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="438.230187" y="303.879069" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-06: PBI +0,65 %, AL30D −18,05 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="367.178898" y="188.660864" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-07: PBI +0,15 %, AL30D +7,03 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="293.149849" y="240.546568" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-08: PBI −0,37 %, AL30D −4,26 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="226.325073" y="300.496298" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-09: PBI −0,83 %, AL30D −17,31 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="211.406218" y="184.859452" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-10: PBI −0,94 %, AL30D +7,86 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="261.368478" y="123.35551" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-11: PBI −0,59 %, AL30D +21,24 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="350.327127" y="214.589847" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-12: PBI +0,03 %, AL30D +1,39 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="366.719709" y="72.056652" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-01: PBI +0,15 %, AL30D +32,41 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="282.44376" y="269.711895" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-02: PBI −0,44 %, AL30D −10,61 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="141.935444" y="268.580759" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-03: PBI −1,42 %, AL30D −10,36 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="124.731559" y="310.700829" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-04: PBI −1,54 %, AL30D −19,53 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="283.604628" y="193.972375" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-05: PBI −0,43 %, AL30D +5,87 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="557.685895" y="59.587963" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-06: PBI +1,49 %, AL30D +35,12 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="673.351193" y="201.783592" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-07: PBI +2,30 %, AL30D +4,17 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="570.10186" y="176.510316" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-08: PBI +1,57 %, AL30D +9,67 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="318.957977" y="281.550062" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-09: PBI −0,18 %, AL30D −13,19 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="139.457025" y="288.238459" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-10: PBI −1,44 %, AL30D −14,64 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="80.407869" y="39.566781" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-11: PBI −1,85 %, AL30D +39,48 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="124.201031" y="180.691028" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-12: PBI −1,55 %, AL30D +8,76 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="186.344413" y="199.716999" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-01: PBI −1,11 %, AL30D +4,62 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="244.013752" y="149.603603" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-02: PBI −0,71 %, AL30D +15,53 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="299.91118" y="137.302002" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-03: PBI −0,32 %, AL30D +18,21 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="368.091143" y="181.708608" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-04: PBI +0,16 %, AL30D +8,54 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="451.468901" y="238.180977" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-05: PBI +0,74 %, AL30D −3,75 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="535.39321" y="231.939126" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-06: PBI +1,33 %, AL30D −2,39 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="566.35833" y="230.186326" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-07: PBI +1,55 %, AL30D −2,01 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="533.764881" y="183.014389" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-08: PBI +1,32 %, AL30D +8,26 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="455.958738" y="188.274104" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-09: PBI +0,77 %, AL30D +7,11 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="393.165141" y="176.567053" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-10: PBI +0,33 %, AL30D +9,66 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="358.752273" y="169.836548" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-11: PBI +0,09 %, AL30D +11,13 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="348.877533" y="193.655163" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-12: PBI +0,02 %, AL30D +5,94 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="350.977748" y="225.185216" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-01: PBI +0,04 %, AL30D −0,92 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="361.935061" y="238.592667" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-02: PBI +0,12 %, AL30D −3,84 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="378.821859" y="222.398736" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-03: PBI +0,23 %, AL30D −0,31 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="390.023342" y="194.633102" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-04: PBI +0,31 %, AL30D +5,73 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="392.685263" y="213.933863" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-05: PBI +0,33 %, AL30D +1,53 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="387.886851" y="220.490291" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-06: PBI +0,30 %, AL30D +0,10 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="379.634469" y="224.663912" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-07: PBI +0,24 %, AL30D −0,81 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="368.932516" y="227.953746" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-08: PBI +0,17 %, AL30D −1,52 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="357.895947" y="288.694975" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-09: PBI +0,09 %, AL30D −14,74 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="354.949432" y="95.56751" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-10: PBI +0,07 %, AL30D +27,29 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="362.167036" y="213.914005" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-11: PBI +0,12 %, AL30D +1,53 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="376.149066" y="202.406226" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-12: PBI +0,22 %, AL30D +4,04 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="383.417558" y="207.381373" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-01: PBI +0,27 %, AL30D +2,96 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="380.669141" y="222.552605" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-02: PBI +0,25 %, AL30D −0,35 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="370.35854" y="215.559594" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-03: PBI +0,18 %, AL30D +1,18 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="361.943748" y="204.419434" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-04: PBI +0,12 %, AL30D +3,60 %</title></use>
+     <use xlink:href="#dispersion-m61e306bbf7" x="357.743806" y="216.170723" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-05: PBI +0,09 %, AL30D +1,04 %</title></use>
+    </g>
+   </g>
+   <g id="dispersion-text_15">
+    <text style="font-size: 11.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta)" x="50.760703" y="16.010078" transform="rotate(-0 50.760703 16.010078)">β1 = 0,0154 · p = 0,9940 · R² = 0,0000 · n = 56</text>
+   </g>
+   <g id="dispersion-legend_1">
+    <g id="dispersion-patch_5">
+     <path d="M 136.94293 378.798216 
+L 155.94293 378.798216 
+L 155.94293 372.148216 
+L 136.94293 372.148216 
+z
+" style="fill: var(--fig-s1); fill-opacity: 0.15"/>
+    </g>
+    <g id="dispersion-text_16">
+     <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta2)" x="163.54293" y="378.798216" transform="rotate(-0 163.54293 378.798216)">IC 95 % de la media condicional</text>
+    </g>
+    <g id="dispersion-line2d_28">
+     <path d="M 335.022383 375.473216 
+L 344.522383 375.473216 
+L 354.022383 375.473216 
+" style="fill: none; stroke: var(--fig-s1); stroke-width: 2; stroke-linecap: square"/>
+    </g>
+    <g id="dispersion-text_17">
+     <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta2)" x="361.622383" y="378.798216" transform="rotate(-0 361.622383 378.798216)">Recta de MCO</text>
+    </g>
+    <g id="dispersion-PathCollection_1">
+     <g>
+      <use xlink:href="#dispersion-m61e306bbf7" x="457.135977" y="376.304466" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+     </g>
+    </g>
+    <g id="dispersion-text_18">
+     <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta2)" x="474.235977" y="378.798216" transform="rotate(-0 474.235977 378.798216)">Meses (oct-2021 a may-2026)</text>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="dispersion-p7bc6e8739d">
+   <rect x="50.760703" y="26.010078" width="652.237656" height="298.247453"/>
+  </clipPath>
+ </defs>
+</svg>
