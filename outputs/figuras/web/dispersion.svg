@@ -223,7 +223,7 @@ L 702.998359 37.17275
      <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="15.198438" y="175.133805" transform="rotate(-90 15.198438 175.133805)">Variación mensual del AL30D (%)</text>
     </g>
    </g>
-   <g id="dispersion-FillBetweenPolyCollection_1">
+   <g class="m m--aparece f3" style="--i:0">
     <defs>
      <path id="dispersion-md54708104a" d="M 80.407869 -222.909538 
 L 80.407869 -142.166793 
@@ -644,11 +644,11 @@ L 702.998359 220.960646
 L 345.342777 26.010078 
 " clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-eje); stroke-linecap: square"/>
    </g>
-   <g id="dispersion-line2d_27">
-    <path d="M 80.407869 209.542277 
+   <g>
+    <path pathLength="1" class="m m--trazo f2" d="M 80.407869 209.542277 
 L 673.351193 209.247745 
 L 673.351193 209.247745 
-" clip-path="url(#dispersion-p7bc6e8739d)" style="fill: none; stroke: var(--fig-s1); stroke-width: 2; stroke-linecap: square"/>
+" clip-path="url(#dispersion-p7bc6e8739d)" style="--i:0;fill: none; stroke: var(--fig-s1); stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="dispersion-patch_3">
     <path d="M 50.760703 324.257532 
@@ -660,7 +660,7 @@ L 50.760703 26.010078
 L 702.998359 324.257532 
 " style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
-   <g id="dispersion-puntos-dispersion">
+   <g>
     <defs>
      <path id="dispersion-m61e306bbf7" d="M 0 3.391165 
 C 0.899347 3.391165 1.761981 3.03385 2.397916 2.397916 
@@ -675,62 +675,62 @@ z
 " style="stroke: var(--fig-fondo); stroke-width: 1.5"/>
     </defs>
     <g clip-path="url(#dispersion-p7bc6e8739d)">
-     <use xlink:href="#dispersion-m61e306bbf7" x="445.579511" y="238.537344" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2021-10: PBI +0,70 %, AL30D −3,83 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="416.790554" y="302.815759" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2021-11: PBI +0,50 %, AL30D −17,82 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="377.358282" y="168.342434" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2021-12: PBI +0,22 %, AL30D +11,45 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="372.920907" y="236.135793" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-01: PBI +0,19 %, AL30D −3,30 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="414.476331" y="243.774292" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-02: PBI +0,48 %, AL30D −4,97 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="484.971959" y="213.927165" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-03: PBI +0,98 %, AL30D +1,53 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="518.234685" y="258.609756" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-04: PBI +1,21 %, AL30D −8,19 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="499.291115" y="250.487441" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-05: PBI +1,08 %, AL30D −6,43 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="438.230187" y="303.879069" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-06: PBI +0,65 %, AL30D −18,05 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="367.178898" y="188.660864" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-07: PBI +0,15 %, AL30D +7,03 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="293.149849" y="240.546568" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-08: PBI −0,37 %, AL30D −4,26 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="226.325073" y="300.496298" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-09: PBI −0,83 %, AL30D −17,31 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="211.406218" y="184.859452" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-10: PBI −0,94 %, AL30D +7,86 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="261.368478" y="123.35551" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-11: PBI −0,59 %, AL30D +21,24 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="350.327127" y="214.589847" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-12: PBI +0,03 %, AL30D +1,39 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="366.719709" y="72.056652" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-01: PBI +0,15 %, AL30D +32,41 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="282.44376" y="269.711895" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-02: PBI −0,44 %, AL30D −10,61 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="141.935444" y="268.580759" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-03: PBI −1,42 %, AL30D −10,36 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="124.731559" y="310.700829" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-04: PBI −1,54 %, AL30D −19,53 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="283.604628" y="193.972375" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-05: PBI −0,43 %, AL30D +5,87 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="557.685895" y="59.587963" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-06: PBI +1,49 %, AL30D +35,12 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="673.351193" y="201.783592" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-07: PBI +2,30 %, AL30D +4,17 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="570.10186" y="176.510316" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-08: PBI +1,57 %, AL30D +9,67 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="318.957977" y="281.550062" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-09: PBI −0,18 %, AL30D −13,19 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="139.457025" y="288.238459" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-10: PBI −1,44 %, AL30D −14,64 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="80.407869" y="39.566781" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-11: PBI −1,85 %, AL30D +39,48 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="124.201031" y="180.691028" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-12: PBI −1,55 %, AL30D +8,76 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="186.344413" y="199.716999" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-01: PBI −1,11 %, AL30D +4,62 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="244.013752" y="149.603603" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-02: PBI −0,71 %, AL30D +15,53 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="299.91118" y="137.302002" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-03: PBI −0,32 %, AL30D +18,21 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="368.091143" y="181.708608" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-04: PBI +0,16 %, AL30D +8,54 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="451.468901" y="238.180977" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-05: PBI +0,74 %, AL30D −3,75 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="535.39321" y="231.939126" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-06: PBI +1,33 %, AL30D −2,39 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="566.35833" y="230.186326" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-07: PBI +1,55 %, AL30D −2,01 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="533.764881" y="183.014389" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-08: PBI +1,32 %, AL30D +8,26 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="455.958738" y="188.274104" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-09: PBI +0,77 %, AL30D +7,11 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="393.165141" y="176.567053" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-10: PBI +0,33 %, AL30D +9,66 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="358.752273" y="169.836548" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-11: PBI +0,09 %, AL30D +11,13 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="348.877533" y="193.655163" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-12: PBI +0,02 %, AL30D +5,94 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="350.977748" y="225.185216" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-01: PBI +0,04 %, AL30D −0,92 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="361.935061" y="238.592667" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-02: PBI +0,12 %, AL30D −3,84 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="378.821859" y="222.398736" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-03: PBI +0,23 %, AL30D −0,31 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="390.023342" y="194.633102" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-04: PBI +0,31 %, AL30D +5,73 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="392.685263" y="213.933863" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-05: PBI +0,33 %, AL30D +1,53 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="387.886851" y="220.490291" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-06: PBI +0,30 %, AL30D +0,10 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="379.634469" y="224.663912" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-07: PBI +0,24 %, AL30D −0,81 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="368.932516" y="227.953746" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-08: PBI +0,17 %, AL30D −1,52 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="357.895947" y="288.694975" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-09: PBI +0,09 %, AL30D −14,74 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="354.949432" y="95.56751" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-10: PBI +0,07 %, AL30D +27,29 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="362.167036" y="213.914005" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-11: PBI +0,12 %, AL30D +1,53 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="376.149066" y="202.406226" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-12: PBI +0,22 %, AL30D +4,04 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="383.417558" y="207.381373" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-01: PBI +0,27 %, AL30D +2,96 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="380.669141" y="222.552605" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-02: PBI +0,25 %, AL30D −0,35 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="370.35854" y="215.559594" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-03: PBI +0,18 %, AL30D +1,18 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="361.943748" y="204.419434" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-04: PBI +0,12 %, AL30D +3,60 %</title></use>
-     <use xlink:href="#dispersion-m61e306bbf7" x="357.743806" y="216.170723" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-05: PBI +0,09 %, AL30D +1,04 %</title></use>
+     <g class="m m--punto f1" style="--i:0"><use xlink:href="#dispersion-m61e306bbf7" x="445.579511" y="238.537344" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2021-10: PBI +0,70 %, AL30D −3,83 %</title></use></g>
+     <g class="m m--punto f1" style="--i:1"><use xlink:href="#dispersion-m61e306bbf7" x="416.790554" y="302.815759" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2021-11: PBI +0,50 %, AL30D −17,82 %</title></use></g>
+     <g class="m m--punto f1" style="--i:2"><use xlink:href="#dispersion-m61e306bbf7" x="377.358282" y="168.342434" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2021-12: PBI +0,22 %, AL30D +11,45 %</title></use></g>
+     <g class="m m--punto f1" style="--i:3"><use xlink:href="#dispersion-m61e306bbf7" x="372.920907" y="236.135793" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-01: PBI +0,19 %, AL30D −3,30 %</title></use></g>
+     <g class="m m--punto f1" style="--i:4"><use xlink:href="#dispersion-m61e306bbf7" x="414.476331" y="243.774292" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-02: PBI +0,48 %, AL30D −4,97 %</title></use></g>
+     <g class="m m--punto f1" style="--i:5"><use xlink:href="#dispersion-m61e306bbf7" x="484.971959" y="213.927165" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-03: PBI +0,98 %, AL30D +1,53 %</title></use></g>
+     <g class="m m--punto f1" style="--i:6"><use xlink:href="#dispersion-m61e306bbf7" x="518.234685" y="258.609756" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-04: PBI +1,21 %, AL30D −8,19 %</title></use></g>
+     <g class="m m--punto f1" style="--i:7"><use xlink:href="#dispersion-m61e306bbf7" x="499.291115" y="250.487441" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-05: PBI +1,08 %, AL30D −6,43 %</title></use></g>
+     <g class="m m--punto f1" style="--i:8"><use xlink:href="#dispersion-m61e306bbf7" x="438.230187" y="303.879069" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-06: PBI +0,65 %, AL30D −18,05 %</title></use></g>
+     <g class="m m--punto f1" style="--i:9"><use xlink:href="#dispersion-m61e306bbf7" x="367.178898" y="188.660864" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-07: PBI +0,15 %, AL30D +7,03 %</title></use></g>
+     <g class="m m--punto f1" style="--i:10"><use xlink:href="#dispersion-m61e306bbf7" x="293.149849" y="240.546568" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-08: PBI −0,37 %, AL30D −4,26 %</title></use></g>
+     <g class="m m--punto f1" style="--i:11"><use xlink:href="#dispersion-m61e306bbf7" x="226.325073" y="300.496298" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-09: PBI −0,83 %, AL30D −17,31 %</title></use></g>
+     <g class="m m--punto f1" style="--i:12"><use xlink:href="#dispersion-m61e306bbf7" x="211.406218" y="184.859452" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-10: PBI −0,94 %, AL30D +7,86 %</title></use></g>
+     <g class="m m--punto f1" style="--i:13"><use xlink:href="#dispersion-m61e306bbf7" x="261.368478" y="123.35551" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-11: PBI −0,59 %, AL30D +21,24 %</title></use></g>
+     <g class="m m--punto f1" style="--i:14"><use xlink:href="#dispersion-m61e306bbf7" x="350.327127" y="214.589847" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2022-12: PBI +0,03 %, AL30D +1,39 %</title></use></g>
+     <g class="m m--punto f1" style="--i:15"><use xlink:href="#dispersion-m61e306bbf7" x="366.719709" y="72.056652" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-01: PBI +0,15 %, AL30D +32,41 %</title></use></g>
+     <g class="m m--punto f1" style="--i:16"><use xlink:href="#dispersion-m61e306bbf7" x="282.44376" y="269.711895" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-02: PBI −0,44 %, AL30D −10,61 %</title></use></g>
+     <g class="m m--punto f1" style="--i:17"><use xlink:href="#dispersion-m61e306bbf7" x="141.935444" y="268.580759" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-03: PBI −1,42 %, AL30D −10,36 %</title></use></g>
+     <g class="m m--punto f1" style="--i:18"><use xlink:href="#dispersion-m61e306bbf7" x="124.731559" y="310.700829" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-04: PBI −1,54 %, AL30D −19,53 %</title></use></g>
+     <g class="m m--punto f1" style="--i:19"><use xlink:href="#dispersion-m61e306bbf7" x="283.604628" y="193.972375" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-05: PBI −0,43 %, AL30D +5,87 %</title></use></g>
+     <g class="m m--punto f1" style="--i:20"><use xlink:href="#dispersion-m61e306bbf7" x="557.685895" y="59.587963" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-06: PBI +1,49 %, AL30D +35,12 %</title></use></g>
+     <g class="m m--punto f1" style="--i:21"><use xlink:href="#dispersion-m61e306bbf7" x="673.351193" y="201.783592" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-07: PBI +2,30 %, AL30D +4,17 %</title></use></g>
+     <g class="m m--punto f1" style="--i:22"><use xlink:href="#dispersion-m61e306bbf7" x="570.10186" y="176.510316" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-08: PBI +1,57 %, AL30D +9,67 %</title></use></g>
+     <g class="m m--punto f1" style="--i:23"><use xlink:href="#dispersion-m61e306bbf7" x="318.957977" y="281.550062" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-09: PBI −0,18 %, AL30D −13,19 %</title></use></g>
+     <g class="m m--punto f1" style="--i:24"><use xlink:href="#dispersion-m61e306bbf7" x="139.457025" y="288.238459" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-10: PBI −1,44 %, AL30D −14,64 %</title></use></g>
+     <g class="m m--punto f1" style="--i:25"><use xlink:href="#dispersion-m61e306bbf7" x="80.407869" y="39.566781" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-11: PBI −1,85 %, AL30D +39,48 %</title></use></g>
+     <g class="m m--punto f1" style="--i:26"><use xlink:href="#dispersion-m61e306bbf7" x="124.201031" y="180.691028" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2023-12: PBI −1,55 %, AL30D +8,76 %</title></use></g>
+     <g class="m m--punto f1" style="--i:27"><use xlink:href="#dispersion-m61e306bbf7" x="186.344413" y="199.716999" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-01: PBI −1,11 %, AL30D +4,62 %</title></use></g>
+     <g class="m m--punto f1" style="--i:28"><use xlink:href="#dispersion-m61e306bbf7" x="244.013752" y="149.603603" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-02: PBI −0,71 %, AL30D +15,53 %</title></use></g>
+     <g class="m m--punto f1" style="--i:29"><use xlink:href="#dispersion-m61e306bbf7" x="299.91118" y="137.302002" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-03: PBI −0,32 %, AL30D +18,21 %</title></use></g>
+     <g class="m m--punto f1" style="--i:30"><use xlink:href="#dispersion-m61e306bbf7" x="368.091143" y="181.708608" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-04: PBI +0,16 %, AL30D +8,54 %</title></use></g>
+     <g class="m m--punto f1" style="--i:31"><use xlink:href="#dispersion-m61e306bbf7" x="451.468901" y="238.180977" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-05: PBI +0,74 %, AL30D −3,75 %</title></use></g>
+     <g class="m m--punto f1" style="--i:32"><use xlink:href="#dispersion-m61e306bbf7" x="535.39321" y="231.939126" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-06: PBI +1,33 %, AL30D −2,39 %</title></use></g>
+     <g class="m m--punto f1" style="--i:33"><use xlink:href="#dispersion-m61e306bbf7" x="566.35833" y="230.186326" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-07: PBI +1,55 %, AL30D −2,01 %</title></use></g>
+     <g class="m m--punto f1" style="--i:34"><use xlink:href="#dispersion-m61e306bbf7" x="533.764881" y="183.014389" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-08: PBI +1,32 %, AL30D +8,26 %</title></use></g>
+     <g class="m m--punto f1" style="--i:35"><use xlink:href="#dispersion-m61e306bbf7" x="455.958738" y="188.274104" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-09: PBI +0,77 %, AL30D +7,11 %</title></use></g>
+     <g class="m m--punto f1" style="--i:36"><use xlink:href="#dispersion-m61e306bbf7" x="393.165141" y="176.567053" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-10: PBI +0,33 %, AL30D +9,66 %</title></use></g>
+     <g class="m m--punto f1" style="--i:37"><use xlink:href="#dispersion-m61e306bbf7" x="358.752273" y="169.836548" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-11: PBI +0,09 %, AL30D +11,13 %</title></use></g>
+     <g class="m m--punto f1" style="--i:38"><use xlink:href="#dispersion-m61e306bbf7" x="348.877533" y="193.655163" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2024-12: PBI +0,02 %, AL30D +5,94 %</title></use></g>
+     <g class="m m--punto f1" style="--i:39"><use xlink:href="#dispersion-m61e306bbf7" x="350.977748" y="225.185216" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-01: PBI +0,04 %, AL30D −0,92 %</title></use></g>
+     <g class="m m--punto f1" style="--i:40"><use xlink:href="#dispersion-m61e306bbf7" x="361.935061" y="238.592667" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-02: PBI +0,12 %, AL30D −3,84 %</title></use></g>
+     <g class="m m--punto f1" style="--i:41"><use xlink:href="#dispersion-m61e306bbf7" x="378.821859" y="222.398736" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-03: PBI +0,23 %, AL30D −0,31 %</title></use></g>
+     <g class="m m--punto f1" style="--i:42"><use xlink:href="#dispersion-m61e306bbf7" x="390.023342" y="194.633102" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-04: PBI +0,31 %, AL30D +5,73 %</title></use></g>
+     <g class="m m--punto f1" style="--i:43"><use xlink:href="#dispersion-m61e306bbf7" x="392.685263" y="213.933863" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-05: PBI +0,33 %, AL30D +1,53 %</title></use></g>
+     <g class="m m--punto f1" style="--i:44"><use xlink:href="#dispersion-m61e306bbf7" x="387.886851" y="220.490291" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-06: PBI +0,30 %, AL30D +0,10 %</title></use></g>
+     <g class="m m--punto f1" style="--i:45"><use xlink:href="#dispersion-m61e306bbf7" x="379.634469" y="224.663912" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-07: PBI +0,24 %, AL30D −0,81 %</title></use></g>
+     <g class="m m--punto f1" style="--i:46"><use xlink:href="#dispersion-m61e306bbf7" x="368.932516" y="227.953746" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-08: PBI +0,17 %, AL30D −1,52 %</title></use></g>
+     <g class="m m--punto f1" style="--i:47"><use xlink:href="#dispersion-m61e306bbf7" x="357.895947" y="288.694975" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-09: PBI +0,09 %, AL30D −14,74 %</title></use></g>
+     <g class="m m--punto f1" style="--i:48"><use xlink:href="#dispersion-m61e306bbf7" x="354.949432" y="95.56751" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-10: PBI +0,07 %, AL30D +27,29 %</title></use></g>
+     <g class="m m--punto f1" style="--i:49"><use xlink:href="#dispersion-m61e306bbf7" x="362.167036" y="213.914005" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-11: PBI +0,12 %, AL30D +1,53 %</title></use></g>
+     <g class="m m--punto f1" style="--i:50"><use xlink:href="#dispersion-m61e306bbf7" x="376.149066" y="202.406226" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2025-12: PBI +0,22 %, AL30D +4,04 %</title></use></g>
+     <g class="m m--punto f1" style="--i:51"><use xlink:href="#dispersion-m61e306bbf7" x="383.417558" y="207.381373" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-01: PBI +0,27 %, AL30D +2,96 %</title></use></g>
+     <g class="m m--punto f1" style="--i:52"><use xlink:href="#dispersion-m61e306bbf7" x="380.669141" y="222.552605" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-02: PBI +0,25 %, AL30D −0,35 %</title></use></g>
+     <g class="m m--punto f1" style="--i:53"><use xlink:href="#dispersion-m61e306bbf7" x="370.35854" y="215.559594" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-03: PBI +0,18 %, AL30D +1,18 %</title></use></g>
+     <g class="m m--punto f1" style="--i:54"><use xlink:href="#dispersion-m61e306bbf7" x="361.943748" y="204.419434" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-04: PBI +0,12 %, AL30D +3,60 %</title></use></g>
+     <g class="m m--punto f1" style="--i:55"><use xlink:href="#dispersion-m61e306bbf7" x="357.743806" y="216.170723" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"><title>2026-05: PBI +0,09 %, AL30D +1,04 %</title></use></g>
     </g>
    </g>
    <g id="dispersion-text_15">
@@ -748,7 +748,7 @@ z
     <g id="dispersion-text_16">
      <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta2)" x="163.54293" y="378.798216" transform="rotate(-0 163.54293 378.798216)">IC 95 % de la media condicional</text>
     </g>
-    <g id="dispersion-line2d_28">
+    <g id="dispersion-line2d_27">
      <path d="M 335.022383 375.473216 
 L 344.522383 375.473216 
 L 354.022383 375.473216 

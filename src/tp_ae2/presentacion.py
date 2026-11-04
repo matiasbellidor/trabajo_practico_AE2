@@ -14,6 +14,7 @@ from pathlib import Path
 
 import jinja2
 import pandas as pd
+from markupsafe import Markup
 
 from . import reporte, textos
 from .config import Config, cargar_config
@@ -111,15 +112,23 @@ def trazo_portada(panel: list[dict], ancho: int = 600, alto: int = 220) -> dict:
             "inicio": str(panel[0]["periodo"]), "fin": str(panel[-1]["periodo"])}
 
 
+def palabras(texto: str) -> Markup:
+    """Envuelve cada palabra en <span class="pal" style="--i:N"> para que el título entre escalonado. Los espacios
+    quedan fuera de los span: el texto del elemento no cambia (lectores de pantalla, buscadores, tests)."""
+    return Markup(" ".join(f'<span class="pal" style="--i:{i}">{html.escape(p)}</span>'
+                           for i, p in enumerate(texto.split(" "))))
+
+
 def _svg_accesible(svg: str, figura_id: str) -> str:
     return svg.replace("<svg ", f'<svg role="img" aria-labelledby="cap-{figura_id}" focusable="false" ', 1)
 
 
 def renderizar(resultados: dict, figuras: list[dict], svgs: dict[str, str], panel: list[dict],
-               conclusion_md: str | None, fecha_entrega: str) -> str:
+               conclusion_md: str | None, fecha_entrega: str, linkedin: dict[str, str] | None = None) -> str:
     entorno = jinja2.Environment(loader=jinja2.FileSystemLoader(WEB), autoescape=True,
                                  undefined=jinja2.StrictUndefined, trim_blocks=True, lstrip_blocks=True)
-    figs = {f["id"]: {**f, "svg": _svg_accesible(svgs[f["id"]], f["id"])} for f in figuras}
+    entorno.filters["palabras"] = palabras
+    figs ={f["id"]: {**f, "svg": _svg_accesible(svgs[f["id"]], f["id"])} for f in figuras}
     return entorno.get_template("plantilla.html.j2").render(
         r=resultados, t=textos.construir(resultados), figs=figs, panel=panel, trazo=trazo_portada(panel),
         secciones=[{"id": i, "titulo": t} for i, t in SECCIONES],
@@ -127,7 +136,7 @@ def renderizar(resultados: dict, figuras: list[dict], svgs: dict[str, str], pane
         conclusion_html=markdown_a_html(conclusion_md) if conclusion_md else None,
         mensual=resultados["muestra"]["principal"]["frecuencia"] == "mensual", fecha_entrega=fecha_entrega,
         n=num, pv=pval, ic=ic_texto, p_texto=p_texto, gl=gl_texto, partir=partir_veredicto,
-        nombres=textos.NOMBRES,
+        nombres=textos.NOMBRES, linkedin=linkedin or {},
     )
 
 
@@ -141,7 +150,8 @@ def generar(cfg: Config) -> Path:
     filas = panel[["periodo", "var_pbi", "var_bono", "grupo_bono", "tercil_pbi"]].to_dict(orient="records")
     conclusion = reporte.leer_conclusion(cfg.ruta("conclusion"))
     y, m, d = cfg["proyecto"]["fecha_entrega"].split("-")
-    contenido = renderizar(resultados, figuras, svgs, filas, conclusion, f"{d}/{m}/{y}")
+    contenido = renderizar(resultados, figuras, svgs, filas, conclusion, f"{d}/{m}/{y}",
+                           cfg["proyecto"].get("linkedin") or {})
     docs = cfg.ruta("docs")
     docs.mkdir(parents=True, exist_ok=True)
     destino = docs / "index.html"

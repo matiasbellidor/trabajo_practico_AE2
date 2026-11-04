@@ -16,6 +16,11 @@ proyecto:
     - "Melina Escalante"
     - "Luka Orpianesi"
     - "Manuel Rodriguez"
+  linkedin:   # perfil de cada integrante; en la portada, el nombre lleva a su LinkedIn
+    "Maria Acevedo": "https://www.linkedin.com/in/acebedomaria/"
+    "Matías Rodrigo Bellido": "https://www.linkedin.com/in/matiasbellido/"
+    "Melina Escalante": "https://www.linkedin.com/in/melina-antonella-escalante-4870a1288/"
+    "Luka Orpianesi": "https://www.linkedin.com/in/luka-santino-orpianesi-45673a24a/"
   github: "matiasbellidor"
   repositorio: "https://github.com/matiasbellidor/trabajo_practico_AE2"
   pages: "https://matiasbellidor.github.io/trabajo_practico_AE2/"

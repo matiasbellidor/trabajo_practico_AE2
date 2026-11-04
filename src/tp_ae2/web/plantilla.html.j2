@@ -13,8 +13,15 @@
 </head>
 <body>
 {%- macro figura(id) -%}
-{%- set f = figs[id] -%}
-<figure class="figura revela" id="fig-{{ id }}">
+{%- set f = figs[id] -%}{%- set a = f.get("anim") -%}
+{#- Motion: la figura lleva los tiempos de cada fase; graficos._Motion marcó sus elementos (ver estilos.css). -#}
+<figure class="figura revela" id="fig-{{ id }}"{% if a %} data-anim="{{ id }}" data-dur="{{ a.duracion }}" style="{{ a.estilo }}"{% if a.get('lecturas') %} data-lecturas='{{ a.lecturas | tojson }}'{% endif %}{% endif %}>
+  {%- if a %}
+  <button class="figura__repetir no-imprimir" type="button" aria-label="Repetir la animación de la figura"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10M23 4v6h-6"/></svg>Repetir</button>
+  {%- endif %}
+  {%- if a and a.get('lecturas') %}
+  <output class="lectura" aria-hidden="true"></output>
+  {%- endif %}
   <div class="figura__lienzo">{{ f.svg | safe }}</div>
   <p class="pista-movil" aria-hidden="true">Deslizá la figura hacia los costados para verla completa.</p>
   <figcaption id="cap-{{ id }}"><strong>{{ f.titulo }}.</strong> {{ f.alt }}</figcaption>
@@ -95,24 +102,32 @@
   <div class="diapo__contenido portada__rejilla">
     <div class="portada__texto">
       <p class="diapo__num">Trabajo práctico · {{ r.meta.facultad }}</p>
-      <h1 id="t-portada">Variación del PBI real argentino y variación del bono AL30D</h1>
+      <h1 id="t-portada">{{ "Variación del PBI real argentino y variación del bono AL30D" | palabras }}</h1>
       <p class="portada__materia">{{ r.meta.materia }} · Cátedra {{ r.meta.catedra }} · {{ r.meta.cuatrimestre }}</p>
       <p class="portada__meta">Entrega: {{ fecha_entrega }}</p>
       <div class="portada__grupo">
         <span class="etiqueta" style="color: var(--noche-tenue)">{{ r.meta.grupo }}</span>
-        <ul>{% for i in r.meta.integrantes %}<li>{{ i }}</li>{% endfor %}</ul>
+        <ul>{% for i in r.meta.integrantes %}<li>{% if linkedin.get(i) %}<a class="integrante" href="{{ linkedin[i] }}" target="_blank" rel="noopener" aria-label="{{ i }} en LinkedIn (se abre en otra pestaña)">{{ i }}<svg class="icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>{% else %}{{ i }}{% endif %}</li>{% endfor %}</ul>
       </div>
       <p class="portada__pista no-imprimir">Avanzá con <kbd>→</kbd> o <kbd>Av Pág</kbd>; retrocedé con <kbd>←</kbd> o <kbd>Re Pág</kbd>. El índice está arriba, en la sección actual.</p>
     </div>
     <div class="portada__lateral">
       <figure class="trazo" role="img" aria-label="Recorrido mensual del AL30D y del PBI entre {{ trazo.inicio }} y {{ trazo.fin }}, en índices con base 100. El AL30D termina en {{ n(trazo.bono_final, 1) }} y el PBI en {{ n(trazo.pbi_final, 1) }}.">
         <svg viewBox="0 0 {{ trazo.ancho }} {{ trazo.alto }}" aria-hidden="true" focusable="false">
-          <path class="trazo__linea trazo__linea--pbi" d="{{ trazo.pbi }}" pathLength="1"/>
-          <path class="trazo__linea trazo__linea--bono" d="{{ trazo.bono }}" pathLength="1"/>
+          {#- Cada serie: la línea, la onda que se abre al llegar y el punto que recorre la línea mientras se dibuja
+              (offset-path con el mismo camino). Sin animación, el punto queda en el último mes. -#}
+          {%- for s in ("pbi", "bono") %}
+          {%- set fin = trazo["fin_" ~ s] %}
+          <g class="trazo__grupo trazo__grupo--{{ s }}">
+            <path class="trazo__linea trazo__linea--{{ s }}" d="{{ trazo[s] }}" pathLength="1"/>
+            <g transform="translate({{ '%.1f %.1f' | format(fin[0], fin[1]) }})"><circle class="trazo__onda" r="4.5"/></g>
+            <circle class="trazo__punta" r="4.5" transform="translate({{ '%.1f %.1f' | format(fin[0], fin[1]) }})" style="--ruta: path('{{ trazo[s] }}')"/>
+          </g>
+          {%- endfor %}
         </svg>
         <figcaption>
-          <span class="trazo__serie trazo__serie--bono"><i></i>AL30D: 100 → {{ n(trazo.bono_final, 1) }}</span>
-          <span class="trazo__serie trazo__serie--pbi"><i></i>PBI: 100 → {{ n(trazo.pbi_final, 1) }}</span>
+          <span class="trazo__serie trazo__serie--bono"><i></i>AL30D: 100 → <span data-cuenta="{{ trazo.bono_final }}" data-demora="350">{{ n(trazo.bono_final, 1) }}</span></span>
+          <span class="trazo__serie trazo__serie--pbi"><i></i>PBI: 100 → <span data-cuenta="{{ trazo.pbi_final }}" data-demora="700">{{ n(trazo.pbi_final, 1) }}</span></span>
           <span class="trazo__nota">Índices base 100, {{ trazo.inicio }} a {{ trazo.fin }}. Cada línea en su propia escala: lo que se compara es la forma.</span>
         </figcaption>
       </figure>

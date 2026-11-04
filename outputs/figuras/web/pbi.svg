@@ -14,7 +14,7 @@ z
 " style="fill: none"/>
   </g>
   <g id="pbi-axes_1">
-   <g id="pbi-patch_2">
+   <g>
     <path d="M 48.242656 312.620898 
 L 702.640312 312.620898 
 L 702.640312 25.938203 
@@ -195,8 +195,8 @@ L 702.640312 30.390231
      <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="14.798438" y="169.279551" transform="rotate(-90 14.798438 169.279551)">Miles de millones de $ de 2004</text>
     </g>
    </g>
-   <g id="pbi-line2d_19">
-    <path d="M 77.988004 190.24287 
+   <g>
+    <path pathLength="1" class="m m--trazo f1 m--sinc" d="M 77.988004 190.24287 
 L 97.998102 87.843137 
 L 118.682698 168.732162 
 L 139.367294 183.674348 
@@ -226,7 +226,7 @@ L 611.515675 105.299132
 L 632.200271 107.60242 
 L 652.884866 118.372946 
 L 672.894964 38.969235 
-" clip-path="url(#pbi-pd42de1310b)" style="fill: none; stroke: var(--fig-s2); stroke-width: 1.5; stroke-linecap: square"/>
+" clip-path="url(#pbi-pd42de1310b)" style="--i:0;--sinc:linear(0.0000 0.00%, 0.0775 3.36%, 0.1395 6.84%, 0.1584 10.32%, 0.1962 13.79%, 0.2215 17.20%, 0.2374 20.67%, 0.2667 24.15%, 0.2846 27.63%, 0.3489 30.99%, 0.3849 34.47%, 0.4023 37.94%, 0.4177 41.42%, 0.4941 44.78%, 0.5407 48.26%, 0.5641 51.74%, 0.5813 55.22%, 0.6149 58.58%, 0.6324 62.06%, 0.6616 65.53%, 0.6941 69.01%, 0.7507 72.41%, 0.7713 75.89%, 0.7874 79.37%, 0.8053 82.84%, 0.8676 86.21%, 0.9064 89.68%, 0.9219 93.16%, 0.9392 96.64%, 1.0000 100.00%);fill: none; stroke: var(--fig-s2); stroke-width: 1.5; stroke-linecap: square"/>
     <defs>
      <path id="pbi-me361bab3f4" d="M 0 2 
 C 0.530406 2 1.03916 1.789267 1.414214 1.414214 
@@ -241,40 +241,40 @@ z
 " style="stroke: var(--fig-s2)"/>
     </defs>
     <g clip-path="url(#pbi-pd42de1310b)">
-     <use xlink:href="#pbi-me361bab3f4" x="77.988004" y="190.24287" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="97.998102" y="87.843137" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="118.682698" y="168.732162" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="139.367294" y="183.674348" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="160.05189" y="230.112538" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="180.28682" y="257.530148" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="200.971416" y="251.795659" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="221.656012" y="218.180044" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="242.340607" y="205.753418" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="262.350705" y="121.526665" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="283.035301" y="165.329508" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="303.719897" y="154.154586" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="324.404493" y="152.378391" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="344.414591" y="51.435253" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="365.099187" y="110.628976" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="385.783782" y="134.367379" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="406.468378" y="144.77161" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="426.478476" y="104.115479" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="447.163072" y="115.538196" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="467.847668" y="148.901449" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="488.532263" y="187.417723" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="508.767194" y="113.909165" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="529.45179" y="132.509985" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="550.136385" y="126.285023" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="570.820981" y="138.711103" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="590.831079" y="57.221676" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="611.515675" y="105.299132" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="632.200271" y="107.60242" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="652.884866" y="118.372946" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
-     <use xlink:href="#pbi-me361bab3f4" x="672.894964" y="38.969235" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/>
+     <g class="m m--punto f2" style="--i:0"><use xlink:href="#pbi-me361bab3f4" x="77.988004" y="190.24287" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:1"><use xlink:href="#pbi-me361bab3f4" x="97.998102" y="87.843137" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:2"><use xlink:href="#pbi-me361bab3f4" x="118.682698" y="168.732162" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:3"><use xlink:href="#pbi-me361bab3f4" x="139.367294" y="183.674348" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:4"><use xlink:href="#pbi-me361bab3f4" x="160.05189" y="230.112538" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:5"><use xlink:href="#pbi-me361bab3f4" x="180.28682" y="257.530148" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:6"><use xlink:href="#pbi-me361bab3f4" x="200.971416" y="251.795659" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:7"><use xlink:href="#pbi-me361bab3f4" x="221.656012" y="218.180044" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:8"><use xlink:href="#pbi-me361bab3f4" x="242.340607" y="205.753418" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:9"><use xlink:href="#pbi-me361bab3f4" x="262.350705" y="121.526665" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:10"><use xlink:href="#pbi-me361bab3f4" x="283.035301" y="165.329508" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:11"><use xlink:href="#pbi-me361bab3f4" x="303.719897" y="154.154586" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:12"><use xlink:href="#pbi-me361bab3f4" x="324.404493" y="152.378391" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:13"><use xlink:href="#pbi-me361bab3f4" x="344.414591" y="51.435253" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:14"><use xlink:href="#pbi-me361bab3f4" x="365.099187" y="110.628976" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:15"><use xlink:href="#pbi-me361bab3f4" x="385.783782" y="134.367379" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:16"><use xlink:href="#pbi-me361bab3f4" x="406.468378" y="144.77161" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:17"><use xlink:href="#pbi-me361bab3f4" x="426.478476" y="104.115479" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:18"><use xlink:href="#pbi-me361bab3f4" x="447.163072" y="115.538196" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:19"><use xlink:href="#pbi-me361bab3f4" x="467.847668" y="148.901449" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:20"><use xlink:href="#pbi-me361bab3f4" x="488.532263" y="187.417723" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:21"><use xlink:href="#pbi-me361bab3f4" x="508.767194" y="113.909165" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:22"><use xlink:href="#pbi-me361bab3f4" x="529.45179" y="132.509985" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:23"><use xlink:href="#pbi-me361bab3f4" x="550.136385" y="126.285023" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:24"><use xlink:href="#pbi-me361bab3f4" x="570.820981" y="138.711103" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:25"><use xlink:href="#pbi-me361bab3f4" x="590.831079" y="57.221676" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:26"><use xlink:href="#pbi-me361bab3f4" x="611.515675" y="105.299132" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:27"><use xlink:href="#pbi-me361bab3f4" x="632.200271" y="107.60242" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:28"><use xlink:href="#pbi-me361bab3f4" x="652.884866" y="118.372946" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
+     <g class="m m--punto f2" style="--i:29"><use xlink:href="#pbi-me361bab3f4" x="672.894964" y="38.969235" style="fill: var(--fig-s2); stroke: var(--fig-s2)"/></g>
     </g>
    </g>
-   <g id="pbi-line2d_20">
-    <path d="M 77.988004 159.68513 
+   <g>
+    <path pathLength="1" class="m m--trazo f4" d="M 77.988004 159.68513 
 L 84.283316 152.956289 
 L 91.253125 145.194764 
 L 97.998102 142.018833 
@@ -362,9 +362,9 @@ L 652.884866 89.695405
 L 659.180178 88.129825 
 L 666.149988 87.089055 
 L 672.894964 86.31069 
-" clip-path="url(#pbi-pd42de1310b)" style="fill: none; stroke: var(--fig-s1); stroke-width: 2; stroke-linecap: square"/>
+" clip-path="url(#pbi-pd42de1310b)" style="--i:0;fill: none; stroke: var(--fig-s1); stroke-width: 2; stroke-linecap: square"/>
    </g>
-   <g id="pbi-line2d_21">
+   <g>
     <defs>
      <path id="pbi-m23d9778d88" d="M 0 3.5 
 C 0.928211 3.5 1.81853 3.131218 2.474874 2.474874 
@@ -379,44 +379,44 @@ z
 " style="stroke: var(--fig-fondo); stroke-width: 1.5"/>
     </defs>
     <g clip-path="url(#pbi-pd42de1310b)">
-     <use xlink:href="#pbi-m23d9778d88" x="77.988004" y="159.68513" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="97.998102" y="142.018833" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="118.682698" y="164.8653" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="139.367294" y="166.190667" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="160.05189" y="205.215501" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="180.28682" y="299.589867" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="200.971416" y="245.230744" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="221.656012" y="203.078948" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="242.340607" y="183.739485" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="262.350705" y="169.675937" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="283.035301" y="155.033464" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="303.719897" y="138.795072" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="324.404493" y="131.160589" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="344.414591" y="103.018324" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="365.099187" y="99.180369" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="385.783782" y="119.882114" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="406.468378" y="122.098138" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="426.478476" y="151.097502" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="447.163072" y="105.718693" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="467.847668" y="135.990207" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="488.532263" y="164.256851" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="508.767194" y="159.484091" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="529.45179" y="124.410053" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="550.136385" y="114.041569" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="570.820981" y="112.472461" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="590.831079" y="104.795984" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="611.515675" y="98.603045" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="632.200271" y="96.185445" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="652.884866" y="89.695405" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
-     <use xlink:href="#pbi-m23d9778d88" x="672.894964" y="86.31069" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
+     <g class="m m--punto f3" style="--i:0"><use xlink:href="#pbi-m23d9778d88" x="77.988004" y="159.68513" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:1"><use xlink:href="#pbi-m23d9778d88" x="97.998102" y="142.018833" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:2"><use xlink:href="#pbi-m23d9778d88" x="118.682698" y="164.8653" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:3"><use xlink:href="#pbi-m23d9778d88" x="139.367294" y="166.190667" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:4"><use xlink:href="#pbi-m23d9778d88" x="160.05189" y="205.215501" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:5"><use xlink:href="#pbi-m23d9778d88" x="180.28682" y="299.589867" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:6"><use xlink:href="#pbi-m23d9778d88" x="200.971416" y="245.230744" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:7"><use xlink:href="#pbi-m23d9778d88" x="221.656012" y="203.078948" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:8"><use xlink:href="#pbi-m23d9778d88" x="242.340607" y="183.739485" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:9"><use xlink:href="#pbi-m23d9778d88" x="262.350705" y="169.675937" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:10"><use xlink:href="#pbi-m23d9778d88" x="283.035301" y="155.033464" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:11"><use xlink:href="#pbi-m23d9778d88" x="303.719897" y="138.795072" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:12"><use xlink:href="#pbi-m23d9778d88" x="324.404493" y="131.160589" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:13"><use xlink:href="#pbi-m23d9778d88" x="344.414591" y="103.018324" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:14"><use xlink:href="#pbi-m23d9778d88" x="365.099187" y="99.180369" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:15"><use xlink:href="#pbi-m23d9778d88" x="385.783782" y="119.882114" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:16"><use xlink:href="#pbi-m23d9778d88" x="406.468378" y="122.098138" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:17"><use xlink:href="#pbi-m23d9778d88" x="426.478476" y="151.097502" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:18"><use xlink:href="#pbi-m23d9778d88" x="447.163072" y="105.718693" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:19"><use xlink:href="#pbi-m23d9778d88" x="467.847668" y="135.990207" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:20"><use xlink:href="#pbi-m23d9778d88" x="488.532263" y="164.256851" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:21"><use xlink:href="#pbi-m23d9778d88" x="508.767194" y="159.484091" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:22"><use xlink:href="#pbi-m23d9778d88" x="529.45179" y="124.410053" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:23"><use xlink:href="#pbi-m23d9778d88" x="550.136385" y="114.041569" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:24"><use xlink:href="#pbi-m23d9778d88" x="570.820981" y="112.472461" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:25"><use xlink:href="#pbi-m23d9778d88" x="590.831079" y="104.795984" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:26"><use xlink:href="#pbi-m23d9778d88" x="611.515675" y="98.603045" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:27"><use xlink:href="#pbi-m23d9778d88" x="632.200271" y="96.185445" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:28"><use xlink:href="#pbi-m23d9778d88" x="652.884866" y="89.695405" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
+     <g class="m m--punto f3" style="--i:29"><use xlink:href="#pbi-m23d9778d88" x="672.894964" y="86.31069" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/></g>
     </g>
    </g>
-   <g id="pbi-patch_3">
+   <g id="pbi-patch_2">
     <path d="M 48.242656 312.620898 
 L 48.242656 25.938203 
 " style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
-   <g id="pbi-patch_4">
+   <g id="pbi-patch_3">
     <path d="M 48.242656 312.620898 
 L 702.640312 312.620898 
 " style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
@@ -424,8 +424,8 @@ L 702.640312 312.620898
    <g id="pbi-text_15">
     <text style="font-size: 11.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta)" x="48.242656" y="15.938203" transform="rotate(-0 48.242656 15.938203)">PBI a precios de 2004: original, desestacionalizado y mensualizado</text>
    </g>
-   <g id="pbi-legend_1">
-    <g id="pbi-line2d_22">
+   <g class="m m--aparece f5" style="--i:0">
+    <g id="pbi-line2d_19">
      <path d="M 459.349766 269.962187 
 L 468.849766 269.962187 
 L 478.349766 269.962187 
@@ -437,7 +437,7 @@ L 478.349766 269.962187
     <g id="pbi-text_16">
      <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta2)" x="485.949766" y="273.287187" transform="rotate(-0 485.949766 273.287187)">Original trimestral (con estacionalidad)</text>
     </g>
-    <g id="pbi-line2d_23">
+    <g id="pbi-line2d_20">
      <path d="M 459.349766 284.21293 
 L 468.849766 284.21293 
 L 478.349766 284.21293 
@@ -446,7 +446,7 @@ L 478.349766 284.21293
     <g id="pbi-text_17">
      <text style="font-size: 9.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta2)" x="485.949766" y="287.53793" transform="rotate(-0 485.949766 287.53793)">Spline mensual sobre la serie SA</text>
     </g>
-    <g id="pbi-line2d_24">
+    <g id="pbi-line2d_21">
      <g>
       <use xlink:href="#pbi-m23d9778d88" x="468.849766" y="298.463672" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
      </g>

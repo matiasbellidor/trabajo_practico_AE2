@@ -232,6 +232,10 @@ code { overflow-wrap: anywhere; }
 .portada__meta { color: var(--noche-tenue); margin: 0; }
 .portada__grupo { margin-top: 2.4rem; padding-top: 1.4rem; border-top: 1px solid rgba(243, 239, 230, .2); display: grid; gap: .35rem; }
 .portada__grupo ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .3rem 1.4rem; color: var(--noche-tinta); }
+/* Integrante con perfil: el nombre lleva a su LinkedIn (config.yaml → proyecto.linkedin) */
+.integrante { display: inline-flex; align-items: center; gap: .4rem; color: inherit; text-decoration: none; border-bottom: 1px solid rgba(243, 239, 230, .3); }
+.integrante:hover { border-color: #f2a56f; }
+.integrante .icono { width: 14px; height: 14px; flex: none; fill: currentColor; opacity: .75; }
 .portada__pista { margin-top: 2.6rem; font-size: .9rem; color: var(--noche-tenue); }
 .portada kbd { font: inherit; border: 1px solid rgba(243, 239, 230, .35); border-radius: 4px; padding: 0 .35rem; }
 .portada__rejilla { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(2rem, 4vw, 4rem); align-items: end; }
@@ -239,9 +243,11 @@ code { overflow-wrap: anywhere; }
 /* Recorrido real de las dos series: el motivo visual sale de los datos del trabajo */
 .trazo { margin: 0; padding: 1rem 1.1rem .9rem; border: 1px solid rgba(243, 239, 230, .16); border-radius: 14px; background: rgba(243, 239, 230, .04); }
 .trazo svg { display: block; width: 100%; height: auto; overflow: visible; }
-.trazo__linea { fill: none; stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
-.trazo__linea--bono { stroke: #5b9cf0; }
-.trazo__linea--pbi { stroke: #f08a55; }
+.trazo__grupo--bono { color: #5b9cf0; }
+.trazo__grupo--pbi { color: #f08a55; }
+.trazo__linea { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+.trazo__punta { fill: currentColor; stroke: var(--noche); stroke-width: 2; }
+.trazo__onda { --onda: 2.4; fill: none; stroke: currentColor; stroke-width: 1.5; opacity: 0; }
 .trazo figcaption { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin-top: .75rem; font-size: .84rem; color: var(--noche-tinta); }
 .trazo__serie { display: inline-flex; align-items: center; gap: .45rem; font-variant-numeric: tabular-nums; }
 .trazo__serie i { width: 16px; height: 3px; border-radius: 2px; background: #5b9cf0; }
@@ -332,10 +338,23 @@ summary::marker { color: var(--acento); }
 
 /* Figuras */
 .figura { margin: 1.2rem 0 0; background: var(--superficie); border: 1px solid var(--linea); border-radius: 14px; padding: 1rem; }
-.figura__lienzo { overflow-x: auto; }
+.figura__lienzo { overflow-x: auto; position: relative; }
 .figura__lienzo svg { display: block; width: 100%; height: auto; }
 .figura figcaption { font-size: .88rem; color: var(--tenue); margin-top: .6rem; }
 .figura figcaption strong { color: var(--tinta-2); }
+/* Piezas que solo existen mientras la figura se arma: el estado base (sin JS, quieta, impresa) las oculta. */
+.m--deco, .lectura { opacity: 0; pointer-events: none; }
+.m--cursor { stroke: var(--fig-tinta2); stroke-width: 1.2; }
+.m--anillo { fill: none; stroke-width: 1.6; }
+/* Lectura de la figura 1: va sobre el borde superior de la figura, así nunca tapa datos. */
+.lectura {
+  position: absolute; top: 0; left: 1rem; transform: translateY(-50%); z-index: 2; padding: .2rem .6rem; border-radius: 999px; white-space: nowrap;
+  font: 600 .78rem/1.3 var(--sans); font-variant-numeric: tabular-nums; color: var(--tinta);
+  background: var(--superficie); border: 1px solid var(--linea); box-shadow: var(--sombra);
+}
+.figura { position: relative; }
+.figura__repetir { display: none; }
+.pal { display: inline-block; }
 
 .lista-pasos { counter-reset: paso; list-style: none; padding: 0; margin: 0 0 1.4rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .7rem; }
 .lista-pasos li { counter-increment: paso; background: var(--superficie); border: 1px solid var(--linea); border-radius: 12px; padding: .8rem .9rem; font-size: .92rem; }
@@ -356,8 +375,8 @@ summary::marker { color: var(--acento); }
   .js .revela.visible { opacity: 1; transform: none; }
 
   /* Encabezado de cada sección: el título entra la primera vez; la línea del número se extiende en la sección activa */
-  .js .diapo h1, .js .diapo h2 { opacity: 0; transform: translateY(18px); transition: opacity .6s ease .05s, transform .75s cubic-bezier(.2, .8, .2, 1) .05s; }
-  .js .diapo.vista h1, .js .diapo.vista h2 { opacity: 1; transform: none; }
+  .js .diapo h2 { opacity: 0; transform: translateY(18px); transition: opacity .6s ease .05s, transform .75s cubic-bezier(.2, .8, .2, 1) .05s; }
+  .js .diapo.vista h2 { opacity: 1; transform: none; }
   .js .diapo__num::before { transform: scaleX(.3); transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
   .js .diapo.activa .diapo__num::before { transform: scaleX(1); }
 
@@ -365,7 +384,7 @@ summary::marker { color: var(--acento); }
   .js .trazo__linea { stroke-dasharray: 1; stroke-dashoffset: 1; }
   .js .portada.vista .trazo__linea { animation: trazar 1.8s cubic-bezier(.45, 0, .2, 1) .35s forwards; }
   .js .portada.vista .trazo__linea--pbi { animation-delay: .7s; }
-  .js .trazo figcaption { opacity: 0; transition: opacity .6s ease 1.6s; }
+  .js .trazo figcaption { opacity: 0; transition: opacity .5s ease .25s; }
   .js .portada.vista .trazo figcaption { opacity: 1; }
   @keyframes trazar { to { stroke-dashoffset: 0; } }
 
@@ -386,6 +405,79 @@ summary::marker { color: var(--acento); }
   .indice:popover-open { opacity: 1; transform: translateX(-50%); }
   .indice.abierta { opacity: 1; transform: translateX(-50%); }
   @starting-style { .indice:popover-open { opacity: 0; transform: translate(-50%, -8px); } }
+}
+
+/* Motion de figuras y de la portada (solo en pantalla: al imprimir no aplica). Cada figura se arma una vez, con sus
+   datos, al quedar a la vista; dura 2,4 s como mucho y nada se repite solo. graficos._Motion marca cada elemento
+   (class="m m--<tipo> f<fase>", style="--i:<orden>") y la figura trae los tiempos de cada fase (--f<n>-t0, -paso,
+   -dur). navegacion.js agrega .anima para reproducir y, al terminar, .lista: sin animaciones, queda el estilo base,
+   que es el estado final. Solo se animan transform, opacity, stroke-dashoffset (pathLength="1") y offset-distance. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .m { --ease: cubic-bezier(.2, .8, .2, 1); }
+  .m--barra, .m--ic { --k: m-y; }
+  .m--icx { --k: m-x; }
+  .m--punto { --k: m-pop; --ease: cubic-bezier(.34, 1.56, .64, 1); }
+  .m--cae { --k: m-cae; }
+  .m--aparece { --k: m-op; --ease: ease; }
+  .m--trazo { --k: m-traza; --ease: linear; }
+  .m--caja { --k: m-caja; }
+  .m--anillo { --k: m-onda; --ease: ease-out; }
+  .m--cursor { --k: m-barrido; --ease: linear; }
+  @supports (animation-timing-function: linear(0, 1)) { .m--sinc { --ease: var(--sinc); } }
+  .f1 { --t0: var(--f1-t0); --paso: var(--f1-paso); --dur: var(--f1-dur); }
+  .f2 { --t0: var(--f2-t0); --paso: var(--f2-paso); --dur: var(--f2-dur); }
+  .f3 { --t0: var(--f3-t0); --paso: var(--f3-paso); --dur: var(--f3-dur); }
+  .f4 { --t0: var(--f4-t0); --paso: var(--f4-paso); --dur: var(--f4-dur); }
+  .f5 { --t0: var(--f5-t0); --paso: var(--f5-paso); --dur: var(--f5-dur); }
+  .f6 { --t0: var(--f6-t0); --paso: var(--f6-paso); --dur: var(--f6-dur); }
+  .f7 { --t0: var(--f7-t0); --paso: var(--f7-paso); --dur: var(--f7-dur); }
+  .f8 { --t0: var(--f8-t0); --paso: var(--f8-paso); --dur: var(--f8-dur); }
+  .js .figura:not(.lista) .m { transform-box: fill-box; transform-origin: 50% 50%; }
+  .js .figura:not(.lista) .m--pos { transform-origin: 50% 100%; }
+  .js .figura:not(.lista) .m--neg { transform-origin: 50% 0; }
+  .js .figura:not(.lista) .m--trazo { stroke-dasharray: 1; }
+  .js .figura:not(.anima):not(.lista) .m { opacity: 0; }
+  .js .figura.anima .m {
+    animation: var(--k) var(--dur) var(--ease) calc(var(--t0) + var(--i, 0) * var(--paso)) both;
+  }
+  .js .figura.anima .lectura { animation: m-lectura 2.3s linear both; }
+  @keyframes m-y { from { transform: scaleY(0); } }
+  @keyframes m-x { from { transform: scaleX(0); } }
+  @keyframes m-pop { from { transform: scale(0); opacity: 0; } }
+  @keyframes m-cae { from { transform: translateY(-14px); opacity: 0; } }
+  @keyframes m-op { from { opacity: 0; } }
+  @keyframes m-traza { from { stroke-dashoffset: 1; opacity: 0; } 1% { opacity: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes m-caja { from { transform: scaleY(0); opacity: 0; } 40% { opacity: 1; } }
+  @keyframes m-onda { from { opacity: 0; } 2% { transform: none; opacity: .6; } to { transform: scale(var(--onda, 2.2)); opacity: 0; } }
+  @keyframes m-barrido { 3%, 92% { opacity: .75; } 92%, to { transform: translateX(var(--dx)); } to { opacity: 0; } }
+  @keyframes m-lectura { 6%, 90% { opacity: 1; } }
+
+  /* Botón para repetir la figura (en la exposición): aparece al pasar el mouse o con foco; en táctil, siempre. */
+  .js .figura__repetir {
+    position: absolute; top: .45rem; right: .45rem; z-index: 2; display: inline-flex; align-items: center; gap: .3rem;
+    font: 600 .74rem/1 var(--sans); color: var(--tinta-2); background: var(--superficie); border: 1px solid var(--linea);
+    border-radius: 999px; padding: .3rem .6rem .3rem .45rem; min-height: 28px; cursor: pointer;
+    opacity: 0; pointer-events: none; transition: opacity .2s ease, border-color .2s ease;
+  }
+  .js .figura__repetir .icono { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .js .figura__repetir:hover { border-color: var(--acento); color: var(--tinta); }
+  .js .figura:hover .figura__repetir, .js .figura__repetir:focus-visible { opacity: 1; pointer-events: auto; }
+  @media (hover: none) { .js .figura__repetir { opacity: 1; pointer-events: auto; } }
+
+  /* Portada: el título entra palabra por palabra; un punto recorre cada línea mientras se dibuja (mismo camino,
+     misma duración y curva) y al llegar abre una onda. Sin offset-path, el punto no se muestra. */
+  .js .pal { opacity: 0; transform: translateY(.5em); transition: opacity .5s ease, transform .7s cubic-bezier(.2, .8, .2, 1); transition-delay: calc(.05s + var(--i) * 45ms); }
+  .js .portada.vista .pal { opacity: 1; transform: none; }
+  .js .trazo__onda { transform-box: fill-box; transform-origin: center; }
+  .js .portada.vista .trazo__onda { animation: m-onda .7s ease-out 2.15s both; }
+  .js .portada.vista .trazo__grupo--pbi .trazo__onda { animation-delay: 2.5s; }
+  @supports (offset-path: path("M0 0")) {
+    .js:not(.modo-impresion) .trazo__punta { transform: none; offset-path: var(--ruta); offset-rotate: 0deg; }
+    .js:not(.modo-impresion) .portada.vista .trazo__punta { animation: m-punta 1.8s cubic-bezier(.45, 0, .2, 1) .35s both; }
+    .js:not(.modo-impresion) .portada.vista .trazo__grupo--pbi .trazo__punta { animation-delay: .7s; }
+  }
+  @supports not (offset-path: path("M0 0")) { .js .trazo__punta { display: none; } }
+  @keyframes m-punta { from { offset-distance: 0%; } to { offset-distance: 100%; } }
 }
 
 @media (max-width: 1100px) {
@@ -440,7 +532,7 @@ html.modo-impresion .figura { padding: 2mm; margin-top: 3mm; }
 html.modo-impresion .figura__lienzo svg { max-height: 80mm; width: auto; max-width: 100%; margin: 0 auto; }
 html.modo-impresion .par-figuras { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
 html.modo-impresion .par-figuras .figura__lienzo svg { max-height: 70mm; }
-html.modo-impresion .revela, html.modo-impresion .diapo h1, html.modo-impresion .diapo h2,
+html.modo-impresion .revela, html.modo-impresion .diapo h1, html.modo-impresion .diapo h2, html.modo-impresion .pal,
 html.modo-impresion .trazo figcaption { opacity: 1 !important; transform: none !important; }
 html.modo-impresion .trazo__linea { stroke-dashoffset: 0 !important; animation: none !important; }
 html.modo-impresion .diapo__num::before { transform: none !important; }

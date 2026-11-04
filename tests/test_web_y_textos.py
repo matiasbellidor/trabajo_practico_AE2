@@ -126,6 +126,20 @@ def test_integrantes_en_orden_alfabetico_por_apellido(corrida):
     assert apellidos == sorted(apellidos)
 
 
+def test_linkedin_de_los_integrantes(cfg, corrida):
+    resultados, extras = corrida
+    perfiles = cfg["proyecto"].get("linkedin") or {}
+    # Cada clave es un integrante tal como figura en la lista (un error de tipeo dejaría el nombre sin link).
+    assert set(perfiles) <= set(resultados["meta"]["integrantes"])
+    assert all(url.startswith("https://www.linkedin.com/in/") for url in perfiles.values())
+    panel = extras["principal"]["panel"].reset_index().assign(periodo=lambda d: d["periodo"].astype(str))
+    filas = panel[["periodo", "var_pbi", "var_bono", "grupo_bono", "tercil_pbi"]].to_dict(orient="records")
+    html = presentacion.renderizar(resultados, FIGURAS, {f["id"]: SVG_FALSO for f in FIGURAS}, filas, None,
+                                   "12/11/2026", perfiles)
+    for nombre, url in perfiles.items():
+        assert f'<a class="integrante" href="{url}" target="_blank" rel="noopener" aria-label="{nombre} en LinkedIn' in html
+
+
 def test_readme_esta_al_dia_con_los_resultados(corrida):
     resultados, _ = corrida
     readme = (RAIZ_REPO / "README.md").read_text(encoding="utf-8")

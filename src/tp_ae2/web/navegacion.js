@@ -255,11 +255,83 @@
     });
   });
 
+  // --- Motion de figuras ---------------------------------------------------------------------------
+  // graficos.py marcó cada elemento (.m con su orden --i y su fase) y estilos.css define las animaciones; acá solo
+  // se decide cuándo: la figura se arma una vez, cuando quedó al menos un 35 % a la vista durante 120 ms (un
+  // flick del trackpad no la dispara). Al terminar, .lista la deja quieta, sin animaciones.
+  var figuras = lista(document.querySelectorAll(".figura[data-anim]"));
+  var conMotion = !movimientoReducido.matches && "IntersectionObserver" in window;
+
+  function terminar(fig) {
+    clearTimeout(fig._fin);
+    fig.classList.remove("anima");
+    fig.classList.add("lista");
+  }
+  function animar(fig) {
+    fig.setAttribute("data-vista", "");
+    fig.classList.add("lista");
+    fig.classList.remove("anima");
+    void fig.offsetWidth;  // corta lo que esté corriendo, así "Repetir" arranca de cero
+    fig._pendientes = fig.querySelectorAll(".m").length;
+    if (fig._lectura) fig._lectura.textContent = fig._textos[0] || "";
+    fig.classList.remove("lista");
+    fig.classList.add("anima");
+    clearTimeout(fig._fin);
+    fig._fin = setTimeout(function () { terminar(fig); }, Number(fig.getAttribute("data-dur")) + 800);
+  }
+  figuras.forEach(function (fig) {
+    var datos = fig.getAttribute("data-lecturas");
+    fig._textos = datos ? JSON.parse(datos) : [];
+    fig._lectura = fig.querySelector(".lectura");
+    fig.addEventListener("animationend", function (ev) {
+      if (fig.classList.contains("anima") && ev.target.classList.contains("m") && --fig._pendientes <= 0) terminar(fig);
+    });
+    // Lectura de la figura 1: cambia cuando el cursor llega a cada mes (cada barra arranca en ese momento).
+    if (fig._lectura) fig.addEventListener("animationstart", function (ev) {
+      if (ev.target.classList.contains("m--barra")) fig._lectura.textContent = fig._textos[ev.target.style.getPropertyValue("--i")] || "";
+    });
+    var boton = fig.querySelector(".figura__repetir");
+    if (boton) boton.addEventListener("click", function () { animar(fig); });
+  });
+  if (conMotion) {
+    var observadorFig = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        var fig = e.target;
+        clearTimeout(fig._espera);
+        if (e.intersectionRatio >= 0.35) fig._espera = setTimeout(function () { observadorFig.unobserve(fig); animar(fig); }, 120);
+      });
+    }, { threshold: [0, 0.35] });
+    figuras.forEach(function (fig) { observadorFig.observe(fig); });
+  } else {
+    figuras.forEach(function (fig) { fig.classList.add("lista"); });
+  }
+
+  // Portada: los dos números del recorrido cuentan desde 100 mientras se dibuja su línea; al final queda el texto
+  // que vino del servidor, idéntico.
+  function contar() {
+    lista(document.querySelectorAll("[data-cuenta]")).forEach(function (el) {
+      var fin = parseFloat(el.getAttribute("data-cuenta")), texto = el.textContent, ultimo = texto, inicio = null;
+      var demora = Number(el.getAttribute("data-demora")) || 0;
+      function cuadro(t) {
+        if (inicio === null) inicio = t + demora;
+        var u = acotar((t - inicio) / 1600);
+        var s = u < 1 ? (100 + (fin - 100) * (1 - Math.pow(1 - u, 3))).toLocaleString("es-AR",
+          { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : texto;
+        if (s !== ultimo) { el.textContent = s; ultimo = s; }
+        if (u < 1) window.requestAnimationFrame(cuadro);
+      }
+      window.requestAnimationFrame(cuadro);
+    });
+  }
+
   // --- Entradas: cada sección marca .vista la primera vez que aparece; cada bloque .revela, idem ------
   if ("IntersectionObserver" in window) {
     var observadorVista = new IntersectionObserver(function (entradas) {
       entradas.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add("vista"); observadorVista.unobserve(e.target); }
+        if (!e.isIntersecting) return;
+        e.target.classList.add("vista");
+        observadorVista.unobserve(e.target);
+        if (e.target.id === "portada" && conMotion) contar();
       });
     }, { rootMargin: "0px 0px -10% 0px" });
     secciones.forEach(function (s) { observadorVista.observe(s); });
@@ -293,6 +365,7 @@
   var MM = 96 / 25.4;
   function prepararImpresion() {
     raiz.classList.add("modo-impresion");
+    figuras.forEach(terminar);  // figuras completas y quietas
     var alto = 182 * MM;
     secciones.forEach(function (s) {
       s.style.zoom = "";

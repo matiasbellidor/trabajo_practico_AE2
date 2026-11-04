@@ -16,7 +16,8 @@ La web es la presentación que se proyecta en la exposición y que los docentes 
 | Navegación, progreso, riel, índice, tema, impresión | `src/tp_ae2/web/navegacion.js` |
 | Datos que recibe la plantilla (secciones, trazo de portada) | `src/tp_ae2/presentacion.py` |
 | Salida publicada | `docs/index.html` (un solo archivo autocontenido) |
-| Tests de la web | `tests/test_web_y_textos.py` |
+| Tests de la web | `tests/test_web_y_textos.py`, `tests/test_motion.py` (motion de figuras) |
+| Coreografía de cada figura (marcas y tiempos) | `src/tp_ae2/graficos.py` (`_Motion`, `RECETAS`) |
 
 Regenerar solo la web: `python -m tp_ae2.presentacion`. Regenerar todo: `python -m tp_ae2.run_all`. Nunca se edita `docs/index.html` a mano: se pisa en la próxima corrida.
 
@@ -53,12 +54,44 @@ Si agregás una sección: sumala a `SECCIONES` en `presentacion.py` (el riel, el
 
 Reglas, con su motivo:
 
-- **Solo `transform` y `opacity`.** Animar `clip-path`, `width`, `height`, `top` o `visibility` saca la animación de la placa de video y traba el scroll en notebooks del aula. Para "dibujar" una línea, `stroke-dashoffset` con `pathLength="1"` vale porque se corre una sola vez.
+- **Solo `transform` y `opacity`.** Animar `clip-path`, `width`, `height`, `top` o `visibility` saca la animación de la placa de video y traba el scroll en notebooks del aula. Para "dibujar" una línea, `stroke-dashoffset` con `pathLength="1"` vale porque se corre una sola vez. En la portada, además, `offset-distance` para el punto que recorre cada línea.
 - **El estilo base es el estado final.** Las animaciones viven dentro de `@media (prefers-reduced-motion: no-preference)` y detrás de la clase `.js`. Sin JS, con movimiento reducido o al imprimir, todo se ve completo y quieto.
-- **Duraciones cortas.** Cambios de interfaz (etiqueta de sección, cursor, popover): de 160 a 300 ms. Entradas de contenido: de 500 a 700 ms. El trazo de portada, de una sola vez: alrededor de 1,8 s. Curva por defecto: `cubic-bezier(.2, .8, .2, 1)`.
-- **Nada en loop.** Una animación infinita distrae mientras se explica un p-valor.
+- **Duraciones cortas.** Cambios de interfaz (etiqueta de sección, cursor, popover): de 160 a 300 ms. Entradas de contenido: de 500 a 700 ms. El trazo de portada, de una sola vez: alrededor de 1,8 s. Curva por defecto: `cubic-bezier(.2, .8, .2, 1)`. **Excepción, solo para las figuras:** cada figura se arma una vez, en 2,4 s como mucho, y el movimiento tiene que mostrar cómo se construye el dato (barras que crecen, puntos que caen en orden, líneas que se trazan). Nada decorativo: ni partículas, ni brillos, ni gradientes animados.
+- **Nada en loop.** Una animación infinita distrae mientras se explica un p-valor. Vale también para las figuras: todo es de una sola vez.
 - **Lo invisible no recibe clics.** Toda capa que entra o sale con `opacity` lleva `pointer-events: none` cuando está oculta.
 - **Impresión.** `html.modo-impresion` y `@media print` anulan toda animación (`opacity: 1; transform: none`) y ocultan barra, riel, índice y "Volver".
+
+## Motion de figuras
+
+Cada figura se arma con sus propios datos cuando queda a la vista. La lógica está repartida así:
+
+1. **Python marca, JS no calcula.** Cada función de `graficos.py` pone `gid="m-<etiqueta>[-k][-sufijo]"` a sus artistas (barras con `-pos`/`-neg`, el anillo con `-anillo`). `_Motion` (en `graficos.py`) lee la geometría del SVG final (ejes, centros de barras, vértices de líneas) y deja en cada elemento `class="m m--<tipo> f<fase>"` y `style="--i:<orden>"`; las líneas llevan `pathLength="1"`. Cada receta (`RECETAS`) fija las fases: `t0`, `paso` (escalonado, como mucho `min(25 ms, 1200 ms / N)`) y `dur`. La figura recibe `--f<n>-t0/-paso/-dur`, `data-dur` (total, tope 2,4 s: si se pasa, `run_all` falla) y, la figura 1, `data-lecturas` con los textos del cursor formateados con `veredicto.num`.
+2. **CSS reproduce.** Estado oculto: `.js .figura:not(.anima):not(.lista) .m`. Con `.anima`, cada elemento corre `var(--k)` con demora `t0 + i × paso`. Al terminar, `.lista` saca las animaciones: queda el estilo base, que es el final. Todo dentro de `@media screen and (prefers-reduced-motion: no-preference)`: al imprimir no aplica, y `tpPrepararImpresion` pone `.lista` en todas.
+3. **JS decide cuándo.** Un IntersectionObserver: la figura tiene que quedar al menos un 35 % a la vista durante 120 ms (un flick del trackpad no la dispara); se arma una vez (`data-vista`). El fin llega con el último `animationend` (o `data-dur` + 800 ms). La lectura de la figura 1 cambia con el `animationstart` de cada barra: no hay trabajo por cuadro.
+4. **Tipos** (`--k` en `estilos.css`): `barra` (scaleY desde la base: abajo si `m--pos`, arriba si `m--neg`), `ic`/`icx` (desde el centro), `punto` (escala con un rebote, `cubic-bezier(.34, 1.56, .64, 1)`), `cae`, `trazo` (dashoffset; con `m--sinc`, un `linear()` que hace que la punta quede bajo el cursor), `aparece`, `caja` (desde la mediana), `anillo` y `cursor` (decorativos, `m--deco`: invisibles en el estado base). Los keyframes que esperan con `fill-mode: both` arrancan invisibles (el anillo, desde opacidad 0): si no, se ven durante la demora.
+
+| Figura | Coreografía |
+|---|---|
+| `series` | Cursor que barre los dos paneles en 2 s; cada barra crece cuando llega su mes; la línea del PBI se traza bajo el cursor; la lectura (mes · AL30D · PBI) va sobre el borde superior de la figura, así no tapa datos. |
+| `pbi` | La serie original se traza y cada trimestre aparece al llegar la punta; después los puntos STL, el spline y la leyenda. |
+| `histogramas` | Barras por panel (150 ms entre paneles); después la Normal ajustada de cada uno y la leyenda. |
+| `dispersion` | Los 56 meses caen en orden cronológico (18 ms); después la recta de MCO y la banda del IC. |
+| `desfases` | Referencias (cero, α); por desfase, el IC desde su centro, β1 y el p-valor que cae; anillo una vez sobre d = −2. |
+| `residuos` | Puntos en orden, barras de la FAC por rezago, bandas ±1,96/√n. |
+| `anova` | Por tercil: los meses, el IC desde el centro, la media y su rótulo. |
+| `robustez` | Cero; fila por fila, el IC desde β1 (el IC t es simétrico) y el punto. |
+| `complementaria` | Meses de suba, meses de baja; las cajas crecen desde su mediana. |
+
+**Portada.** El título entra palabra por palabra (filtro `palabras` en `presentacion.py`: el texto del `<h1>` no cambia). Un punto recorre cada línea con `offset-path` (mismo camino, duración y curva que el trazo; sin soporte, se oculta) y al llegar abre una onda. Los números del pie cuentan desde 100 y terminan con el texto exacto del servidor.
+
+**Repetir.** Botón «↻ Repetir» arriba a la derecha de cada figura: visible al pasar el mouse o con foco, siempre en táctil, oculto al imprimir y con movimiento reducido.
+
+**Agregar una figura.** Poner los `gid` en su función, escribir su receta en `RECETAS`, sumar su conteo esperado (derivado de `resultados.json`) en `tests/test_motion.py` y mirar sus fotogramas.
+
+**Lo que se aprendió midiendo** (no repetir):
+- `will-change` en hijos de un SVG no ayuda (Chrome no los compone) y corre las líneas un subpíxel: al quitarlo, la figura salta. No usarlo.
+- El costo de cada cuadro crece con la cantidad de elementos que tienen una animación vigente, **incluida la demora**: con CSS, los 56 puntos ya pesan desde el primer cuadro. Activarlos por tandas con JS no mejoró (más tareas largas). Medido con la CPU 4× más lenta: ~13 ms fijos más ~0,4 ms por elemento animado.
+- Las capturas para comparar se toman con la página asentada (2,5 s): un momento después del scroll, Chromium vuelve a rasterizar con más calidad y los píxeles cambian.
 
 ## Link al repositorio
 
@@ -68,6 +101,8 @@ Usar el componente `.repo` (logo de GitHub en SVG inline, título, una línea qu
 
 1. `pytest` (los tests de la web incluidos).
 2. `python .claude/skills/tp-web-design/scripts/verificar_web.py docs/index.html <carpeta>`. Mide el desborde horizontal de 320 a 1920 px en los dos temas, comprueba que el riel, el índice y la barra marquen la sección correcta al saltar a cada una, que aparezca "Volver a…" después de un salto largo, que no haya errores de consola y que el modo de movimiento reducido no deje nada oculto. Además guarda capturas.
+   - `--rendimiento`: por figura, con la CPU 4× más lenta, cuadros (ningún cuadro de más de 50 ms, p95 ≤ 33 ms) y tareas largas (como mucho 1); figuras quietas con movimiento reducido, al imprimir y en modo impresión; y la figura terminada idéntica píxel por píxel a la quieta. Si falla, se arregla con menos elementos animados a la vez (agrupar, subir el paso, acortar), nunca aflojando los umbrales.
+   - `--fotogramas`: congela cada figura al 30, 60 y 100 % en claro y oscuro, a 390 y 1440 px, y arma `fotogramas/hoja_<id>.png`. Mirar cada hoja: barras desde la base correcta, puntos que no saltan, cursor alineado, nada cortado.
 3. Mirar las capturas de cada sección que tocaste, en celular y en escritorio. Los tests no ven el diseño.
 
 ## Deploy

@@ -155,7 +155,7 @@ L 253.937344 60.122893
      <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="14.798438" y="132.988359" transform="rotate(-90 14.798438 132.988359)">Densidad</text>
     </g>
    </g>
-   <g id="histogramas-patch_3">
+   <g class="m m--barra f1 m--pos" style="--i:0">
     <path d="M 88.026394 240.378359 
 L 100.972818 240.378359 
 L 100.972818 158.557407 
@@ -163,7 +163,7 @@ L 88.026394 158.557407
 z
 " clip-path="url(#histogramas-p9349f38ade)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_4">
+   <g class="m m--barra f1 m--pos" style="--i:1">
     <path d="M 100.972818 240.378359 
 L 113.919243 240.378359 
 L 113.919243 185.831058 
@@ -171,7 +171,7 @@ L 100.972818 185.831058
 z
 " clip-path="url(#histogramas-p9349f38ade)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_5">
+   <g class="m m--barra f1 m--pos" style="--i:2">
     <path d="M 113.919243 240.378359 
 L 126.865667 240.378359 
 L 126.865667 117.646931 
@@ -179,7 +179,7 @@ L 113.919243 117.646931
 z
 " clip-path="url(#histogramas-p9349f38ade)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_6">
+   <g class="m m--barra f1 m--pos" style="--i:3">
     <path d="M 126.865667 240.378359 
 L 139.812091 240.378359 
 L 139.812091 35.825978 
@@ -187,7 +187,7 @@ L 126.865667 35.825978
 z
 " clip-path="url(#histogramas-p9349f38ade)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_7">
+   <g class="m m--barra f1 m--pos" style="--i:4">
     <path d="M 139.812091 240.378359 
 L 152.758516 240.378359 
 L 152.758516 63.099629 
@@ -195,7 +195,7 @@ L 139.812091 63.099629
 z
 " clip-path="url(#histogramas-p9349f38ade)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_8">
+   <g class="m m--barra f1 m--pos" style="--i:5">
     <path d="M 152.758516 240.378359 
 L 165.70494 240.378359 
 L 165.70494 199.467883 
@@ -203,7 +203,7 @@ L 152.758516 199.467883
 z
 " clip-path="url(#histogramas-p9349f38ade)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_9">
+   <g class="m m--barra f1 m--pos" style="--i:6">
     <path d="M 165.70494 240.378359 
 L 178.651364 240.378359 
 L 178.651364 213.104709 
@@ -211,7 +211,7 @@ L 165.70494 213.104709
 z
 " clip-path="url(#histogramas-p9349f38ade)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_10">
+   <g class="m m--barra f1 m--pos" style="--i:7">
     <path d="M 178.651364 240.378359 
 L 191.597789 240.378359 
 L 191.597789 226.741534 
@@ -219,7 +219,7 @@ L 178.651364 226.741534
 z
 " clip-path="url(#histogramas-p9349f38ade)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_11">
+   <g class="m m--barra f1 m--pos" style="--i:8">
     <path d="M 191.597789 240.378359 
 L 204.544213 240.378359 
 L 204.544213 226.741534 
@@ -227,7 +227,7 @@ L 191.597789 226.741534
 z
 " clip-path="url(#histogramas-p9349f38ade)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_12">
+   <g class="m m--barra f1 m--pos" style="--i:9">
     <path d="M 204.544213 240.378359 
 L 217.490637 240.378359 
 L 217.490637 213.104709 
@@ -235,8 +235,8 @@ L 204.544213 213.104709
 z
 " clip-path="url(#histogramas-p9349f38ade)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-line2d_15">
-    <path d="M 60.777763 237.110615 
+   <g>
+    <path pathLength="1" class="m m--trazo f4" d="M 60.777763 237.110615 
 L 63.854042 235.960972 
 L 66.315066 234.806693 
 L 68.776089 233.406874 
@@ -304,14 +304,14 @@ L 229.357872 239.905821
 L 236.125686 240.178901 
 L 244.739268 240.317398 
 L 244.739268 240.317398 
-" clip-path="url(#histogramas-p9349f38ade)" style="fill: none; stroke: var(--fig-s2); stroke-width: 2; stroke-linecap: square"/>
+" clip-path="url(#histogramas-p9349f38ade)" style="--i:0;fill: none; stroke: var(--fig-s2); stroke-width: 2; stroke-linecap: square"/>
    </g>
-   <g id="histogramas-patch_13">
+   <g id="histogramas-patch_3">
     <path d="M 51.579688 240.378359 
 L 51.579688 25.598359 
 " style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
-   <g id="histogramas-patch_14">
+   <g id="histogramas-patch_4">
     <path d="M 51.579687 240.378359 
 L 253.937344 240.378359 
 " style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
@@ -321,7 +321,7 @@ L 253.937344 240.378359
    </g>
   </g>
   <g id="histogramas-axes_2">
-   <g id="histogramas-patch_15">
+   <g id="histogramas-patch_5">
     <path d="M 311.799687 240.378359 
 L 514.157344 240.378359 
 L 514.157344 25.598359 
@@ -332,7 +332,7 @@ z
    </g>
    <g id="histogramas-matplotlib.axis_3">
     <g id="histogramas-xtick_5">
-     <g id="histogramas-line2d_16">
+     <g id="histogramas-line2d_15">
       <g>
        <use xlink:href="#histogramas-m7909aaca7d" x="342.690467" y="240.378359" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -342,7 +342,7 @@ z
      </g>
     </g>
     <g id="histogramas-xtick_6">
-     <g id="histogramas-line2d_17">
+     <g id="histogramas-line2d_16">
       <g>
        <use xlink:href="#histogramas-m7909aaca7d" x="405.990803" y="240.378359" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -352,7 +352,7 @@ z
      </g>
     </g>
     <g id="histogramas-xtick_7">
-     <g id="histogramas-line2d_18">
+     <g id="histogramas-line2d_17">
       <g>
        <use xlink:href="#histogramas-m7909aaca7d" x="469.29114" y="240.378359" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -364,12 +364,12 @@ z
    </g>
    <g id="histogramas-matplotlib.axis_4">
     <g id="histogramas-ytick_6">
-     <g id="histogramas-line2d_19">
+     <g id="histogramas-line2d_18">
       <path d="M 311.799687 240.378359 
 L 514.157344 240.378359 
 " clip-path="url(#histogramas-p073722095c)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
      </g>
-     <g id="histogramas-line2d_20">
+     <g id="histogramas-line2d_19">
       <g>
        <use xlink:href="#histogramas-m0a5f5023ec" x="311.799687" y="240.378359" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -379,12 +379,12 @@ L 514.157344 240.378359
      </g>
     </g>
     <g id="histogramas-ytick_7">
-     <g id="histogramas-line2d_21">
+     <g id="histogramas-line2d_20">
       <path d="M 311.799687 193.76101 
 L 514.157344 193.76101 
 " clip-path="url(#histogramas-p073722095c)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
      </g>
-     <g id="histogramas-line2d_22">
+     <g id="histogramas-line2d_21">
       <g>
        <use xlink:href="#histogramas-m0a5f5023ec" x="311.799687" y="193.76101" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -394,12 +394,12 @@ L 514.157344 193.76101
      </g>
     </g>
     <g id="histogramas-ytick_8">
-     <g id="histogramas-line2d_23">
+     <g id="histogramas-line2d_22">
       <path d="M 311.799687 147.143661 
 L 514.157344 147.143661 
 " clip-path="url(#histogramas-p073722095c)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
      </g>
-     <g id="histogramas-line2d_24">
+     <g id="histogramas-line2d_23">
       <g>
        <use xlink:href="#histogramas-m0a5f5023ec" x="311.799687" y="147.143661" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -409,12 +409,12 @@ L 514.157344 147.143661
      </g>
     </g>
     <g id="histogramas-ytick_9">
-     <g id="histogramas-line2d_25">
+     <g id="histogramas-line2d_24">
       <path d="M 311.799687 100.526312 
 L 514.157344 100.526312 
 " clip-path="url(#histogramas-p073722095c)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
      </g>
-     <g id="histogramas-line2d_26">
+     <g id="histogramas-line2d_25">
       <g>
        <use xlink:href="#histogramas-m0a5f5023ec" x="311.799687" y="100.526312" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -424,12 +424,12 @@ L 514.157344 100.526312
      </g>
     </g>
     <g id="histogramas-ytick_10">
-     <g id="histogramas-line2d_27">
+     <g id="histogramas-line2d_26">
       <path d="M 311.799687 53.908963 
 L 514.157344 53.908963 
 " clip-path="url(#histogramas-p073722095c)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
      </g>
-     <g id="histogramas-line2d_28">
+     <g id="histogramas-line2d_27">
       <g>
        <use xlink:href="#histogramas-m0a5f5023ec" x="311.799687" y="53.908963" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -442,7 +442,7 @@ L 514.157344 53.908963
      <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="281.699062" y="132.988359" transform="rotate(-90 281.699062 132.988359)">Densidad</text>
     </g>
    </g>
-   <g id="histogramas-patch_16">
+   <g class="m m--barra f2 m--pos" style="--i:0">
     <path d="M 347.288222 240.378359 
 L 358.236604 240.378359 
 L 358.236604 204.28088 
@@ -450,7 +450,7 @@ L 347.288222 204.28088
 z
 " clip-path="url(#histogramas-p073722095c)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_17">
+   <g class="m m--barra f2 m--pos" style="--i:1">
     <path d="M 358.236604 240.378359 
 L 369.184986 240.378359 
 L 369.184986 216.313373 
@@ -458,7 +458,7 @@ L 358.236604 216.313373
 z
 " clip-path="url(#histogramas-p073722095c)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_18">
+   <g class="m m--barra f2 m--pos" style="--i:2">
     <path d="M 369.184986 240.378359 
 L 380.133369 240.378359 
 L 380.133369 204.28088 
@@ -466,7 +466,7 @@ L 369.184986 204.28088
 z
 " clip-path="url(#histogramas-p073722095c)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_19">
+   <g class="m m--barra f2 m--pos" style="--i:3">
     <path d="M 380.133369 240.378359 
 L 391.081751 240.378359 
 L 391.081751 216.313373 
@@ -474,7 +474,7 @@ L 380.133369 216.313373
 z
 " clip-path="url(#histogramas-p073722095c)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_20">
+   <g class="m m--barra f2 m--pos" style="--i:4">
     <path d="M 391.081751 240.378359 
 L 402.030133 240.378359 
 L 402.030133 180.215894 
@@ -482,7 +482,7 @@ L 391.081751 180.215894
 z
 " clip-path="url(#histogramas-p073722095c)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_21">
+   <g class="m m--barra f2 m--pos" style="--i:5">
     <path d="M 402.030133 240.378359 
 L 412.978516 240.378359 
 L 412.978516 35.825978 
@@ -490,7 +490,7 @@ L 402.030133 35.825978
 z
 " clip-path="url(#histogramas-p073722095c)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_22">
+   <g class="m m--barra f2 m--pos" style="--i:6">
     <path d="M 412.978516 240.378359 
 L 423.926898 240.378359 
 L 423.926898 108.020936 
@@ -498,7 +498,7 @@ L 412.978516 108.020936
 z
 " clip-path="url(#histogramas-p073722095c)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_23">
+   <g class="m m--barra f2 m--pos" style="--i:7">
     <path d="M 423.926898 240.378359 
 L 434.87528 240.378359 
 L 434.87528 192.248387 
@@ -506,7 +506,7 @@ L 423.926898 192.248387
 z
 " clip-path="url(#histogramas-p073722095c)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_24">
+   <g class="m m--barra f2 m--pos" style="--i:8">
     <path d="M 434.87528 240.378359 
 L 445.823663 240.378359 
 L 445.823663 204.28088 
@@ -514,7 +514,7 @@ L 434.87528 204.28088
 z
 " clip-path="url(#histogramas-p073722095c)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_25">
+   <g class="m m--barra f2 m--pos" style="--i:9">
     <path d="M 445.823663 240.378359 
 L 456.772045 240.378359 
 L 456.772045 180.215894 
@@ -522,7 +522,7 @@ L 445.823663 180.215894
 z
 " clip-path="url(#histogramas-p073722095c)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_26">
+   <g class="m m--barra f2 m--pos" style="--i:10">
     <path d="M 456.772045 240.378359 
 L 467.720427 240.378359 
 L 467.720427 240.378359 
@@ -530,7 +530,7 @@ L 456.772045 240.378359
 z
 " clip-path="url(#histogramas-p073722095c)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_27">
+   <g class="m m--barra f2 m--pos" style="--i:11">
     <path d="M 467.720427 240.378359 
 L 478.66881 240.378359 
 L 478.66881 228.345866 
@@ -538,8 +538,8 @@ L 467.720427 228.345866
 z
 " clip-path="url(#histogramas-p073722095c)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-line2d_29">
-    <path d="M 320.997763 239.988709 
+   <g>
+    <path pathLength="1" class="m m--trazo f5" d="M 320.997763 239.988709 
 L 326.535066 239.609261 
 L 330.841857 239.111924 
 L 334.533392 238.476707 
@@ -607,14 +607,14 @@ L 496.345686 239.810107
 L 502.498245 240.117906 
 L 504.959268 240.190573 
 L 504.959268 240.190573 
-" clip-path="url(#histogramas-p073722095c)" style="fill: none; stroke: var(--fig-s2); stroke-width: 2; stroke-linecap: square"/>
+" clip-path="url(#histogramas-p073722095c)" style="--i:0;fill: none; stroke: var(--fig-s2); stroke-width: 2; stroke-linecap: square"/>
    </g>
-   <g id="histogramas-patch_28">
+   <g id="histogramas-patch_6">
     <path d="M 311.799687 240.378359 
 L 311.799687 25.598359 
 " style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
-   <g id="histogramas-patch_29">
+   <g id="histogramas-patch_7">
     <path d="M 311.799688 240.378359 
 L 514.157344 240.378359 
 " style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
@@ -622,8 +622,8 @@ L 514.157344 240.378359
    <g id="histogramas-text_21">
     <text style="font-size: 10.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta)" x="311.799687" y="15.598359" transform="rotate(-0 311.799687 15.598359)">Var PBI (%)</text>
    </g>
-   <g id="histogramas-legend_1">
-    <g id="histogramas-line2d_30">
+   <g class="m m--aparece f7" style="--i:0">
+    <g id="histogramas-line2d_28">
      <path d="M 319.449687 36.732031 
 L 327.949687 36.732031 
 L 336.449687 36.732031 
@@ -632,7 +632,7 @@ L 336.449687 36.732031
     <g id="histogramas-text_22">
      <text style="font-size: 8.5px; font-family: var(--fig-fuente); text-anchor: start; fill: var(--fig-tinta2)" x="343.249687" y="39.707031" transform="rotate(-0 343.249687 39.707031)">Normal ajustada N(x̄, S)</text>
     </g>
-    <g id="histogramas-patch_30">
+    <g id="histogramas-patch_8">
      <path d="M 319.449687 52.457695 
 L 336.449687 52.457695 
 L 336.449687 46.507695 
@@ -646,7 +646,7 @@ z
    </g>
   </g>
   <g id="histogramas-axes_3">
-   <g id="histogramas-patch_31">
+   <g id="histogramas-patch_9">
     <path d="M 572.019687 240.378359 
 L 774.377344 240.378359 
 L 774.377344 25.598359 
@@ -657,7 +657,7 @@ z
    </g>
    <g id="histogramas-matplotlib.axis_5">
     <g id="histogramas-xtick_8">
-     <g id="histogramas-line2d_31">
+     <g id="histogramas-line2d_29">
       <g>
        <use xlink:href="#histogramas-m7909aaca7d" x="612.898858" y="240.378359" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -667,7 +667,7 @@ z
      </g>
     </g>
     <g id="histogramas-xtick_9">
-     <g id="histogramas-line2d_32">
+     <g id="histogramas-line2d_30">
       <g>
        <use xlink:href="#histogramas-m7909aaca7d" x="656.77495" y="240.378359" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -677,7 +677,7 @@ z
      </g>
     </g>
     <g id="histogramas-xtick_10">
-     <g id="histogramas-line2d_33">
+     <g id="histogramas-line2d_31">
       <g>
        <use xlink:href="#histogramas-m7909aaca7d" x="700.651042" y="240.378359" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -687,7 +687,7 @@ z
      </g>
     </g>
     <g id="histogramas-xtick_11">
-     <g id="histogramas-line2d_34">
+     <g id="histogramas-line2d_32">
       <g>
        <use xlink:href="#histogramas-m7909aaca7d" x="744.527134" y="240.378359" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -699,12 +699,12 @@ z
    </g>
    <g id="histogramas-matplotlib.axis_6">
     <g id="histogramas-ytick_11">
-     <g id="histogramas-line2d_35">
+     <g id="histogramas-line2d_33">
       <path d="M 572.019687 240.378359 
 L 774.377344 240.378359 
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
      </g>
-     <g id="histogramas-line2d_36">
+     <g id="histogramas-line2d_34">
       <g>
        <use xlink:href="#histogramas-m0a5f5023ec" x="572.019687" y="240.378359" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -714,12 +714,12 @@ L 774.377344 240.378359
      </g>
     </g>
     <g id="histogramas-ytick_12">
-     <g id="histogramas-line2d_37">
+     <g id="histogramas-line2d_35">
       <path d="M 572.019687 195.310834 
 L 774.377344 195.310834 
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
      </g>
-     <g id="histogramas-line2d_38">
+     <g id="histogramas-line2d_36">
       <g>
        <use xlink:href="#histogramas-m0a5f5023ec" x="572.019687" y="195.310834" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -729,12 +729,12 @@ L 774.377344 195.310834
      </g>
     </g>
     <g id="histogramas-ytick_13">
-     <g id="histogramas-line2d_39">
+     <g id="histogramas-line2d_37">
       <path d="M 572.019687 150.243308 
 L 774.377344 150.243308 
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
      </g>
-     <g id="histogramas-line2d_40">
+     <g id="histogramas-line2d_38">
       <g>
        <use xlink:href="#histogramas-m0a5f5023ec" x="572.019687" y="150.243308" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -744,12 +744,12 @@ L 774.377344 150.243308
      </g>
     </g>
     <g id="histogramas-ytick_14">
-     <g id="histogramas-line2d_41">
+     <g id="histogramas-line2d_39">
       <path d="M 572.019687 105.175782 
 L 774.377344 105.175782 
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
      </g>
-     <g id="histogramas-line2d_42">
+     <g id="histogramas-line2d_40">
       <g>
        <use xlink:href="#histogramas-m0a5f5023ec" x="572.019687" y="105.175782" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -759,12 +759,12 @@ L 774.377344 105.175782
      </g>
     </g>
     <g id="histogramas-ytick_15">
-     <g id="histogramas-line2d_43">
+     <g id="histogramas-line2d_41">
       <path d="M 572.019687 60.108256 
 L 774.377344 60.108256 
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: none; stroke: var(--fig-grilla); stroke-width: 0.8; stroke-linecap: square"/>
      </g>
-     <g id="histogramas-line2d_44">
+     <g id="histogramas-line2d_42">
       <g>
        <use xlink:href="#histogramas-m0a5f5023ec" x="572.019687" y="60.108256" style="fill: var(--fig-eje); stroke: var(--fig-eje); stroke-width: 0.8"/>
       </g>
@@ -777,7 +777,7 @@ L 774.377344 60.108256
      <text style="font-size: 10px; font-family: var(--fig-fuente); text-anchor: middle; fill: var(--fig-tinta2)" x="535.238437" y="132.988359" transform="rotate(-90 535.238437 132.988359)">Densidad</text>
     </g>
    </g>
-   <g id="histogramas-patch_32">
+   <g class="m m--barra f3 m--pos" style="--i:0">
     <path d="M 608.464827 240.378359 
 L 621.411564 240.378359 
 L 621.411564 158.557407 
@@ -785,7 +785,7 @@ L 608.464827 158.557407
 z
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_33">
+   <g class="m m--barra f3 m--pos" style="--i:1">
     <path d="M 621.411564 240.378359 
 L 634.358302 240.378359 
 L 634.358302 185.831058 
@@ -793,7 +793,7 @@ L 621.411564 185.831058
 z
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_34">
+   <g class="m m--barra f3 m--pos" style="--i:2">
     <path d="M 634.358302 240.378359 
 L 647.30504 240.378359 
 L 647.30504 117.646931 
@@ -801,7 +801,7 @@ L 634.358302 117.646931
 z
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_35">
+   <g class="m m--barra f3 m--pos" style="--i:3">
     <path d="M 647.30504 240.378359 
 L 660.251778 240.378359 
 L 660.251778 35.825978 
@@ -809,7 +809,7 @@ L 647.30504 35.825978
 z
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_36">
+   <g class="m m--barra f3 m--pos" style="--i:4">
     <path d="M 660.251778 240.378359 
 L 673.198516 240.378359 
 L 673.198516 63.099629 
@@ -817,7 +817,7 @@ L 660.251778 63.099629
 z
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_37">
+   <g class="m m--barra f3 m--pos" style="--i:5">
     <path d="M 673.198516 240.378359 
 L 686.145253 240.378359 
 L 686.145253 199.467883 
@@ -825,7 +825,7 @@ L 673.198516 199.467883
 z
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_38">
+   <g class="m m--barra f3 m--pos" style="--i:6">
     <path d="M 686.145253 240.378359 
 L 699.091991 240.378359 
 L 699.091991 213.104709 
@@ -833,7 +833,7 @@ L 686.145253 213.104709
 z
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_39">
+   <g class="m m--barra f3 m--pos" style="--i:7">
     <path d="M 699.091991 240.378359 
 L 712.038729 240.378359 
 L 712.038729 226.741534 
@@ -841,7 +841,7 @@ L 699.091991 226.741534
 z
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_40">
+   <g class="m m--barra f3 m--pos" style="--i:8">
     <path d="M 712.038729 240.378359 
 L 724.985467 240.378359 
 L 724.985467 226.741534 
@@ -849,7 +849,7 @@ L 712.038729 226.741534
 z
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-patch_41">
+   <g class="m m--barra f3 m--pos" style="--i:9">
     <path d="M 724.985467 240.378359 
 L 737.932205 240.378359 
 L 737.932205 213.104709 
@@ -857,8 +857,8 @@ L 724.985467 213.104709
 z
 " clip-path="url(#histogramas-p5bad1b7005)" style="fill: var(--fig-s1); opacity: 0.35; stroke: var(--fig-s1); stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
-   <g id="histogramas-line2d_45">
-    <path d="M 581.217763 237.091738 
+   <g>
+    <path pathLength="1" class="m m--trazo f6" d="M 581.217763 237.091738 
 L 583.678786 236.191926 
 L 586.13981 235.08832 
 L 588.600833 233.747133 
@@ -926,14 +926,14 @@ L 749.797872 239.909632
 L 756.565686 240.180638 
 L 765.179268 240.317979 
 L 765.179268 240.317979 
-" clip-path="url(#histogramas-p5bad1b7005)" style="fill: none; stroke: var(--fig-s2); stroke-width: 2; stroke-linecap: square"/>
+" clip-path="url(#histogramas-p5bad1b7005)" style="--i:0;fill: none; stroke: var(--fig-s2); stroke-width: 2; stroke-linecap: square"/>
    </g>
-   <g id="histogramas-patch_42">
+   <g id="histogramas-patch_10">
     <path d="M 572.019687 240.378359 
 L 572.019687 25.598359 
 " style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
-   <g id="histogramas-patch_43">
+   <g id="histogramas-patch_11">
     <path d="M 572.019687 240.378359 
 L 774.377344 240.378359 
 " style="fill: none; stroke: var(--fig-eje); stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>

@@ -240,12 +240,12 @@ L -3.5 0
      </g>
     </g>
    </g>
-   <g id="robustez-line2d_25">
+   <g class="m m--icx f2" style="--i:0">
     <path d="M 478.284784 42.022642 
 L 653.859112 42.022642 
 " clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-s1); stroke-width: 2.5; stroke-linecap: square"/>
    </g>
-   <g id="robustez-line2d_26">
+   <g class="m m--punto f3" style="--i:0">
     <defs>
      <path id="robustez-mf5f92c525d" d="M 0 4.5 
 C 1.193414 4.5 2.338109 4.025852 3.181981 3.181981 
@@ -263,22 +263,22 @@ z
      <use xlink:href="#robustez-mf5f92c525d" x="566.071948" y="42.022642" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
     </g>
    </g>
-   <g id="robustez-line2d_27">
+   <g class="m m--icx f2" style="--i:1">
     <path d="M 518.316745 86.663896 
 L 694.924461 86.663896 
 " clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-s1); stroke-width: 2.5; stroke-linecap: square"/>
    </g>
-   <g id="robustez-line2d_28">
+   <g class="m m--punto f3" style="--i:1">
     <g clip-path="url(#robustez-p8577304cb5)">
      <use xlink:href="#robustez-mf5f92c525d" x="606.620603" y="86.663896" style="fill: var(--fig-s1); stroke: var(--fig-fondo); stroke-width: 1.5"/>
     </g>
    </g>
-   <g id="robustez-line2d_29">
+   <g class="m m--icx f2" style="--i:2">
     <path d="M 392.601989 131.30515 
 L 543.44811 131.30515 
 " clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-s2); stroke-width: 2.5; stroke-linecap: square"/>
    </g>
-   <g id="robustez-line2d_30">
+   <g class="m m--punto f3" style="--i:2">
     <defs>
      <path id="robustez-m91f921e33d" d="M 0 4.5 
 C 1.193414 4.5 2.338109 4.025852 3.181981 3.181981 
@@ -296,22 +296,22 @@ z
      <use xlink:href="#robustez-m91f921e33d" x="468.02505" y="131.30515" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"/>
     </g>
    </g>
-   <g id="robustez-line2d_31">
+   <g class="m m--icx f2" style="--i:3">
     <path d="M 466.400929 175.946404 
 L 655.940161 175.946404 
 " clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-s2); stroke-width: 2.5; stroke-linecap: square"/>
    </g>
-   <g id="robustez-line2d_32">
+   <g class="m m--punto f3" style="--i:3">
     <g clip-path="url(#robustez-p8577304cb5)">
      <use xlink:href="#robustez-m91f921e33d" x="561.170545" y="175.946404" style="fill: var(--fig-s2); stroke: var(--fig-fondo); stroke-width: 1.5"/>
     </g>
    </g>
-   <g id="robustez-line2d_33">
+   <g class="m m--icx f2" style="--i:4">
     <path d="M 468.518741 220.587658 
 L 650.520001 220.587658 
 " clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-neutro); stroke-width: 2.5; stroke-linecap: square"/>
    </g>
-   <g id="robustez-line2d_34">
+   <g class="m m--punto f3" style="--i:4">
     <defs>
      <path id="robustez-m514c2f6b3e" d="M 0 4.5 
 C 1.193414 4.5 2.338109 4.025852 3.181981 3.181981 
@@ -329,40 +329,40 @@ z
      <use xlink:href="#robustez-m514c2f6b3e" x="559.519371" y="220.587658" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
     </g>
    </g>
-   <g id="robustez-line2d_35">
+   <g class="m m--icx f2" style="--i:5">
     <path d="M 514.718565 265.228912 
 L 591.927957 265.228912 
 " clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-neutro); stroke-width: 2.5; stroke-linecap: square"/>
    </g>
-   <g id="robustez-line2d_36">
+   <g class="m m--punto f3" style="--i:5">
     <g clip-path="url(#robustez-p8577304cb5)">
      <use xlink:href="#robustez-m514c2f6b3e" x="553.323261" y="265.228912" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
     </g>
    </g>
-   <g id="robustez-line2d_37">
+   <g class="m m--icx f2" style="--i:6">
     <path d="M 478.291042 309.870166 
 L 653.815617 309.870166 
 " clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-neutro); stroke-width: 2.5; stroke-linecap: square"/>
    </g>
-   <g id="robustez-line2d_38">
+   <g class="m m--punto f3" style="--i:6">
     <g clip-path="url(#robustez-p8577304cb5)">
      <use xlink:href="#robustez-m514c2f6b3e" x="566.053329" y="309.870166" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
     </g>
    </g>
-   <g id="robustez-line2d_39">
+   <g class="m m--icx f2" style="--i:7">
     <path d="M 460.349401 354.51142 
 L 698.129261 354.51142 
 " clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-neutro); stroke-width: 2.5; stroke-linecap: square"/>
    </g>
-   <g id="robustez-line2d_40">
+   <g class="m m--punto f3" style="--i:7">
     <g clip-path="url(#robustez-p8577304cb5)">
      <use xlink:href="#robustez-m514c2f6b3e" x="579.239331" y="354.51142" style="fill: var(--fig-neutro); stroke: var(--fig-fondo); stroke-width: 1.5"/>
     </g>
    </g>
-   <g id="robustez-line2d_41">
-    <path d="M 565.739625 370.135859 
+   <g>
+    <path pathLength="1" class="m m--trazo f1" d="M 565.739625 370.135859 
 L 565.739625 26.398203 
-" clip-path="url(#robustez-p8577304cb5)" style="fill: none; stroke: var(--fig-tinta2); stroke-linecap: square"/>
+" clip-path="url(#robustez-p8577304cb5)" style="--i:0;fill: none; stroke: var(--fig-tinta2); stroke-linecap: square"/>
    </g>
    <g id="robustez-patch_3">
     <path d="M 377.325625 370.135859 
