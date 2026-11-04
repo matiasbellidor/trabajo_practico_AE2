@@ -360,7 +360,7 @@
 <section class="diapo" id="multiple" aria-labelledby="t-multiple">
   <div class="diapo__contenido">
     <p class="diapo__num">08 · Regresión lineal múltiple y supuestos</p>
-    <h2 id="t-multiple">Con un control: {{ "la variación del CCL implícito" if mu.modo == "ccl" else "el PBI adelantado" }}</h2>
+    <h2 id="t-multiple">Sumándole otra variable independiente x2 = {{ "CCL" if mu.modo == "ccl" else "PBI adelantado" }}</h2>
     <div class="dos-col" style="margin-top:1.4rem">
       <div>
         {{ porque(t.multiple.porque) }}
