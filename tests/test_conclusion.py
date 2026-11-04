@@ -32,7 +32,7 @@ def test_conclusion_cita_los_numeros_vigentes(corrida, conclusion):
     sens = {s["id"]: s for s in r["sensibilidades"]}
     diag = r["diagnosticos"]["regresion_simple"]
     esperados = [
-        f"β1 = {num(d0['b1'])}", _ic(d0["ic_b1"]), f"p = {pval(d0['p_b1'])}", f"R² = {num(d0['r2'])}",
+        f"β1 = {num(d0['b1'])}", _ic(d0["ic_b1"]), f"p = {pval(d0['p_b1'])}", f"R² ≈ {num(d0['r2'], 6)}",
         f"n = {r['muestra']['principal']['n']} meses",
         f"β1 = {num(d1['b1'])}; p = {pval(d1['p_b1'])}",
         f"diferencia = {num(comp['decision']['diferencia'])} pp", _ic(comp["decision"]["ic"]),
@@ -47,9 +47,11 @@ def test_conclusion_cita_los_numeros_vigentes(corrida, conclusion):
         f"Durbin-Watson ({num(diag['durbin_watson'])})", f"p = {pval(diag['breusch_godfrey']['p_valor'])}",
         f"p = {pval(diag['breusch_pagan']['p_valor'])}", f"p = {pval(diag['normalidad_residuos']['shapiro']['p_valor'])}",
         f"n = {trim['n']}", f"β1 = {num(trim['b1'])}", _ic(trim["ic_b1"]), f"p = {pval(trim['p_b1'])}",
-        f"sin 2024Q1, el p-valor sube a {pval(por_periodo['2024Q1']['p_sin'])}",
-        f"en los {inf['signos']['pbi_baja']}, el bono subió",
-        f"en los {inf['signos']['pbi_sube']} trimestres con suba del PBI el bono subió en {inf['signos']['pbi_sube_bono_sube']}",
+        f"sin esa observación, el valor p pasa a {pval(por_periodo['2024Q1']['p_sin'])}",
+        # Respaldado por el assert de periodos_que_cambian_decision == ["2024Q1"] de abajo.
+        "único trimestre cuya exclusión cambia la decisión",
+        f"en los {inf['signos']['pbi_baja']} trimestres con caída del PBI, en los cuales el bono subió",
+        f"en los {inf['signos']['pbi_sube']} trimestres con suba del PBI, el bono subió en {inf['signos']['pbi_sube_bono_sube']}",
         f"2024Q1 (+{num(por_periodo['2024Q1']['var_bono'], 2)} % con el PBI en {num(por_periodo['2024Q1']['var_pbi'], 2)} %)",
         f"2022Q4 (+{num(por_periodo['2022Q4']['var_bono'], 2)} % con {num(por_periodo['2022Q4']['var_pbi'], 2)} %)",
         f"solo {r['datos']['trimestres_pbi_en_ventana']} trimestres reales",
