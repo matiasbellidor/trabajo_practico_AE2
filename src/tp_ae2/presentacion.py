@@ -12,6 +12,8 @@ import logging
 import re
 from pathlib import Path
 
+from urllib.parse import quote
+
 import jinja2
 import pandas as pd
 from markupsafe import Markup
@@ -119,6 +121,35 @@ def palabras(texto: str) -> Markup:
                            for i, p in enumerate(texto.split(" "))))
 
 
+def icono(panel: list[dict], puntos: int = 8) -> str:
+    """Ícono de la pestaña: el recorrido real del AL30D (azul) y del PBI (naranja), en índices base 100 y en la misma
+    escala, sobre el azul noche de la portada: el bono sube mucho y el PBI casi no se mueve, que es lo que muestra el
+    trabajo. Pocos puntos y trazo grueso para que se lea a 16 px. Devuelve un data URI (sin pedidos externos)."""
+    def indice(variaciones: list[float]) -> list[float]:
+        valores = [100.0]
+        for v in variaciones:
+            valores.append(valores[-1] * (1 + v / 100))
+        paso = (len(valores) - 1) / (puntos - 1)
+        return [valores[round(k * paso)] for k in range(puntos)]
+
+    bono_i, pbi_i = indice([float(f["var_bono"]) for f in panel]), indice([float(f["var_pbi"]) for f in panel])
+    bajo, alto = min(bono_i + pbi_i), max(bono_i + pbi_i)
+
+    def camino(muestra: list[float]) -> list[tuple[float, float]]:
+        return [(5 + 21 * k / (puntos - 1), 25 - 17 * (v - bajo) / ((alto - bajo) or 1)) for k, v in enumerate(muestra)]
+
+    def linea(pts: list[tuple[float, float]], color: str, grosor: float) -> str:
+        d = "M" + " L".join(f"{x:.1f} {y:.1f}" for x, y in pts)
+        return (f'<path d="{d}" fill="none" stroke="{color}" stroke-width="{grosor}" stroke-linecap="round" '
+                f'stroke-linejoin="round"/>')
+
+    bono, pbi = camino(bono_i), camino(pbi_i)
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#142036"/>'
+           + linea(pbi, "#f08a55", 2.6) + linea(bono, "#5b9cf0", 3)
+           + f'<circle cx="{bono[-1][0]:.1f}" cy="{bono[-1][1]:.1f}" r="2.7" fill="#5b9cf0"/></svg>')
+    return "data:image/svg+xml," + quote(svg)
+
+
 def _svg_accesible(svg: str, figura_id: str) -> str:
     return svg.replace("<svg ", f'<svg role="img" aria-labelledby="cap-{figura_id}" focusable="false" ', 1)
 
@@ -130,7 +161,7 @@ def renderizar(resultados: dict, figuras: list[dict], svgs: dict[str, str], pane
     entorno.filters["palabras"] = palabras
     figs ={f["id"]: {**f, "svg": _svg_accesible(svgs[f["id"]], f["id"])} for f in figuras}
     return entorno.get_template("plantilla.html.j2").render(
-        r=resultados, t=textos.construir(resultados), figs=figs, panel=panel, trazo=trazo_portada(panel),
+        r=resultados, t=textos.construir(resultados), figs=figs, panel=panel, trazo=trazo_portada(panel), icono=icono(panel),
         secciones=[{"id": i, "titulo": t} for i, t in SECCIONES],
         css=(WEB / "estilos.css").read_text(encoding="utf-8"), js=(WEB / "navegacion.js").read_text(encoding="utf-8"),
         conclusion_html=markdown_a_html(conclusion_md) if conclusion_md else None,

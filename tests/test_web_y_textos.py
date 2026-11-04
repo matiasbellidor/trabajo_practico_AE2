@@ -45,6 +45,14 @@ def test_html_sin_pedidos_externos(html_generado):
     assert "Conclusión final pendiente" in html_generado
 
 
+def test_icono_de_pestana_con_los_datos(html_generado):
+    from urllib.parse import unquote
+    href = re.search(r'<link rel="icon" type="image/svg\+xml" href="(data:image/svg\+xml,[^"]+)">', html_generado).group(1)
+    svg = unquote(href.split(",", 1)[1])
+    # Las dos series del trabajo (azul AL30D, naranja PBI) sobre el azul noche de la portada, con el punto final.
+    assert svg.count("<path ") == 2 and "#5b9cf0" in svg and "#f08a55" in svg and "#142036" in svg and "<circle" in svg
+
+
 def test_html_publicado_sin_pedidos_externos():
     ruta = RAIZ_REPO / "docs" / "index.html"
     if not ruta.exists():
