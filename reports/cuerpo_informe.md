@@ -1,7 +1,7 @@
 # Variación del PBI real argentino y variación del bono AL30D
 
 **Análisis Estadístico 2** · Cátedra Tito Lasanta · FCE UBA · 2C 2026
-Grupo 1: Maria Acevedo, Matías Rodrigo Bellido, Melina Escalante, Luka Orpianesi, Manuel Rodriguez
+Grupo 1: Maria Victoria Acebedo, Matías Rodrigo Bellido, Melina Antonella Escalante, Luka Santino Orpianesi, Manuel Rodriguez
 
 > Documento generado por `python -m tp_ae2.run_all` a partir de `outputs/resultados.json`. Ningún número está escrito a mano.
 

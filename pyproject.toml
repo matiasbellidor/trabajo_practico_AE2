@@ -7,11 +7,11 @@ name = "tp_ae2"
 version = "1.0.0"
 description = "TP de Análisis Estadístico 2 (FCE UBA, cátedra Tito Lasanta): variación del PBI real y variación del bono AL30D"
 authors = [
+    { name = "Maria Victoria Acebedo" },
     { name = "Matías Rodrigo Bellido" },
-    { name = "Luka Orpianesi" },
+    { name = "Melina Antonella Escalante" },
+    { name = "Luka Santino Orpianesi" },
     { name = "Manuel Rodriguez" },
-    { name = "Melina Escalante" },
-    { name = "Maria Acevedo" },
 ]
 license = { text = "MIT" }
 requires-python = ">=3.10"

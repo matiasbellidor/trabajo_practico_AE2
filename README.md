@@ -476,6 +476,6 @@ trabajo_practico_AE2/
 
 ## Autoría y licencia
 
-Grupo 1: Maria Acevedo, Matías Rodrigo Bellido, Melina Escalante, Luka Orpianesi y Manuel Rodriguez.
+Grupo 1 (orden alfabético por apellido): Maria Victoria Acebedo, Matías Rodrigo Bellido, Melina Antonella Escalante, Luka Santino Orpianesi y Manuel Rodriguez.
 
 El código se publica bajo licencia MIT ([`LICENSE`](LICENSE)). Los datos pertenecen a sus fuentes: Data912 y el INDEC (vía datos.gob.ar).
