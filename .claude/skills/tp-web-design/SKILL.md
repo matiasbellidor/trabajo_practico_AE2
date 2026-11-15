@@ -1,6 +1,6 @@
 ---
 name: tp-web-design
-description: Diseño, navegación y motion de la presentación web del TP de Análisis Estadístico 2 (docs/index.html, generada desde src/tp_ae2/web/ por tp_ae2.presentacion). Usala siempre que se toque la plantilla HTML, los estilos, navegacion.js, la portada, el riel de puntos, la barra superior, el índice, las animaciones o el deploy de la web (GitHub Pages o Vercel), aunque el pedido sea chico ("agregá un link", "que se vea más lindo", "me pierdo al scrollear", "animá esto").
+description: Diseño, navegación y motion de la presentación web del TP de Análisis Estadístico 2 (docs/index.html, generada desde src/tp_ae2/web/ por tp_ae2.presentacion) y del pitch de la exposición (docs/presentacion/, armado por tp_ae2.pitch con el deck, el video de fondo, el PDF y Recursos con el guion cifrado). Usala siempre que se toque la plantilla HTML, los estilos, navegacion.js, la portada, el riel de puntos, la barra superior, el botón Presentación, el índice, las animaciones, el deck, el guion o el deploy de la web (GitHub Pages o Vercel), aunque el pedido sea chico ("agregá un link", "que se vea más lindo", "me pierdo al scrollear", "animá esto", "cambiá el guion").
 ---
 
 # Diseño y motion de la web del TP
@@ -18,6 +18,8 @@ La web es la presentación que se proyecta en la exposición y que los docentes 
 | Salida publicada | `docs/index.html` (un solo archivo autocontenido) |
 | Tests de la web | `tests/test_web_y_textos.py`, `tests/test_motion.py` (motion de figuras) |
 | Coreografía de cada figura (marcas y tiempos) | `src/tp_ae2/graficos.py` (`_Motion`, `RECETAS`) |
+| Pitch: deck, capa, video, PDF y Recursos | `src/tp_ae2/pitch/` → `docs/presentacion/` (`python -m tp_ae2.pitch`) |
+| Guion de los oradores (no se publica) | `guion/guion.yaml` → cifrado en `docs/presentacion/recursos/` |
 
 Regenerar solo la web: `python -m tp_ae2.presentacion`. Regenerar todo: `python -m tp_ae2.run_all`. Nunca se edita `docs/index.html` a mano: se pisa en la próxima corrida.
 
@@ -96,6 +98,32 @@ Cada figura se arma con sus propios datos cuando queda a la vista. La lógica es
 ## Link al repositorio
 
 Usar el componente `.repo` (logo de GitHub en SVG inline, título, una línea que dice qué hay: código, datos, tablas y tests) y el botón de la barra (`.boton--repo`). La URL sale de `r.meta.repositorio` (`config.yaml`); no escribirla a mano. Abre en otra pestaña, con `rel="noopener"` y un `aria-label` completo que lo avise.
+
+## Botón "Presentación" y su panel
+
+El único CTA relleno de la barra. Toma el lenguaje del botón "Propuesta" de Bellido Asesoramientos (portfolio): relleno del color de acción, sombra de color, brillo inclinado que cruza el botón y halo que se expande. Lo que cambia acá, por las reglas de esta web:
+
+| Pieza | Regla | Por qué |
+|---|---|---|
+| Color | `--cta-fondo` = el óxido (`#a8460f`, blanco encima 5,9:1); en oscuro `#f2955c` con texto `#1f1208` (8,1:1) | Un solo color de acción; el blanco sobre el óxido claro no llega a AA |
+| Invitación | Brillo y halo pasan **3 veces** al cargar (`.cta-pres--invita`, período de 4 s) y se cortan con la primera interacción | "Nada en loop": en Bellido el brillo es infinito; acá se proyecta mientras se explica un p-valor |
+| Hover | `translateY(-1px) scale(1.03)`, resplandor y una pasada del brillo; solo con mouse (`hover: hover` y `pointer: fine`) | En táctil el hover queda pegado |
+| Zona táctil | `::before` con `inset: -5px -3px`: 45 px de alto sin cambiar la barra (el botón mide 36) | WCAG 2.5.5; `inset` se mide desde adentro del borde |
+| Panel | `popover` nativo (`#menu-presentacion`) con respaldo por clase `.abierta`, como el índice. Orden: Descargar PDF · **Ver presentación** (rellena: el foco) · Recursos | Pedido de Matías; una sola acción principal |
+
+Datos del panel: `presentacion.datos_pitch(docs)` lee la cantidad de diapositivas y el peso del PDF de lo publicado. Con "reducir movimiento" no hay brillo, halo ni elevación; al imprimir, el botón y el panel no salen (`.no-imprimir`).
+
+## Pitch de la exposición (`docs/presentacion/`)
+
+Otro artefacto, con otras reglas: es el deck que se proyecta (export de un solo archivo, `presentacion-tp-ae2.html` en la raíz, React + Plotly, sin fuente). `python -m tp_ae2.pitch` (`src/tp_ae2/pitch/`) lo publica con una capa propia y nunca se edita a mano.
+
+- **Qué se toca del bundle:** solo el orden de las diapositivas (`deck.ORDEN`: la Figura 4 va tercera, para el bloque de Luka) y `deck.CORRECCIONES` (texto corregido contra el informe, cada uno con su motivo; si un export nuevo ya no lo trae, el build falla y avisa).
+- **Cómo se entera la capa de la diapositiva:** la app escribe `#N` con `history.replaceState`; el script inyectado (clásico, corre antes que el módulo diferido) envuelve `replaceState` y escucha `hashchange`. No toca el DOM de React.
+- **Excepciones pedidas por Matías (solo en el deck, no en la web del TP):** luces por diapositiva que cambian con cada pase (transform y opacity, 1,15 s) y un barrido de luz una vez por cambio; video del horizonte en loop, fijo abajo, sumado con `mix-blend-mode: screen` sobre negro. Tiene botón **Fondo** y tecla V para pausarlo (WCAG 2.2.2). Con "reducir movimiento", ahorro de datos o la pestaña oculta, el video queda en pausa con el póster.
+- **El video sale de los datos:** el recorrido del AL30D y del PBI en la misma escala, con una luz que barre los meses; Pillow dibuja los cuadros y el ffmpeg de Playwright los codifica en VP9 (~60 KB). `object-fit: fill`: la curva entra entera en la franja en cualquier pantalla.
+- **PDF y miniaturas:** capturas de cada diapositiva a 1920 × 1080 (escala 1,5) con `?captura=1` (sin controles ni transiciones) y "reducir movimiento" (estado final).
+- **Recursos:** código de 3 casillas (regla del vault: una casilla por dígito; avanza solo, Backspace vuelve, se puede pegar, error junto a las casillas). El guion vive en `guion/guion.yaml` (fuera del repo) y se publica cifrado (AES-GCM, clave PBKDF2 del código; sal e IV derivados del contenido para que el build sea reproducible). Vista del presentador sincronizada con la vista previa (`postMessage`) y con la ventana de proyección (`BroadcastChannel "tp-ae2-pitch"`).
+- **Tests:** `tests/test_pitch.py`. Los números del deck contra `resultados.json`, el orden de los oradores, los pases, que el guion no quede en texto plano, el PDF de una página por diapositiva y que Recursos no esté desactualizado respecto del guion.
 
 ## Verificación antes de dar algo por terminado
 

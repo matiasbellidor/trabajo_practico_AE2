@@ -150,12 +150,27 @@ def icono(panel: list[dict], puntos: int = 8) -> str:
     return "data:image/svg+xml," + quote(svg)
 
 
+def datos_pitch(docs: Path) -> dict:
+    """Lo que el panel "Presentación" dice del pitch publicado (docs/presentacion/, lo arma tp_ae2.pitch)."""
+    deck, pdf = docs / "presentacion" / "index.html", docs / "presentacion" / "presentacion-tp-ae2.pdf"
+    datos = {"diapositivas": None, "peso": None}
+    if deck.exists():
+        m = re.search(r"window\.__PITCH__ = (\{.*?\});</script>", deck.read_text(encoding="utf-8"))
+        if m:
+            datos["diapositivas"] = len(json.loads(m.group(1))["diapositivas"])
+    if pdf.exists():
+        n = pdf.stat().st_size
+        datos["peso"] = f"{n / 1_048_576:.1f} MB".replace(".", ",") if n >= 1_048_576 else f"{round(n / 1024)} KB"
+    return datos
+
+
 def _svg_accesible(svg: str, figura_id: str) -> str:
     return svg.replace("<svg ", f'<svg role="img" aria-labelledby="cap-{figura_id}" focusable="false" ', 1)
 
 
 def renderizar(resultados: dict, figuras: list[dict], svgs: dict[str, str], panel: list[dict],
-               conclusion_md: str | None, fecha_entrega: str, linkedin: dict[str, str] | None = None) -> str:
+               conclusion_md: str | None, fecha_entrega: str, linkedin: dict[str, str] | None = None,
+               pitch: dict | None = None) -> str:
     entorno = jinja2.Environment(loader=jinja2.FileSystemLoader(WEB), autoescape=True,
                                  undefined=jinja2.StrictUndefined, trim_blocks=True, lstrip_blocks=True)
     entorno.filters["palabras"] = palabras
@@ -167,7 +182,7 @@ def renderizar(resultados: dict, figuras: list[dict], svgs: dict[str, str], pane
         conclusion_html=markdown_a_html(conclusion_md) if conclusion_md else None,
         mensual=resultados["muestra"]["principal"]["frecuencia"] == "mensual", fecha_entrega=fecha_entrega,
         n=num, pv=pval, ic=ic_texto, p_texto=p_texto, gl=gl_texto, partir=partir_veredicto,
-        nombres=textos.NOMBRES, linkedin=linkedin or {},
+        nombres=textos.NOMBRES, linkedin=linkedin or {}, pitch=pitch or {"diapositivas": None, "peso": None},
     )
 
 
@@ -181,9 +196,9 @@ def generar(cfg: Config) -> Path:
     filas = panel[["periodo", "var_pbi", "var_bono", "grupo_bono", "tercil_pbi"]].to_dict(orient="records")
     conclusion = reporte.leer_conclusion(cfg.ruta("conclusion"))
     y, m, d = cfg["proyecto"]["fecha_entrega"].split("-")
-    contenido = renderizar(resultados, figuras, svgs, filas, conclusion, f"{d}/{m}/{y}",
-                           cfg["proyecto"].get("linkedin") or {})
     docs = cfg.ruta("docs")
+    contenido = renderizar(resultados, figuras, svgs, filas, conclusion, f"{d}/{m}/{y}",
+                           cfg["proyecto"].get("linkedin") or {}, datos_pitch(docs))
     docs.mkdir(parents=True, exist_ok=True)
     destino = docs / "index.html"
     destino.write_text(contenido, encoding="utf-8", newline="\n")

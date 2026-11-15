@@ -41,6 +41,8 @@ rutas:
   docs: docs
   informe: reports/cuerpo_informe.md
   readme: README.md
+  pitch: presentacion-tp-ae2.html     # export del pitch (no se edita): python -m tp_ae2.pitch lo publica en docs/presentacion/
+  guion: guion/guion.yaml              # guion de cada orador: no se publica (está en .gitignore); se cifra en Recursos
 
 # Origen declarado de cada archivo (el hash, las filas y las fechas se calculan al correr).
 fuentes:

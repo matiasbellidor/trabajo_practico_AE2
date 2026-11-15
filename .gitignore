@@ -15,6 +15,9 @@ dist/
 # Verificación visual local
 .capturas/
 
+# Guion de los oradores: el repo es público y Recursos lo muestra solo con el código (va cifrado en docs/)
+guion/
+
 # Sistema
 .DS_Store
 Thumbs.db

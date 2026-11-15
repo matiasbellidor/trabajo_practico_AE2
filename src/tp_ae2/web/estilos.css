@@ -28,6 +28,13 @@
   --fig-s3: #1baf7a;
   --fig-neutro: #9aa0aa;
   --fig-fuente: var(--sans);
+  /* CTA "Presentación": color de acción (el óxido) relleno, como el botón "Propuesta" de Bellido Asesoramientos.
+     Blanco sobre #a8460f: 5,9:1. En oscuro el acento es claro, así que el texto pasa a casi negro (8,1:1). */
+  --cta-fondo: #a8460f;
+  --cta-tinta: #ffffff;
+  --cta-borde: rgba(255, 255, 255, .26);
+  --cta-brillo: rgba(255, 255, 255, .42);
+  --curva-cta: cubic-bezier(.2, .8, .2, 1);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -56,6 +63,10 @@
     --fig-s2: #d95926;
     --fig-s3: #199e70;
     --fig-neutro: #7c8492;
+    --cta-fondo: #f2955c;
+    --cta-tinta: #1f1208;
+    --cta-borde: rgba(255, 255, 255, .3);
+    --cta-brillo: rgba(255, 255, 255, .5);
   }
 }
 :root[data-theme="dark"] {
@@ -84,6 +95,10 @@
   --fig-s2: #d95926;
   --fig-s3: #199e70;
   --fig-neutro: #7c8492;
+  --cta-fondo: #f2955c;
+  --cta-tinta: #1f1208;
+  --cta-borde: rgba(255, 255, 255, .3);
+  --cta-brillo: rgba(255, 255, 255, .5);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -136,6 +151,99 @@ code { overflow-wrap: anywhere; }
 .progreso { position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; display: flex; gap: 2px; }
 .progreso__tramo { flex: 1; background: color-mix(in srgb, var(--linea) 70%, transparent); overflow: hidden; }
 .progreso__tramo i { display: block; height: 100%; background: var(--acento); transform-origin: 0 50%; transform: scaleX(0); }
+
+/* Botón "Presentación" (CTA de la barra): relleno de acción, sombra de color, brillo inclinado y halo. El brillo y el
+   halo pasan tres veces al cargar (invitan sin quedar en loop mientras se explica un p-valor) y una vez más con el
+   mouse encima. Solo transform y opacity; con "reducir movimiento" no se mueve nada. */
+.cta-pres {
+  position: relative; isolation: isolate; display: inline-flex; align-items: center; gap: .45rem; min-height: 36px;
+  padding: .35rem .75rem .35rem .7rem; border: 1px solid var(--cta-borde); border-radius: 999px; background: var(--cta-fondo);
+  color: var(--cta-tinta); font: inherit; font-weight: 650; white-space: nowrap; cursor: pointer;
+  box-shadow: 0 6px 20px -6px color-mix(in srgb, var(--cta-fondo) 90%, transparent);
+  transition: transform .2s var(--curva-cta), box-shadow .2s var(--curva-cta), filter .2s var(--curva-cta);
+}
+.cta-pres .icono { width: 17px; height: 17px; flex: none; }
+.cta-pres__flecha { flex: none; transition: transform .2s var(--curva-cta); }
+.cta-pres[aria-expanded="true"] .cta-pres__flecha { transform: rotate(180deg); }
+.cta-pres__brillo { position: absolute; inset: 0; z-index: -1; border-radius: inherit; overflow: hidden; pointer-events: none; }
+.cta-pres__brillo::before, .accion__brillo::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 50%;
+  background: linear-gradient(90deg, transparent, var(--cta-brillo), transparent); transform: translateX(-150%) skewX(-12deg);
+}
+.cta-pres::after {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit; border: 2px solid var(--cta-fondo); opacity: 0;
+  pointer-events: none;
+}
+/* Zona táctil de 44 px de alto sin cambiar el alto de la barra (el botón mide 36) */
+.cta-pres::before { content: ""; position: absolute; inset: -5px -3px; } /* se mide desde adentro del borde de 1 px */
+.cta-pres:focus-visible { outline-offset: 3px; }
+@media (prefers-reduced-motion: no-preference) {
+  .cta-pres--invita .cta-pres__brillo::before { animation: cta-brillo 4s ease-in-out 3; }
+  .cta-pres--invita::after { animation: cta-halo 4s ease-out 3; }
+  @media (hover: hover) and (pointer: fine) {
+    .cta-pres:hover {
+      transform: translateY(-1px) scale(1.03); filter: brightness(1.06);
+      box-shadow: 0 0 24px color-mix(in srgb, var(--cta-fondo) 45%, transparent), 0 6px 20px -6px color-mix(in srgb, var(--cta-fondo) 90%, transparent);
+    }
+    .cta-pres:not(.cta-pres--invita):hover .cta-pres__brillo::before { animation: cta-brillo-una 1.1s ease-in-out 1; }
+  }
+  .cta-pres:active { transform: scale(.97); }
+  @keyframes cta-brillo { from { transform: translateX(-150%) skewX(-12deg); } 35%, to { transform: translateX(250%) skewX(-12deg); } }
+  @keyframes cta-brillo-una { from { transform: translateX(-150%) skewX(-12deg); } to { transform: translateX(250%) skewX(-12deg); } }
+  @keyframes cta-halo { from { opacity: .6; transform: scale(1); } 40%, to { opacity: 0; transform: scale(1.3); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-pres:hover { box-shadow: 0 0 0 3px color-mix(in srgb, var(--cta-fondo) 35%, transparent); }
+}
+
+/* Panel de la presentación: tres acciones con el mismo lenguaje que el botón; la principal, rellena */
+.menu-pres {
+  display: none; position: fixed; inset: 3.4rem clamp(1rem, 3vw, 2rem) auto auto; margin: 0; z-index: 45;
+  width: min(calc(100vw - 2rem), 400px); padding: .5rem; background: var(--superficie); color: var(--tinta);
+  border: 1px solid var(--linea); border-radius: 14px; box-shadow: 0 18px 50px rgba(20, 32, 54, .22);
+}
+.menu-pres:popover-open, .menu-pres.abierta { display: block; }
+.menu-pres::backdrop { background: rgba(10, 16, 32, .28); }
+.menu-pres__titulo { font: 600 .74rem/1.2 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--tenue); margin: .5rem .5rem .25rem; }
+.menu-pres__bajada { margin: 0 .5rem .75rem; font-size: .92rem; color: var(--tinta-2); }
+.menu-pres__acciones { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.accion {
+  position: relative; isolation: isolate; display: grid; grid-template-columns: 40px minmax(0, 1fr) 16px; align-items: center; gap: .75rem;
+  min-height: 64px; padding: .75rem; border: 1px solid var(--linea); border-radius: 10px; background: var(--superficie); color: var(--tinta);
+  text-decoration: none; overflow-wrap: normal;
+  transition: transform .2s var(--curva-cta), box-shadow .2s var(--curva-cta), border-color .2s var(--curva-cta), background-color .2s;
+}
+.accion__icono { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: var(--acento-suave); color: var(--acento); }
+.accion__texto { min-width: 0; }
+.accion__texto strong { display: block; font-weight: 650; line-height: 1.3; }
+.accion__texto > span { display: block; margin-top: .1rem; font-size: .84rem; line-height: 1.35; color: var(--tenue); }
+.accion kbd { font: 600 .72rem/1 var(--sans); padding: .1rem .3rem; border: 1px solid currentColor; border-bottom-width: 2px; border-radius: 4px; opacity: .85; }
+.accion__flecha { color: var(--tenue); transition: transform .2s var(--curva-cta); }
+.accion:hover { border-color: color-mix(in srgb, var(--acento) 45%, var(--linea)); background: var(--superficie-2); }
+.accion--principal {
+  background: var(--cta-fondo); color: var(--cta-tinta); border-color: var(--cta-borde);
+  box-shadow: 0 6px 20px -8px color-mix(in srgb, var(--cta-fondo) 90%, transparent);
+}
+.accion--principal:hover { background: var(--cta-fondo); border-color: var(--cta-borde); }
+.accion--principal .accion__icono { background: color-mix(in srgb, var(--cta-tinta) 16%, transparent); color: inherit; }
+.accion--principal .accion__texto > span, .accion--principal .accion__flecha { color: inherit; opacity: .88; }
+.accion__brillo { position: absolute; inset: 0; z-index: -1; border-radius: inherit; overflow: hidden; pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .menu-pres:popover-open, .menu-pres.abierta { animation: menu-pres-entra .22s var(--curva-cta) both; }
+  .menu-pres:popover-open li, .menu-pres.abierta li { animation: menu-pres-item .3s var(--curva-cta) both; animation-delay: calc(60ms + var(--i) * 45ms); }
+  @keyframes menu-pres-entra { from { opacity: 0; transform: translateY(-6px) scale(.985); } }
+  @keyframes menu-pres-item { from { opacity: 0; transform: translateY(6px); } }
+  @media (hover: hover) and (pointer: fine) {
+    .accion:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -14px rgba(20, 32, 54, .45); }
+    .accion--principal:hover {
+      filter: brightness(1.05);
+      box-shadow: 0 0 24px color-mix(in srgb, var(--cta-fondo) 40%, transparent), 0 6px 20px -8px color-mix(in srgb, var(--cta-fondo) 90%, transparent);
+    }
+    .accion:hover .accion__flecha { transform: translateX(3px); }
+    .accion--principal:hover .accion__brillo::before { animation: cta-brillo-una 1.1s ease-in-out 1; }
+  }
+  .accion:active { transform: scale(.985); }
+}
 
 /* Índice desplegable (popover nativo; navegacion.js da el respaldo con la clase .abierta) */
 .indice {
@@ -496,6 +604,10 @@ summary::marker { color: var(--acento); }
   .diapo { min-height: 0; padding-top: 5rem; }
   .portada { min-height: 100svh; }
 }
+@media (max-width: 380px) {
+  /* A 320 px el título de la sección quedaba en una letra: el número alcanza y el índice sigue abriéndose ahí */
+  .cta-pres .icono, .seccion-actual__titulo { display: none; }
+}
 @media (max-width: 560px) {
   body { font-size: 1rem; }
   .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -504,6 +616,9 @@ summary::marker { color: var(--acento); }
   .barra__acciones { gap: .35rem; }
   .boton--repo, .boton--tema { padding: .35rem .55rem; min-width: 36px; justify-content: center; }
   .boton--repo .boton__texto, .boton--tema .boton__texto { display: none; }
+  .cta-pres { padding: .35rem .65rem; gap: .35rem; }
+  .cta-pres__flecha { display: none; }
+  .menu-pres { inset: 3.4rem 1rem auto 1rem; width: auto; }
   .seccion-actual { gap: .45rem; padding: .3rem .55rem .3rem .7rem; }
   .repo { padding: .85rem; gap: .8rem; }
   .repo__logo { width: 38px; height: 38px; }

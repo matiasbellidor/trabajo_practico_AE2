@@ -66,6 +66,14 @@
     <svg class="seccion-actual__flecha" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
   <div class="barra__acciones">
+    {#- CTA de la exposición: abre el panel con PDF, deck y Recursos (lenguaje del botón "Propuesta" de Bellido
+        Asesoramientos: relleno de acción, brillo, halo y elevación). Popover nativo; navegacion.js da el respaldo. -#}
+    <button class="cta-pres no-imprimir" type="button" popovertarget="menu-presentacion" data-presentacion aria-expanded="false">
+      <span class="cta-pres__brillo" aria-hidden="true"></span>
+      <svg class="icono" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><path d="M3.5 4.5h17v11h-17zM8.5 20h7M12 15.5V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.2 7.6v4.8l4.1-2.4z" fill="currentColor"/></svg>
+      <span class="cta-pres__texto">Presentación</span>
+      <svg class="cta-pres__flecha" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
     <a class="boton boton--repo" href="{{ r.meta.repositorio }}" target="_blank" rel="noopener" aria-label="Código del trabajo en GitHub (se abre en otra pestaña)">{{ logo_github() }}<span class="boton__texto">Código</span></a>
     <button class="boton boton--tema" type="button" data-tema aria-pressed="false" aria-label="Tema oscuro"><svg class="icono" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg><span class="boton__texto" data-tema-texto>Tema oscuro</span></button>
   </div>
@@ -79,6 +87,34 @@
   {%- endfor %}
   </ol>
 </nav>
+<div class="menu-pres no-imprimir" id="menu-presentacion" popover role="dialog" aria-labelledby="menu-pres-titulo">
+  <p class="menu-pres__titulo" id="menu-pres-titulo">Presentación</p>
+  <p class="menu-pres__bajada">{% if pitch.diapositivas %}Las {{ pitch.diapositivas }} diapositivas{% else %}Las diapositivas{% endif %} que proyectamos en la exposición.</p>
+  <ul class="menu-pres__acciones">
+    <li style="--i: 0">
+      <a class="accion" href="presentacion/presentacion-tp-ae2.pdf" download>
+        <span class="accion__icono" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" focusable="false"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="accion__texto"><strong>Descargar PDF</strong><span>{% if pitch.peso %}Una página por diapositiva · {{ pitch.peso }}{% else %}Una página por diapositiva{% endif %}</span></span>
+        <svg class="accion__flecha" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </li>
+    <li style="--i: 1">
+      <a class="accion accion--principal" href="presentacion/?presentar=1">
+        <span class="accion__brillo" aria-hidden="true"></span>
+        <span class="accion__icono" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" focusable="false"><path d="M8.5 6.2v11.6L18 12z" fill="currentColor"/></svg></span>
+        <span class="accion__texto"><strong>Ver presentación</strong><span>Pantalla completa con <kbd>F</kbd>; se avanza con <kbd>→</kbd> o un clic</span></span>
+        <svg class="accion__flecha" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </li>
+    <li style="--i: 2">
+      <a class="accion" href="presentacion/recursos/">
+        <span class="accion__icono" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" focusable="false"><path d="M7.5 11V8.2a4.5 4.5 0 0 1 9 0V11M6 11h12v9H6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="accion__texto"><strong>Recursos</strong><span>Guion de cada orador, con el código del grupo</span></span>
+        <svg class="accion__flecha" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </li>
+  </ul>
+</div>
 <nav class="riel" aria-label="Secciones">
   <span class="riel__pista" aria-hidden="true"><span class="riel__relleno"></span></span>
   <ol>

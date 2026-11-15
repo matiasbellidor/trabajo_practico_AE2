@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Recursos · Guion de la exposición</title>
+<meta name="description" content="Guion de cada orador para la exposición del TP de Análisis Estadístico 2 (Grupo 1). Se abre con el código del grupo.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#111726">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111726'/%3E%3Cpath d='M5 22l6-7 5 4 5-9 6 6' fill='none' stroke='%233b8beb' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+/* Recursos: guion de la exposición detrás del código del grupo. Mismo universo visual que el deck (azul noche,
+   serif para títulos, celeste de acento). Tokens acá; nada de valores sueltos más abajo. */
+:root {
+  color-scheme: dark;
+  --bg: #111726; --bg-out: #0a0e17; --card: #151b26; --card-2: #1b2334; --borde: #273046; --borde-2: #33405c;
+  --tx: #c3c7cf; --blanco: #fff; --mut: #a4adbc; --kick: #62bceb; --azul: #3b8beb; --naranja: #e8612c;
+  --accion: #2667cc;          /* blanco encima: 5,4:1 (el azul del deck da 3,5:1, no alcanza para texto) */
+  --borde-control: #5f6e92;   /* borde de las casillas: 3,4:1 contra la tarjeta (WCAG 1.4.11) */
+  --ok: #6fdc9a; --error: #ff8a7a; --error-fondo: #3a1d1d; --ok-fondo: #15302a;
+  --serif: "Times New Roman", Tinos, Times, "Liberation Serif", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  --e1: 4px; --e2: 8px; --e3: 12px; --e4: 16px; --e5: 24px; --e6: 32px; --e7: 48px; --e8: 64px;
+  --r-pill: 999px; --r-tarjeta: 14px; --r-control: 10px;
+  --curva: cubic-bezier(.2, .8, .2, 1); --rapido: .18s; --medio: .28s;
+  --sombra: 0 18px 50px rgba(0, 0, 0, .35);
+}
+* { box-sizing: border-box; }
+html { background: var(--bg-out); }
+body { margin: 0; min-height: 100vh; min-height: 100dvh; background: var(--bg); color: var(--tx); font: 16px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p { margin: 0; }
+button { font: inherit; color: inherit; }
+a { color: var(--kick); }
+:focus-visible { outline: 2px solid var(--kick); outline-offset: 3px; border-radius: 6px; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.saltar { position: absolute; left: var(--e4); top: -64px; z-index: 50; padding: var(--e2) var(--e4); background: var(--card); color: var(--blanco); border-radius: var(--r-control); }
+.saltar:focus { top: var(--e4); }
+kbd { font: 600 11px/1 var(--sans); color: #dfe5f0; border: 1px solid var(--borde-2); border-bottom-width: 2px; border-radius: 5px; padding: 2px 5px; }
+[hidden] { display: none !important; }
+
+/* Barras de scroll con la identidad del deck */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2a3550; border: 2px solid var(--bg); border-radius: var(--r-pill); }
+::-webkit-scrollbar-thumb:hover { background: #36456a; }
+::-webkit-scrollbar-button { display: none; }
+@supports not selector(::-webkit-scrollbar) { html, .linea, .notas { scrollbar-color: #2a3550 transparent; scrollbar-width: thin; } }
+
+/* Cabecera */
+.cab {
+  position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: var(--e3); flex-wrap: wrap;
+  padding: var(--e2) clamp(var(--e4), 3vw, var(--e6)); min-height: 56px; background: rgba(13, 18, 30, .92);
+  border-bottom: 1px solid var(--borde); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.cab__volver { display: inline-flex; align-items: center; gap: var(--e2); min-height: 40px; padding: 0 var(--e3); margin-left: calc(var(--e3) * -1); border-radius: var(--r-pill); color: var(--tx); text-decoration: none; font-weight: 500; }
+.cab__volver:hover { background: var(--card-2); color: var(--blanco); }
+.cab__volver svg { width: 18px; height: 18px; }
+.cab__titulo { font: 700 15px/1.2 var(--serif); color: var(--blanco); letter-spacing: .01em; }
+.cab__titulo span { font: 400 14px/1.2 var(--sans); color: var(--mut); }
+.cab__acciones { display: flex; align-items: center; gap: var(--e2); margin-left: auto; flex-wrap: wrap; }
+.boton {
+  display: inline-flex; align-items: center; gap: var(--e2); min-height: 40px; padding: 0 var(--e4); border: 1px solid var(--borde);
+  border-radius: var(--r-pill); background: var(--card); color: var(--tx); cursor: pointer; font-size: 14px; font-weight: 500;
+  transition: background-color var(--rapido), border-color var(--rapido), color var(--rapido), transform var(--rapido);
+}
+.boton:hover { background: var(--card-2); border-color: var(--borde-2); color: var(--blanco); }
+.boton:active { transform: scale(.97); }
+.boton[aria-pressed="true"] { border-color: var(--kick); color: var(--blanco); }
+.boton--icono { width: 40px; padding: 0; justify-content: center; }
+.boton svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Reloj */
+.reloj { display: flex; align-items: baseline; gap: var(--e2); padding: 0 var(--e2); font-variant-numeric: tabular-nums; }
+.reloj__tiempo { font: 700 20px/1 var(--sans); color: var(--blanco); min-width: 3.2ch; text-align: right; }
+.reloj__plan { font-size: 13px; color: var(--mut); }
+.reloj[data-estado="tarde"] .reloj__tiempo { color: #ffc46b; }
+.reloj[data-estado="muy-tarde"] .reloj__tiempo { color: var(--error); }
+
+/* ── Puerta: código de 3 casillas ───────────────────────────────────────────── */
+.puerta { display: grid; place-items: center; min-height: calc(100vh - 57px); min-height: calc(100dvh - 57px); padding: var(--e6) var(--e4); }
+.puerta__tarjeta {
+  width: min(100%, 440px); padding: var(--e6) clamp(var(--e5), 5vw, var(--e6)); text-align: center; background: var(--card);
+  border: 1px solid var(--borde); border-radius: var(--r-tarjeta); box-shadow: var(--sombra);
+}
+.puerta__icono { width: 44px; height: 44px; margin: 0 auto var(--e4); display: block; color: var(--kick); fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.puerta h1 { font: 700 30px/1.15 var(--serif); color: var(--blanco); letter-spacing: -.01em; }
+.puerta__bajada { margin-top: var(--e3); color: var(--tx); font-size: 15px; }
+.codigo { margin-top: var(--e6); text-align: left; }
+.codigo__cabecera { display: flex; justify-content: space-between; align-items: baseline; gap: var(--e3); }
+.codigo__etiqueta { font-weight: 600; color: var(--blanco); font-size: 15px; }
+.codigo__formato { font-size: 13px; color: var(--mut); }
+.codigo__casillas { display: grid; grid-template-columns: repeat(3, 64px); justify-content: center; gap: var(--e3); margin-top: var(--e3); }
+.codigo__casilla {
+  width: 64px; height: 72px; padding: 0; text-align: center; font: 700 32px/1 var(--sans); font-variant-numeric: tabular-nums;
+  color: var(--blanco); background: var(--bg); border: 2px solid var(--borde-control); border-radius: var(--r-control); caret-color: var(--kick);
+  transition: border-color var(--rapido), background-color var(--rapido), box-shadow var(--rapido);
+}
+.codigo__casilla:hover { border-color: #7383aa; }
+.codigo__casilla:focus { outline: none; border-color: var(--kick); box-shadow: 0 0 0 4px rgba(98, 188, 235, .22); }
+.codigo__casilla:disabled { opacity: .6; }
+.codigo--error .codigo__casilla { border-color: var(--error); background: var(--error-fondo); }
+.codigo--ok .codigo__casilla { border-color: var(--ok); background: var(--ok-fondo); }
+.codigo__ayuda { margin-top: var(--e3); font-size: 13px; color: var(--mut); text-align: center; min-height: 20px; }
+.codigo__error { margin-top: var(--e2); font-size: 14px; color: var(--error); text-align: center; min-height: 0; }
+.codigo__error:empty { display: none; }
+.codigo__abrir {
+  display: block; width: 100%; min-height: 48px; margin-top: var(--e5); border: 0; border-radius: var(--r-pill);
+  background: var(--accion); color: var(--blanco); font-weight: 600; font-size: 15px; cursor: pointer;
+  transition: filter var(--rapido), transform var(--rapido), box-shadow var(--rapido);
+}
+.codigo__abrir:hover { filter: brightness(1.06); box-shadow: 0 0 24px rgba(59, 139, 235, .35); }
+.codigo__abrir:active { transform: scale(.98); }
+.codigo__abrir:disabled { opacity: .55; cursor: default; filter: none; box-shadow: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .codigo--sacude .codigo__casillas { animation: sacude .32s var(--curva) 1; }
+  @keyframes sacude { 20% { transform: translateX(-8px); } 45% { transform: translateX(7px); } 70% { transform: translateX(-4px); } 90% { transform: translateX(2px); } }
+  .puerta--sale { animation: sale .26s var(--curva) both; }
+  @keyframes sale { to { opacity: 0; transform: translateY(-8px) scale(.99); } }
+  .guion--entra { animation: entra .32s var(--curva) both; }
+  @keyframes entra { from { opacity: 0; transform: translateY(8px); } }
+}
+
+/* ── Guion ─────────────────────────────────────────────────────────────────── */
+.guion { padding: var(--e4) clamp(var(--e4), 3vw, var(--e6)) var(--e7); }
+.guion__barra { display: flex; align-items: center; gap: var(--e4); flex-wrap: wrap; }
+/* Segmentos de igual ancho (Presentador | Guion completo) */
+.segmentos { display: inline-grid; grid-template-columns: 1fr 1fr; padding: var(--e1); background: var(--card); border: 1px solid var(--borde); border-radius: var(--r-pill); }
+.segmentos button { min-height: 36px; padding: 0 var(--e4); border: 0; border-radius: var(--r-pill); background: transparent; color: var(--mut); cursor: pointer; font-size: 14px; font-weight: 600; white-space: nowrap; transition: background-color var(--rapido), color var(--rapido); }
+.segmentos button:hover { color: var(--blanco); }
+.segmentos button[aria-pressed="true"] { background: var(--card-2); color: var(--blanco); box-shadow: inset 0 0 0 1px var(--borde-2); }
+.guion__total { font-size: 13px; color: var(--mut); }
+
+/* Línea de oradores: un tramo por bloque, ancho proporcional a su tiempo */
+.linea { display: flex; gap: var(--e1); list-style: none; margin: var(--e4) 0 0; padding: 0 0 var(--e1); overflow-x: auto; }
+.linea li { flex: var(--peso) 1 0; min-width: max-content; }
+.linea button {
+  position: relative; display: grid; gap: 2px; width: 100%; padding: var(--e2) var(--e3) var(--e2); text-align: left; border: 0;
+  border-radius: var(--r-control); background: var(--card); color: var(--tx); cursor: pointer; overflow: hidden;
+  transition: background-color var(--rapido);
+}
+.linea button::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--color); opacity: .45; transition: opacity var(--rapido); }
+.linea button:hover { background: var(--card-2); }
+.linea button[aria-current="step"] { background: var(--card-2); box-shadow: inset 0 0 0 1px var(--color); }
+.linea button[aria-current="step"]::before { opacity: 1; }
+.linea__nombre { font-weight: 700; font-size: 14px; color: var(--blanco); white-space: nowrap; }
+.linea__tema { font-size: 12px; color: var(--mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.linea__tiempo { font-size: 12px; color: var(--mut); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Vista del presentador: diapositiva en vivo (iframe del deck) + notas */
+.presentador { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(320px, 1fr); gap: var(--e5); margin-top: var(--e5); align-items: start; }
+.escenario { position: sticky; top: 72px; }
+.escenario__marco { position: relative; aspect-ratio: 16 / 9; border-radius: var(--r-tarjeta); overflow: hidden; background: var(--bg-out); box-shadow: 0 0 0 1px var(--borde), var(--sombra); }
+.escenario__marco iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.escenario__controles { display: flex; align-items: center; gap: var(--e2); margin-top: var(--e3); flex-wrap: wrap; }
+.contador { min-width: 64px; text-align: center; font-variant-numeric: tabular-nums; font-weight: 600; color: var(--blanco); }
+.escenario__sigue { margin-left: auto; font-size: 13px; color: var(--mut); min-width: 0; }
+.escenario__sigue strong { color: var(--tx); font-weight: 600; }
+
+/* Marcas numeradas sobre la diapositiva */
+.pines { position: absolute; inset: 0; pointer-events: none; }
+.pines, .completo__imagen { --pin: 26px; }
+.pin {
+  position: absolute; left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); display: grid; place-items: center;
+  width: var(--pin); height: var(--pin); margin: calc(var(--pin) / -2) 0 0 calc(var(--pin) / -2); border-radius: 50%;
+  background: var(--color, var(--kick)); color: #0b1220; font: 800 calc(var(--pin) * .5)/1 var(--sans);
+  box-shadow: 0 0 0 3px rgba(11, 18, 32, .75), 0 4px 14px rgba(0, 0, 0, .45);
+  opacity: 0; transform: scale(.6); transition: opacity var(--medio) var(--curva), transform var(--medio) var(--curva);
+}
+/* Marca de un texto: a la izquierda de su primera línea, sin salirse de la diapositiva */
+.pin--izq { left: max(calc(var(--pin) / 2 + 2px), calc(var(--x) * 1% - var(--pin) * .8)); top: calc(var(--y) * 1% + var(--pin) * .45); }
+.completo__imagen { --pin: 22px; }
+.pines--listo .pin { opacity: 1; transform: none; }
+.pin--activo { transform: scale(1.25) !important; box-shadow: 0 0 0 3px rgba(11, 18, 32, .75), 0 0 0 7px var(--color); }
+
+.notas { display: grid; gap: var(--e4); }
+.notas__cabecera { display: flex; align-items: baseline; gap: var(--e3); flex-wrap: wrap; }
+.notas__num { font: 700 13px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--kick); }
+.notas__titulo { font: 700 22px/1.2 var(--serif); color: var(--blanco); }
+
+/* Un paso del guion: quién habla, cómo, qué dice y a quién le pasa */
+.paso { --color: var(--kick); position: relative; padding: var(--e4) var(--e5) var(--e5); background: var(--card); border: 1px solid var(--borde); border-radius: var(--r-tarjeta); }
+.paso::before { content: ""; position: absolute; left: 0; top: var(--e4); bottom: var(--e4); width: 3px; border-radius: 0 3px 3px 0; background: var(--color); }
+.paso__cab { display: flex; align-items: center; gap: var(--e2) var(--e3); flex-wrap: wrap; }
+.chip { display: inline-flex; align-items: center; gap: var(--e2); padding: var(--e1) var(--e3) var(--e1) var(--e2); border-radius: var(--r-pill); background: color-mix(in srgb, var(--color) 16%, transparent); color: var(--blanco); font-weight: 700; font-size: 14px; }
+.chip::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--color); }
+.paso__tema { font-size: 14px; color: var(--tx); font-weight: 600; }
+.paso__tiempo { margin-left: auto; font-size: 13px; color: var(--mut); font-variant-numeric: tabular-nums; }
+.paso__como { margin-top: var(--e3); font-size: 14px; color: var(--mut); }
+.paso__como b { color: var(--tx); font-weight: 600; }
+.paso__texto { display: grid; gap: var(--e3); margin-top: var(--e4); font: 19px/1.55 var(--serif); color: #e7eaf0; }
+.paso__texto strong { color: var(--blanco); font-weight: 700; background: linear-gradient(transparent 62%, color-mix(in srgb, var(--color) 32%, transparent) 62%); padding: 0 1px; }
+.pase {
+  display: flex; gap: var(--e2); align-items: baseline; flex-wrap: wrap; margin-top: var(--e4); padding: var(--e3) var(--e4); border-radius: var(--r-control);
+  background: var(--bg); border: 1px dashed var(--borde-2); font-size: 15px;
+}
+.pase__a { font-weight: 700; color: var(--blanco); white-space: nowrap; }
+.pase__a i { font-style: normal; color: var(--pase-color, var(--kick)); }
+.pase q { font-family: var(--serif); font-size: 17px; color: #e7eaf0; quotes: "«" "»"; }
+
+/* Marcas de interpretación dentro del texto */
+.cue { display: inline-flex; align-items: center; gap: 4px; margin: 0 2px; padding: 1px 8px; border-radius: var(--r-pill); font: 600 12px/1.6 var(--sans); vertical-align: 2px; white-space: nowrap; border: 1px solid transparent; }
+.cue--pausa { color: #ffd38a; background: rgba(255, 196, 107, .12); border-color: rgba(255, 196, 107, .28); }
+.cue--pausa::before { content: ""; width: 7px; height: 9px; border-left: 2px solid currentColor; border-right: 2px solid currentColor; }
+.cue--enfasis { color: var(--color); background: color-mix(in srgb, var(--color) 14%, transparent); border-color: color-mix(in srgb, var(--color) 35%, transparent); }
+.cue--publico { color: #9fe3c7; background: rgba(111, 220, 154, .1); border-color: rgba(111, 220, 154, .25); }
+.cue--lento { color: #c9b8ff; background: rgba(185, 166, 242, .12); border-color: rgba(185, 166, 242, .28); }
+button.cue--senal { cursor: pointer; color: var(--blanco); background: color-mix(in srgb, var(--color) 22%, transparent); border-color: color-mix(in srgb, var(--color) 50%, transparent); }
+button.cue--senal:hover, button.cue--senal:focus-visible { background: color-mix(in srgb, var(--color) 36%, transparent); }
+.cue__num { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--color); color: #0b1220; font-size: 10px; font-weight: 800; }
+
+.leyenda { margin-top: var(--e2); padding: var(--e2) var(--e4); font-size: 13px; color: var(--mut); background: var(--card); border: 1px solid var(--borde); border-radius: var(--r-tarjeta); }
+.leyenda summary { cursor: pointer; min-height: 32px; display: flex; align-items: center; color: var(--tx); font-weight: 600; }
+.leyenda__items { display: flex; flex-wrap: wrap; gap: var(--e2) var(--e4); padding: var(--e1) 0 var(--e2); }
+.leyenda b { color: var(--tx); font-weight: 600; }
+
+/* Guion completo: todas las diapositivas con sus marcas y sus notas */
+.completo { list-style: none; margin: var(--e5) 0 0; padding: 0; display: grid; gap: var(--e7); }
+.completo__item { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: var(--e5); align-items: start; scroll-margin-top: 80px; }
+.completo__diapo { margin: 0; position: sticky; top: 72px; }
+.completo__imagen { position: relative; aspect-ratio: 16 / 9; border-radius: var(--r-tarjeta); overflow: hidden; background: var(--bg-out); box-shadow: 0 0 0 1px var(--borde); }
+.completo__imagen img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.completo__imagen .pin { opacity: 1; transform: none; }
+.completo__pie { display: flex; align-items: center; gap: var(--e3); margin-top: var(--e2); font-size: 14px; color: var(--mut); }
+.completo__pie strong { color: var(--blanco); font-family: var(--serif); font-size: 17px; }
+.completo__notas { display: grid; gap: var(--e4); }
+
+@media (max-width: 1100px) {
+  .presentador, .completo__item { grid-template-columns: minmax(0, 1fr); }
+  .escenario, .completo__diapo { position: static; }
+}
+@media (max-width: 640px) {
+  .cab { gap: var(--e2); }
+  .cab__titulo span { display: none; }
+  .cab__acciones { width: 100%; justify-content: space-between; margin-left: 0; gap: var(--e1); flex-wrap: nowrap; }
+  .boton { padding: 0 var(--e3); }
+  .cab__acciones .boton { width: 40px; padding: 0; justify-content: center; }
+  .reloj { padding: 0; }
+  .reloj__total { display: none; }
+  .linea__tema { display: none; }
+  .completo__imagen { --pin: 16px; }
+  .boton__texto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .paso { padding: var(--e4); }
+  .paso__texto { font-size: 18px; }
+  .paso__tiempo { margin-left: 0; width: 100%; }
+  .codigo__casillas { grid-template-columns: repeat(3, 60px); }
+  .codigo__casilla { width: 60px; height: 68px; }
+}
+
+/* Pantallas táctiles: todos los controles de al menos 44 × 44 px */
+@media (pointer: coarse) {
+  .boton, .cab__volver, .segmentos button { min-height: 44px; }
+  .boton--icono, .cab__acciones .boton { width: 44px; }
+}
+
+/* Impresión: el guion completo, claro y sin controles */
+@media print {
+  :root { --bg: #fff; --bg-out: #fff; --card: #fff; --card-2: #fff; --borde: #ccd2dc; --tx: #1b2230; --blanco: #0b1220; --mut: #4b5563; }
+  body { background: #fff; color: var(--tx); }
+  .cab, .puerta, .guion__barra, .linea, .presentador, .saltar { display: none !important; }
+  [data-panel="completo"][hidden] { display: grid !important; }
+  .completo__item { break-inside: avoid; grid-template-columns: 1fr; }
+  .completo__diapo { position: static; }
+  .paso__texto { color: #111; }
+}
+
+</style>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cab">
+  <a class="cab__volver" href="../"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg><span>Presentación</span></a>
+  <p class="cab__titulo">Recursos <span>· Grupo 1</span></p>
+  <div class="cab__acciones" data-acciones hidden>
+    <div class="reloj" data-reloj-caja>
+      <span class="reloj__tiempo" data-reloj aria-label="Tiempo transcurrido">0:00</span>
+      <span class="reloj__plan" data-plan></span>
+    </div>
+    <button class="boton" type="button" data-reloj-boton aria-pressed="false" aria-keyshortcuts="T"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10-6.5z"/></svg><span class="boton__texto" data-reloj-texto>Empezar</span></button>
+    <button class="boton boton--icono" type="button" data-reloj-reiniciar aria-label="Reiniciar el reloj"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.6M4 4v4.6h4.6"/></svg></button>
+    <button class="boton" type="button" data-proyectar title="Abre la presentación en otra ventana para el proyector; avanza junto con esta página"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h16v11H4zM9 20h6M12 16v4"/></svg><span class="boton__texto">Proyectar</span></button>
+    <button class="boton" type="button" data-bloquear><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 11V8a5 5 0 0 1 10 0v3M5.5 11h13v9h-13z"/></svg><span class="boton__texto">Bloquear</span></button>
+  </div>
+</header>
+
+<main id="contenido">
+  <section class="puerta" data-puerta aria-labelledby="t-puerta">
+    <div class="puerta__tarjeta">
+      <svg class="puerta__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 11V8a5 5 0 0 1 10 0v3"/><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M12 15v2"/></svg>
+      <h1 id="t-puerta">Guion de la exposición</h1>
+      <p class="puerta__bajada">Qué dice cada uno, con tiempos, pausas y pases. Se abre con el código del grupo.</p>
+      <form class="codigo" data-codigo novalidate>
+        <div class="codigo__cabecera">
+          <label class="codigo__etiqueta" id="codigo-etiqueta" for="codigo-1">Código del grupo</label>
+          <span class="codigo__formato" id="codigo-formato">3 números</span>
+        </div>
+        <div class="codigo__casillas" role="group" aria-labelledby="codigo-etiqueta codigo-formato">
+          <input class="codigo__casilla" id="codigo-1" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Número 1 de 3" aria-describedby="codigo-ayuda codigo-error" data-casilla="0">
+          <input class="codigo__casilla" id="codigo-2" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Número 2 de 3" aria-describedby="codigo-ayuda codigo-error" data-casilla="1">
+          <input class="codigo__casilla" id="codigo-3" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Número 3 de 3" aria-describedby="codigo-ayuda codigo-error" data-casilla="2">
+        </div>
+        <p class="codigo__ayuda" id="codigo-ayuda" data-ayuda>Se abre solo al completar las tres casillas. También podés pegarlo.</p>
+        <p class="codigo__error" id="codigo-error" data-error role="alert"></p>
+        <button class="codigo__abrir" type="submit" data-abrir>Abrir el guion</button>
+      </form>
+    </div>
+  </section>
+  <section class="guion" data-guion hidden aria-label="Guion de la exposición"></section>
+  <p class="sr-only" aria-live="polite" data-anuncio></p>
+</main><script type="application/json" id="guion-cifrado">{"v":1,"kdf":"PBKDF2-SHA256","iteraciones":250000,"cifrado":"AES-GCM-256","sal":"R/BUrezwCok57LwhrkMgRA==","iv":"8AOmT0u19Mnvci3f","datos":"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"}</script>
+<script type="application/json" id="guion-publico">{"diapositivas": [{"id": "portada", "titulo": "Variación del PBI real argentino y variación del bono AL30D", "imagen": "../media/diapo-01.webp", "marcas": [{"num": 1, "x": 3.12, "y": 19.59, "centro": false}, {"num": 2, "x": 3.12, "y": 89.8, "centro": false}]}, {"id": "hipotesis", "titulo": "¿Se asocian las variaciones mensuales del PBI y del AL30D?", "imagen": "../media/diapo-02.webp", "marcas": [{"num": 1, "x": 6.25, "y": 30.01, "centro": false}, {"num": 2, "x": 8.75, "y": 50.73, "centro": false}, {"num": 3, "x": 51.87, "y": 47.99, "centro": false}]}, {"id": "figura-4", "titulo": "Var AL30D vs. Var PBI con recta de regresión y banda de confianza", "imagen": "../media/diapo-03.webp", "marcas": [{"num": 1, "x": 46.42, "y": 45.04, "centro": true}, {"num": 2, "x": 82.21, "y": 55.79, "centro": true}]}, {"id": "fuentes", "titulo": "Dos series mensuales comparables", "imagen": "../media/diapo-04.webp", "marcas": [{"num": 1, "x": 5.62, "y": 49.03, "centro": false}, {"num": 2, "x": 5.62, "y": 65.32, "centro": false}, {"num": 3, "x": 5.62, "y": 38.17, "centro": false}]}, {"id": "figura-1", "titulo": "Variaciones mensuales del AL30D y del PBI", "imagen": "../media/diapo-05.webp", "marcas": [{"num": 1, "x": 50, "y": 36.45, "centro": true}, {"num": 2, "x": 50, "y": 75.12, "centro": true}]}, {"id": "descriptiva", "titulo": "El bono presenta unas 15 veces más volatilidad", "imagen": "../media/diapo-06.webp", "marcas": [{"num": 1, "x": 7.71, "y": 41.3, "centro": false}, {"num": 2, "x": 54.65, "y": 41.3, "centro": false}, {"num": 3, "x": 5.62, "y": 75.97, "centro": false}]}, {"id": "mco", "titulo": "La regresión mensual no rechaza H₀", "imagen": "../media/diapo-07.webp", "marcas": [{"num": 1, "x": 5.62, "y": 49.76, "centro": false}, {"num": 2, "x": 5.62, "y": 55.79, "centro": false}, {"num": 3, "x": 5.62, "y": 67.87, "centro": false}, {"num": 4, "x": 5.62, "y": 61.83, "centro": false}]}, {"id": "sensibilidad", "titulo": "Las herramientas complementarias no cambian el resultado", "imagen": "../media/diapo-08.webp", "marcas": [{"num": 1, "x": 5.69, "y": 44.82, "centro": false}, {"num": 2, "x": 5.69, "y": 57.04, "centro": false}, {"num": 3, "x": 5.69, "y": 69.26, "centro": false}]}, {"id": "agregacion", "titulo": "La muestra trimestral es una excepción que se debe tener en cuenta", "imagen": "../media/diapo-09.webp", "marcas": [{"num": 1, "x": 5.62, "y": 47.68, "centro": false}, {"num": 2, "x": 5.62, "y": 72.73, "centro": false}]}, {"id": "limitaciones", "titulo": "Las limitaciones condicionan la interpretación", "imagen": "../media/diapo-10.webp", "marcas": [{"num": 1, "x": 5.62, "y": 37.41, "centro": false}, {"num": 2, "x": 36.04, "y": 37.41, "centro": false}, {"num": 3, "x": 66.46, "y": 37.41, "centro": false}]}, {"id": "conclusiones", "titulo": "No se encontró evidencia suficiente de asociación contemporánea", "imagen": "../media/diapo-11.webp", "marcas": [{"num": 1, "x": 5.62, "y": 34.08, "centro": false}, {"num": 2, "x": 60.35, "y": 30.38, "centro": false}]}, {"id": "futuro", "titulo": "El contraste abre preguntas para nuevas muestras", "imagen": "../media/diapo-12.webp", "marcas": [{"num": 1, "x": 5.62, "y": 35.81, "centro": false}, {"num": 2, "x": 36.04, "y": 35.81, "centro": false}, {"num": 3, "x": 66.46, "y": 35.81, "centro": false}]}], "deck": "../", "pdf": "../presentacion-tp-ae2.pdf"}</script>
+<script>
+/* Recursos: código de 3 casillas → descifra el guion (WebCrypto) → vista del presentador sincronizada con el deck.
+   Sincronización: la vista previa es un iframe del deck (?modo=notas) que avisa por postMessage en qué diapositiva
+   está; la ventana "Proyectar" y esta página se hablan por BroadcastChannel ("tp-ae2-pitch"). */
+(() => {
+  "use strict";
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const CLAVE = { codigo: "tp-ae2-recursos-codigo", vista: "tp-ae2-recursos-vista", reloj: "tp-ae2-recursos-reloj" };
+  const publico = JSON.parse($("#guion-publico").textContent);
+  const cifrado = JSON.parse($("#guion-cifrado").textContent);
+  const total = publico.diapositivas.length;
+  const form = $("[data-codigo]");
+  const casillas = $$("[data-casilla]");
+  const ayuda = $("[data-ayuda]");
+  const error = $("[data-error]");
+  const abrir = $("[data-abrir]");
+  const puerta = $("[data-puerta]");
+  const seccion = $("[data-guion]");
+  const acciones = $("[data-acciones]");
+  const anuncio = $("[data-anuncio]");
+  const reducido = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const AYUDA = ayuda.textContent;
+
+  const guardar = (clave, valor) => { try { valor == null ? sessionStorage.removeItem(clave) : sessionStorage.setItem(clave, valor); } catch (e) { /* sin almacenamiento */ } };
+  const leer = (clave) => { try { return sessionStorage.getItem(clave); } catch (e) { return null; } };
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const reloj = (seg) => { seg = Math.max(0, Math.round(seg)); return `${Math.floor(seg / 60)}:${String(seg % 60).padStart(2, "0")}`; };
+
+  /* ── Código de 3 casillas: un dígito por casilla, avanza solo, Backspace vuelve, se puede pegar ─────────── */
+  const codigo = () => casillas.map((c) => c.value).join("");
+  function limpiarError() {
+    error.textContent = "";
+    form.classList.remove("codigo--error");
+    casillas.forEach((c) => c.removeAttribute("aria-invalid"));
+  }
+  function mostrarError(texto) {
+    error.textContent = texto;
+    form.classList.add("codigo--error");
+    form.classList.remove("codigo--sacude");
+    void form.offsetWidth;
+    form.classList.add("codigo--sacude");
+    casillas.forEach((c) => c.setAttribute("aria-invalid", "true"));
+  }
+  form.addEventListener("animationend", () => form.classList.remove("codigo--sacude"));
+  function repartir(desde, digitos) {
+    for (let i = 0; i < digitos.length && desde + i < casillas.length; i++) casillas[desde + i].value = digitos[i];
+    casillas[Math.min(desde + digitos.length, casillas.length - 1)].focus();
+    if (codigo().length === casillas.length) intentar();
+  }
+  casillas.forEach((c, i) => {
+    c.addEventListener("focus", () => c.select());
+    c.addEventListener("input", () => {
+      const d = c.value.replace(/\D/g, "");
+      limpiarError();
+      if (!d) { c.value = ""; return; }
+      c.value = d[0];
+      if (d.length > 1) { repartir(i, d); return; } // autocompletado o teclados que mandan varios dígitos juntos
+      if (i < casillas.length - 1) casillas[i + 1].focus();
+      else if (codigo().length === casillas.length) intentar();
+    });
+    c.addEventListener("keydown", (e) => {
+      if (e.key === "Backspace" && !c.value && i > 0) { e.preventDefault(); casillas[i - 1].value = ""; casillas[i - 1].focus(); }
+      else if (e.key === "ArrowLeft" && i > 0) { e.preventDefault(); casillas[i - 1].focus(); }
+      else if (e.key === "ArrowRight" && i < casillas.length - 1) { e.preventDefault(); casillas[i + 1].focus(); }
+      else if (e.key.length === 1 && /\D/.test(e.key) && !e.ctrlKey && !e.metaKey) e.preventDefault(); // solo números
+    });
+    c.addEventListener("paste", (e) => {
+      const d = ((e.clipboardData || window.clipboardData).getData("text") || "").replace(/\D/g, "").slice(0, casillas.length);
+      e.preventDefault();
+      if (!d) return;
+      limpiarError();
+      casillas.forEach((x) => { x.value = ""; });
+      repartir(0, d);
+    });
+  });
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (codigo().length < casillas.length) {
+      mostrarError("Faltan números: el código tiene tres.");
+      (casillas.find((c) => !c.value) || casillas[0]).focus();
+      return;
+    }
+    intentar();
+  });
+
+  async function descifrar(cod) {
+    const deB64 = (s) => Uint8Array.from(atob(s), (ch) => ch.charCodeAt(0));
+    const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(cod), "PBKDF2", false, ["deriveKey"]);
+    const clave = await crypto.subtle.deriveKey(
+      { name: "PBKDF2", salt: deB64(cifrado.sal), iterations: cifrado.iteraciones, hash: "SHA-256" },
+      base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+    const plano = await crypto.subtle.decrypt({ name: "AES-GCM", iv: deB64(cifrado.iv) }, clave, deB64(cifrado.datos));
+    return JSON.parse(new TextDecoder().decode(plano));
+  }
+
+  let ocupado = false;
+  async function intentar() {
+    const cod = codigo();
+    if (ocupado || !/^\d{3}$/.test(cod)) return;
+    if (!window.crypto || !crypto.subtle) {
+      mostrarError("Esta página se abre desde la web publicada o desde localhost, no como archivo.");
+      return;
+    }
+    ocupado = true;
+    casillas.forEach((c) => { c.disabled = true; });
+    abrir.disabled = true;
+    const espera = setTimeout(() => { ayuda.textContent = "Verificando…"; }, 600);
+    try {
+      const datos = await descifrar(cod);
+      clearTimeout(espera);
+      guardar(CLAVE.codigo, cod);
+      form.classList.add("codigo--ok");
+      ayuda.textContent = "Código correcto.";
+      setTimeout(() => abrirGuion(datos, true), reducido ? 0 : 280);
+    } catch (err) {
+      clearTimeout(espera);
+      ayuda.textContent = AYUDA;
+      casillas.forEach((c) => { c.disabled = false; c.value = ""; });
+      abrir.disabled = false;
+      mostrarError("Ese código no abre el guion. Revisalo con el grupo.");
+      casillas[0].focus();
+    } finally {
+      ocupado = false;
+    }
+  }
+
+  /* ── Guion ─────────────────────────────────────────────────────────────────────────────────────────────── */
+  let G = null;
+  let n = 1;
+  let vista = leer(CLAVE.vista) || (matchMedia("(max-width: 760px)").matches ? "completo" : "presentador");
+  let iframe = null;
+  const canal = "BroadcastChannel" in window ? new BroadcastChannel("tp-ae2-pitch") : null;
+
+  const pasosDe = (k) => G.pasos.filter((p) => p.n === k);
+  const bloqueDe = (p) => G.bloques[p.bloque];
+  const colorDe = (p) => G.oradores[bloqueDe(p).orador].color;
+  function colorDePin(k, num) {
+    const p = pasosDe(k).find((x) => x.marcas.some((m) => m.num === num));
+    return p ? colorDe(p) : "var(--kick)";
+  }
+  function textoDePin(k, num) {
+    for (const p of pasosDe(k)) { const m = p.marcas.find((x) => x.num === num); if (m) return m.texto; }
+    return "";
+  }
+
+  function textoConMarcas(texto, paso) {
+    let h = esc(texto);
+    h = h.replace(/\*\*(.+?)\*\*/g, '<span class="cue cue--enfasis">énfasis</span><strong>$1</strong>');
+    h = h.replace(/\[pausa (\d+(?:,\d+)?)s\]/g, '<span class="cue cue--pausa">pausa $1 s</span>');
+    h = h.replace(/\[público\]/g, '<span class="cue cue--publico">al público</span>');
+    h = h.replace(/\[lento\]/g, '<span class="cue cue--lento">más lento</span>');
+    h = h.replace(/\[señalar (\d+)\]/g, (_, k) => {
+      const m = paso.marcas[Number(k) - 1];
+      if (!m) return "";
+      return `<button type="button" class="cue cue--senal" data-pin="${m.num}" aria-label="Señalá la marca ${m.num}: ${esc(m.texto)}">` +
+        `<span class="cue__num" aria-hidden="true">${m.num}</span>${esc(m.texto)}</button>`;
+    });
+    return h;
+  }
+
+  function pasoHTML(p) {
+    const b = bloqueDe(p);
+    const delBloque = G.pasos.filter((x) => x.bloque === p.bloque);
+    let pase = "";
+    if (b.pase && delBloque[delBloque.length - 1] === p) {
+      const a = G.oradores[b.pase.a];
+      pase = `<p class="pase" style="--pase-color:${esc(a.color)}"><span class="pase__a">Pase a <i>${esc(a.nombre)}</i></span>` +
+        `<q>${esc(b.pase.frase)}</q></p>`;
+    }
+    return `<article class="paso" style="--color:${esc(colorDe(p))}" aria-label="${esc(b.etiqueta)}, ${esc(b.tema)}">` +
+      `<header class="paso__cab"><span class="chip">${esc(b.etiqueta)}</span><span class="paso__tema">${esc(b.tema)}</span>` +
+      `<span class="paso__tiempo">${reloj(p.inicio)} a ${reloj(p.inicio + p.segundos)} · ${p.segundos} s</span></header>` +
+      (p.como ? `<p class="paso__como"><b>Cómo:</b> ${esc(p.como)}</p>` : "") +
+      `<div class="paso__texto">${p.guion.map((l) => `<p>${textoConMarcas(l, p)}</p>`).join("")}</div>${pase}</article>`;
+  }
+
+  const pinHTML = (k, m) => `<span class="pin${m.centro ? "" : " pin--izq"}" data-pin="${m.num}" ` +
+    `style="--x:${m.x};--y:${m.y};--color:${esc(colorDePin(k, m.num))}" title="${esc(textoDePin(k, m.num))}">${m.num}</span>`;
+
+  function armar() {
+    const ICONO = { ant: '<path d="M15 6l-6 6 6 6"/>', sig: '<path d="M9 6l6 6-6 6"/>' };
+    const svg = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${d}</svg>`;
+    seccion.innerHTML =
+      `<h2 class="sr-only" tabindex="-1" data-foco>Guion de la exposición</h2>` +
+      `<div class="guion__barra"><div class="segmentos" role="group" aria-label="Vista">` +
+      `<button type="button" data-vista="presentador">Presentador</button><button type="button" data-vista="completo">Guion completo</button></div>` +
+      `<p class="guion__total">${G.bloques.length} bloques · ${esc(G.duracion_texto)} en total · ${total} diapositivas</p></div>` +
+      `<ol class="linea" aria-label="Orden de los oradores">` + G.bloques.map((b, i) =>
+        `<li style="--peso:${b.segundos};--color:${esc(G.oradores[b.orador].color)}"><button type="button" data-bloque="${i}">` +
+        `<span class="linea__nombre">${esc(b.etiqueta)}</span><span class="linea__tema">${esc(b.tema)}</span>` +
+        `<span class="linea__tiempo">${reloj(b.inicio)} · dura ${reloj(b.segundos)}</span></button></li>`).join("") + `</ol>` +
+      (G.leyenda && G.leyenda.length ? `<details class="leyenda" data-leyenda><summary>Cómo leer las marcas</summary><p class="leyenda__items">${G.leyenda.map((l) => {
+        const [a, ...resto] = l.split(":");
+        return `<span><b>${esc(a)}:</b>${esc(resto.join(":"))}</span>`;
+      }).join("")}</p></details>` : "") +
+      `<div class="presentador" data-panel="presentador"><div class="escenario">` +
+      `<div class="escenario__marco"><iframe title="Vista previa de la diapositiva actual" src="${esc(publico.deck)}?modo=notas#${n}"></iframe>` +
+      `<div class="pines" data-pines aria-hidden="true"></div></div>` +
+      `<div class="escenario__controles"><button class="boton boton--icono" type="button" data-anterior aria-label="Diapositiva anterior">${svg(ICONO.ant)}</button>` +
+      `<span class="contador" data-contador></span><button class="boton boton--icono" type="button" data-siguiente aria-label="Diapositiva siguiente">${svg(ICONO.sig)}</button>` +
+      `<p class="escenario__sigue" data-sigue></p></div></div><div class="notas" data-notas></div></div>` +
+      `<ol class="completo" data-panel="completo">` + publico.diapositivas.map((d, i) => {
+        const k = i + 1;
+        return `<li class="completo__item" id="g-${k}"><figure class="completo__diapo"><div class="completo__imagen">` +
+          `<img src="${esc(d.imagen)}" alt="Diapositiva ${k}: ${esc(d.titulo)}" width="1280" height="720" loading="lazy" decoding="async">` +
+          `${d.marcas.map((m) => pinHTML(k, m)).join("")}</div><figcaption class="completo__pie"><span><strong>${k}.</strong> ${esc(d.titulo)}</span>` +
+          `<button class="boton" type="button" data-presentar-desde="${k}">Presentar desde acá</button></figcaption></figure>` +
+          `<div class="completo__notas">${pasosDe(k).map(pasoHTML).join("") || '<p class="paso__como">Esta diapositiva no tiene guion.</p>'}</div></li>`;
+      }).join("") + `</ol>`;
+    iframe = $("iframe", seccion);
+    const leyenda = $("[data-leyenda]", seccion);
+    if (leyenda && matchMedia("(min-width: 761px)").matches) leyenda.open = true;
+    iframe.addEventListener("load", () => enviarAlIframe(n));
+  }
+
+  function pintarNotas() {
+    const d = publico.diapositivas[n - 1];
+    const pasos = pasosDe(n);
+    $("[data-notas]").innerHTML =
+      `<div class="notas__cabecera"><span class="notas__num">Diapositiva ${n} de ${total}</span><h3 class="notas__titulo">${esc(d.titulo)}</h3></div>` +
+      (pasos.map(pasoHTML).join("") || '<p class="paso__como">Esta diapositiva no tiene guion.</p>');
+    $("[data-contador]").textContent = `${n} / ${total}`;
+    $("[data-anterior]").disabled = n === 1;
+    $("[data-siguiente]").disabled = n === total;
+    const sig = pasosDe(n + 1)[0];
+    $("[data-sigue]").innerHTML = n < total
+      ? `Sigue: <strong>${esc(publico.diapositivas[n].titulo)}</strong>${sig ? ` · ${esc(bloqueDe(sig).etiqueta)}` : ""}`
+      : "Es la última diapositiva.";
+  }
+
+  let temporizadorPines = 0;
+  function pintarPines() {
+    const caja = $("[data-pines]");
+    caja.classList.remove("pines--listo");
+    caja.innerHTML = publico.diapositivas[n - 1].marcas.map((m) => pinHTML(n, m)).join("");
+    clearTimeout(temporizadorPines);
+    // Las marcas aparecen cuando la diapositiva terminó de entrar en la vista previa
+    temporizadorPines = setTimeout(() => caja.classList.add("pines--listo"), reducido ? 0 : 750);
+  }
+
+  function marcarLinea() {
+    const actuales = new Set(pasosDe(n).map((p) => p.bloque));
+    $$("[data-bloque]", seccion).forEach((b) => {
+      if (actuales.has(Number(b.dataset.bloque))) b.setAttribute("aria-current", "step");
+      else b.removeAttribute("aria-current");
+    });
+    const actual = $(`[data-bloque][aria-current="step"]`, seccion);
+    if (actual && actual.scrollIntoView) actual.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }
+
+  function enviarAlIframe(k) {
+    try { iframe.contentWindow.postMessage({ tipo: "pitch:ir", n: k }, location.origin); } catch (e) { /* todavía cargando */ }
+  }
+
+  function ir(k, origen) {
+    k = Math.max(1, Math.min(total, Number(k) || 1));
+    const cambio = k !== n;
+    n = k;
+    if (cambio || origen === "inicio") {
+      pintarNotas();
+      pintarPines();
+      marcarLinea();
+      pintarReloj();
+      anuncio.textContent = `Diapositiva ${n} de ${total}: ${publico.diapositivas[n - 1].titulo}`;
+      if (vista === "completo" && origen !== "inicio") {
+        const item = document.getElementById(`g-${n}`);
+        if (item) item.scrollIntoView({ behavior: reducido ? "auto" : "smooth", block: "start" });
+      }
+    }
+    if (origen !== "iframe") enviarAlIframe(n);
+    if (canal && origen !== "canal" && cambio) canal.postMessage({ tipo: "pitch:ir", n });
+  }
+
+  function cambiarVista(v) {
+    vista = v;
+    guardar(CLAVE.vista, v);
+    $$("[data-vista]", seccion).forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.vista === v)));
+    $$("[data-panel]", seccion).forEach((p) => { p.hidden = p.dataset.panel !== v; });
+  }
+
+  /* ── Reloj de la exposición (persiste si se recarga la página) ── */
+  const R = { corriendo: false, inicio: 0, acumulado: 0, id: 0 };
+  try { Object.assign(R, JSON.parse(leer(CLAVE.reloj) || "{}")); } catch (e) { /* reloj nuevo */ }
+  const transcurrido = () => R.acumulado + (R.corriendo ? (Date.now() - R.inicio) / 1000 : 0);
+  function pintarReloj() {
+    if (!G) return;
+    const t = transcurrido();
+    $("[data-reloj]").textContent = reloj(t);
+    const fin = Math.max(...pasosDe(n).map((p) => p.inicio + p.segundos), 0);
+    $("[data-plan]").innerHTML = fin ? `plan ${reloj(fin)}<span class="reloj__total"> de ${esc(G.duracion_texto)}</span>` : "";
+    const atraso = t - fin;
+    $("[data-reloj-caja]").dataset.estado = (R.corriendo || t > 0) && fin ? (atraso > 30 ? "muy-tarde" : atraso > 0 ? "tarde" : "") : "";
+    const boton = $("[data-reloj-boton]");
+    boton.setAttribute("aria-pressed", String(R.corriendo));
+    $("[data-reloj-texto]").textContent = R.corriendo ? "Pausar" : t > 0 ? "Seguir" : "Empezar";
+    boton.querySelector("path").setAttribute("d", R.corriendo ? "M9 6v12M15 6v12" : "M8 5.5v13l10-6.5z");
+  }
+  function guardarReloj() { guardar(CLAVE.reloj, JSON.stringify({ corriendo: R.corriendo, inicio: R.inicio, acumulado: R.acumulado })); }
+  function alternarReloj() {
+    if (R.corriendo) { R.acumulado = transcurrido(); R.corriendo = false; } else { R.inicio = Date.now(); R.corriendo = true; }
+    guardarReloj();
+    pintarReloj();
+  }
+  setInterval(() => { if (R.corriendo) pintarReloj(); }, 500);
+
+  function abrirGuion(datos, animar) {
+    G = datos;
+    armar();
+    puerta.hidden = true;
+    seccion.hidden = false;
+    acciones.hidden = false;
+    if (animar && !reducido) seccion.classList.add("guion--entra");
+    cambiarVista(vista);
+    ir(1, "inicio");
+    $("[data-foco]", seccion).focus();
+    if (canal) canal.postMessage({ tipo: "pitch:quien" }); // si la proyección ya está abierta, seguirla
+
+    seccion.addEventListener("click", (e) => {
+      const b = e.target.closest("button");
+      if (!b) return;
+      if (b.dataset.vista) cambiarVista(b.dataset.vista);
+      else if (b.dataset.bloque != null) ir(G.pasos.find((p) => p.bloque === Number(b.dataset.bloque)).n);
+      else if (b.hasAttribute("data-anterior")) ir(n - 1);
+      else if (b.hasAttribute("data-siguiente")) ir(n + 1);
+      else if (b.dataset.presentarDesde) { cambiarVista("presentador"); ir(Number(b.dataset.presentarDesde)); window.scrollTo({ top: 0 }); }
+      else if (b.dataset.pin) resaltar(b.dataset.pin, true);
+    });
+    const resaltar = (num, si) => $$(`.pines .pin[data-pin="${num}"]`, seccion).forEach((p) => p.classList.toggle("pin--activo", si));
+    ["mouseover", "focusin"].forEach((ev) => seccion.addEventListener(ev, (e) => {
+      const c = e.target.closest(".cue--senal");
+      if (c) resaltar(c.dataset.pin, true);
+    }));
+    ["mouseout", "focusout"].forEach((ev) => seccion.addEventListener(ev, (e) => {
+      const c = e.target.closest(".cue--senal");
+      if (c) resaltar(c.dataset.pin, false);
+    }));
+  }
+
+  /* Mensajes: la vista previa (postMessage) y la ventana de proyección (BroadcastChannel) */
+  window.addEventListener("message", (e) => {
+    if (!G || e.origin !== location.origin || !e.data || e.data.tipo !== "pitch:diapo") return;
+    if (iframe && e.source === iframe.contentWindow) ir(e.data.n, "iframe");
+  });
+  if (canal) canal.onmessage = (e) => {
+    const m = e.data || {};
+    if (G && m.tipo === "pitch:diapo") ir(m.n, "canal");
+  };
+
+  /* Teclado: ← → y Av/Re Pág cambian de diapositiva; T, reloj */
+  document.addEventListener("keydown", (e) => {
+    if (!G || e.altKey || e.ctrlKey || e.metaKey || e.defaultPrevented) return;
+    if (e.target.closest("input, textarea, select")) return;
+    const enControl = e.target.closest("button, a");
+    const presentando = vista === "presentador";
+    if (e.key === "ArrowRight" || (presentando && (e.key === "PageDown" || (e.key === " " && !enControl)))) { e.preventDefault(); ir(n + 1); }
+    else if (e.key === "ArrowLeft" || (presentando && e.key === "PageUp")) { e.preventDefault(); ir(n - 1); }
+    else if (presentando && e.key === "Home") { e.preventDefault(); ir(1); }
+    else if (presentando && e.key === "End") { e.preventDefault(); ir(total); }
+    else if (e.key === "t" || e.key === "T") { e.preventDefault(); alternarReloj(); }
+  });
+
+  $("[data-reloj-boton]").addEventListener("click", alternarReloj);
+  $("[data-reloj-reiniciar]").addEventListener("click", () => {
+    R.corriendo = false; R.acumulado = 0; R.inicio = 0;
+    guardarReloj();
+    pintarReloj();
+  });
+  $("[data-proyectar]").addEventListener("click", () => {
+    const w = window.open(`${publico.deck}?presentar=1#${n}`, "tp-ae2-proyeccion", "popup=yes,width=1280,height=720");
+    anuncio.textContent = w
+      ? "Se abrió la presentación en otra ventana: llevala al proyector y apretá F. Avanza junto con esta página."
+      : "El navegador bloqueó la ventana nueva. Permití ventanas emergentes para este sitio.";
+  });
+  $("[data-bloquear]").addEventListener("click", () => {
+    guardar(CLAVE.codigo, null);
+    location.reload();
+  });
+
+  /* Si el código ya se puso en esta pestaña, abrir directo */
+  const recordado = leer(CLAVE.codigo);
+  if (recordado && window.crypto && crypto.subtle) {
+    descifrar(recordado).then((datos) => abrirGuion(datos, false)).catch(() => guardar(CLAVE.codigo, null));
+  } else if (matchMedia("(pointer: fine)").matches) {
+    casillas[0].focus();
+  }
+})();
+
+</script>
+</body>
+</html>

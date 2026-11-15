@@ -446,6 +446,29 @@ pytest
 - **GitHub Pages:** https://matiasbellidor.github.io/trabajo_practico_AE2/ (rama `main`, carpeta `/docs`).
 - **Vercel:** importar el repositorio. [`vercel.json`](vercel.json) ya lo configura: preset "Other", sin instalar ni compilar, y publica `docs/`.
 
+### Pitch de la exposición y Recursos
+
+En la barra de la web, **Presentación** abre tres opciones: **Descargar PDF**, **Ver presentación** (el deck de 12 diapositivas que se proyecta en la exposición) y **Recursos** (el guion de cada orador, con código).
+
+**Cómo se arma.** El deck es un export de un solo archivo ([`presentacion-tp-ae2.html`](presentacion-tp-ae2.html)) que no se edita. `python -m tp_ae2.pitch` lo copia a `docs/presentacion/` y le suma una capa propia ([`src/tp_ae2/pitch/`](src/tp_ae2/pitch/)):
+
+- Detrás de cada diapositiva cambia la luz (azul para el AL30D, naranja para el PBI) y pasa un barrido al avanzar. Abajo queda fijo un video con el recorrido real de las dos series, generado con los datos. Se pausa con el botón **Fondo** o la tecla <kbd>V</kbd>, y con "reducir movimiento" queda quieto.
+- El PDF (una página por diapositiva) y las miniaturas salen de capturas con Playwright.
+- La Figura 4 pasa al tercer lugar para que Luka muestre la regresión en su bloque (`ORDEN` en `deck.py`), y van dos correcciones de contenido con su motivo (`CORRECCIONES`). Un test verifica que los números del deck coincidan con `resultados.json`.
+
+Hace falta Playwright con Chromium (`python -m playwright install chromium ffmpeg`): el video se codifica con el ffmpeg que trae Playwright.
+
+**Cómo verlo en local.** Recursos usa WebCrypto, que no funciona si se abre el archivo con doble clic (`file://`). Con un servidor local:
+
+```bash
+python -m http.server 8000 --directory docs
+# http://localhost:8000/  ·  /presentacion/  ·  /presentacion/recursos/
+```
+
+**Cómo funciona el código de Recursos.** El guion se escribe en `guion/guion.yaml`, con los números como variables que salen de `resultados.json`. Ese archivo **no está en el repo** (la carpeta está en `.gitignore`), porque el repo es público. Al armar, el guion se cifra con AES-GCM y una clave derivada del código del grupo (PBKDF2, 250.000 iteraciones). La página lo descifra en el navegador solo con los tres números correctos, y el código no figura en ningún archivo publicado. Sirve para que el guion no quede a la vista de cualquiera que abra la web; no es una caja fuerte, porque con 1000 combinaciones posibles alguien con tiempo y conocimientos técnicos podría probarlas todas.
+
+En Recursos, **Proyectar** abre el deck en otra ventana para llevar al proyector: las dos avanzan juntas, con las flechas o con un control de diapositivas.
+
 <details>
 <summary>Estructura del repositorio</summary>
 
@@ -464,11 +487,14 @@ trabajo_practico_AE2/
 │   ├── graficos.py             # figuras
 │   ├── reporte.py, plantillas/ # tablas, informe, resumen y bloques del README
 │   ├── presentacion.py, web/   # presentación web
+│   ├── pitch/                  # deck de la exposición: capa de mejoras, video, PDF y Recursos
 │   └── run_all.py              # pipeline completo
-├── tests/                      # herramientas contra scipy/statsmodels, datos, web, conclusión
+├── presentacion-tp-ae2.html    # export del deck (fuente de docs/presentacion/, no se edita)
+├── guion/                      # guion de los oradores (no se publica: .gitignore)
+├── tests/                      # herramientas contra scipy/statsmodels, datos, web, conclusión, pitch
 ├── outputs/                    # resultados, tablas y figuras
 ├── reports/cuerpo_informe.md   # informe para imprimir
-├── docs/                       # web publicada (GitHub Pages y Vercel)
+├── docs/                       # web publicada (GitHub Pages y Vercel); docs/presentacion/, el pitch
 ├── vercel.json
 └── .claude/skills/tp-web-design/
 ```

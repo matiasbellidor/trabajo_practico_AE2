@@ -255,6 +255,45 @@
     });
   });
 
+  // --- Presentación: botón de la barra y su panel (PDF, deck y Recursos) ------------------------------
+  // Popover nativo con respaldo por clase, como el índice. La invitación (brillo y halo) pasa tres veces al cargar y
+  // se corta con la primera interacción: después el brillo vuelve solo al pasar el mouse.
+  var botonPres = document.querySelector("[data-presentacion]");
+  var menuPres = document.getElementById("menu-presentacion");
+  var popoverPres = !!(menuPres && typeof menuPres.showPopover === "function");
+  function menuAbierto() {
+    if (!menuPres) return false;
+    if (popoverPres) { try { return menuPres.matches(":popover-open"); } catch (e) { return false; } }
+    return menuPres.classList.contains("abierta");
+  }
+  function cerrarMenu() {
+    if (!menuAbierto()) return;
+    if (popoverPres) menuPres.hidePopover();
+    else { menuPres.classList.remove("abierta"); botonPres.setAttribute("aria-expanded", "false"); }
+  }
+  if (botonPres && menuPres) {
+    if (popoverPres) {
+      menuPres.addEventListener("toggle", function (ev) {
+        botonPres.setAttribute("aria-expanded", ev.newState === "open" ? "true" : "false");
+      });
+    } else {
+      botonPres.removeAttribute("popovertarget");
+      botonPres.addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        var abierta = menuPres.classList.toggle("abierta");
+        botonPres.setAttribute("aria-expanded", abierta ? "true" : "false");
+        if (abierta) { var primera = menuPres.querySelector("a"); if (primera) primera.focus(); }
+      });
+      document.addEventListener("click", function (ev) { if (!menuPres.contains(ev.target)) cerrarMenu(); });
+    }
+    if (!movimientoReducido.matches) {
+      var invitar = setTimeout(function () { botonPres.classList.add("cta-pres--invita"); }, 900);
+      var cortar = function () { clearTimeout(invitar); botonPres.classList.remove("cta-pres--invita"); };
+      botonPres.addEventListener("animationend", function (ev) { if (ev.animationName === "cta-halo") cortar(); });
+      ["pointerenter", "focus", "click"].forEach(function (tipo) { botonPres.addEventListener(tipo, cortar); });
+    }
+  }
+
   // --- Motion de figuras ---------------------------------------------------------------------------
   // graficos.py marcó cada elemento (.m con su orden --i y su fase) y estilos.css define las animaciones; acá solo
   // se decide cuándo: la figura se arma una vez, cuando quedó al menos un 35 % a la vista durante 120 ms (un
@@ -355,7 +394,8 @@
     var objetivo = ev.target;
     if (objetivo && (objetivo.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(objetivo.tagName))) return;
     if (indice && indice.contains(objetivo)) return;
-    if (ev.key === "Escape") { cerrarIndice(); return; }
+    if (menuPres && menuPres.contains(objetivo)) return;
+    if (ev.key === "Escape") { cerrarIndice(); cerrarMenu(); return; }
     if (ev.key === "ArrowRight" || ev.key === "PageDown") { ev.preventDefault(); ir(actual + 1); }
     else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); ir(actual - 1); }
   });

@@ -1,0 +1,140 @@
+/* Capa de mejoras del pitch (la inyecta tp_ae2.pitch; no editar docs/presentacion/index.html a mano).
+   Fondo vivo detrás del deck: tres luces que cambian de lugar y de intensidad con cada diapositiva, un barrido de luz
+   una sola vez por cambio y el horizonte (video con el recorrido real del AL30D y del PBI) fijo abajo.
+   Solo se anima transform y opacity. Con "reducir movimiento": luces quietas, sin barrido y video en pausa (póster). */
+:root {
+  --fx-azul: 59, 139, 235;     /* = --up del deck: el AL30D */
+  --fx-naranja: 232, 97, 44;   /* = --dn del deck: el PBI */
+  --fx-celeste: 98, 188, 235;  /* = --kick del deck */
+  --fx-curva: cubic-bezier(.2, .8, .2, 1);
+  --fx-dur: 1.15s;
+}
+
+/* El deck pasa a ser transparente: la escena va a sangre completa detrás, como en AgroCow. */
+html { background: var(--bg-out); }
+body { background: transparent !important; }
+#root { position: relative; z-index: 1; background: transparent !important; }
+.deck { background: transparent !important; box-shadow: none !important; }
+
+.fx { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: var(--bg); contain: strict; }
+.fx__luz {
+  position: absolute; left: 50%; top: 50%; width: 92vmax; height: 92vmax; margin: -46vmax 0 0 -46vmax; border-radius: 50%;
+  opacity: 0; transform: translate(0, 40vh) scale(.6); will-change: transform, opacity;
+  transition: transform var(--fx-dur) var(--fx-curva), opacity var(--fx-dur) var(--fx-curva);
+}
+.fx__luz--azul { background: radial-gradient(closest-side, rgba(var(--fx-azul), .26), rgba(var(--fx-azul), .09) 46%, transparent 74%); }
+.fx__luz--naranja { background: radial-gradient(closest-side, rgba(var(--fx-naranja), .20), rgba(var(--fx-naranja), .065) 46%, transparent 74%); }
+.fx__luz--celeste { background: radial-gradient(closest-side, rgba(var(--fx-celeste), .16), rgba(var(--fx-celeste), .05) 46%, transparent 74%); }
+
+/* Una "atmósfera" por diapositiva. Azul = AL30D, naranja = PBI: la luz acompaña de qué variable se habla. */
+.fx[data-diapo="portada"] .fx__luz--azul { opacity: 1; transform: translate(-30vw, 22vh) scale(.95); }
+.fx[data-diapo="portada"] .fx__luz--naranja { opacity: .55; transform: translate(34vw, -26vh) scale(.55); }
+.fx[data-diapo="hipotesis"] .fx__luz--azul { opacity: .9; transform: translate(-27vw, 8vh) scale(.8); }
+.fx[data-diapo="hipotesis"] .fx__luz--naranja { opacity: .8; transform: translate(29vw, 12vh) scale(.72); }
+.fx[data-diapo="figura-4"] .fx__luz--azul { opacity: .5; transform: translate(-6vw, 36vh) scale(.75); }
+.fx[data-diapo="figura-4"] .fx__luz--naranja { opacity: .3; transform: translate(32vw, -32vh) scale(.42); }
+.fx[data-diapo="fuentes"] .fx__luz--azul { opacity: .85; transform: translate(31vw, -22vh) scale(.75); }
+.fx[data-diapo="fuentes"] .fx__luz--naranja { opacity: .65; transform: translate(-30vw, 26vh) scale(.66); }
+.fx[data-diapo="figura-1"] .fx__luz--azul { opacity: .45; transform: translate(-22vw, 36vh) scale(.7); }
+.fx[data-diapo="figura-1"] .fx__luz--naranja { opacity: .32; transform: translate(26vw, 32vh) scale(.5); }
+/* 15 veces más volátil: una luz grande para el bono y una chica para el PBI */
+.fx[data-diapo="descriptiva"] .fx__luz--azul { opacity: 1; transform: translate(-19vw, 6vh) scale(1.05); }
+.fx[data-diapo="descriptiva"] .fx__luz--naranja { opacity: .8; transform: translate(30vw, 10vh) scale(.32); }
+.fx[data-diapo="mco"] .fx__luz--azul { opacity: .85; transform: translate(4vw, 32vh) scale(.92); }
+.fx[data-diapo="mco"] .fx__luz--celeste { opacity: .4; transform: translate(-6vw, -36vh) scale(.55); }
+.fx[data-diapo="sensibilidad"] .fx__luz--azul { opacity: .7; transform: translate(-33vw, -10vh) scale(.6); }
+.fx[data-diapo="sensibilidad"] .fx__luz--celeste { opacity: .55; transform: translate(0, 32vh) scale(.62); }
+.fx[data-diapo="sensibilidad"] .fx__luz--naranja { opacity: .55; transform: translate(33vw, -12vh) scale(.6); }
+/* La excepción trimestral: el naranja toma el frente */
+.fx[data-diapo="agregacion"] .fx__luz--naranja { opacity: .9; transform: translate(27vw, -18vh) scale(.85); }
+.fx[data-diapo="agregacion"] .fx__luz--azul { opacity: .45; transform: translate(-31vw, 30vh) scale(.55); }
+.fx[data-diapo="limitaciones"] .fx__luz--celeste { opacity: .4; transform: translate(0, -30vh) scale(.72); }
+.fx[data-diapo="limitaciones"] .fx__luz--azul { opacity: .38; transform: translate(-34vw, 26vh) scale(.5); }
+.fx[data-diapo="conclusiones"] .fx__luz--azul { opacity: .95; transform: translate(0, 20vh) scale(1.1); }
+.fx[data-diapo="conclusiones"] .fx__luz--celeste { opacity: .5; transform: translate(0, -26vh) scale(.6); }
+.fx[data-diapo="futuro"] .fx__luz--azul { opacity: .72; transform: translate(-22vw, -20vh) scale(.8); }
+.fx[data-diapo="futuro"] .fx__luz--naranja { opacity: .5; transform: translate(25vw, -26vh) scale(.5); }
+.fx[data-diapo="futuro"] .fx__luz--celeste { opacity: .62; transform: translate(0, 34vh) scale(.82); }
+
+/* Barrido: una banda de luz cruza una vez en la dirección del avance (en la de retroceso al volver) */
+.fx__barrido {
+  position: absolute; top: -10%; bottom: -10%; left: 0; width: 38vw; opacity: 0;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .045) 42%, rgba(var(--fx-celeste), .075) 50%, rgba(255, 255, 255, .045) 58%, transparent);
+  transform: translateX(-60vw) skewX(-12deg);
+}
+.fx--barre .fx__barrido { animation: fx-barre .95s var(--fx-curva) 1 both; }
+.fx--barre.fx--atras .fx__barrido { animation-name: fx-barre-atras; }
+@keyframes fx-barre { from { opacity: 0; transform: translateX(-45vw) skewX(-12deg); } 18% { opacity: 1; } to { opacity: 0; transform: translateX(118vw) skewX(-12deg); } }
+@keyframes fx-barre-atras { from { opacity: 0; transform: translateX(118vw) skewX(-12deg); } 18% { opacity: 1; } to { opacity: 0; transform: translateX(-45vw) skewX(-12deg); } }
+
+/* Horizonte: video sobre negro sumado con "screen" (el negro no tapa nada: solo suman las líneas). Se corre un poco
+   con cada diapositiva (paralaje) y se funde hacia arriba para no competir con el texto. */
+.fx__horizonte {
+  position: absolute; left: -7vw; right: -7vw; bottom: 0; height: clamp(96px, 21vh, 280px);
+  mix-blend-mode: screen; opacity: .9;
+  transform: translateX(calc(var(--i, 0) * -.5vw));
+  transition: transform 1.4s var(--fx-curva), opacity var(--fx-dur) var(--fx-curva);
+  -webkit-mask-image: linear-gradient(to top, #000 38%, transparent);
+  mask-image: linear-gradient(to top, #000 38%, transparent);
+}
+/* "fill": la curva entra entera en la franja en cualquier proporción de pantalla (es un fondo, no una figura) */
+.fx__video { display: block; width: 100%; height: 100%; object-fit: fill; background: #000; }
+/* La portada ya tiene su propio gráfico de fondo: el horizonte baja para no sumar dos gráficos */
+.fx[data-diapo="portada"] .fx__horizonte { opacity: .5; }
+
+/* Celular en vertical (el deck pasa a "modo lectura": diapositivas apiladas con scroll): horizonte más bajo y tenue */
+body:has(.stage.reading) .fx__horizonte { height: 16vh; opacity: .55; }
+body:has(.stage.reading) .fx__luz { width: 120vmax; height: 120vmax; margin: -60vmax 0 0 -60vmax; }
+
+/* Herramientas propias (PDF y pausa del fondo), con el mismo estilo que la barra de navegación del deck */
+.pitch-herramientas {
+  position: fixed; left: max(14px, env(safe-area-inset-left)); bottom: max(14px, env(safe-area-inset-bottom)); z-index: 21;
+  display: flex; gap: 4px; padding: 5px; font: 500 13px/1 var(--sans); color: #dfe5f0; background: #0d121ed6;
+  border: 1px solid #273046; border-radius: 999px; box-shadow: 0 8px 30px #00000059; transition: opacity .3s;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.pitch-boton {
+  display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px 0 9px; border: 0; border-radius: 999px;
+  background: transparent; color: inherit; font: inherit; text-decoration: none; cursor: pointer;
+  transition: background-color .16s, transform .16s;
+}
+.pitch-boton:hover, .pitch-boton:focus-visible { background: #1f2840; }
+.pitch-boton:active { transform: scale(.96); }
+.pitch-boton svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pitch-boton .pitch-icono-play { display: none; fill: currentColor; stroke: none; }
+.pitch-boton[aria-pressed="true"] .pitch-icono-pausa { display: none; }
+.pitch-boton[aria-pressed="true"] .pitch-icono-play { display: block; }
+body:has(.stage.idle) .pitch-herramientas { opacity: 0; pointer-events: none; }
+/* Pantallas medianas: "Volver al inicio" queda solo con la flecha para no chocar con la barra centrada del deck */
+@media (max-width: 1000px) and (min-width: 761px) {
+  [data-pitch-inicio] { padding: 0 8px; }
+  [data-pitch-inicio] span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+/* Celular: solo íconos (el nombre queda en aria-label) y zonas táctiles de 44 px */
+@media (max-width: 760px) {
+  .pitch-herramientas { padding: 3px; }
+  .pitch-boton { width: 44px; height: 44px; padding: 0; justify-content: center; }
+  .pitch-boton span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
+.pitch-aviso {
+  position: fixed; left: 50%; top: max(16px, env(safe-area-inset-top)); z-index: 30; margin: 0; padding: 10px 16px;
+  font: 500 14px/1.3 var(--sans); color: #dfe5f0; background: #0d121eeb; border: 1px solid #273046; border-radius: 999px;
+  box-shadow: 0 8px 30px #00000059; transform: translateX(-50%); transition: opacity .25s, transform .25s var(--fx-curva);
+}
+.pitch-aviso[hidden] { display: block; opacity: 0; transform: translate(-50%, -8px); pointer-events: none; }
+.pitch-aviso kbd { font: 600 12px/1 var(--sans); border: 1px solid #33405c; border-bottom-width: 2px; border-radius: 5px; padding: 2px 6px; }
+
+/* Dentro de Recursos (iframe con ?modo=notas): sin herramientas propias, el presentador maneja todo desde afuera */
+.pitch-embebido .pitch-herramientas, .pitch-embebido .pitch-aviso { display: none; }
+
+/* Captura para el PDF: escena final de cada diapositiva, sin controles ni transiciones */
+.pitch-captura .fx__luz, .pitch-captura .fx__horizonte { transition: none !important; }
+.pitch-captura .fx__barrido, .pitch-captura .pitch-herramientas, .pitch-captura .pitch-aviso,
+.pitch-captura .nav, .pitch-captura .edge, .pitch-captura .hint, .pitch-captura .fab, .pitch-captura .prog { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx__luz, .fx__horizonte { transition: opacity .2s linear; }
+  .fx__horizonte { transform: none; }
+  .fx__barrido { display: none; }
+}
