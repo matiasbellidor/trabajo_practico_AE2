@@ -1,11 +1,11 @@
 /* Recursos: código de 3 casillas → descifra el guion (WebCrypto) → vista del presentador sincronizada con el deck.
    Sincronización: la vista previa es un iframe del deck (?modo=notas) que avisa por postMessage en qué diapositiva
-   está; la ventana "Proyectar" y esta página se hablan por BroadcastChannel ("tp-ae2-pitch"). */
+   está; si el deck está abierto en otra pestaña del mismo navegador, se siguen por BroadcastChannel ("tp-ae2-pitch"). */
 (() => {
   "use strict";
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-  const CLAVE = { codigo: "tp-ae2-recursos-codigo", vista: "tp-ae2-recursos-vista", reloj: "tp-ae2-recursos-reloj" };
+  const CLAVE = { vista: "tp-ae2-recursos-vista", reloj: "tp-ae2-recursos-reloj" };
   const publico = JSON.parse($("#guion-publico").textContent);
   const cifrado = JSON.parse($("#guion-cifrado").textContent);
   const total = publico.diapositivas.length;
@@ -108,7 +108,6 @@
     try {
       const datos = await descifrar(cod);
       clearTimeout(espera);
-      guardar(CLAVE.codigo, cod);
       form.classList.add("codigo--ok");
       ayuda.textContent = "Código correcto.";
       setTimeout(() => abrirGuion(datos, true), reducido ? 0 : 280);
@@ -313,7 +312,7 @@
     cambiarVista(vista);
     ir(1, "inicio");
     $("[data-foco]", seccion).focus();
-    if (canal) canal.postMessage({ tipo: "pitch:quien" }); // si la proyección ya está abierta, seguirla
+    if (canal) canal.postMessage({ tipo: "pitch:quien" }); // si el deck ya está abierto en otra pestaña, seguirlo
 
     seccion.addEventListener("click", (e) => {
       const b = e.target.closest("button");
@@ -336,7 +335,7 @@
     }));
   }
 
-  /* Mensajes: la vista previa (postMessage) y la ventana de proyección (BroadcastChannel) */
+  /* Mensajes: la vista previa (postMessage) y otra pestaña con el deck, si la hay (BroadcastChannel) */
   window.addEventListener("message", (e) => {
     if (!G || e.origin !== location.origin || !e.data || e.data.tipo !== "pitch:diapo") return;
     if (iframe && e.source === iframe.contentWindow) ir(e.data.n, "iframe");
@@ -365,22 +364,7 @@
     guardarReloj();
     pintarReloj();
   });
-  $("[data-proyectar]").addEventListener("click", () => {
-    const w = window.open(`${publico.deck}?presentar=1#${n}`, "tp-ae2-proyeccion", "popup=yes,width=1280,height=720");
-    anuncio.textContent = w
-      ? "Se abrió la presentación en otra ventana: llevala al proyector y apretá F. Avanza junto con esta página."
-      : "El navegador bloqueó la ventana nueva. Permití ventanas emergentes para este sitio.";
-  });
-  $("[data-bloquear]").addEventListener("click", () => {
-    guardar(CLAVE.codigo, null);
-    location.reload();
-  });
-
-  /* Si el código ya se puso en esta pestaña, abrir directo */
-  const recordado = leer(CLAVE.codigo);
-  if (recordado && window.crypto && crypto.subtle) {
-    descifrar(recordado).then((datos) => abrirGuion(datos, false)).catch(() => guardar(CLAVE.codigo, null));
-  } else if (matchMedia("(pointer: fine)").matches) {
-    casillas[0].focus();
-  }
+  // El código no se guarda en ningún lado: al refrescar la página hay que volver a ponerlo (pedido de Matías).
+  $("[data-bloquear]").addEventListener("click", () => location.reload());
+  if (matchMedia("(pointer: fine)").matches) casillas[0].focus();
 })();

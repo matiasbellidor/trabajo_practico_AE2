@@ -54,9 +54,24 @@ def test_orden_de_la_exposicion(publicado):
     assert [d["id"] for d in config["diapositivas"]] == ids, "la capa y la app tienen que contar igual las diapositivas"
 
 
-def test_correcciones_de_contenido(publicado):
-    for viejo, nuevo, _ in deck.CORRECCIONES:
+def test_correcciones_de_contenido_y_velocidad_de_graficos(publicado):
+    for viejo, nuevo, _ in deck.CORRECCIONES + deck.OPTIMIZACIONES:
         assert viejo not in publicado and publicado.count(nuevo) == 1
+
+
+def test_volver_al_inicio_no_aparece_en_pantalla_completa(publicado):
+    estilos = publicado.split(f'id="{deck.MARCA}-estilos"')[1].split("</style>")[0]
+    for control in (".pitch-herramientas", ".nav", ".edge", ".hint", ".fab"):
+        assert f":root:fullscreen {control}" in estilos, control
+    assert "display: none !important" in estilos
+
+
+def test_recursos_no_abre_otra_pestana(recursos):
+    assert "data-proyectar" not in recursos and "window.open" not in recursos
+
+
+def test_recursos_no_recuerda_el_codigo(recursos):
+    assert "recursos-codigo" not in recursos and "CLAVE.codigo" not in recursos, "el código no se guarda en el navegador"
 
 
 def test_numeros_del_deck_coinciden_con_resultados(publicado, resultados):

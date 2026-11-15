@@ -165,7 +165,8 @@ def construir(cfg: Config, con_video: bool = True, con_capturas: bool = True) ->
     media.mkdir(parents=True, exist_ok=True)
     resultados = json.loads((cfg.ruta("salidas") / "resultados.json").read_text(encoding="utf-8"))
 
-    fuente = deck.corregir(deck.reordenar(cfg.ruta("pitch").read_text(encoding="utf-8"), deck.ORDEN))
+    fuente = deck.reordenar(cfg.ruta("pitch").read_text(encoding="utf-8"), deck.ORDEN)
+    fuente = deck.corregir(deck.corregir(fuente, deck.CORRECCIONES), deck.OPTIMIZACIONES)
     diapos = deck.diapositivas(fuente)
     ids, titulos = [d.id for d in diapos], {d.id: d.titulo for d in diapos}
 

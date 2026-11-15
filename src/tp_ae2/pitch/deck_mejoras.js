@@ -56,6 +56,24 @@
     });
   }
 
+  /* Gráficos más rápidos: la app precarga Plotly al arrancar y llama a esta función con él (deck.OPTIMIZACIONES). La
+     primera figura que se dibuja en la página paga la puesta a punto de Plotly (módulos de barras y dispersión,
+     medición de textos); se paga acá, con un gráfico mínimo fuera de pantalla, mientras se habla de la portada. */
+  window.__pitchCalentar = function (Plotly) {
+    try {
+      var caja = document.createElement("div");
+      caja.setAttribute("aria-hidden", "true");
+      caja.style.cssText = "position:fixed;left:-10000px;top:0;width:480px;height:320px;pointer-events:none";
+      document.body.appendChild(caja);
+      Promise.resolve(Plotly.newPlot(caja, [
+        { type: "scatter", mode: "markers+lines", x: [0, 1, 2], y: [0, 2, 1] },
+        { type: "bar", x: [0, 1, 2], y: [1, -1, 2], xaxis: "x2", yaxis: "y2" },
+      ], { grid: { rows: 2, columns: 1, pattern: "independent" }, showlegend: true }, { staticPlot: true }))
+        .then(function () { Plotly.purge(caja); caja.remove(); }, function () { caja.remove(); });
+    } catch (e) { /* si falla, la figura se dibuja igual al aparecer */ }
+    return Plotly;
+  };
+
   var replaceOriginal = history.replaceState;
   history.replaceState = function (estado, titulo, url) {
     var r = replaceOriginal.apply(this, arguments);

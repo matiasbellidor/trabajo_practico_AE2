@@ -105,6 +105,19 @@ body:has(.stage.reading) .fx__luz { width: 120vmax; height: 120vmax; margin: -60
 .pitch-boton[aria-pressed="true"] .pitch-icono-pausa { display: none; }
 .pitch-boton[aria-pressed="true"] .pitch-icono-play { display: block; }
 body:has(.stage.idle) .pitch-herramientas { opacity: 0; pointer-events: none; }
+/* Pantalla completa (F, el botón del deck o F11): no se ve ningún control, ni los míos ni los del deck (flechas,
+   barra de diapositivas, aviso de "clic para avanzar"). Con Esc se sale de pantalla completa y vuelven. */
+:root:fullscreen .pitch-herramientas, :root:fullscreen .nav, :root:fullscreen .edge,
+:root:fullscreen .hint, :root:fullscreen .fab { display: none !important; }
+@media (display-mode: fullscreen) {
+  .pitch-herramientas, .nav, .edge, .hint, .fab { display: none !important; }
+}
+/* Con mouse, los controles casi no se ven: se aclaran al pasar el cursor o al enfocarlos con el teclado */
+@media (hover: hover) and (pointer: fine) {
+  .pitch-herramientas, .stage .nav, .stage .edge:not(:disabled) { opacity: .14; transition: opacity .25s; }
+  .pitch-herramientas:hover, .pitch-herramientas:focus-within,
+  .stage .nav:hover, .stage .nav:focus-within, .stage .edge:not(:disabled):hover, .stage .edge:not(:disabled):focus-visible { opacity: 1; }
+}
 /* Pantallas medianas: "Volver al inicio" queda solo con la flecha para no chocar con la barra centrada del deck */
 @media (max-width: 1000px) and (min-width: 761px) {
   [data-pitch-inicio] { padding: 0 8px; }

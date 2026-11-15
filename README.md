@@ -467,7 +467,7 @@ python -m http.server 8000 --directory docs
 
 **Cómo funciona el código de Recursos.** El guion se escribe en `guion/guion.yaml`, con los números como variables que salen de `resultados.json`. Ese archivo **no está en el repo** (la carpeta está en `.gitignore`), porque el repo es público. Al armar, el guion se cifra con AES-GCM y una clave derivada del código del grupo (PBKDF2, 250.000 iteraciones). La página lo descifra en el navegador solo con los tres números correctos, y el código no figura en ningún archivo publicado. Sirve para que el guion no quede a la vista de cualquiera que abra la web; no es una caja fuerte, porque con 1000 combinaciones posibles alguien con tiempo y conocimientos técnicos podría probarlas todas.
 
-En Recursos, **Proyectar** abre el deck en otra ventana para llevar al proyector: las dos avanzan juntas, con las flechas o con un control de diapositivas.
+La presentación se da desde la misma página del deck, en pantalla completa (<kbd>F</kbd>); el botón **Volver al inicio** solo aparece fuera de pantalla completa. Recursos es para leer y ensayar el guion, con la diapositiva en vivo al lado.
 
 <details>
 <summary>Estructura del repositorio</summary>

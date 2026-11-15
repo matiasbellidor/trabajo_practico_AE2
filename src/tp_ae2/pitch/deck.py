@@ -35,6 +35,24 @@ CORRECCIONES: list[tuple[str, str, str]] = [
      "el ANOVA y el test t de diferencia de medias son pruebas paramétricas"),
 ]
 
+# Velocidad de los gráficos (Plotly). Medido con Playwright, de la tecla → a "el gráfico dejó de moverse": 2,2 s en una
+# compu normal y 3,9 s con la CPU 4× más lenta. La demora era sobre todo esperar la animación de entrada de la
+# diapositiva antes de empezar a dibujar. Mismo control que CORRECCIONES: cada texto, exactamente una vez.
+OPTIMIZACIONES: list[tuple[str, str, str]] = [
+    ("let{fs:o}=am(),{entered:s}=sm(),c=ep()", "let{fs:o}=am(),{started:s}=sm(),c=ep()",
+     "el gráfico se dibuja al montar la diapositiva (en el celular, al entrar en pantalla), no al terminar su entrada"),
+    ("vm={duration:1300,easing:`cubic-in-out`}", "vm={duration:700,easing:`cubic-in-out`}",
+     "la animación de armado del gráfico pasa de 1,3 s a 0,7 s"),
+    ("new ResizeObserver(()=>{u.current&&d.current&&u.current.Plots.resize(e)})",
+     "new ResizeObserver(()=>{u.current&&d.current&&e.offsetParent&&u.current.Plots.resize(e).catch(()=>{})})",
+     "con el gráfico dibujado antes, pasar rápido de diapositiva pedía redimensionar uno que ya salía (error de consola)"),
+    ("window.requestIdleCallback?window.requestIdleCallback(()=>rm()):setTimeout(rm,1500)",
+     "window.requestIdleCallback?window.requestIdleCallback(()=>rm().then(__pitchCalentar),{timeout:500}):"
+     "setTimeout(()=>rm().then(__pitchCalentar),300)",
+     "Plotly se inicializa a más tardar a los 0,5 s de cargar y dibuja una vez un gráfico invisible (lo que la primera "
+     "figura pagaba al aparecer); __pitchCalentar está en la capa (deck_mejoras.js)"),
+]
+
 _ARRAY = re.compile(r"=\[(\{id:`portada`.*?\})\];", re.S)
 _ENTRADA = re.compile(
     r"\{id:`(?P<id>[^`]+)`,cls:`(?P<cls>[^`]*)`,C:(?P<comp>[\w$]+),(?:num:!1,)?"
