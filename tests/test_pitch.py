@@ -192,6 +192,16 @@ class TestGuion:
             assert valor in texto
         assert not re.search(r"\{\{\s*\w+\s*\}\}", texto), "quedó una variable de Jinja sin reemplazar"
 
+    def test_cada_diapositiva_tiene_puntos_clave_y_los_conceptos_estan_explicados(self, armado, publicado):
+        ids = [d.id for d in deck.diapositivas(publicado)]
+        assert list(armado["apoyo"]) == ids, "una entrada por diapositiva, en el orden del deck"
+        for d, a in armado["apoyo"].items():
+            assert a["claves"], f"{d}: sin puntos clave"
+            for c in a["conceptos"]:
+                assert c["nombre"] and len(c["texto"]) <= 190, f"{d}/{c['nombre']}: el concepto va en una o dos líneas"
+        con_conceptos = {d for d, a in armado["apoyo"].items() if a["conceptos"]}
+        assert {"hipotesis", "descriptiva", "mco", "sensibilidad"} <= con_conceptos
+
     def test_recursos_esta_al_dia_con_el_guion(self, armado, recursos):
         sal, iv = construir.sal_e_iv(construir.texto_del_guion(armado))
         cifrado = json.loads(re.search(r'id="guion-cifrado">(.*?)</script>', recursos).group(1))

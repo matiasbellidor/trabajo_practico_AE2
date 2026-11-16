@@ -173,6 +173,18 @@
       `<div class="paso__texto">${p.guion.map((l) => `<p>${textoConMarcas(l, p)}</p>`).join("")}</div>${pase}</article>`;
   }
 
+  /* Debajo de la diapositiva: lo que sí o sí hay que tocar y los conceptos estadísticos, en una línea cada uno */
+  function apoyoHTML(k) {
+    const a = G.apoyo && G.apoyo[publico.diapositivas[k - 1].id];
+    if (!a) return "";
+    const conceptos = a.conceptos.length
+      ? `<section class="apoyo__bloque" aria-labelledby="apoyo-con-${k}"><h4 class="apoyo__titulo" id="apoyo-con-${k}">Conceptos en esta diapositiva</h4>` +
+        `<dl class="conceptos">${a.conceptos.map((c) => `<div class="concepto"><dt>${esc(c.nombre)}</dt><dd>${esc(c.texto)}</dd></div>`).join("")}</dl></section>`
+      : "";
+    return `<div class="apoyo"><section class="apoyo__bloque" aria-labelledby="apoyo-cla-${k}"><h4 class="apoyo__titulo" id="apoyo-cla-${k}">Puntos clave: hay que tocarlos sí o sí</h4>` +
+      `<ol class="claves">${a.claves.map((c) => `<li>${esc(c)}</li>`).join("")}</ol></section>${conceptos}</div>`;
+  }
+
   const pinHTML = (k, m) => `<span class="pin${m.centro ? "" : " pin--izq"}" data-pin="${m.num}" ` +
     `style="--x:${m.x};--y:${m.y};--color:${esc(colorDePin(k, m.num))}" title="${esc(textoDePin(k, m.num))}">${m.num}</span>`;
 
@@ -197,13 +209,13 @@
       `<div class="pines" data-pines aria-hidden="true"></div></div>` +
       `<div class="escenario__controles"><button class="boton boton--icono" type="button" data-anterior aria-label="Diapositiva anterior">${svg(ICONO.ant)}</button>` +
       `<span class="contador" data-contador></span><button class="boton boton--icono" type="button" data-siguiente aria-label="Diapositiva siguiente">${svg(ICONO.sig)}</button>` +
-      `<p class="escenario__sigue" data-sigue></p></div></div><div class="notas" data-notas></div></div>` +
+      `<p class="escenario__sigue" data-sigue></p></div><div data-apoyo></div></div><div class="notas" data-notas></div></div>` +
       `<ol class="completo" data-panel="completo">` + publico.diapositivas.map((d, i) => {
         const k = i + 1;
         return `<li class="completo__item" id="g-${k}"><figure class="completo__diapo"><div class="completo__imagen">` +
           `<img src="${esc(d.imagen)}" alt="Diapositiva ${k}: ${esc(d.titulo)}" width="1280" height="720" loading="lazy" decoding="async">` +
           `${d.marcas.map((m) => pinHTML(k, m)).join("")}</div><figcaption class="completo__pie"><span><strong>${k}.</strong> ${esc(d.titulo)}</span>` +
-          `<button class="boton" type="button" data-presentar-desde="${k}">Presentar desde acá</button></figcaption></figure>` +
+          `<button class="boton" type="button" data-presentar-desde="${k}">Presentar desde acá</button></figcaption>${apoyoHTML(k)}</figure>` +
           `<div class="completo__notas">${pasosDe(k).map(pasoHTML).join("") || '<p class="paso__como">Esta diapositiva no tiene guion.</p>'}</div></li>`;
       }).join("") + `</ol>`;
     iframe = $("iframe", seccion);
@@ -218,6 +230,7 @@
     $("[data-notas]").innerHTML =
       `<div class="notas__cabecera"><span class="notas__num">Diapositiva ${n} de ${total}</span><h3 class="notas__titulo">${esc(d.titulo)}</h3></div>` +
       (pasos.map(pasoHTML).join("") || '<p class="paso__como">Esta diapositiva no tiene guion.</p>');
+    $("[data-apoyo]").innerHTML = apoyoHTML(n);
     $("[data-contador]").textContent = `${n} / ${total}`;
     $("[data-anterior]").disabled = n === 1;
     $("[data-siguiente]").disabled = n === total;

@@ -33,7 +33,7 @@ kbd { font: 600 11px/1 var(--sans); color: #dfe5f0; border: 1px solid var(--bord
 ::-webkit-scrollbar-thumb { background: #2a3550; border: 2px solid var(--bg); border-radius: var(--r-pill); }
 ::-webkit-scrollbar-thumb:hover { background: #36456a; }
 ::-webkit-scrollbar-button { display: none; }
-@supports not selector(::-webkit-scrollbar) { html, .linea, .notas { scrollbar-color: #2a3550 transparent; scrollbar-width: thin; } }
+@supports not selector(::-webkit-scrollbar) { html, .linea, .notas, .escenario { scrollbar-color: #2a3550 transparent; scrollbar-width: thin; } }
 
 /* Cabecera */
 .cab {
@@ -137,13 +137,29 @@ kbd { font: 600 11px/1 var(--sans); color: #dfe5f0; border: 1px solid var(--bord
 
 /* Vista del presentador: diapositiva en vivo (iframe del deck) + notas */
 .presentador { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(320px, 1fr); gap: var(--e5); margin-top: var(--e5); align-items: start; }
-.escenario { position: sticky; top: 72px; }
+.escenario { position: sticky; top: 72px; max-height: calc(100dvh - 84px); overflow-y: auto; padding: 2px 4px 2px 2px; margin: -2px -4px -2px -2px; }
 .escenario__marco { position: relative; aspect-ratio: 16 / 9; border-radius: var(--r-tarjeta); overflow: hidden; background: var(--bg-out); box-shadow: 0 0 0 1px var(--borde), var(--sombra); }
 .escenario__marco iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .escenario__controles { display: flex; align-items: center; gap: var(--e2); margin-top: var(--e3); flex-wrap: wrap; }
 .contador { min-width: 64px; text-align: center; font-variant-numeric: tabular-nums; font-weight: 600; color: var(--blanco); }
 .escenario__sigue { margin-left: auto; font-size: 13px; color: var(--mut); min-width: 0; }
 .escenario__sigue strong { color: var(--tx); font-weight: 600; }
+
+/* Debajo de la diapositiva: puntos clave (los que sí o sí se tocan) y conceptos estadísticos en una línea */
+.apoyo { display: grid; gap: var(--e3); margin-top: var(--e4); }
+.apoyo__bloque { padding: var(--e3) var(--e4) var(--e4); background: var(--card); border: 1px solid var(--borde); border-radius: var(--r-tarjeta); }
+.apoyo__titulo { font: 700 12px/1.3 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--kick); }
+.claves { list-style: none; counter-reset: clave; margin: var(--e3) 0 0; padding: 0; display: grid; gap: var(--e2); }
+.claves li { counter-increment: clave; position: relative; padding-left: 30px; font-size: 15px; line-height: 1.45; color: #e7eaf0; }
+.claves li::before {
+  content: counter(clave); position: absolute; left: 0; top: 1px; display: grid; place-items: center; width: 20px; height: 20px;
+  border-radius: 50%; background: color-mix(in srgb, var(--ok) 20%, transparent); border: 1px solid color-mix(in srgb, var(--ok) 55%, transparent);
+  color: var(--ok); font: 800 11px/1 var(--sans);
+}
+.conceptos { margin: var(--e3) 0 0; display: grid; gap: var(--e3); }
+.concepto { display: grid; gap: 2px; padding-left: var(--e3); border-left: 2px solid var(--borde-2); }
+.concepto dt { font: 700 14px/1.35 var(--sans); color: var(--blanco); }
+.concepto dd { margin: 0; font-size: 14px; line-height: 1.45; color: var(--mut); }
 
 /* Marcas numeradas sobre la diapositiva */
 .pines { position: absolute; inset: 0; pointer-events: none; }
@@ -205,7 +221,7 @@ button.cue--senal:hover, button.cue--senal:focus-visible { background: color-mix
 /* Guion completo: todas las diapositivas con sus marcas y sus notas */
 .completo { list-style: none; margin: var(--e5) 0 0; padding: 0; display: grid; gap: var(--e7); }
 .completo__item { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: var(--e5); align-items: start; scroll-margin-top: 80px; }
-.completo__diapo { margin: 0; position: sticky; top: 72px; }
+.completo__diapo { margin: 0; }
 .completo__imagen { position: relative; aspect-ratio: 16 / 9; border-radius: var(--r-tarjeta); overflow: hidden; background: var(--bg-out); box-shadow: 0 0 0 1px var(--borde); }
 .completo__imagen img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .completo__imagen .pin { opacity: 1; transform: none; }
@@ -216,6 +232,7 @@ button.cue--senal:hover, button.cue--senal:focus-visible { background: color-mix
 @media (max-width: 1100px) {
   .presentador, .completo__item { grid-template-columns: minmax(0, 1fr); }
   .escenario, .completo__diapo { position: static; }
+  .escenario { max-height: none; overflow: visible; }
 }
 @media (max-width: 640px) {
   .cab { gap: var(--e2); }
@@ -249,5 +266,7 @@ button.cue--senal:hover, button.cue--senal:focus-visible { background: color-mix
   [data-panel="completo"][hidden] { display: grid !important; }
   .completo__item { break-inside: avoid; grid-template-columns: 1fr; }
   .completo__diapo { position: static; }
+  .apoyo__titulo, .claves li::before { color: #0b1220; }
+  .claves li { color: #111; }
   .paso__texto { color: #111; }
 }

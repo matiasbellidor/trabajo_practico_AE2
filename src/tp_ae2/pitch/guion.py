@@ -146,4 +146,24 @@ def armar(fuente: dict, resultados: dict, ids_diapositivas: list[str], titulos: 
         bloques.append({"id": b["id"], "orador": quien, "etiqueta": etiqueta, "tema": b["tema"],
                         "inicio": inicio_bloque, "segundos": reloj - inicio_bloque, "pase": b.get("pase")})
     return {"titulo": g.get("titulo", "Guion de la exposición"), "duracion": reloj, "duracion_texto": _reloj(reloj),
-            "oradores": oradores, "bloques": bloques, "pasos": pasos, "leyenda": g.get("leyenda", [])}
+            "oradores": oradores, "bloques": bloques, "pasos": pasos, "leyenda": g.get("leyenda", []),
+            "apoyo": _apoyo(g.get("diapositivas", {}), ids_diapositivas)}
+
+
+def _apoyo(fuente: dict, ids_diapositivas: list[str]) -> dict:
+    """Panel de cada diapositiva (debajo de la vista previa): puntos clave que sí o sí hay que tocar y conceptos
+    estadísticos explicados en una línea. Una entrada por diapositiva del deck; sin entrada, el panel no sale."""
+    apoyo = {}
+    for d, a in fuente.items():
+        if d not in ids_diapositivas:
+            raise GuionInvalido(f"diapositivas: {d!r} no está en el deck")
+        claves, conceptos = a.get("claves", []), a.get("conceptos", [])
+        if not claves or not all(isinstance(c, str) and c for c in claves):
+            raise GuionInvalido(f"diapositivas/{d}: falta la lista de puntos clave")
+        if any(set(c) != {"nombre", "texto"} for c in conceptos):
+            raise GuionInvalido(f"diapositivas/{d}: cada concepto lleva «nombre» y «texto»")
+        apoyo[d] = {"claves": claves, "conceptos": conceptos}
+    faltan = [d for d in ids_diapositivas if d not in apoyo]
+    if faltan:
+        raise GuionInvalido("diapositivas: faltan los puntos clave de " + ", ".join(faltan))
+    return apoyo
