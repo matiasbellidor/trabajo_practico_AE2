@@ -66,6 +66,12 @@ def test_volver_al_inicio_no_aparece_en_pantalla_completa(publicado):
     assert "display: none !important" in estilos
 
 
+def test_recursos_siempre_dice_volver_al_inicio(recursos):
+    cab = re.search(r'<a class="cab__volver" href="([^"]*)"[^>]*>.*?<span>(.*?)</span></a>', recursos, re.S)
+    assert cab and cab.group(1) == "../../" and cab.group(2) == "Volver al inicio", \
+        "Recursos vuelve a la web del trabajo, no a la presentación"
+
+
 def test_recursos_no_abre_otra_pestana(recursos):
     assert "data-proyectar" not in recursos and "window.open" not in recursos
 
